@@ -33,6 +33,12 @@
       background-color: #2f2f2f; /* Black Gray */
       color: #fff;
   }
+  
+  .bg-5 {
+		background-color: #bbc2c6; /* Light Green*/
+		color: #ffffff;
+  }
+  
   .container-fluid {
       padding-top: 70px;
       padding-bottom: 70px;
@@ -54,11 +60,17 @@
     position: relative;
     height: 300px;
     width: 300px;
+	margin: 0 auto;
 }
 .div-wrapper img {
     position: absolute;
+	margin: 0 auto;
     left: 0;
     bottom: 0;
+}
+
+
+
 }
   </style>
 </head>
@@ -77,9 +89,9 @@
     </div>
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="#">WHO</a></li>
-        <li><a href="#">WHAT</a></li>
-        <li><a href="#">WHERE</a></li>
+        <li><a href="#who">WHO</a></li>
+        <li><a href="#what">WHAT</a></li>
+        <li><a href="#where">WHERE</a></li>
         <li><a href="#">WHY</a></li>
       </ul>
     </div>
@@ -89,11 +101,12 @@
 <!-- First Container -->
 <div class="container-fluid bg-1 text-center">
   <h3 class="margin">A place to innovate and empower</h3>
-  <a href= ""><img src="images/design_us.gif" class="img-responsive img-circle margin" style="display:inline" alt="designus" width="350" height="350"></a>
-  <h3>Give us time to get started</h3>
+  <a href= "deadlink.html"><img src="images/design_us.gif" class="img-responsive img-circle margin" style="display:inline" alt="designus" width="350" height="350"></a>
+  <h3>Currently underconstruction... Coming Soon</h3>
 </div>
 
 <!-- Second Container -->
+<section class ="what" id="what">
 <div class="container-fluid bg-2 text-center">
   <h3 class="margin">What Am I?</h3>
   <p> We, the undersigned, the board of Aggie Robotics, 
@@ -103,34 +116,68 @@
                 readily available to underclassmen,Whereas the Department of Electrical and Computer 
                 Engineering seeks to encourage students to apply their knowledge and seek new technical skills,
                 Found on this day the Aggie Robotics Club.</p>
-  <a href="#" class="btn btn-default btn-lg">
-    <span class="glyphicon glyphicon-search"></span> Search
+  <a href="https://github.com/aggierobotics" class="btn btn-default btn-lg">
+    Our Github <span class="glyphicon glyphicon-home"></span> 
   </a>
 </div>
+</section>
+<!-- Third Container -->
+<section class ="who" id = "who">
+	<div class="container-fluid bg-2 text-center">
+	<h3 class="margin"> Who are we? </h3>
+	<div class="row">
+		<div class="col-xs-6 col-md-2" style=""><div class= "row">
+		<img src="images/team/chris.png" class="img-rounded" style="rounded mx-auto d-block; opacity: 10" alt="Image" width="200" height="200">
+		</div>Chris Cannon</div>
+		
+		
+		<div class="col-xs-6 col-md-2" style=""><div class= "row">
+		<img src="images/team/holley.png" class="img-rounded" style="rounded mx-auto d-block; opacity: 10" alt="Image" width="200" height="200">
+		</div>Holley Jupiter</div>
+		
+		<div class="col-xs-6 col-md-2" style=""><div class= "row">
+		<img src="images/team/kenny.png" class="img-rounded" style="rounded mx-auto d-block; opacity: 10" alt="Image" width="200" height="200">
+		</div>Kenny Lindsay</div>
+		
+		<div class="col-xs-6 col-md-2" style=""><div class= "row">
+		<img src="images/team/robert.png" class="img-rounded" style="rounded mx-auto d-block; opacity: 10" alt="Image" width="200" height="200">
+		</div>Robert Mwaniki</div>
+		<div class="col-xs-6 col-md-2" style=""><div class= "row">
+		<img src="images/team/uriah.png" class="img-rounded" style="rounded mx-auto d-block; opacity: 10" alt="Image" width="200" height="200">
+		</div>Uriah Newkirk</div>
+		<div class="col-xs-6 col-md-2" style=""><div class= "row">
+		<img src="images/team/abby.png" class="img-rounded" style="rounded mx-auto d-block; opacity: 10" alt="Image" width="200" height="200">
+		</div>Abbigail Waddell</div>
+		
+		
+	</div>
+</section>
 
-<!-- Third Container (Grid) -->
+
+<!-- Fourth Container (Grid) -->
+<section class ="where" id ="where">
 <div class="container-fluid bg-3 text-center">    
   <h3 class="margin">Where To Find Me?</h3><br>
   <div class="row">
     <div class="col-sm-4">
 		<p>We are located at North Carolina Agricultural and Technical State University</p>
-		<div class ="div-wrapper"><a href ="https://www.google.com/maps/place/North+Carolina+Agricultural+and+Technical+State+University/@36.077012,-79.7740933,17z/data=!3m1!4b1!4m5!3m4!1s0x885318ce56445187:0x9210566d49c974e0!8m2!3d36.0770077!4d-79.7719046"> <p>1601 E Market St, Greensboro, NC 27401</p></a>
-		  <a href ="http://www.ncat.edu/">
+		<div class ="div-wrapper"><a href ="https://www.google.com/maps/place/North+Carolina+Agricultural+and+Technical+State+University/@36.077012,-79.7740933,17z/data=!3m1!4b1!4m5!3m4!1s0x885318ce56445187:0x9210566d49c974e0!8m2!3d36.0770077!4d-79.7719046" target="_blank"> <p>1601 E Market St, Greensboro, NC 27401</p></a>
+		  <a href ="http://www.ncat.edu/" target="_blank" >
 		  <img src="images/ncat.png" class="img-rounded" style="rounded mx-auto d-block" alt="Image" width="267" height="237">
 		  </a>
 
 		  </div>
     </div>
     <div class="col-sm-4">
-		  <p>We worked in conjuction with the school's makerspace. our on campus locations are in Cherry 318, and McNair Dungeon.</p>
+		  <p>We are working in conjuction with the school's makerspace. our on campus locations are in Cherry 318, and McNair Dungeon.</p>
 		  <div class ="div-wrapper">
 
-			 <a href ="https://www.google.com/maps/place/North+Carolina+Agricultural+and+Technical+State+University/@36.077012,-79.7740933,17z/data=!3m1!4b1!4m5!3m4!1s0x885318ce56445187:0x9210566d49c974e0!8m2!3d36.0770077!4d-79.7719046"> <img src="images/location.jpg" class="img-rounded" style="rounded mx-auto d-block" alt="Image" width="267" height="237">
+			 <a href ="makerspace.html"> <img src="images/makerspace.jpg" class="img-rounded" style="rounded mx-auto d-block" alt="Image" width="267" height="237">
 			  </a> 
       </div>
     </div>
     <div class="col-sm-4">
-      <p>You can also reach us at our Facebook page. Slack or GroupMe</p>
+      <p>You can also reach us at our <a href="https://www.facebook.com/Aggie-Robotics-Club-1705670803009762/" target="_blank">Facebook page.</a> Slack or GroupMe</p>
      
         
      
@@ -139,6 +186,12 @@
   
   </div>
 </div>
+</section>
+
+<!-- Fifth Container --> 
+<section class ="why" id ="why">
+
+</section>
 
 <!-- Footer -->
 <footer class="container-fluid bg-4 text-center">
