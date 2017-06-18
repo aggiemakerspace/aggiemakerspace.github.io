@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ 
+  <title>Bootstrap Theme Simply Me</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <style>
+  body {
+      font: 20px Montserrat, sans-serif;
+      line-height: 1.8;
+      color: #f5f6f7;
+  }
+  p {font-size: 16px;}
+  .margin {margin-bottom: 45px;}
+  .bg-1 { 
+      background-color: #1abc9c; /* Green */
+      color: #ffffff;
+  }
+  .bg-2 { 
+      background-color: #474e5d; /* Dark Blue */
+      color: #ffffff;
+  }
+  .bg-3 { 
+      background-color: #ffffff; /* White */
+      color: #555555;
+  }
+  .bg-4 { 
+      background-color: #2f2f2f; /* Black Gray */
+      color: #fff;
+  }
+  .container-fluid {
+      padding-top: 70px;
+      padding-bottom: 70px;
+  }
+  .navbar {
+      padding-top: 15px;
+      padding-bottom: 15px;
+      border: 0;
+      border-radius: 0;
+      margin-bottom: 0;
+      font-size: 12px;
+      letter-spacing: 5px;
+  }
+  .navbar-nav  li a:hover {
+      color: #1abc9c !important;
+  }
+	  
+	  .div-wrapper {
+    position: relative;
+    height: 300px;
+    width: 300px;
+}
+.div-wrapper img {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+}
+  </style>
+</head>
+<body>
+
+<!-- Navbar -->
+<nav class="navbar navbar-default">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>                        
+      </button>
+      <a class="navbar-brand" href="#">AGGIE|ROBOTICS</a>
+    </div>
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="#">WHO</a></li>
+        <li><a href="#">WHAT</a></li>
+        <li><a href="#">WHERE</a></li>
+        <li><a href="#">WHY</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- First Container -->
+<div class="container-fluid bg-1 text-center">
+  <h3 class="margin">A place to innovate and empower</h3>
+  <a href= ""><img src="images/design_us.gif" class="img-responsive img-circle margin" style="display:inline" alt="designus" width="350" height="350"></a>
+  <h3>Give us time to get started</h3>
+</div>
+
+<!-- Second Container -->
+<div class="container-fluid bg-2 text-center">
+  <h3 class="margin">What Am I?</h3>
+  <p> We, the undersigned, the board of Aggie Robotics, 
+                Whereas the students of the College of Engineering at North Carolina Agricultural 
+                and Technical State University seek opportunities to innovate and create in pursuit 
+                of understanding,Whereas opportunities for hands on application of engineering are not 
+                readily available to underclassmen,Whereas the Department of Electrical and Computer 
+                Engineering seeks to encourage students to apply their knowledge and seek new technical skills,
+                Found on this day the Aggie Robotics Club.</p>
+  <a href="#" class="btn btn-default btn-lg">
+    <span class="glyphicon glyphicon-search"></span> Search
+  </a>
+</div>
+
+<!-- Third Container (Grid) -->
+<div class="container-fluid bg-3 text-center">    
+  <h3 class="margin">Where To Find Me?</h3><br>
+  <div class="row">
+    <div class="col-sm-4">
+		<p>We are located at North Carolina Agricultural and Technical State University</p>
+		<div class ="div-wrapper"><a href ="https://www.google.com/maps/place/North+Carolina+Agricultural+and+Technical+State+University/@36.077012,-79.7740933,17z/data=!3m1!4b1!4m5!3m4!1s0x885318ce56445187:0x9210566d49c974e0!8m2!3d36.0770077!4d-79.7719046"> <p>1601 E Market St, Greensboro, NC 27401</p></a>
+		  <a href ="http://www.ncat.edu/">
+		  <img src="images/ncat.png" class="img-rounded" style="rounded mx-auto d-block" alt="Image" width="267" height="237">
+		  </a>
+
+		  </div>
+    </div>
+    <div class="col-sm-4">
+		  <p>We worked in conjuction with the school's makerspace. our on campus locations are in Cherry 318, and McNair Dungeon.</p>
+		  <div class ="div-wrapper">
+
+			 <a href ="https://www.google.com/maps/place/North+Carolina+Agricultural+and+Technical+State+University/@36.077012,-79.7740933,17z/data=!3m1!4b1!4m5!3m4!1s0x885318ce56445187:0x9210566d49c974e0!8m2!3d36.0770077!4d-79.7719046"> <img src="images/location.jpg" class="img-rounded" style="rounded mx-auto d-block" alt="Image" width="267" height="237">
+			  </a> 
+      </div>
+    </div>
+    <div class="col-sm-4">
+      <p>You can also reach us at our Facebook page. Slack or GroupMe</p>
+     
+        
+     
+    </div>
+    
+  
+  </div>
+</div>
+
+<!-- Footer -->
+<footer class="container-fluid bg-4 text-center">
+   <div class = "copyright">&copy;2017 - <strong>AGGIE ROBOTICS</strong></div>
+</footer>
+
+</body>
+</html>
