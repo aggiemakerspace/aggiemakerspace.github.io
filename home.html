@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>MakeSpace HomePage</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-blue.css">
+<link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Open+Sans'>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<script src="https://www.gstatic.com/firebasejs/4.1.2/firebase.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<style>
+    html,body,h1,h2,h3,h4,h5 {
+      font-family: "Open Sans", sans-serif;
+
+
+    }
+#username{
+
+  position: center-fixed;
+  text-align: center;
+}
+.w3-bar{
+
+    overflow: hidden;
+   position: fixed;
+   height: 50px;
+
+
+
+}
+
+.bg-1 {
+      background-color: #1abc9c; /* Green */
+      color: #ffffff;
+  }
+
+  .bg-2 {
+    background-color: #474e5d; /* Dark Blue */
+    color: #ffffff;
+}
+
+.w3-container{
+  padding-top: 70px;
+  padding-bottom: 70px;
+
+}
+#navDemo{
+  top:50px;;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+  overflow:hidden;
+  position: fixed;
+  width: 100%;
+}
+
+/*.footer{
+
+  position: absolute;
+  bottom: 0px;
+  width: 100%;
+}*/
+
+.userpic {
+  position: relative;
+
+}
+
+.userpicbtn{
+  position: relative;
+  right: 30px; top: 4px;
+
+}
+</style>
+
+
+</head>
+
+
+<body class="w3-theme-l5 (w3-theme-light)">
+<!-- Navbar -->
+
+    <div class="w3-bar w3-theme-d2 w3-left-align w3-large">
+        <a class="w3-bar-item w3-button w3-hide-medium w3-hide-large w3-right w3-padding-large
+        w3-hover-white w3-large w3-theme-d2" href="javascript:void(0);" onclick="openNav()"><i class="fa fa-bars"></i></a>
+        <a href="home.html" class="w3-bar-item w3-button w3-padding-large w3-theme-d4">
+          <i class="fa fa-home w3-margin-right"></i>MakerSpace</a>
+
+
+        <!--Sign Out -->
+        <a href="#" id="logout" class=" w3-bar-item w3-button w3-right w3-hide-small
+        w3-padding-large w3-hover-white" title="Logout"><i class="fa fa-sign-out"></i>Sign Out</a>
+        <a href="console.html" class =" w3-animate-top w3-bar-item w3-button w3-right
+        w3-hide-small w3-padding-large w3-hover-white">Console</a>
+        <a href="#news" class="w3-animate-top w3-bar-item w3-button w3-right
+        w3-hide-small w3-padding-large w3-hover-white">Inventory</a>
+        <a href="#contact" class="w3-animate-top w3-bar-item w3-button w3-right
+        w3-hide-small w3-padding-large w3-hover-white">Classes</a>
+        <a class="w3-animate-top active w3-bar-item w3-button w3-right w3-hide-small
+        w3-padding-large w3-hover-white" href="#about">Courses</a>
+
+
+    </div>
+
+
+<!-- Navbar on small screens -->
+<div id="navDemo" class="w3-bar-block w3-theme-d2 w3-hide w3-hide-large w3-hide-medium w3-large">
+
+      <a href="members.html" class="w3-bar-item w3-button w3-padding-large">Members</a>
+      <a href="equipment.html" class="w3-bar-item w3-button w3-padding-large">Equipment</a>
+      <a href="console.html" class="w3-bar-item w3-button w3-padding-large">Console</a>
+      <a href="profile.html" class="w3-bar-item w3-button w3-padding-large">My Profile</a>
+      <a href="#" onclick="logOut();return false;" id ="logout" class = "w3-bar-item w3-button w3-padding-large" >Log Out</a>
+
+</div>
+
+<!-- Page Container -->
+<div class="w3-container .bg-1"  style="" >
+                    <br>
+                    <!-- user pic and name container -->
+
+                    <h2  class="w3-center" >Welcome</h2>
+
+                    <div id = "username">
+                    <h4 id ="userName" class= "w3-center">User Name</h4>
+                    </div>
+                    <!--User Picture -->
+                    <div id = "profileDisplay" class= "userpic w3-container">
+                      <p class="w3-center"><img id="userPic" src="assets/img/avatar3.png"
+                      class="w3-circle" style="height:120px;width:120px" alt=""/>
+                        <a class="userpicbtn  w3-btn w3-circle w3-xlarge  w3-white" style="">+</a>
+                      </p>
+
+
+
+
+                    </div>
+            <hr>
+
+</div>
+
+  <!--Information Container-->
+          <div class="w3-row-padding w3-center w3-margin-top .bg-2">
+
+            <!--User Information -->
+            <div class="w3-third">
+              <div class="w3-card-2 w3-container" style="min-height:460px">
+                <h3>User Information</h3><br>
+                <i class="fa fa-desktop w3-margin-bottom w3-text-theme" style="font-size:120px"></i>
+
+                <!--Member Title (superusers, admin, or regularuser) -->
+                <div class="w3-row">
+                   <div class="w3-col s1 m4 l1">
+                     <i class="fa fa-pencil fa-fw w3-margin-right w3-text-theme"></i></div>
+                   <div class="w3-col s11 m7 l11">
+                  <b class>Member Title</b>
+                   </div>
+                </div>
+                <hr>
+                <div class="w3-row">
+                     <i id = "title" class="w3-center"></i>
+
+                </div>
+                <hr>
+                <!-- // -->
+
+
+                <!--Major Classification (computer engineering, animal science, etc...) -->
+                <div class="w3-row">
+                   <div class="w3-col s1 m4 l1">
+                     <i class="fa fa-institution fa-fw w3-margin-right w3-text-theme"></i></div>
+                   <div class="w3-col s11 m7 l11">
+                  <b class>Major</b>
+                   </div>
+                </div>
+                <hr>
+                <div class="w3-row">
+                     <i id = "major" class="w3-center"></i>
+                </div>
+                <hr>
+                <!-- // -->
+
+                <!--Join Date (computer engineering, animal science, etc...) -->
+                <div class="w3-row">
+                   <div class="w3-col s1 m4 l4">
+                     <i class="f 	fa fa-calendar fa-fw w3-margin-right w3-text-theme"></i></div>
+                   <div class="w3-col s11 m7 l8">
+                  <b class>Join Date</b>
+                   </div>
+                </div>
+                <hr>
+                <div class="w3-row">
+                     <i id = "joinDate" class="w3-center"></i>
+                </div>
+                <!-- // -->
+
+
+
+          </div>
+        </div>
+
+        <!--machine approval -->
+        <div class="w3-third">
+          <div class="w3-card-2 w3-container" style="min-height:460px">
+          <h3>Machine Approval</h3><br>
+          <i class="fa fa-css3 w3-margin-bottom w3-text-theme" style="font-size:120px"></i>
+          <p>OtherMill</p>
+          <p>LaserBoss</p>
+          <p>Milling Machine</p>
+          <p>3D Printer</p>
+          </div>
+        </div>
+
+        <!-- Checked Out Items -->
+        <div class="w3-third">
+          <div class="w3-card-2 w3-container" style="min-height:460px">
+          <h3>Checked Out Items</h3><br>
+          <i class="fa fa-diamond w3-margin-bottom w3-text-theme" style="font-size:120px"></i>
+          <p>Paper like design</p>
+          <p>Bold colors and shadows</p>
+          <p>Equal across platforms</p>
+          <p>Equal across devices</p>
+          </div>
+        </div>
+    </div>
+
+
+
+<div class="w3-container"  style="" >
+<p></p>
+<p></p>
+</div>
+  <!-- Footer -->
+  <div id="wrapper">
+  <footer class="w3-container w3-theme-d3 w3-padding-16">
+      <h5>Footer</h5>
+  </footer>
+  </div>
+  <script>
+      // Used to toggle the menu on smaller screens when clicking on the menu button
+      function openNav() {
+          var x = document.getElementById("navDemo");
+          if (x.className.indexOf("w3-show") == -1) {
+              x.className += " w3-show";
+          } else {
+              x.className = x.className.replace(" w3-show", "");
+          }
+      }
+  </script>
+  <!--Source -->
+  <script src="home.js"></script>
+  <!--Logout-->
+
+  <script>
+      function  logOut(){
+      firebase.auth().signOut();
+      console.log(firebaseUser + "has logged out");
+      };
+  </script>
+
+
+</body>
+</html>

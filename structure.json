@@ -1,0 +1,103 @@
+{
+  "users":{
+      "user1":{
+        "email": "user1@gmail.com",
+        "name": " Robert Mwaniki",
+        "created_at": "7th Aug 2017",
+        "profilePic": "",
+
+      },
+      "user2":{
+        "email": "",
+        "name": "",
+        "created_at": "7th Aug 2017",
+        "profilePic": "",
+
+      }
+
+  },
+
+
+  "timesheet":{
+        "user1":{
+          "email":"user1@gmail.com",
+          "timeIn":"2017-07-01T00:06:00Z",
+          "timeOut":"2017-07-01T00:15:00Z",
+          "totalTime":"9"
+        },
+        "user2":{
+          "email":"",
+          "timeIn":"",
+          "timeOut":"",
+          "totalTime":""
+        }
+
+
+  },
+
+  "groups": {
+      "group1":{
+            "group_name": "Administrators",
+            "group_description": "Full control",
+            "no_of_users": 2,
+            "members":{
+              "user1": true
+          },
+
+        "group2":{
+            "group_name": "SuperUsers",
+            "group_description": "Moderate control, Add members, Amend inventory",
+            "no_of_users": 2,
+            "members":{
+                "user1": true
+                },
+          "group3":{
+              "group_name": "RegularUser",
+              "group_description": "Limited control",
+              "no_of_users": 0,
+              "members":{
+
+                },
+
+          }
+
+
+  },
+
+  "inventory":{
+
+    "item1":{
+        "item_name":"",
+        "item_no":"",
+        "item_desc":"",
+        "vendor": "",
+        "vendorURL":"",
+        "Amount":"",
+        "stockCheckDate": "2017-07-01T00:06:00Z"
+    },
+
+    "item2":{
+        "item_name":"",
+        "item_no":"",
+        "item_desc":"",
+        "vendor": "",
+        "vendorURL":"",
+        "Amount":"",
+        "stockCheckDate": "2017-07-01T00:06:00Z"
+    },
+
+
+
+
+
+  }
+
+
+
+
+
+
+
+
+
+}

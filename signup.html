@@ -21,12 +21,16 @@
      </script>
      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
-     <style type = "text/css">
+     <style>
+     a, a:visited {
+        text-decoration:none;
+        color: #F0FFFF;
+     }
 
-        a, a:visited {
-           text-decoration:none;
-           color: #F0FFFF;
-        }
+     a:hover{
+
+       color:#000;
+     }
 
 
 body,html{
@@ -86,6 +90,19 @@ body,html{
           <br>
         <form>
           <div class="form-group">
+            <label for="fname">First Name: </label>
+            <input id="txtFname" type="text" placeholder="FirstName" class="form-control">
+          </div>
+
+          <div class="form-group">
+            <label for="lname">Last Name: </label>
+            <input id="txtLname" type="text" placeholder="LastName" class="form-control">
+          </div>
+
+
+
+
+          <div class="form-group">
             <label for="txtEmail">Email address:</label>
             <input id="txtEmail" type="email" placeholder="Email" class="form-control">
           </div>
@@ -96,12 +113,13 @@ body,html{
                placeholder="Password" class="form-control">
           </div>
 
-          <button id= "btnLogin" type= "button" class="btn btn-success btn-lg btn-block btn-action">Log in</button>
-            <button id="btnLogout" type = "button" class="btn btn-danger btn-lg btn-block btn-action hide">Logout</button>
-          <button id="btnGoogleSignUp" type = "button" class ="btn btn-primary btn-lg btn-block btn-action">Google Sign In </button>
-          <button id="btnRegister" type = "button" class="btn btn-danger btn-lg btn-block">Register Now</button>
 
-          </form>
+          <button id="btnSignUp" type = "button" class="btn btn-success btn-lg btn-block">Sign Up</button>
+          <button id="btnLogout" type = "button" class="btn btn-danger btn-lg btn-block btn-action hide">Logout</button>
+          
+          <br>
+          <p>Already have an account? <a href="index.html">Log In </a></p>
+        </form>
         <!-- <div class = "row">
           <div class = "col-sm-3">
             <button id = "btnLogin" class="btn btn-action">
@@ -120,23 +138,8 @@ body,html{
         </div>
       </div>
 
-<!-- Login by clicking the enter button -->
 
-      <!-- <script>
-          function searchKeyPress(e)
-          {
-              // look for window.event in case event isn't passed in
-              e = e || window.event;
-              if (e.keyCode == 13)
-              {
-                console.log("enter button was pressed.")
-                  document.getElementById('btnLogin').click();
-                  return false;
-              }
-              return true;
-          }
-  </script> -->
-    <script src="index.js"></script>
+    <script src="signup.js"></script>
 </body>
 
 

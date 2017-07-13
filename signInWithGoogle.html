@@ -21,13 +21,7 @@
      </script>
      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
-     <style type = "text/css">
-
-        a, a:visited {
-           text-decoration:none;
-           color: #F0FFFF;
-        }
-
+     <style>
 
 body,html{
   height: 100%;
@@ -41,7 +35,7 @@ body,html{
     width:100px;
     height: auto;
     background: #000 url('assets/img/notepad.jpg') center no-repeat;
-    background-size: auto 150;
+    background-size: auto 150%;
 
 }
 
@@ -96,11 +90,10 @@ body,html{
                placeholder="Password" class="form-control">
           </div>
 
-          <button id= "btnLogin" type= "button" class="btn btn-success btn-lg btn-block btn-action">Log in</button>
-            <button id="btnLogout" type = "button" class="btn btn-danger btn-lg btn-block btn-action hide">Logout</button>
-          <button id="btnGoogleSignUp" type = "button" class ="btn btn-primary btn-lg btn-block btn-action">Google Sign In </button>
-          <button id="btnRegister" type = "button" class="btn btn-danger btn-lg btn-block">Register Now</button>
-
+          <button id= "btnLogin" type= "button" class="btn btn-primary btn-lg btn-block btn-action">Log in</button>
+          <button id="btnSignUp" type = "button" class="btn btn-success btn-lg btn-block">Sign Up</button>
+          <button id="btnLogout" type = "button" class="btn btn-danger btn-lg btn-block btn-action hide">Logout</button>
+          <button id="btnGoogleSignUp" type = "button" class ="btn btn-default btn-lg btn-block btn-action">Google Sign In </button>
           </form>
         <!-- <div class = "row">
           <div class = "col-sm-3">
@@ -120,22 +113,7 @@ body,html{
         </div>
       </div>
 
-<!-- Login by clicking the enter button -->
 
-      <!-- <script>
-          function searchKeyPress(e)
-          {
-              // look for window.event in case event isn't passed in
-              e = e || window.event;
-              if (e.keyCode == 13)
-              {
-                console.log("enter button was pressed.")
-                  document.getElementById('btnLogin').click();
-                  return false;
-              }
-              return true;
-          }
-  </script> -->
     <script src="index.js"></script>
 </body>
 

@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>W3.CSS Template</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-blue-grey.css">
+<link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Open+Sans'>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<script src="https://www.gstatic.com/firebasejs/4.1.2/firebase.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+<style>
+    html,body,h1,h2,h3,h4,h5 {font-family: "Open Sans", sans-serif}
+    th, td
+    {
+        border-left: 1px solid black;
+        text-align: center;
+    }
+
+    table
+    {
+        text-align:center;
+        align: center;
+    }
+    form
+    {
+
+        text-align:center;
+    }
+
+
+    #tableContainer-2 {
+
+    }
+    body {
+
+        background: url("assets/img/notepad.jpg");
+        height: 100%;
+        background-position: center;
+        background-repeat: repeat-x, repeat-y;
+        background-size: cover;
+
+
+    }
+
+    select {
+
+        width: 200px;
+    }
+
+
+</style>
+</head>
+<body>
+
+
+
+<!-- Navbar -->
+<div class="w3-top">
+    <div class="w3-bar w3-theme-d2 w3-left-align w3-large">
+        <a class="w3-bar-item w3-button w3-hide-medium w3-hide-large w3-right w3-padding-large w3-hover-white w3-large w3-theme-d2" href="javascript:void(0);" onclick="openNav()"><i class="fa fa-bars"></i></a>
+        <a href="home.html" class="w3-bar-item w3-button w3-padding-large w3-theme-d4"><i class="fa fa-home w3-margin-right"></i>MakerSpace</a>
+        <a href="#" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white" title="News"><i class="fa fa-globe"></i></a>
+        <a href="#" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white" title="Account Settings"><i class="fa fa-user"></i></a>
+        <a href="#" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white" title="Messages"><i class="fa fa-envelope"></i></a>
+        <div class="w3-dropdown-hover w3-hide-small">
+            <button class="w3-button w3-padding-large" title="Notifications"><i class="fa fa-bell"></i><span class="w3-badge w3-right w3-small w3-green">3</span></button>
+
+        </div>
+        <a href="#" class="w3-bar-item w3-button w3-hide-small w3-right w3-padding-large w3-hover-white" title="My Account"><img src ="assets/img/avatar3.png"  class="w3-circle" style="height:25px;width:25px" alt="Avatar"/>
+        </a>
+    </div>
+
+    <div class="w3-container w3-content" style="max-width:1400px;margin-top:80px">
+
+        <!-- Profile -->
+        <div class="w3-card-2 w3-round w3-white">
+            <div class="w3-container">
+                <h4 class="w3-center">My Profile</h4>
+                <p class="w3-center"><img src="assets/img/avatar3.png"
+                                          class="w3-circle" style="height:106px;width:106px" alt="Avatar"/></p>
+                <hr>
+                <!--Information-->
+                <center><form action="/action_page.php">
+                    <br><h5 class="w3-text-theme w3-center">firstName lastName</h5>
+
+                  <input id ="input" type="text" name="name" class="w3-text-theme w3-center" value = "Rick James">
+
+                  <!-- Change year -->
+                    <h5 class="w3-text-theme w3-center">Classification</h5>
+                    <input type="text" name="classification" class="w3-text-theme w3-center" value = "Senior">
+
+                    <!-- Change Major -->
+                      <h5 class="w3-text-theme w3-center">Major</h5>
+                    <h5><select class="w3-text-theme w3-center" id="selector"></select></h5>
+                    <!-- <input type="text" name="major"  class="w3-text-theme w3-center" value="Engineering"> -->
+
+                    <!--Equipment people can use -->
+                    <h5 class="w3-text-theme w3-center">Usable Equipment</h5>
+
+                    <!--Insert table-->
+                    <div id="tableContainer-2">
+                    <table align="center" class= "w3-table-all" >
+                        <colgroup>
+                            <col span="2" style="background-color:">
+                            <col style="background-color:">
+                        </colgroup>
+                        <tr class="w3-light-grey">
+                            <th style="border-left: 0px">tool</th>
+                            <th>tool</th>
+                            <th>tool</th>
+                            <th>tool</th>
+                            <th>tool</th>
+                            <th>tool</th>
+                            <th>tool</th>
+                            <th>tool</th>
+                            <th>tool</th>
+
+                            <p></p>
+                        </tr>
+                        <tr >
+                            <td style="border-left: 0px">true</td>
+                            <td class="w3-hover-green">true</td>
+                            <td class="w3-hover-red">false</td>
+                            <td class="w3-hover-green">true</td>
+                            <td class="w3-hover-green">true</td>
+                            <td class="w3-hover-red">false</td>
+                            <td class="w3-hover-green">true</td>
+                            <td class="w3-hover-green">true</td>
+                            <td class="w3-hover-red">false</td>
+
+
+
+                        </tr>
+                        <tr>
+
+                        </tr>
+                    </table>
+                    </div>
+
+
+                    <h5 class="w3-text-theme w3-center">Equipment Checkout</h5>
+
+
+
+
+                    <br><br>
+                    <input type="submit" class="w3-text-theme w3-center" ><br>
+                </form></center>
+
+           </div>
+        </div>
+
+
+    </div>
+    <!--Source -->
+    <script src="profile.js"></script>
+</body>
+</html>
