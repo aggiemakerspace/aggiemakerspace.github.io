@@ -1,12 +1,49 @@
 
 function writeUserData(date, email,name, imageUrl) {
-  firebase.database().ref('users/' + userId).set({
-    created_at: date,
-    email: email,
-    name: name,
-    profile_picture : imageUrl
-  });
+  var user = firebase.auth().currentUser;
+  console.log(user);
+
+        firebase.database().ref('users/' + user.uid).set({
+          created_at: date,
+          email: email,
+          name: name,
+          profile_picture : imageUrl
+        });
+
+
+          //
+          // firebase.user.updateProfile({
+          //   displayName: name,
+          //   photoURL: ""
+          //
+          // }).then(function(){
+          //   console.log("Success name updated");
+          // },function(error){
+          //   console.log(error);
+          // });
 }
+
+// function step(){
+//
+// var user = firebase.auth().currentUser;
+// console.log(user);
+// firebase.user.updateProfile({
+//   displayName: fullname,
+//   photoURL: ""
+//
+// }).then(function(){
+//   console.log("Success name updated");
+// },function(error){
+//   console.log(error);
+// });
+
+
+
+
+
+
+//writeUserData(d,email,fullname, );
+
 
 (function() {
 
@@ -81,29 +118,17 @@ function writeUserData(date, email,name, imageUrl) {
           console.log(error.message);
           alert(error.message)
         });
-
-         var user = firebase.auth().currentUser;
-
-         firebase.user.updateProfile({
-           displayName: fullname,
-           photoURL: ""
-
-         }).then(function(){
-           console.log("Success name updated");
-         },function(error){
-           console.log(error);
-         });
-
-         firebase.database().ref('users/' + user.uid).set({
-           created_at: n,
-           email: txtemail,
-           name: fullname,
-           profile_picture : imageUrl
-         });
+      //  setTimeout('', 4000);
+      //  const login = auth.signInWithEmailAndPassword(txtemail, pass);
+        // login.catch(function(error){
+        //   console.log('User login error', error.message);
+        //   alert(error.message)
+        // });
+        var today = new Date();
+        var date = today.toString();
+        writeUserData(date, txtemail,fullname, imageUrl)
 
 
-         //writeUserData(d,email,fullname, );
-         console.log("User Information sent");
 
     });
 

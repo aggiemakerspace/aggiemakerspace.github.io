@@ -36,7 +36,6 @@ function writeUserData(date, email,name, imageUrl) {
     const btnRegister = document.getElementById('btnRegister');
 
 
-
     // add login event
     btnLogin.addEventListener("click", e => {
         //get email and pass
@@ -61,14 +60,12 @@ function writeUserData(date, email,name, imageUrl) {
     //AFTER SIGN IN
 
         var user = firebase.auth().currentUser;
-
+        console.log("User:"+String(user.displayName));
         var name;
         if (user != null) {
             name = user.displayName;
 
         };
-
-
 
 
     });
@@ -83,21 +80,33 @@ function writeUserData(date, email,name, imageUrl) {
 
         //Google Sign In
           btnGoogleSignup.addEventListener('click', e =>{
-              console.log("Google Sign in button was clicked");
+              //console.log("Google Sign in button was clicked");
               var provider = new firebase.auth.GoogleAuthProvider();
               provider.addScope('profile');
               provider.addScope('email');
 
 
-              return firebase.auth().signInWithPopup(provider)
-              .catch(function(error){
-                console.log('Google sign in error', error.message);
-                alert(error.message);
-              });
+              firebase.auth().signInWithRedirect(provider);
 
-
-          });
-
+              firebase.auth().getRedirectResult().then(function(result) {
+              if (result.credential) {
+                // This gives you a Google Access Token. You can use it to access the Google API.
+                var token = result.credential.accessToken;
+                // ...
+              }
+              // The signed-in user info.
+              var user = result.user;
+            }).catch(function(error) {
+              // Handle Errors here.
+              var errorCode = error.code;
+              var errorMessage = error.message;
+              // The email of the user's account used.
+              var email = error.email;
+              // The firebase.auth.AuthCredential type that was used.
+              var credential = error.credential;
+              // ...
+            });
+        });
 
 
 
@@ -111,7 +120,7 @@ function writeUserData(date, email,name, imageUrl) {
 //add a realtime listener
     firebase.auth().onAuthStateChanged(firebaseUser => {
         if (firebaseUser) {
-            console.log(firebaseUser);
+            console.log(firebaseUser+" has signed in.");
             window.location.href = 'home.html';
             btnLogout.classList.remove('hide');
         } else {

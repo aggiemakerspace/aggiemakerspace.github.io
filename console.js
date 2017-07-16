@@ -47,7 +47,7 @@
           var roles = object.roles;
           console.log(roles);
 
-          var displayRole = roles.administrator;
+          //var displayRole = roles.administrator;
 
           for (var prop in roles) {
               //console.log(roles[prop]);
@@ -92,7 +92,11 @@
 // JQUERY
 
 //**Console Buttons **//
-//Update machines
+//**Update machines**
+
+
+//**Print out all the machines
+
 
 $(document).ready(function(){
 console.log("Button1 was clicked");
@@ -104,13 +108,15 @@ console.log("Button1 was clicked");
       $("#querytitle").text("Machines");
       var queryDescrip= "Here is a list of current machines in operation."
       $("#querydescp").text(String(queryDescrip));
+      var example = "this.is.a.string.";
 
+      	var n = example.replace(/\./g,' ');
       var machineRef = firebase.database().ref().child("machines");
       machineRef.on("child_added", snap=> {
        $("#unList").append("<div id='editable'>" +
 
 
-           "<li>"+snap.key+"</li>"
+           "<li>"+snap.key.replace(/\_/g,' ').toUpperCase()+"</li>"
 
          +"</div>" );
         console.log(snap.key);
