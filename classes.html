@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<!-- 07/16/17 -->
 <html>
 <head>
 <title>MakeSpace HomePage</title>
@@ -8,9 +9,11 @@
 <link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-blue.css">
 <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Open+Sans'>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
+<!--Source -->
 <script src="https://www.gstatic.com/firebasejs/4.1.2/firebase.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="home.js"></script>
+
 <style>
     html,body,h1,h2,h3,h4,h5 {
       font-family: "Open Sans", sans-serif;
@@ -56,12 +59,12 @@
   width: 100%;
 }
 
-/*.footer{
+footer{
 
   position: absolute;
   bottom: 0px;
   width: 100%;
-}*/
+}
 
 .userpic {
   position: relative;
@@ -89,53 +92,88 @@
             <i class="fa fa-home w3-margin-right"></i>MakerSpace</a>
 
 
-          <!--TOP NAV-->
-          <a href="#" id="logout" class=" w3-bar-item w3-button w3-right w3-hide-small
-          w3-padding-large w3-hover-white" title="Logout"><i class="fa fa-sign-out"></i>Sign Out</a>
-          <a href="console.html" class =" w3-animate-top w3-bar-item w3-button w3-right w3-red
-          w3-hide-small w3-padding-large w3-hover-white">ADMIN CONSOLE</a>
-          <a href="inventory.html" class="w3-animate-top w3-bar-item w3-button w3-right
-          w3-hide-small w3-padding-large w3-hover-white hide">Inventory</a>
-          <a href="classes.html" class="w3-animate-top w3-bar-item w3-button w3-right
-          w3-hide-small w3-padding-large w3-hover-white">Classes</a>
-
-
+            <a href="#" id="logout" class=" w3-bar-item w3-button w3-right w3-hide-small
+            w3-padding-large w3-hover-white" title="Logout"><i class="fa fa-sign-out"></i>Sign Out</a>
+            <a href="console.html" class =" w3-animate-top w3-bar-item w3-button w3-right w3-red
+            w3-hide-small w3-padding-large w3-hover-white">ADMIN CONSOLE</a>
+            <a href="inventory.html" class="w3-animate-top w3-bar-item w3-button w3-right
+            w3-hide-small w3-padding-large w3-hover-white hide">Inventory</a>
+            <a href="classes.html" class="w3-animate-top w3-bar-item w3-button w3-right
+            w3-hide-small w3-padding-large w3-hover-white">Classes</a>
 
       </div>
 
 
   <!-- Navbar on small screens -->
   <div id="navDemo" class="w3-bar-block w3-theme-d2 w3-hide w3-hide-large w3-hide-medium w3-large">
-
-        <a href="members.html" class="w3-bar-item w3-button w3-padding-large">Members</a>
-        <a href="equipment.html" class="w3-bar-item w3-button w3-padding-large">Equipment</a>
-        <a href="console.html" class="w3-bar-item w3-button w3-padding-large">Console</a>
-        <a href="profile.html" class="w3-bar-item w3-button w3-padding-large">My Profile</a>
-        <a href="#" onclick="logOut();return false;" id ="logout" class = "w3-bar-item w3-button w3-padding-large" >Log Out</a>
-
+  <nav>
+          <a href="members.html" class="w3-bar-item w3-button w3-padding-large">Classes</a>
+          <a href="inventory.html" class="w3-bar-item w3-button w3-padding-large">Inventory</a>
+          <a href="console.html" id="admin" class="w3-bar-item w3-button w3-padding-large">Admin Console</a>
+          <a href="profile.html" class="w3-bar-item w3-button w3-padding-large">My Profile</a>
+          <a href="#" onclick="logOut();return false;" id ="logout" class = "w3-bar-item w3-button w3-padding-large" >Sign out</a>
+  </nav>
   </div>
 
-  <!-- Page Container -->
 
 
 
 
-  <div class="w3-container" style="">
-  <a target="_blank" href="https://calendar.google.com/calendar/event?action=TEMPLATE&amp;tmeid=aGR0bzBsc3JvN2M1dmJycTJqY2Frb3A5NjQgYWdnaWVzLm5jYXQuZWR1XzNwbnZrNHNrb2NncmtlOGVrYjQydXJiOXVvQGc&amp;tmsrc=aggies.ncat.edu_3pnvk4skocgrke8ekb42urb9uo%40group.calendar.google.com">
-<img border="0" src="https://www.google.com/calendar/images/ext/gc_button1_en.gif"></a>
-</div>
-</body>
-
+<h1>Under Construction</h1>
 <div class="w3-container"  style="" >
-<p></p>
-<p></p>
+    <div class="w3-row">
+      <div class="w3-col w3-green w3-container" style="width:25%">
+        <p> <h2>Other Mill</h2>
+
+          <div class="w3-card-4" style="width:285px">
+            <img src="assets/img/othermill.png" style="" alt="OtherMill" style="width:100%">
+            <div class="w3-container w3-center">
+              <p>OtherMill Class <a href="" class="w3-btn w3-blue">SIGN UP</a></p>
+            </div></p>
+          </div>
+      </div>
+
+      <div class="w3-col w3-green w3-container" style="width:25%">
+        <p> <h2>3D Printer</h2>
+
+          <div class="w3-card-4" style="width:285px">
+            <img src="assets/img/3dprinting.jpeg" style="width: 283px; height: 300px" alt="3dPrinter" style="width:100%">
+            <div class="w3-container w3-center">
+              <p>3D Printing <a href="" class="w3-btn w3-blue">SIGN UP</a></p>
+            </div></p>
+          </div>
+      </div>
+
+      <div class="w3-col w3-green w3-container" style="width:25%">
+        <p> <h2>CNC Milling</h2>
+
+          <div class="w3-card-4" style="width:285px">
+            <img src="assets/img/othermill.png" style="" alt="OtherMill" style="width:100%">
+            <div class="w3-container w3-center">
+              <p>OtherMill Class <a href="" class="w3-btn w3-blue">SIGN UP</a></p>
+            </div></p>
+          </div>
+      </div>
+
+      <div class="w3-col w3-green w3-container" style="width:25%">
+        <p> <h2>Laser Engraver</h2>
+
+          <div class="w3-card-4" style="width:285px">
+            <img src="assets/img/othermill.png" style="" alt="OtherMill" style="width:100%">
+            <div class="w3-container w3-center">
+              <p>OtherMill Class <a href="" class="w3-btn w3-blue">SIGN UP</a></p>
+            </div></p>
+          </div>
+      </div>
+
+    </div>
 </div>
-  <!-- Footer -->
-  <div id="wrapper">
-  <footer class="w3-container w3-theme-d3 w3-padding-16">
-      <h5>Footer</h5>
-  </footer>
-  </div>
+
+
+
+
+
+</div>
   <script>
       // Used to toggle the menu on smaller screens when clicking on the menu button
       function openNav() {
@@ -147,8 +185,7 @@
           }
       }
   </script>
-  <!--Source -->
-  <script src="home.js"></script>
+
   <!--Logout-->
 
   <script>

@@ -1,13 +1,20 @@
 
 function writeUserData(date, email,name, imageUrl) {
-  var user = firebase.auth().currentUser;
-  console.log(user);
 
-        firebase.database().ref('users/' + user.uid).set({
+  //console.log(user);
+  //send to signup queue
+        // firebase.database().ref('signupQueue' + user.uid).set({
+        firebase.database().ref('signupQueue').push({
           created_at: date,
           email: email,
           name: name,
-          profile_picture : imageUrl
+          profile_picture : imageUrl,
+          roles:
+          {
+            administrator: false,
+            regularuser: true,
+            superuser: false,
+          }
         });
 
 
@@ -21,6 +28,9 @@ function writeUserData(date, email,name, imageUrl) {
           // },function(error){
           //   console.log(error);
           // });
+
+
+
 }
 
 // function step(){
@@ -96,7 +106,13 @@ function writeUserData(date, email,name, imageUrl) {
     //
     //
     // });
+//enter button pressed
 
+$("#getInput").keyup(function(event){
+    if(event.keyCode == 13){
+        $("#btnSignUp").click();
+    }
+});
     //add sign up event
     btnSignUp.addEventListener("click", e => {
         const fname = txtFirstName.value;
@@ -118,6 +134,8 @@ function writeUserData(date, email,name, imageUrl) {
           console.log(error.message);
           alert(error.message)
         });
+
+
       //  setTimeout('', 4000);
       //  const login = auth.signInWithEmailAndPassword(txtemail, pass);
         // login.catch(function(error){
@@ -126,7 +144,18 @@ function writeUserData(date, email,name, imageUrl) {
         // });
         var today = new Date();
         var date = today.toString();
-        writeUserData(date, txtemail,fullname, imageUrl)
+
+        firebase.auth().onAuthStateChanged(function(user) {
+          if (user) {
+          writeUserData(date, txtemail,fullname, imageUrl);
+          alert('Success '+ txtemail+ ' was created');
+          window.location= "index.html";
+          } else {
+            // No user is signed in.
+
+          }
+        });
+
 
 
 

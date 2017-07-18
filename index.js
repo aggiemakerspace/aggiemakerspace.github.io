@@ -29,7 +29,7 @@ function writeUserData(date, email,name, imageUrl) {
     const txtPassword = document.getElementById('txtPassword');
     const btnLogin = document.getElementById('btnLogin');
     const btnSignUp = document.getElementById('btnSignUp');
-    const btnLogout = document.getElementById('btnLogout');
+    //const btnLogout = document.getElementById('btnLogout');
     const btnGoogleSignup = document.getElementById('btnGoogleSignUp');
     const txtFirstName = document.getElementById('txtFname');
     const txtLastName = document.getElementById('txtLname');
@@ -60,7 +60,7 @@ function writeUserData(date, email,name, imageUrl) {
     //AFTER SIGN IN
 
         var user = firebase.auth().currentUser;
-        console.log("User:"+String(user.displayName));
+        console.log("User:"+String(user.uid));
         var name;
         if (user != null) {
             name = user.displayName;
@@ -110,10 +110,10 @@ function writeUserData(date, email,name, imageUrl) {
 
 
 
-    <!-- Log out-->
-    btnLogout.addEventListener('click', e => {
-        firebase.auth().signOut();
-    });
+    // <!-- Log out-->
+    // btnLogout.addEventListener('click', e => {
+    //     firebase.auth().signOut();
+    // });
 
 
 
@@ -122,10 +122,10 @@ function writeUserData(date, email,name, imageUrl) {
         if (firebaseUser) {
             console.log(firebaseUser+" has signed in.");
             window.location.href = 'home.html';
-            btnLogout.classList.remove('hide');
+            //btnLogout.classList.remove('hide');
         } else {
             console.log("not logged in");
-            btnLogout.classList.add("hide");
+            //btnLogout.classList.add("hide");
         }
     });
 

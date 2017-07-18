@@ -82,14 +82,14 @@ body,html{
 
      </style>
 </head>
-<body id ="image">
+<body id ="image" onload="onReload()">
 
     <div  class="container w3-card center
     w3-round-xlarge w3-text-black">
         <div><h2>Aggie|MAKERSPACE</h2>
           <hr>
           <br>
-        <form>
+        <form id="getInput">
           <div class="form-group">
             <label for="fname">First Name: </label>
             <input id="txtFname" type="text" placeholder="FirstName" class="form-control">
@@ -117,7 +117,7 @@ body,html{
 
           <button id="btnSignUp" type = "button" class="btn btn-success btn-lg btn-block">Sign Up</button>
           <button id="btnLogout" type = "button" class="btn btn-danger btn-lg btn-block btn-action hide">Logout</button>
-          
+
           <br>
           <p>Already have an account? <a href="index.html">Log In </a></p>
         </form>
@@ -139,7 +139,12 @@ body,html{
         </div>
       </div>
 
-
+      <!-- reset form inputs on mozilla browser  -->
+      <script>
+      function onReload(){
+        document.getElementById("getInput").reset();
+      }
+    </script>
     <script src="signup.js"></script>
 </body>
 

@@ -110,7 +110,7 @@ console.log("Button1 was clicked");
       $("#querydescp").text(String(queryDescrip));
       var example = "this.is.a.string.";
 
-      	var n = example.replace(/\./g,' ');
+      var n = example.replace(/\./g,' ');
       var machineRef = firebase.database().ref().child("machines");
       machineRef.on("child_added", snap=> {
        $("#unList").append("<div id='editable'>" +
@@ -141,7 +141,7 @@ console.log("Button2 was clicked");
       var queryDescrip= "Here is a list of users in operation."
       $("#querydescp").text(String(queryDescrip));
 
-      var userRef = firebase.database().ref().child("users");
+      var userRef = firebase.database().ref().child("superusers");
       userRef.on("value", snap=> {
        $("#unList").append("<div id='editable'>" +
 
@@ -156,6 +156,37 @@ console.log("Button2 was clicked");
 
 });
 
+//SHow all SuperUsers
+$(document).ready(function(){
+console.log("Button2 was clicked");
+    $("#btn4").click(function(){
+      //clear contents
+      $("#unList").html(" ");
+      $("#editable").html(" ");
+      //Title
+      $("#querytitle").text("SuperUsers");
+      var queryDescrip= "Here is a list of superusers in operation."
+      $("#querydescp").text(String(queryDescrip));
+
+      var rolesRef = firebase.database().ref('roles').child('admins').orderByChild('email');
+      rolesRef.on("child_added", snap=> {
+        var userRef = snap.val();
+       $("#unList").append("<div id='editable'>"+"<li>"+"Name: "+ userRef.name + " Email: " + String(userRef.email) +
+       " Phone:" +String(userRef.phone)+"</li>"
+       +"<bd>"+"</div>" );
+        console.log(snap.key);
+        });
+
+    });
+
+});
+
+<!-- Log out-->
+logout.addEventListener('click', e => {
+    console.log(name+"is signing out.");
+    firebase.auth().signOut();
+
+});
 
 
         } else {
@@ -168,12 +199,7 @@ console.log("Button2 was clicked");
 
 
 
-    <!-- Log out-->
-    logout.addEventListener('click', e => {
-        console.log(name+"is signing out.");
-        firebase.auth().signOut();
 
-    });
 
 // //Display image
 // $(window).scroll(function() {

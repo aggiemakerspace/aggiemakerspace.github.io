@@ -1,16 +1,17 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>W3.CSS Template</title>
+<title>Profile page</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-<link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-blue-grey.css">
+<link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-blue.css">
 <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Open+Sans'>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
+<!--Source -->
 <script src="https://www.gstatic.com/firebasejs/4.1.2/firebase.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="profile.js"></script>
 
 <style>
     html,body,h1,h2,h3,h4,h5 {font-family: "Open Sans", sans-serif}
@@ -51,6 +52,23 @@
         width: 200px;
     }
 
+    #navDemo{
+      top:50px;;
+      box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+      z-index: 1;
+      overflow:hidden;
+      position: fixed;
+      width: 100%;
+    }
+
+    .w3-bar{
+
+       overflow: hidden;
+       position: fixed;
+       height: 50px;
+
+    }
+
 
 </style>
 </head>
@@ -58,23 +76,42 @@
 
 
 
-<!-- Navbar -->
-<div class="w3-top">
-    <div class="w3-bar w3-theme-d2 w3-left-align w3-large">
-        <a class="w3-bar-item w3-button w3-hide-medium w3-hide-large w3-right w3-padding-large w3-hover-white w3-large w3-theme-d2" href="javascript:void(0);" onclick="openNav()"><i class="fa fa-bars"></i></a>
-        <a href="home.html" class="w3-bar-item w3-button w3-padding-large w3-theme-d4"><i class="fa fa-home w3-margin-right"></i>MakerSpace</a>
-        <a href="#" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white" title="News"><i class="fa fa-globe"></i></a>
-        <a href="#" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white" title="Account Settings"><i class="fa fa-user"></i></a>
-        <a href="#" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white" title="Messages"><i class="fa fa-envelope"></i></a>
-        <div class="w3-dropdown-hover w3-hide-small">
-            <button class="w3-button w3-padding-large" title="Notifications"><i class="fa fa-bell"></i><span class="w3-badge w3-right w3-small w3-green">3</span></button>
 
-        </div>
-        <a href="#" class="w3-bar-item w3-button w3-hide-small w3-right w3-padding-large w3-hover-white" title="My Account"><img src ="assets/img/avatar3.png"  class="w3-circle" style="height:25px;width:25px" alt="Avatar"/>
-        </a>
+<!-- Navbar -->
+
+    <div class="w3-bar w3-theme-d2 w3-left-align w3-large">
+        <a class="w3-bar-item w3-button w3-hide-medium w3-hide-large w3-right w3-padding-large
+        w3-hover-white w3-large w3-theme-d2" href="javascript:void(0);" onclick="openNav()"><i class="fa fa-bars"></i></a>
+        <a href="home.html" class="w3-bar-item w3-button w3-padding-large w3-theme-d4">
+          <i class="fa fa-home w3-margin-right"></i>MakerSpace</a>
+
+
+        <!--Sign Out -->
+        <div id = "menubar">
+        <a href="#" id="logout" class=" w3-bar-item w3-button w3-right w3-hide-small
+        w3-padding-large w3-hover-white" onclick="logOut();return false;" title="Logout"><i class="fa fa-sign-out"></i>Sign Out</a>
+        <a href="console.html" id = "admin" class = "w3-animate-top w3-bar-item w3-button w3-right w3-red
+        w3-hide-small w3-padding-large w3-hover-white">ADMIN CONSOLE</a\>
+        <a href="inventory.html" class="w3-animate-top w3-bar-item w3-button w3-right
+        w3-hide-small w3-padding-large w3-hover-white hide">Inventory</a>
+        <a href="classes.html" class="w3-animate-top w3-bar-item w3-button w3-right
+        w3-hide-small w3-padding-large w3-hover-white">Classes</a>
+      </div>
+
+
     </div>
 
-    <div class="w3-container w3-content" style="max-width:1400px;margin-top:80px">
+
+    <!-- Navbar on small screens -->
+    <div id="navDemo" class="w3-bar-block w3-theme-d2 w3-hide w3-hide-large w3-hide-medium w3-large">
+    <nav>
+            <a href="members.html" class="w3-bar-item w3-button w3-padding-large">Classes</a>
+            <a href="inventory.html" class="w3-bar-item w3-button w3-padding-large">Inventory</a>
+            <a href="console.html" id="admin" class="w3-bar-item w3-button w3-padding-large">Admin Console</a>
+            <a href="profile.html" class="w3-bar-item w3-button w3-padding-large">My Profile</a>
+            <a href="#" onclick="logOut();return false;" id ="logout" class = "w3-bar-item w3-button w3-padding-large" >Sign out</a>
+    </nav>
+    </div>
 
         <!-- Profile -->
         <div class="w3-card-2 w3-round w3-white">
@@ -156,7 +193,27 @@
 
 
     </div>
-    <!--Source -->
-    <script src="profile.js"></script>
+  
+
+    <script>
+        // Used to toggle the menu on smaller screens when clicking on the menu button
+        function openNav() {
+            var x = document.getElementById("navDemo");
+            if (x.className.indexOf("w3-show") == -1) {
+                x.className += " w3-show";
+            } else {
+                x.className = x.className.replace(" w3-show", "");
+            }
+        }
+    </script>
+
+    <!--Logout-->
+
+    <script>
+        function  logOut(){
+        firebase.auth().signOut();
+        console.log(firebaseUser + "has logged out");
+        };
+    </script>
 </body>
 </html>

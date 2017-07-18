@@ -34,7 +34,7 @@ function checkifAdmin (){
          if(prop == "administrator"||"superuser"){
            adminAccess = true;
            console.log("Admin Approved");
-           $("#admin" ).remove();
+           //$("#admin" ).remove();
            //$("#admin" ).remove();
         }
         if (adminAccess == true){
@@ -84,13 +84,52 @@ function checkifAdmin (){
           //     // An error happened.
           // });
 
+          //profile picture
           $("#userPic").append(user.profile_picture);
           user.providerData.forEach(function (profile){
+            console.log(profile);
+
+            //UPDATE USER INFORMATION FOR FIRST TIME LOGINS
+              if(profile.displayName == null){
+
+                var signupQueue = firebase.database().ref().child('signupQueue');
+                var userRef = firebase.database().ref('users/'+ user.uid);
+                var userTemp;
+                signupQueue.orderByChild('email').equalTo(profile.email).on("child_added", function (snap){
+                  userTemp = snap.val();
+                  //update user node
+                  userRef.update(userTemp);
+
+                  //update auth
+                  user.updateProfile({
+                    displayName: userTemp.name,
+                    photoURL: userTemp.profile_picture,
+                  }).then(function() {
+                    // Update successful.
+                  }, function(error) {
+                      // An error happened.
+                  });
+
+              });
+
+              //ONCE DONE, CLEAN UP PAYLOAD
+
+              // signupQueue.orderByChild('email').equalTo(profile.email).on("child_added", function (snap){
+              //     var userRef = snap.ref;
+              //     return userRef.remove();
+              //   });
+
+
+            }else{
+              console.log('Display name is valid');
+
+
             console.log("Sign-in provider: "+profile.providerId);
             console.log("  Provider-specific UID: "+profile.uid);
             console.log("  Name: "+profile.displayName);
             console.log("  Email: "+profile.email);
             console.log("  Photo URL: "+profile.photoURL);
+}
             });
 
 
@@ -117,11 +156,12 @@ function checkifAdmin (){
 
 
           var object = snap.val();
+          console.log("uid", object.uid);
           var email = object.email;
           var fullname = object.name;
           var joinDate = object.created_at;
           var roles = object.roles;
-          console.log(roles);
+          //console.log(roles);
 
           var displayRole = roles.administrator;
           var adminAccess = false;
@@ -132,10 +172,10 @@ function checkifAdmin (){
                {
                  if(prop == "administrator"||"superuser"){
                    adminAccess = true;
-                   console.log("Admin Approved");
+                   //console.log("Admin Approved");
 
-
-                   $("#admin" ).remove();
+                   //adminConsole.classList.add("hide");
+                   $("#admin").show();
                  console.log(prop);
                 }
                 $("#title").append("|"+prop+"|");
@@ -144,7 +184,6 @@ function checkifAdmin (){
               }
         };
 
-          //Object.keys(roles).map((e)=>  console.log(`key=${e} value=${roles[e]}`));
 
           console.log(joinDate);
 
@@ -162,6 +201,12 @@ function checkifAdmin (){
           });
           //console.log(user.displayName);
 
+          <!-- Log out-->
+          logout.addEventListener('click', e => {
+              console.log(name+"is signing out.");
+              firebase.auth().signOut();
+
+          });
 
         } else {
           // No user is signed in.
@@ -173,12 +218,7 @@ function checkifAdmin (){
 
 
 
-    <!-- Log out-->
-    logout.addEventListener('click', e => {
-        console.log(name+"is signing out.");
-        firebase.auth().signOut();
 
-    });
 
 
 
