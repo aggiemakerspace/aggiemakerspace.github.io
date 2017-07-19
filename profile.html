@@ -11,7 +11,7 @@
 <!--Source -->
 <script src="https://www.gstatic.com/firebasejs/4.1.2/firebase.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script src="profile.js"></script>
+<script src="js/profile.js"></script>
 
 <style>
     html,body,h1,h2,h3,h4,h5 {font-family: "Open Sans", sans-serif}
@@ -122,17 +122,17 @@
                 <hr>
                 <!--Information-->
                 <center><form action="/action_page.php">
-                    <br><h5 class="w3-text-theme w3-center">firstName lastName</h5>
+                    <br><h5 class="w3-text-theme w3-center">Name</h5>
 
-                  <input id ="input" type="text" name="name" class="w3-text-theme w3-center" value = "Rick James">
+                  <input id ="txtName" type="text" name="name" class="w3-text-theme w3-center" value = "Rick James">
 
                   <!-- Change year -->
                     <h5 class="w3-text-theme w3-center">Classification</h5>
-                    <input type="text" name="classification" class="w3-text-theme w3-center" value = "Senior">
+                    <input id="year" type="text" name="classification" class="w3-text-theme w3-center" value = "Senior">
 
                     <!-- Change Major -->
                       <h5 class="w3-text-theme w3-center">Major</h5>
-                    <h5><select class="w3-text-theme w3-center" id="selector"></select></h5>
+                    <h5><select id="major" class="w3-text-theme w3-center" id="selector"></select></h5>
                     <!-- <input type="text" name="major"  class="w3-text-theme w3-center" value="Engineering"> -->
 
                     <!--Equipment people can use -->
@@ -193,7 +193,7 @@
 
 
     </div>
-  
+
 
     <script>
         // Used to toggle the menu on smaller screens when clicking on the menu button

@@ -99,8 +99,9 @@
 
 
 $(document).ready(function(){
-console.log("Button1 was clicked");
+
     $("#btn1").click(function(){
+      console.log("Button1 was clicked");
       //clear contents
       $("#unList").html(" ");
       $("#editable").html(" ");
@@ -113,11 +114,8 @@ console.log("Button1 was clicked");
       var n = example.replace(/\./g,' ');
       var machineRef = firebase.database().ref().child("machines");
       machineRef.on("child_added", snap=> {
-       $("#unList").append("<div id='editable'>" +
-
-
+       $("#unList").append("<div id='editable'> " +
            "<li>"+snap.key.replace(/\_/g,' ').toUpperCase()+"</li>"
-
          +"</div>" );
         console.log(snap.key);
         });
@@ -131,9 +129,10 @@ console.log("Button1 was clicked");
 
 
 $(document).ready(function(){
-console.log("Button2 was clicked");
+
     $("#btn2").click(function(){
       //clear contents
+      console.log("Button2 was clicked");
       $("#unList").html(" ");
       $("#editable").html(" ");
       //Title
@@ -158,8 +157,9 @@ console.log("Button2 was clicked");
 
 //SHow all SuperUsers
 $(document).ready(function(){
-console.log("Button2 was clicked");
+
     $("#btn4").click(function(){
+      console.log("Button4 was clicked");
       //clear contents
       $("#unList").html(" ");
       $("#editable").html(" ");
@@ -180,6 +180,36 @@ console.log("Button2 was clicked");
     });
 
 });
+
+//ADD administrators, superusers
+$(document).ready(function(){
+
+    $("#btnAdmin").click(function(){
+      //clear contents
+      console.log("Admin Button was clicked");
+      $("#unList").html(" ");
+      $("#editable").html(" ");
+      //Title
+      $("#querytitle").text("Users");
+      var queryDescrip= "Amend users, and users rights."
+      $("#querydescp").text(String(queryDescrip));
+
+      var userRef = firebase.database().ref().child("superusers");
+      userRef.on("value", snap=> {
+       $("#unList").append("<div id='editable'>" +
+
+
+           "<li>"+snap.val()+"</li>"
+
+         +"</div>" );
+        console.log(snap.key);
+        });
+
+    });
+
+});
+
+
 
 <!-- Log out-->
 logout.addEventListener('click', e => {

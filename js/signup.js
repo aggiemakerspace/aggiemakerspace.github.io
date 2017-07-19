@@ -148,8 +148,10 @@ $("#getInput").keyup(function(event){
         firebase.auth().onAuthStateChanged(function(user) {
           if (user) {
           writeUserData(date, txtemail,fullname, imageUrl);
-          alert('Success '+ txtemail+ ' was created');
-          window.location= "index.html";
+
+          setTimeout(function(){ alert('Success '+ txtemail+ ' was created');
+          window.location= "index.html";}, 1000);
+
           } else {
             // No user is signed in.
 

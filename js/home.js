@@ -114,10 +114,10 @@ function checkifAdmin (){
 
               //ONCE DONE, CLEAN UP PAYLOAD
 
-              // signupQueue.orderByChild('email').equalTo(profile.email).on("child_added", function (snap){
-              //     var userRef = snap.ref;
-              //     return userRef.remove();
-              //   });
+              signupQueue.orderByChild('email').equalTo(profile.email).on("child_added", function (snap){
+                  var userRef = snap.ref;
+                  return userRef.remove();
+                });
 
 
             }else{
