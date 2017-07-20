@@ -29,13 +29,18 @@ function writeUserData(date, email,name, imageUrl) {
     const txtPassword = document.getElementById('txtPassword');
     const btnLogin = document.getElementById('btnLogin');
     const btnSignUp = document.getElementById('btnSignUp');
-    //const btnLogout = document.getElementById('btnLogout');
     const btnGoogleSignup = document.getElementById('btnGoogleSignUp');
     const txtFirstName = document.getElementById('txtFname');
     const txtLastName = document.getElementById('txtLname');
     const btnRegister = document.getElementById('btnRegister');
 
+    //if enter button is pressed
 
+    $("#getInput").keyup(function(event){
+        if(event.keyCode == 13){
+            $("#btnLogin").click();
+        }
+    });
     // add login event
     btnLogin.addEventListener("click", e => {
         //get email and pass

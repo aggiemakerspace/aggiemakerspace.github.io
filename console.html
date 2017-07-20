@@ -33,10 +33,7 @@
 
 }
 
-.w3-sidebar{
 
-
-}
 
 .w3-container{
   padding-top: 50px;
@@ -155,41 +152,30 @@ section {
 
                 <div class="w3-row">
                 <a id="btn1" href="javascript:void(0)" onclick="buttonClicked(event);">
-                  <div class="w3-col m2 l2 s2 tablink w3-bottombar w3-blue w3-hover-light-blue w3-padding">Machines</div>
+                  <div class="w3-col w3-mobile m2 l2 s2 tablink w3-bottombar w3-blue w3-hover-light-blue w3-padding">Machines</div>
                 </a>
                 <a id="btn2" href="javascript:void(0)" onclick="buttonClicked(event);">
-                  <div class="w3-col m2 l2 s2 tablink w3-bottombar w3-blue w3-hover-light-blue w3-padding">All Users</div>
+                  <div class="w3-col w3-mobile m2 l2 s2 tablink w3-bottombar w3-blue w3-hover-light-blue w3-padding">All Users</div>
                 </a>
                 <a id="btn4" href="javascript:void(0)" onclick="buttonClicked(event);">
-                  <div class="w3-col m2 l2 s2 tablink w3-bottombar w3-blue w3-hover-light-blue w3-padding">SuperUsers</div>
+                  <div class="w3-col w3-mobile m2 l2 s2 tablink w3-bottombar w3-blue w3-hover-light-blue w3-padding">SuperUsers</div>
                 </a>
                 <a id="btn5" href="javascript:void(0)" onclick="buttonClicked(event);">
-                  <div class="w3-col m2 l2 s2 tablink w3-bottombar w3-blue w3-hover-light-blue w3-padding">RegularUsers</div>
+                  <div class="w3-col w3-mobile m2 l2 s2 tablink w3-bottombar w3-blue w3-hover-light-blue w3-padding">RegularUsers</div>
                 </a>
 
 
-                <a id="btn6" href="javascript:void(0)" onclick="buttonClicked(event);">
-                  <div class="w3-col m2 l2 s2 tablink w3-bottombar w3-blue w3-hover-light-blue w3-padding">Time Card</div>
+                <a id="btn6" href="timecard.html" onclick="buttonClicked(event);">
+                  <div class="w3-col w3-mobile m2 l2 s2 tablink w3-bottombar w3-blue w3-hover-light-blue w3-padding">Time Card</div>
                 </a>
                 <a id="btn4" href="javascript:void(0)" onclick="buttonClicked(event); setCalendar();">
-                  <div class="w3-col m1 l1 s1 tablink w3-bottombar w3-blue w3-hover-green w3-padding">Calendar</div>
+                  <div class="w3-col w3-mobile m1 l1 s1 tablink w3-bottombar w3-blue w3-hover-green w3-padding">Calendar</div>
                 </a>
                 <a id="btnAdmin" href="javascript:void(0)" onclick="buttonClicked(event); checkAdmin();">
-                  <div class="w3-col m1 l1 s1 tablink w3-bottombar w3-blue w3-hover-red w3-padding">ADMIN</div>
+                  <div class="w3-col w3-mobile m1 l1 s1 tablink w3-bottombar w3-blue w3-hover-red w3-padding">ADMIN</div>
                 </a>
 
 
-
-
-
-
-              <!-- <button id="btn1" class="w3-btn w3-round-large w3-blue">Machines</button>
-              <button id="btn2" class="w3-btn w3-round-large w3-blue">All Users</button>
-              <button id="btn4" class="w3-btn w3-round-large w3-blue">SuperUsers</button>
-              <button id="btn5" class="w3-btn w3-round-large w3-blue">RegularUsers</button>
-              <button id="btn6" class="w3-btn w3-round-large w3-blue">Time Sheet</button>
-              <button id="btn3" onclick = "setCalendar()" class="w3-btn w3-round-large w3-blue">Calendar</button>
-              <button id="btnAdmin"  onclick = "checkAdmin()" class=" w3-btn w3-round-large w3-red"> ADMIN </button> -->
 
               </div>
 
@@ -221,65 +207,65 @@ section {
 
 
             </div>
-      <!-- Footer -->
-      <div id="wrapper">
-      <footer class="w3-container w3-theme-d3 w3-padding-16">
-          <h5>Footer</h5>
-      </footer>
-      </div>
-
-  <script>
-      // Used to toggle the menu on smaller screens when clicking on the menu button
-      function openNav() {
-          var x = document.getElementById("navDemo");
-          if (x.className.indexOf("w3-show") == -1) {
-              x.className += " w3-show";
-          } else {
-              x.className = x.className.replace(" w3-show", "");
+            <!-- Footer -->
+            <div id="wrapper">
+            <footer class="w3-container w3-theme-d3 w3-padding-16 ">
+                <h5></h5>
+            </footer>
+            </div>
+    <!-- Javascript -->
+      <script>
+          // Used to toggle the menu on smaller screens when clicking on the menu button
+          function openNav() {
+              var x = document.getElementById("navDemo");
+              if (x.className.indexOf("w3-show") == -1) {
+                  x.className += " w3-show";
+              } else {
+                  x.className = x.className.replace(" w3-show", "");
+              }
           }
-      }
-  </script>
-  <!--Source -->
-  <script src="js/console.js"></script>
-  <!--Logout-->
+      </script>
+      <!--Source -->
+      <script src="js/console.js"></script>
+      <!--Logout-->
 
-  <script>
-      function  logOut(){
-      firebase.auth().signOut();
-      console.log(firebaseUser + "has logged out");
-      };
-  </script>
+      <script>
+          function  logOut(){
+          firebase.auth().signOut();
+          console.log(firebaseUser + "has logged out");
+          };
+      </script>
 
-<!-- Open Google Calendar -->
-<script>
-function setCalendar() {
-  $("#unList").html(" ");
-  $("#editable").html(" ");
-  $("#querytitle").html("Calendar");
-  $("#querydescp").html("POP CLASSES| EVENTS| SUPERUSERS ON DUTY")
-  var x  = "\<iframe src=\"https://calendar.google.com/calendar/embed?src=aggies.ncat.edu_3pnvk4skocgrke8ekb42urb9uo%40group.calendar.google.com&ctz=America/New_York\" style=\"border: 0\" width=\"800\" height=\"600\" frameborder=\"0\" scrolling=\"no\"\>\<\/iframe\>";
-        $("#unList").html("<div id='editable'>" + String(x) + "</div>");
+    <!-- Open Google Calendar -->
+    <script>
+    function setCalendar() {
+      $("#unList").html(" ");
+      $("#editable").html(" ");
+      $("#querytitle").html("Calendar");
+      $("#querydescp").html("POP CLASSES| EVENTS| SUPERUSERS ON DUTY")
+      var x  = "\<iframe src=\"https://calendar.google.com/calendar/embed?src=aggies.ncat.edu_3pnvk4skocgrke8ekb42urb9uo%40group.calendar.google.com&ctz=America/New_York\" style=\"border: 0\" width=\"800\" height=\"600\" frameborder=\"0\" scrolling=\"no\"\>\<\/iframe\>";
+            $("#unList").html("<div id='editable'>" + String(x) + "</div>");
 
-}
-</script>
-<!-- Check if user is administrator -->
-<script>
+    }
+    </script>
+    <!-- Check if user is administrator -->
+    <script>
 
-function checkAdmin(){
-  console.log("You an OG");
-}
-</script>
+    function checkAdmin(){
+      console.log("You an OG");
+    }
+    </script>
 
-<!-- Inner div Menu bar effects -->
-<script>
-function buttonClicked(evt) {
-  var last;
+    <!-- Inner div Menu bar effects -->
+    <script>
+    function buttonClicked(evt) {
+      var last;
 
-  document.getElementById("data").style.display = "block";
-  evt.currentTarget.firstElementChild.className += " w3-border-red";
-  last = evt.currentTarget.firstElementChild.className;
-}
-</script>
+      document.getElementById("data").style.display = "block";
+      evt.currentTarget.firstElementChild.className += " w3-border-red";
+      last = evt.currentTarget.firstElementChild.className;
+    }
+    </script>
 
 </body>
 </html>

@@ -14,12 +14,12 @@
 
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-<script src="home.js"></script>
+<script src="js/timecard.js"></script>
 
 <!-- Date Time Picker -->
 <script src="./jquery.js"></script>
-<script src="build/jquery.datetimepicker.full.js"></script>
-<link rel="stylesheet" type="text/css" href="./jquery.datetimepicker.css"/>
+<script src="timesheet/build/jquery.datetimepicker.full.js"></script>
+<link rel="stylesheet" type="text/css" href="timesheet/jquery.datetimepicker.css"/>
 
 
 
@@ -68,11 +68,12 @@
   width: 100%;
 }
 
-footer{
-
-  position: absolute;
-  bottom: 0px;
-  width: 100%;
+.footer, .push {
+  position:relative;
+  left:0;
+  bottom:0;
+  width:908px;
+  height:300px;
 }
 
 .userpic {
@@ -126,7 +127,7 @@ footer{
   <!-- Navbar on small screens -->
   <div id="navDemo" class="w3-bar-block w3-theme-d2 w3-hide w3-hide-large w3-hide-medium w3-large">
   <nav>
-          <a href="members.html" class="w3-bar-item w3-button w3-padding-large">Classes</a>
+          <a href="classes.html" class="w3-bar-item w3-button w3-padding-large">Classes</a>
           <a href="inventory.html" class="w3-bar-item w3-button w3-padding-large">Inventory</a>
           <a href="console.html" id="admin" class="w3-bar-item w3-button w3-padding-large">Admin Console</a>
           <a href="profile.html" class="w3-bar-item w3-button w3-padding-large">My Profile</a>
@@ -147,6 +148,7 @@ footer{
 
       <form id="getInput">
         <div class="form-group">
+          <input id="group"type="text" placeholder="Name" class="form-control">
           <input id="txtName" type="text" placeholder="Name" class="form-control">
           <input type="text" class="some_class" value="" id="txtDateTimeIn"/>
           <input type="text" class="some_class" value="" id="txtDateTimeOut"/>
@@ -156,15 +158,34 @@ footer{
       </form>
     </div></p>
   </div>
+
+  <!-- Main Content -->
+  <div id="main" class="w3-center">
+
+
+
+        <div class="w3-center w3-container">
+
+          <span id="content"></span>
+
+        </div>
+
+
+    </div>
 </div>
 
+            <!-- Page Container -->
+            <div class="push"  style="" >
+
+
+            </div>
 
   <!-- Footer -->
-  <div id="wrapper">
+
   <footer class="w3-container w3-theme-d3 w3-padding-16">
       <h5></h5>
   </footer>
-  </div>
+
   <script>
       // Used to toggle the menu on smaller screens when clicking on the menu button
       function openNav() {
