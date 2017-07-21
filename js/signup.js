@@ -9,6 +9,10 @@ function writeUserData(date, email,name, imageUrl) {
           email: email,
           name: name,
           profile_picture : imageUrl,
+          //maj_class: major,
+          //year_class: year,
+          maj_class: " ",
+          year_class: " ",
           roles:
           {
             administrator: false,

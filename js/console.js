@@ -81,10 +81,17 @@
 
 
 /*** View Machines ***/
-          var ref = firebase.database().ref("machines");
-          ref.orderByKey().endAt("machine2").on("child_added", function(snapshot) {
-            console.log(snapshot.key);
-          });
+
+// var ref = firebase.database().ref("machines");
+//           ref.orderByKey().endAt("other_mill").on("child_added", function(snapshot) {
+//             var m = snapshot.val();
+//             console.log(snapshot.key, m.location);
+//             //console.log(snapshot.key);
+//           });
+//           var ref = firebase.database().ref("machines");
+//           ref.orderByKey().endAt("machine2").on("child_added", function(snapshot) {
+//             console.log(snapshot.key);
+//           });
 
           });
           //console.log(user.displayName);
@@ -113,9 +120,22 @@ $(document).ready(function(){
 
       var n = example.replace(/\./g,' ');
       var machineRef = firebase.database().ref().child("machines");
+      var imageScript = " ";
       machineRef.on("child_added", snap=> {
+        switch(snap.val().status) {
+      case 'working':
+          imageScript = "\<img class= 'w3-round w3-border-black w3-center' height=\"42\" width=\"42\" src='assets/img/machines/working.png' style=\"\" alt='Working' \>";
+          break;
+      case 'repair':
+          imageScript = "\<img class= 'w3-round w3-border-black w3-center' height=\"42\" width=\"42\" src='assets/img/machines/repair.png' style=\"\" alt='Repair' \>";
+          break;
+      default:
+          imageScript = "\<img class= 'w3-round w3-border-black w3-center' height=\"42\" width=\"42\" src='assets/img/machines/damaged.png' style=\"\" alt='Damaged' \>";
+
+        }
+
        $("#unList").append("<div id='editable'> " +
-           "<li>"+snap.key.replace(/\_/g,' ').toUpperCase()+"</li>"
+           "<li>"+snap.key.replace(/\_/g,' ').toUpperCase()+" "+snap.val().location+" "+imageScript+"</li>"
          +"</div>" );
         console.log(snap.key);
         });
@@ -140,12 +160,12 @@ $(document).ready(function(){
       var queryDescrip= "Here is a list of users in operation."
       $("#querydescp").text(String(queryDescrip));
 
-      var userRef = firebase.database().ref().child("superusers");
-      userRef.on("value", snap=> {
+      var userRef = firebase.database().ref().child("users");
+      userRef.on("child_added", snap=> {
        $("#unList").append("<div id='editable'>" +
 
 
-           "<li>"+snap.val()+"</li>"
+           "<li>"+snap.val().email+" "+ snap.val().name+"  "+"</li>"
 
          +"</div>" );
         console.log(snap.key);

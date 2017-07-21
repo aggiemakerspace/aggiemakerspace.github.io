@@ -100,7 +100,7 @@ function checkifAdmin (){
                   //update user node
                   userRef.update(userTemp);
 
-                  //update auth
+                  //update auth user
                   user.updateProfile({
                     displayName: userTemp.name,
                     photoURL: userTemp.profile_picture,
@@ -161,6 +161,8 @@ function checkifAdmin (){
           var fullname = object.name;
           var joinDate = object.created_at;
           var roles = object.roles;
+          var major = object.major_class;
+          var year = object.year_class;
           //console.log(roles);
 
           var displayRole = roles.administrator;
@@ -196,6 +198,7 @@ function checkifAdmin (){
             document.getElementById("joinDate").innerHTML= joinDate;
             document.getElementById("userName").innerHTML=fullname;
 
+            $("#major").append(major + " | " + "<b style='color:blue'>"+year+"</b>" );
 
 
           });

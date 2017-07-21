@@ -20,6 +20,13 @@
         border-left: 1px solid black;
         text-align: center;
     }
+    body,html{
+      height: 100%;
+      width: 100%;
+      margin: 0;
+      padding: 0;
+
+    }
 
     table
     {
@@ -36,13 +43,19 @@
     #tableContainer-2 {
 
     }
-    body {
+    #bgimage {
 
-        background: url("assets/img/notepad.jpg");
-        height: 100%;
-        background-position: center;
-        background-repeat: repeat-x, repeat-y;
-        background-size: cover;
+
+
+
+      height: 100%;
+      background: #000 url('assets/img/notepad.jpg') center no-repeat;
+      background-size: cover;
+      margin-bottom: 0px
+      background-size: 100% 100%;
+      /*background-size: auto 150;*/
+      width: 100%;
+
 
 
     }
@@ -69,10 +82,26 @@
 
     }
 
+    .w3-card-2 {
+      overflow:hidden;
+
+      width:280px;
+      height: 900px;
+      position: absolute;
+      margin-left: 25%;
+      margin-top: 50px;
+      width: 50%;
+
+    }
+    .w3-text-theme{
+      padding-top: 1px;
+    }
+
 
 </style>
 </head>
-<body>
+
+<body id="bgimage">
 
 
 
@@ -117,7 +146,7 @@
         <div class="w3-card-2 w3-round w3-white">
             <div class="w3-container">
                 <h4 class="w3-center">My Profile</h4>
-                <p class="w3-center"><img src="assets/img/avatar3.png"
+                <p class="w3-text-theme w3-center"><img src="assets/img/avatar3.png"
                                           class="w3-circle" style="height:106px;width:106px" alt="Avatar"/></p>
                 <hr>
                 <!--Information-->
@@ -132,43 +161,35 @@
 
                     <!-- Change Major -->
                       <h5 class="w3-text-theme w3-center">Major</h5>
-                    <h5><select id="major" class="w3-text-theme w3-center" id="selector"></select></h5>
-                    <!-- <input type="text" name="major"  class="w3-text-theme w3-center" value="Engineering"> -->
+                    <h5> <select id="major" class="w3-text-theme w3-center" value="0"></select></h5>
+                  <!-- <input type="text" name="major"  class="w3-text-theme w3-center" value="Engineering"> -->
+            
+
 
                     <!--Equipment people can use -->
                     <h5 class="w3-text-theme w3-center">Usable Equipment</h5>
 
                     <!--Insert table-->
-                    <div id="tableContainer-2">
+                    <div id="tableContainer-2" >
                     <table align="center" class= "w3-table-all" >
                         <colgroup>
                             <col span="2" style="background-color:">
                             <col style="background-color:">
                         </colgroup>
-                        <tr class="w3-light-grey">
-                            <th style="border-left: 0px">tool</th>
-                            <th>tool</th>
-                            <th>tool</th>
-                            <th>tool</th>
-                            <th>tool</th>
-                            <th>tool</th>
-                            <th>tool</th>
-                            <th>tool</th>
-                            <th>tool</th>
+                        <tr class="w3-blue">
+                            <th style="border-left: 0px">OtherMill</th>
+                            <th>3D Printer</th>
+                            <th>CNC Milling</th>
+                            <th>Laser Engraver</th>
+
 
                             <p></p>
                         </tr>
-                        <tr >
-                            <td style="border-left: 0px">true</td>
+                        <tr class="w3-light-blue" >
+                            <td style="border-left: 0px" class = "w3-hover-green">true</td>
                             <td class="w3-hover-green">true</td>
                             <td class="w3-hover-red">false</td>
                             <td class="w3-hover-green">true</td>
-                            <td class="w3-hover-green">true</td>
-                            <td class="w3-hover-red">false</td>
-                            <td class="w3-hover-green">true</td>
-                            <td class="w3-hover-green">true</td>
-                            <td class="w3-hover-red">false</td>
-
 
 
                         </tr>
@@ -181,12 +202,16 @@
 
                     <h5 class="w3-text-theme w3-center">Equipment Checkout</h5>
 
+                    <p></p>
 
 
 
-                    <br><br>
-                    <input type="submit" class="w3-text-theme w3-center" ><br>
-                </form></center>
+                      <button id="btnSubmit" type = "button" class="btn btn-success btn-lg btn-block">Submit Changes</button>
+                    <br>
+                </form>
+
+            </center>
+
 
            </div>
         </div>
@@ -215,5 +240,35 @@
         console.log(firebaseUser + "has logged out");
         };
     </script>
+
+    <script>
+    window.onload = function () {
+    var JSON = {
+        "COLUMNS":["ID", "Name"],
+        "DATA": [
+            ["0",""],
+            ["1","Biological Engineering"],
+            ["2", "Chemical Engineering"],
+            ["3", "Bioengineering"],
+            ["4", "Biological Engineering"],
+            ["5", "Architectural Engineering"],
+            ["6", "Civil Engineering"],
+            ["7", "Computer Science"],
+            ["8", "Computer Engineering"],
+            ["9", "Electrical Engineering"],
+            ["10", "Industrial and Systems Engineering"],
+            ["11", "Mechanical Engineering"],
+            ["12",  "Other"]
+        ]
+    }, select = document.getElementById("major");
+    for (var i = 0; i < JSON.DATA.length; i++) {
+    var at = JSON.DATA[i], id = at[0], name = at[1];
+        var option = document.createElement("option");
+        option.value = id;
+        option.textContent = name;
+        select.appendChild(option);
+    };
+  };
+  </script>
 </body>
 </html>
