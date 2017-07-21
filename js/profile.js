@@ -1,12 +1,7 @@
 (function() {
 
     var provider = new firebase.auth.GoogleAuthProvider();
-    var email_gl;
-    var fullname_gl;
-    var joinDate_gl;
-    var roles_gl;
-    var year_gl;
-    var major_gl;
+
 
     const config = {
         apiKey: "AIzaSyDusG6NBnTuNA8gamGCLlF-fagPO4ozJpk",
@@ -38,7 +33,7 @@
             console.log("uid", object.uid);
             var fullname = object.name;
             var year = object.year_class;
-            var major = object.maj_class;
+            var major = object.major_class;
 
             //DISPLAY USER INFORMATION TO DOCUMENT
             $("#txtName").val(fullname);
@@ -76,6 +71,8 @@
                       userTemp.year_class = yInput;
 
                      userRef.update(userTemp);
+                     setTimeout(function(){ alert('Success your profile was updated. ');
+                     window.location= "profile.html";}, 500);
 
                       console.log(userTemp);
                     });
