@@ -84,7 +84,14 @@
         min-height: -moz-calc(100% - 186px);
         min-height: calc(100% - 186px);
     }
+#disclaimer{
+  font: 15px Montserrat, sans-serif;
+  line-height: 1.8;
+  color: #000;
+  margin-bottom:0;
+  padding-bottom:0;
 
+}
 
 #bg_image  {
 
@@ -174,7 +181,7 @@ div.well div {
       </div>
     </div>
 
-<div class="container text-center">
+<div class="container text-center bg-3">
     <div class="row">
 
     <div class="col-sm-4 col-lg-4">
@@ -287,7 +294,7 @@ $(document).ready(function(){
   <h2 class="margin" style="color:#337ab7">Information</h2><br>
   <div class="row">
     <div class="col-sm-4">
-      <div class="well" height="480px">
+      <div class="well" height="480px" background-color:"#CCC">
          <h2 style="color:black">Visit us at:</h2>
       <address id="addText" style="color:black">
 
@@ -295,9 +302,48 @@ $(document).ready(function(){
        1601 East Market Street, Greensboro, NC 27411</br>
       McNair Hall, Room 121</br>
       Makerspace Phone Number: </br><a href="tel://1-336-285-3828">+1 (336)285-3828</a> </br>
+</address>
+<hr style="color:black">
+       <div class="row">
+       <!--Dr.Kelly-->
+         <div class = "col-sm-4">
+         <img id="mcnair" src="img/cn.png" class="img-circle"  alt="Image"class="img-circle"
+         width="100" height="100">
+         <p style="color:black">Adviser</p>
+         <p style="color:black">John C. Kelly</p>
+         <hr style="color:black">
+         <p style="color:black"><a href="mailto:jck@ncat.edu">Adviser: Dr. John C Kelly</p></a>
+         <p style="color:black"><a href="tel://1-336-285-3711">+1 (336)285-3711</a></p>
 
-       </address>
+      </div>
 
+      <div class = "col-sm-4">
+      <img id="mcnair" src="img/cn.png" class="img-circle"  alt="Image"class="img-circle"
+      width="100" height="100">
+      <p style="color:black">Technical Manager</p>
+      <p style="color:black">Princeton Perry</p>
+      <hr style="color:black">
+      <p style="color:black"><a href="mailto:pperry@aggies.ncat.edu">pperry@aggies.ncat.edu</p></a>
+      <p style="color:black"><a href="tel://1-919-602-7940">+1 (919)602-7940</a></p>
+
+   </div>
+   <div class = "col-sm-4">
+   <img id="mcnair" src="img/cn.png" class="img-circle"  alt="Image"class="img-circle"
+   width="100" height="100">
+   <p style="color:black"> Manager</p>
+   <p style="color:black">Attiyah Lanier</p>
+   <hr style="color:black">
+   <p style="color:black"><a href="mailto:attiyahlanier@aggies.ncat.edu">attiyahlanier@gmail.com</p></a>
+   <p style="color:black"><a href="tel://1-202-322-0492">+1 (202)322-0492</a></p>
+</div>
+
+
+
+
+
+
+
+</div>
 </div>
     </div>
 
@@ -343,19 +389,55 @@ $(document).ready(function(){
   </div>
 </div>
 
+<!-- Contact form -->
 
-<div class="container-fluid"></div>
+<!-- <div class="container-fluid bg-3 text-center">
+
+<?php include('form_process.php'); ?>
+<link rel="stylesheet" href="css/form.css" type="text/css">
+<div class="contact_container">
+  <form id="contact" action="<?= htmlspecialchars($_SERVER["PHP_SELF"]) ?>" method="post">
+    <h3>Contact</h3>
+    <h4>Contact us today, and get reply with in 24 hours!</h4>
+    <fieldset>
+      <input placeholder="Your name" type="text" name="name" value="<?= $name ?>" tabindex="1" autofocus>
+      <span class="error"><?= $name_error ?></span>
+    </fieldset>
+    <fieldset>
+      <input placeholder="Your Email Address" type="text" name="email" value="<?= $email ?>" tabindex="2">
+      <span class="error"><?= $email_error ?></span>
+    </fieldset>
+    <fieldset>
+      <input placeholder="Your Phone Number" type="text" name="phone" value="<?= $phone ?>" tabindex="3">
+      <span class="error"><?= $phone_error ?></span>
+    </fieldset>
+    <fieldset>
+      <input placeholder="Your Web Site starts with http://" type="text" name="url" value="<?= $url ?>" tabindex="4" >
+      <span class="error"><?= $url_error ?></span>
+    </fieldset>
+    <fieldset>
+      <textarea value="<?= $message ?>" name="message" tabindex="5">
+      </textarea>
+    </fieldset>
+    <fieldset>
+      <button name="submit" type="submit" id="contact-submit" data-submit="...Sending">Submit</button>
+    </fieldset>
+    <div class="success"><?= $success ?></div>
+  </form>
+</div>
+</div> -->
 
 <!-- Footer -->
 <footer class="container-fluid text-center bg-5">
   <div class="row">
 
-  <p style="color:black">Aggie Makerspace<p>
+  <p style="color:black">Aggie Makerspace | 2017<p>
   <p style="color:black">Contact <span class="glyphicon glyphicon-phone"></span> </p>
 
 
 </div>
 <div class="row">
+
     <div class="col-sm-4">
     <p>  <a href="mailto:jck@ncat.edu">Adviser: Dr. John C Kelly</a></p>
   </div>
@@ -366,6 +448,8 @@ $(document).ready(function(){
     <p><a href="mailto:rgmwanik@aggies.ncat.edu">Web Designer: Robert Mwaniki</a></p>
   </div>
 </div>
+<p id="disclaimer">1601 East Market Street, Greensboro, NC 27411 | This website is
+  unaffiliated with North Carolina Agricultural and Technical State University</p>
 </footer>
 
 
