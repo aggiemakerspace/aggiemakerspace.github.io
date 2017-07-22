@@ -1,4 +1,4 @@
-(function() {
+indexfunction() {
 
     var provider = new firebase.auth.GoogleAuthProvider();
 
@@ -91,7 +91,7 @@
       {
       // No user is signed in.
       console.log("No user is signed in");
-      window.location.href = 'index.html';
+      window.location.href = 'signin.html';
       }
 
   });

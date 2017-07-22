@@ -97,6 +97,7 @@ function checkifAdmin (){
                 var userTemp;
                 signupQueue.orderByChild('email').equalTo(profile.email).on("child_added", function (snap){
                   userTemp = snap.val();
+                  userTemp.uid = user.uid;
                   //update user node
                   userRef.update(userTemp);
 
@@ -110,7 +111,19 @@ function checkifAdmin (){
                       // An error happened.
                   });
 
-              });
+                });
+
+                //create a checked out it child
+                var checkOutRef = firebase.database().ref().child('checkOutItems/'+ user.uid);
+
+                checkOutRef.child("item2").push({
+                  dateIn: "",
+                  dateOut: "",
+                  item_descp: "",
+                  item_name: ""
+
+                });
+
 
               //ONCE DONE, CLEAN UP PAYLOAD
 
@@ -214,7 +227,7 @@ function checkifAdmin (){
         } else {
           // No user is signed in.
           console.log("No user is signed in");
-          window.location.href = 'index.html';
+          window.location.href = 'signin.html';
         }
       });
 

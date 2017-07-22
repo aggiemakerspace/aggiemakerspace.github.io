@@ -11,17 +11,8 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <!--Source -->
 <script src="https://www.gstatic.com/firebasejs/4.1.2/firebase.js"></script>
-
-<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-<script src="js/timecard.js"></script>
-
-<!-- Date Time Picker -->
-<script src="./jquery.js"></script>
-<script src="timesheet/build/jquery.datetimepicker.full.js"></script>
-<link rel="stylesheet" type="text/css" href="timesheet/jquery.datetimepicker.css"/>
-
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="home.js"></script>
 
 <style>
     html,body,h1,h2,h3,h4,h5 {
@@ -68,12 +59,11 @@
   width: 100%;
 }
 
-.footer, .push {
-  position:relative;
-  left:0;
-  bottom:0;
-  width:908px;
-  height:300px;
+footer{
+
+  position: absolute;
+  bottom: 0px;
+  width: 100%;
 }
 
 .userpic {
@@ -85,16 +75,6 @@
   position: relative;
   right: 30px; top: 4px;
 
-}
-
-.custom-date-style {
-	background-color: red !important;
-}
-
-.input{
-}
-.input-wide{
-	width: 500px;
 }
 </style>
 
@@ -120,6 +100,8 @@
             w3-hide-small w3-padding-large w3-hover-white hide">Inventory</a>
             <a href="classes.html" class="w3-animate-top w3-bar-item w3-button w3-right
             w3-hide-small w3-padding-large w3-hover-white">Classes</a>
+            <a href="calendar.html" class="w3-animate-top w3-bar-item w3-button w3-right
+            w3-hide-small w3-padding-large w3-hover-white">Calendar</a>
 
       </div>
 
@@ -127,7 +109,8 @@
   <!-- Navbar on small screens -->
   <div id="navDemo" class="w3-bar-block w3-theme-d2 w3-hide w3-hide-large w3-hide-medium w3-large">
   <nav>
-          <a href="classes.html" class="w3-bar-item w3-button w3-padding-large">Classes</a>
+          <a href="calendar.html" class="w3-bar-item w3-button w3-padding-large">Calendar</a>
+          <a href="members.html" class="w3-bar-item w3-button w3-padding-large">Classes</a>
           <a href="inventory.html" class="w3-bar-item w3-button w3-padding-large">Inventory</a>
           <a href="console.html" id="admin" class="w3-bar-item w3-button w3-padding-large">Admin Console</a>
           <a href="profile.html" class="w3-bar-item w3-button w3-padding-large">My Profile</a>
@@ -141,51 +124,15 @@
 
 
 <div class="w3-container"  style="" >
-  <div class="w3-center"  style="" >
-  <p>Time Cards</p>
-  <p>
-    <div class="w3-row">
-
-      <form id="getInput">
-        <div class="form-group">
-          <input id="group"type="text" placeholder="Purpose" class="form-control">
-          <input id="txtName" type="text" placeholder="Name" class="form-control">
-          <input type="text" class="some_class" value="" id="txtDateTimeIn"/>
-          <input type="text" class="some_class" value="" id="txtDateTimeOut"/>
-          <button id="submit" type = "button" class="btn btn-success btn-lg btn-block">ADD</button>
-        </div>
-
-      </form>
-    </div></p>
-  </div>
-
-  <!-- Main Content -->
-  <div id="main" class="w3-center">
-
-
-
-        <div class="w3-center w3-container">
-
-          <span id="content"></span>
-
-        </div>
-
-
-    </div>
+<p></p>
+<p></p>
 </div>
-
-            <!-- Page Container -->
-            <div class="push"  style="" >
-
-
-            </div>
-
   <!-- Footer -->
-
+  <div id="wrapper">
   <footer class="w3-container w3-theme-d3 w3-padding-16">
       <h5></h5>
   </footer>
-
+  </div>
   <script>
       // Used to toggle the menu on smaller screens when clicking on the menu button
       function openNav() {
@@ -205,15 +152,6 @@
       firebase.auth().signOut();
       console.log(firebaseUser + "has logged out");
       };
-  </script>
-
-  <script>
-
-      $( function() {
-        $('.some_class').datetimepicker();
-      $( "#datepicker" ).datepicker();
-      } );
-
   </script>
 
 

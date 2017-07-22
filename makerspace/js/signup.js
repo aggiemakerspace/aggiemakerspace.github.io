@@ -13,6 +13,7 @@ function writeUserData(date, email,name, imageUrl) {
           //year_class: year,
           maj_class: " ",
           year_class: " ",
+          uid: " ",
           roles:
           {
             administrator: false,
@@ -125,6 +126,7 @@ $("#getInput").keyup(function(event){
         const pass = txtPassword.value;
         const auth = firebase.auth();
 
+//ifstatement
         var d = new Date();
         var n = d.toUTCString();
 
@@ -154,7 +156,7 @@ $("#getInput").keyup(function(event){
           writeUserData(date, txtemail,fullname, imageUrl);
 
           setTimeout(function(){ alert('Success '+ txtemail+ ' was created');
-          window.location= "index.html";}, 1000);
+          window.location= "signin.html";}, 1000);
 
           } else {
             // No user is signed in.

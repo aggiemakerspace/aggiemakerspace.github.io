@@ -12,7 +12,7 @@
 <!--Source -->
 <script src="https://www.gstatic.com/firebasejs/4.1.2/firebase.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script src="home.js"></script>
+<script src="js/home.js"></script>
 
 <style>
     html,body,h1,h2,h3,h4,h5 {
@@ -100,6 +100,8 @@ footer{
             w3-hide-small w3-padding-large w3-hover-white hide">Inventory</a>
             <a href="classes.html" class="w3-animate-top w3-bar-item w3-button w3-right
             w3-hide-small w3-padding-large w3-hover-white">Classes</a>
+            <a href="calendar.html" class="w3-animate-top w3-bar-item w3-button w3-right
+            w3-hide-small w3-padding-large w3-hover-white">Calendar</a>
 
       </div>
 
@@ -107,6 +109,7 @@ footer{
   <!-- Navbar on small screens -->
   <div id="navDemo" class="w3-bar-block w3-theme-d2 w3-hide w3-hide-large w3-hide-medium w3-large">
   <nav>
+          <a href="calendar.html" class="w3-bar-item w3-button w3-padding-large">Calendar</a>
           <a href="members.html" class="w3-bar-item w3-button w3-padding-large">Classes</a>
           <a href="inventory.html" class="w3-bar-item w3-button w3-padding-large">Inventory</a>
           <a href="console.html" id="admin" class="w3-bar-item w3-button w3-padding-large">Admin Console</a>
@@ -130,6 +133,14 @@ footer{
       <h5></h5>
   </footer>
   </div>
+
+
+
+
+
+
+
+
   <script>
       // Used to toggle the menu on smaller screens when clicking on the menu button
       function openNav() {
