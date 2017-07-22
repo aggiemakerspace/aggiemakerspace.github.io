@@ -47,6 +47,7 @@
   .bg-2 {
       background-color: #474e5d; /* Dark Blue */
       color: #ffffff;
+
   }
   .bg-3 {
       background-color: #ffffff; /* White */
@@ -57,7 +58,7 @@
       color: #fff;
   }
 
-  .bg-5,.well{
+  .bg-5{
 
     background-color: #8EE5EE;
     color: #CDC8B1
@@ -85,6 +86,17 @@
     }
 
 
+#bg_image  {
+
+
+    height: auto;
+    background: #000 url('makerspace/assets/img/notepad.jpg') center no-repeat;
+    background-size: contain;
+    background-size: 100% 100%;
+    /*background-size: auto 150;*/
+    width: 100%;
+
+}
 
   .navbar-nav  li a:hover {
       color: #1abc9c !important;
@@ -110,10 +122,14 @@ width: 100%; /* use this, or not */
 margin: auto;
 }
 
+div.well div {
+  height: 220px;
+  overflow-y: scroll;
+}
 
   </style>
 </head>
-<body class= "bg-1">
+<body  class="bg-1">
 
 <!-- Navbar -->
 <nav class="navbar navbar-default bg-5">
@@ -136,100 +152,130 @@ margin: auto;
     </div>
   </div>
 </nav>
+<!-- HERO -->
+<div  class="container-fluid text-center bg-2 ">
 
-
-<div class="container-fluid">
-  <script> $('.carousel').carousel({
-  interval: 10
-})</script>
-    <div class="c-wrapper">
-    <div id="carousel-example-generic" class="carousel slide">
-    <!-- Indicators -->
-    <ol class="carousel-indicators">
-    <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
-    <li data-target="#carousel-example-generic" data-slide-to="1"></li>
-    <li data-target="#carousel-example-generic" data-slide-to="2"></li>
-    </ol>
-
-    <!-- Wrapper for slides -->
-    <div class="carousel-inner">
-    <div class="item active">
-    <img src="http://placehold.it/600x400">
-    <div class="carousel-caption">
-    hello
-    </div>
-    </div>
-    <div class="item">
-    <img src="http://placehold.it/500x400">
-    <div class="carousel-caption">
-    hello
-    </div>
-    </div>
-    <div class="item">
-    <img src="http://placehold.it/700x400">
-    <div class="carousel-caption">
-    hello
-    </div>
-    </div>
-    </div>
-
-    <!-- Controls -->
-    <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
-    <span class="icon-prev"></span>
-    </a>
-    <a class="right carousel-control" href="#carousel-example-generic" data-slide="next">
-    <span class="icon-next"></span>
-    </a>
-    </div>
-</div>
-
-<!--Mission Statement -->
-
-<div id ="mission" class="container text-center">
-
-  <a href="#m_statement" class="" data-toggle="collapse"><h2>Mission Statement</h2></a>
-  <div id="m_statement" class="collapse">
-In accordance with the mission statement of North Carolina A&T State University, the mission of the Makerspace is to establish a unique,
-collaborative environment “dedicated to learning, discovery, and community engagement.” By providing our students
-with a plethora of equipment, technologies, and resources, we ensure the facilitation of creativity, problem solving,
-and innovation.
+  <div class="col-sm-4">
+     <h2 style="color:#337ab7">What is a makerspace?</h2> <h3  style="color:black">A makerspace is a collaborative environment, open to students to explore, learn, make, and share.</h3>
   </div>
 </div>
+
+<div class= "container-fluid text-center bg-3">
+  <div class="col-sm-12 col-lg-12 col-md-12">
+
+    <div  class="container text-center">
+      <a href="#m_statement" id="mission" class="" data-toggle="collapse"><h2>Mission Statement
+        <span id="hidden" class="glyphicon glyphicon-eye-close"></span></h2></a>
+      <div id="m_statement" class="collapse">
+    In accordance with the mission statement of North Carolina A&T State University, the mission of the Makerspace is to establish a unique,
+    collaborative environment “dedicated to learning, discovery, and community engagement.” By providing our students
+    with a plethora of equipment, technologies, and resources, we ensure the facilitation of creativity, problem solving,
+    and innovation.
+      </div>
+    </div>
+
+<div class="container text-center">
+    <div class="row">
+
+    <div class="col-sm-4 col-lg-4">
+      <h2 class="text-center"> Collaboration</h2>
+      <img id ="" src="img/gif/collaborate.jpeg" class="img-responsive  img-rounded" style="" width:"200px" height: "200px" alt="collaborate">
+    </div>
+    <div class="col-sm-4 col-lg-4">
+      <h2> Ideation</h2>
+      <img id ="" src="img/gif/ideas.jpeg" class="img-responsive  img-rounded" style="" height:"200px" width:"200px" alt="collaborate">
+    </div>
+
+    <div class="col-sm-4 col-lg-4">
+      <h2> Growth</h2>
+      <img id ="" src="img/gif/growth.jpeg" class="img-responsive  img-rounded" style="" width:"200px" height: "200px" alt="collaborate">
+    </div>
+  </div>
+
+</div>
+
+
+
+
+
+  </div>
+
+
+</div>
+<!--Mission Statement -->
+<script>
+$(document).ready(function(){
+    $("#mission").click(function(){
+        $("#hidden").removeClass("glyphicon glyphicon-eye-close");
+        $("#hidden").toggleClass("glyphicon glyphicon-eye-open");
+
+    });
+});
+</script>
+
+
 
 
 
 
 <!-- Tools and Equipment -->
 <div id="equipment" class="container text-center">
-  <h3 style="color:#0000FF">Equipment & Software</h3><br>
+  <h2 style="color:#337ab7">Equipment & Software</h2><br>
   <div class="row">
     <div class="col-sm-4">
-      <img id ="" src="cnc_mill.jpg" class="img-responsive hideme img-rounded" style="width:100%" alt="cncmill">
-      <p>CNC Mill</p>
+      <div class="thumbnail">
+        <img id ="" src="img/cnc_mill.jpg" class="img-responsive hideme img-rounded" style="width:100%" alt="cncmill">
+        <div class="caption"><p>CNC Mill</p></div>
+      </div>
     </div>
+
     <div class="col-sm-4">
-      <img src="othermill.jpg" class="img-responsive hideme img-rounded" style="width:100%" alt="othermill">
-      <p>PCB Mill</p>
+      <div class="thumbnail">
+        <img src="img/3dprinter.jpg" class="img-responsive hideme img-rounded" style="width:100%" alt="Image">
+        <div class="caption"><p>3D Printer</p></div>
+      </div>
     </div>
+
     <div class="col-sm-4">
-      <img src="3dprinter.jpg" class="img-responsive hideme img-rounded" style="width:100%" alt="Image">
-      <p>3D Printer</p>
-    </div>
+      <div class="thumbnail">
+        <img src="img/othermill.jpg" class="img-responsive hideme img-rounded" style="width:100%" alt="Image">
+        <div class="caption"><p>Other Mill</p></div>
+      </div>
   </div>
 
+
+
+
+
+</div>
   <div class="row">
+
+
+
     <div class="col-sm-4">
-      <img src="laserengraver.jpg" class="img-responsive hideme img-rounded" style="width:100%" alt="Image">
-      <p>Laser Engraver</p>
+      <div class="thumbnail">
+      <img src="img/eagle_cad.jpg" class="img-responsive hideme img-rounded" style="width:100%" alt="Image">
+      <div class="caption"><p>Eagle CAD</p></div>
     </div>
+
+  </div>
+
     <div class="col-sm-4">
-      <img src="eagle_cad.jpg" class="img-responsive hideme img-rounded" style="width:100%" alt="Image">
-      <p>Eagle CAD</p>
+      <div class="thumbnail">
+      <img src="img/solidworks.jpg" class="img-responsive hideme img-rounded" style="width:100%" alt="Image">
+      <div class="caption"><p>Solid Works</p></div>
     </div>
-    <div class="col-sm-4">
-      <img src="solidworks.jpg" class="img-responsive hideme img-rounded" style="width:100%" alt="Image">
-      <p>Solid Works</p>
-    </div>
+
+  </div>
+
+  <div class="col-sm-4">
+    <div class="thumbnail">
+    <img src="img/laserengraver.jpg" class="img-responsive hideme img-rounded" style="width:100%" alt="Image">
+    <div class="caption"><p>Laser Engraver</p></div>
+  </div>
+
+</div>
+
   </div>
 
 
@@ -237,26 +283,28 @@ and innovation.
 
 </div>
 <!-- Third Container (Grid) -->
-<div id ="info" class="container-fluid text-center" style="padding-top:70px">
-  <h2 class="margin">Locations</h2><br>
+<div id ="info" class="container-fluid text-center bg-2" style="padding-top:70px">
+  <h2 class="margin" style="color:#337ab7">Information</h2><br>
   <div class="row">
     <div class="col-sm-4">
-
+      <div class="well" height="480px">
+         <h2 style="color:black">Visit us at:</h2>
       <address id="addText" style="color:black">
 
-       <h3 style="color:white">Visit us at:</h3><br>
+
        1601 East Market Street, Greensboro, NC 27411</br>
       McNair Hall, Room 121</br>
       Makerspace Phone Number: </br><a href="tel://1-336-285-3828">+1 (336)285-3828</a> </br>
 
        </address>
 
+</div>
     </div>
 
 <div class="col-sm-4">
-<h3 style= "color:white"> Time of Operation</h3>
-  <ul class = "list-group rounded" style ='color:black'>
 
+  <ul class = "list-group rounded" style ='color:black'>
+     <li class = "list-group-item"><h3> Time of Operation <span class="glyphicon glyphicon-time"></h3></span> </li>
    <li class = "list-group-item">Monday: 11:00am-1:30pm; 4:30pm-6:30pm</li>
     <li class = "list-group-item">Tuesday: 9:00am-11:00am 5:00pm-7:00pm</li>
      <li class = "list-group-item">Wednesday: 11:00am-1:30pm; 4:30pm-6:30pm</li>
@@ -271,20 +319,23 @@ and innovation.
 </div>
 <!-- ***Locations  -->
     <div class="col-sm-4">
+      <div class="well">
         <div class="row">
-        <h3>McNair Hall, Rm. 121</h3>
+        <div class ='caption'><h3 style="color:black">McNair Hall, Rm. 121</h3>
+
+          <img id="mcnair" src="img/mcnair.jpg" class="img-circle"  alt="Image"class="img-circle"
+          width="100" height="100">
+        </div>
+
         </div>
       <div class="row">
-        <img id="mcnair" src="mcnair.jpg" class="img-circle"  alt="Image"class="img-circle"
-        width="100" height="100">
+        <div class="caption">  <h3 style="color:black">Cherry, Rm. 318</h3><img id="cherry" src="img/cherry.jpg" class="img-circle"  alt="Image"class="img-circle"
+          width="100" height="100"></div>
+
       </div>
-      <!-- Cherry -->
-      <div class="row">
-      <h3>Cherry, Rm. 318</h3>
-      </div>
-    <div class="row">
-      <img id="cherry" src="cherry.jpg" class="img-circle"  alt="Image"class="img-circle"
-      width="100" height="100">
+
+
+
     </div>
 
     </div>
@@ -293,15 +344,15 @@ and innovation.
 </div>
 
 
-<div class="container-fluid">
+<div class="container-fluid"></div>
 
 <!-- Footer -->
 <footer class="container-fluid text-center bg-5">
   <div class="row">
 
   <p style="color:black">Aggie Makerspace<p>
-  <p style="color:black">Contact </p>
-  <hr>
+  <p style="color:black">Contact <span class="glyphicon glyphicon-phone"></span> </p>
+
 
 </div>
 <div class="row">
@@ -317,7 +368,7 @@ and innovation.
 </div>
 </footer>
 
-</div>
+
 
 <script>
 $(document).ready(function() {
