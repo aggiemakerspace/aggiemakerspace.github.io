@@ -19,23 +19,12 @@
     const logout = document.getElementById('logout');
 
 
-    //const promise = auth.signInWithEmailAndPassword('robertmwaniki@hotmail.com', 'jemmie');
-    //promise.catch(console.log(e.message));
-    // promise.catch(console.log("message!!!!" + e.message));
-    // alert(e.message);
-
-    // promise.catch(function(error){
-    //   console.log('User login error', error.message);
-    //   alert(error.message)
-    // });
-
-
     firebase.auth().onAuthStateChanged(function(user) {
   //admin or superuser has logged in
       if (user) {
 
 
-        var count=0;
+
 
         // User is signed in.
         var user = firebase.auth().currentUser;
@@ -43,60 +32,54 @@
 
         //Node references
         var ref = firebase.database().ref().child('users');
+        //admin node reference
         var userRef = firebase.database().ref('users/'+ user.uid);
-         var timeRef = firebase.database().ref().child('timesheetQueue');
-         var timeSheet = firebase.database().ref().child('timesheet');
-        //clockin
+        var timeRef = firebase.database().ref().child('timesheetQueue');
+        var timeSheet = firebase.database().ref().child('timesheet');
+
+// ****DISPLAY CLOCK IN CLOCK OUT EVENTS
+        //clockin event
          timeRef.on("child_added", function (snap){
 
              var tObj = snap.val();
 
-
-               $("#editable").append("\<li\>"+tObj.email+" has clocked in at "+tObj.timeIn +"\</li><hr>");
-             });
-
-
-             //clock out event
-             timeSheet.on("child_added",function(snap){
-               var tObj = snap.val();
-               if(tObj.email !== null){
-             $("#editable").append("\<li\>"+tObj.email+" has clocked out at "+tObj.timeOut +"\</li><hr>");
-}
+             if(tObj.timeOut == " "){
+               $("#editable").append("\<ul\>"+tObj.email+" has clocked in at "+tObj.timeIn +"\</ul><hr>");
+             }
            });
+            //clock out event
+          timeRef.on("child_removed", function (snap){
 
+            var tObj = snap.val();
+            $("#editable").append("\<ul\>"+tObj.email+" has clocked out at "+tObj.timeOut +"\</ul><hr>");
+          });
 
-
-
-
-
-        //var timeQRef = firebase.database().ref().child('timesheetQueue');
-        //var timeSRef = firebase.database().ref().child('timesheet'+user_uid);
-
-
-      //GET ADMIN INFORMATION
+//******GET ADMIN INFORMATION
           ref.orderByChild('email').equalTo(user.email).once("child_added", function (snap){
             var object = snap.val();
             console.log(object);
             console.log("uid", object.uid);
             var fullname = object.name;
-              //var year = object.year_class;
-            //var major = object.major_class;
             var email= object.email;
             //display admin name
             $("#loggedIn").append("<b>"+fullname+"</b> is on Duty");
-
             //DISPLAY USER INFORMATION TO DOCUMENT
             $("#loggedIn").val(fullname + " is on Duty");
-
-
           });
 
 
-            //UPDATE USER INFORMATION
+//*****UPDATE USER INFORMATION
             $(document).ready(function(){
                 //user clocks in
                 $("#btnClockin").click(function(){
+                  console.log("------Button Clock in was clicked.")
+                  //get email
+                  var eInput =  $("#usrEmail").val();
 
+                  console.log(eInput);
+                  if (eInput.includes('@')==false){
+                    eInput+="@";
+                  }
 
                   //get inputted email
                     var timeIn = new Date();
@@ -114,48 +97,33 @@
                       default:
                         break;
                     };
-
-                    var eInput =  $("#usrEmail").val();
-                    console.log(eInput);
-                    if (eInput.includes('@')==false){
-
-                      eInput+="@";
-                    }
                     var userEmail = eInput+msInput;
-
                     //GET USER CLOCKIN INFORMATION
 
-
+                    //CHECK IF USER EXISTS
                     ref.orderByChild('email').equalTo(userEmail).once("value", function (snap){
                       var userObject = snap.val();
 
                               if(snap.val() == null){
                                alert(userEmail+" was not found. Try again");
-                               $("#usrEmail").val("");
-                                console.log('false');
+                              // $("#usrEmail").val("");
+                                console.log('USER NOT FOUND');
                              }else{
 
-                                console.log('true');
+                                console.log('USER INFO CONFIRMED');
+                                //GET USER INFO
                                 ref.orderByChild('email').equalTo(userEmail).on("child_added", function (snap){
-
                                   var userObject = snap.val();
-                                //console.log(userObject);
-                                  //timeSheetQueue Ref
+                                  timeIn = timeIn.toString();
 
-                                   timeIn = timeIn.toString();
-                                  console.log(timeIn);
-                                  console.log(userObject.email);
-                                  //count = .userCount;
-                                  //count++;
-                    //check if user already logged in
                                   timeRef.orderByChild('email').equalTo(userEmail).once("value", function (snap){
 
                                             //user is not logged in
                                             if(snap.val() == null){
-                                              console.log("false");
-                                              firebase.database().ref('timesheetQueue').push({
-                                                    email: userEmail,
-                                                    uid: userObject.uid,
+                                              //console.log("USER NOT LOGGED IN.");
+                                              firebase.database().ref('timesheetQueue/'+userObject.uid).update({
+                                                   email: userEmail,
+                                                   uid: userObject.uid,
                                                    duration: " ",
                                                    timeOut:" ",
                                                    logged_in:"true",
@@ -163,34 +131,34 @@
                                                    name: userObject.name
 
                                               });
+                                                console.log("User "+ userObject.email+" was added");
                                             }
                                             else{
                                               alert("User already logged in");
+                                              //window.location.reload();
                                             }
 
                                     });
 
-                                  //DISPLAY TIME ON PAGE
-                                  // $("#editable").append("\<li\>"+userEmail+" has clocked in at "+t.toString() +"\</li>");
-                                  // alert(userEmail+" logged in successfully.");
 
-                                //count++;
-                                console.log("User "+ count+" was added");
-                                $("#usrEmail").val("");
+                                //reset user email
+                                //$("#usrEmail").val("");
                               });
                               }
                             });//end of snap
 
 
                   });//button clockin
+  });//doc ready func
 
+    $(document).ready(function(){
                   $("#btnClockout").click(function(){
 
-
+                    console.log("-----Button Clock out was clicked.");
                     //get inputted email
                       var timeOut = new Date();
                       var msInputNum =  $("#email-options").val();
-                      console.log(msInputNum);
+
                       var msInput="";
 
                       switch(msInputNum){
@@ -205,7 +173,7 @@
                       };
 
                       var eInput =  $("#usrEmail").val();
-                      console.log(eInput);
+
                       if (eInput.includes('@')==false){
 
                         eInput+="@";
@@ -220,11 +188,11 @@
 //check if user exists
                                 if(snap.val() == null){
                                  alert(userEmail+" was not found. Try again");
-                                 $("#usrEmail").val("");
-                                  console.log('false');
+                                // $("#usrEmail").val("");
+                                  console.log('CLOCK OUT EVENT: User not Found');
                                }else{
 
-                                  console.log('true');
+                                  console.log('CLOCK OUT EVENT: User Found');
                                   ref.orderByChild('email').equalTo(userEmail).on("child_added", function (snap){
 
                                     var userObject = snap.val();
@@ -232,52 +200,46 @@
                                     //timeSheetQueue Ref
 
                                      timeOut = timeOut.toString();
-                                    console.log(timeOut);
-                                    console.log(userObject.email);
-                                    //count = .userCount;
-                                    //count++;
+
                       //check if user already logged in
 
                                     timeRef.orderByChild('email').equalTo(userEmail).once("value", function (snap){
                                               var temp= snap.val();
-
+                                              console.log(snap.val());
 
                                               //user is not logged in
                                               if(snap.val() !== null){
                                                 console.log("logged in");
                                                 timeRef.orderByChild('email').equalTo(userEmail).once("child_added", function (snap){
-                                                  var tempUser = snap.val();
-                                                  tempUser.timeOut =timeOut;
+                                                    var tempUser = snap.val();
+                                                    tempUser.timeOut =timeOut;
+                                                    tempUser.logged_in=false;
+                                                    //update timeout
+                                                    timeRef.child(tempUser.uid).update(tempUser);
 
-                                                  timeRef.update(tempUser);
-                                                  //remove Temp node
 
-                                                  firebase.database().ref('timesheet/'+tempUser.uid).update(tempUser);
+                                                    firebase.database().ref('timesheet/'+tempUser.uid).push(tempUser);
+                                                    console.log(userEmail+'was clocked out at'+ timeOut)
+
+                                                      timeRef.orderByChild('email').equalTo(tempUser.email).once("child_added", function (snap){
+                                                       var userRef = snap.ref;
+
+                                                       console.log("User was removed");
+                                                       //$("#usrEmail").val("");
+                                                       return userRef.remove();
+
+                                                      });
                                                   });
-
-                                                  //remove node
-                                                  timeRef.orderByChild('email').equalTo(userEmail).once('child_added',function(snap){
-
-                                                    var tempUser=snap.val();
-                                                    return tempUser.remove();
-                                                  })
-
-
-
                                               }
                                               else{
-                                                alert("User already  not logged in");
+                                                alert(userEmail+ "not logged in");
                                               }
 
                                       });
 
-                                    //DISPLAY TIME ON PAGE
-                                    // $("#editable").append("\<li\>"+userEmail+" has clocked in at "+t.toString() +"\</li>");
-                                    // alert(userEmail+" logged in successfully.");
 
-                                  //count++;
-                                  console.log("User "+ count+" was removed");
-                                  $("#usrEmail").val("");
+
+
                                 });
                                 }
                               });//end of snap
