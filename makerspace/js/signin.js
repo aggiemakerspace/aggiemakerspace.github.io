@@ -36,11 +36,11 @@ function writeUserData(date, email,name, imageUrl) {
 
     //if enter button is pressed
 
-    $("#getInput").keyup(function(event){
-        if(event.keyCode == 13){
-            $("#btnLogin").click();
-        }
-    });
+    // $("#getInput").keyup(function(event){
+    //     if(event.keyCode == 13){
+    //         $("#btnLogin").click();
+    //     }
+    // });
     // add login event
     btnLogin.addEventListener("click", e => {
         //get email and pass
@@ -63,14 +63,14 @@ function writeUserData(date, email,name, imageUrl) {
 
         /*  promise.catch(console.log(message));*/
     //AFTER SIGN IN
-
-        var user = firebase.auth().currentUser;
-        console.log("User:"+String(user.uid));
-        var name;
-        if (user != null) {
-            name = user.displayName;
-
-        };
+        //
+        // var user = firebase.auth().currentUser;
+        // console.log("User:"+String(user.uid));
+        // var name;
+        // if (user != null) {
+        //     name = user.displayName;
+        //
+        // };
 
 
     });
@@ -108,6 +108,17 @@ function writeUserData(date, email,name, imageUrl) {
     <!-- Function to logout-->
 
 
+
+
+$(function() {
+      $( ".input" ).each(function(){
+          $(this).keyup(function(event){
+               if(event.keyCode == 13){
+                    $("#btnLogin").click();
+                }
+            });
+        });
+});
 
 
 }());
