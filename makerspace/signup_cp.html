@@ -88,8 +88,7 @@ body,html{
 
     <div  class="container w3-card center
     w3-round-xlarge w3-text-black">
-        <div><h2><a href="../index.html"> <span class=" 	fa fa-arrow-circle-left">   <i class="fa fa-home" aria-hidden="true"></i>
- </span></a>Aggie|MAKERSPACE</h2>
+        <div><h2>Aggie|MAKERSPACE</h2>
           <hr>
           <br>
         <form id="getInput">
@@ -107,13 +106,8 @@ body,html{
 
 
           <div class="form-group">
-
-                <label for="txtEmail">Enter school email </label>
-                  <input id="txtEmail" type="email" placeholder="Email" style="width:100%; float:left" class="form-control" value="@">
-
-
-                  <select id="em-opt" class="" value="0" style="color:black;width:100%;height:50px; margin-top: 15px"></select>
-
+            <label for="txtEmail">Email address:</label>
+            <input id="txtEmail" type="email" placeholder="Email" class="form-control">
           </div>
 
           <div class ="form-group">
@@ -154,33 +148,6 @@ body,html{
       }
     </script>
     <script src="js/signup.js"></script>
-
-
-
-
-    <!--Display Email Options  -->
-    <script>
-    window.onload = function () {
-      var JSON = {
-          "COLUMNS":["ID", "Name"],
-          "DATA": [
-              ["0", "aggies.ncat.edu"],
-              ["1","ncat.edu"]
-
-
-          ]
-      }, select = document.getElementById("em-opt");
-      for (var i = 0; i < JSON.DATA.length; i++) {
-      var at = JSON.DATA[i], id = at[0], name = at[1];
-          var option = document.createElement("option");
-          option.value = id;
-          option.textContent = name;
-          select.appendChild(option);
-        };
-    };
-
-    </script>
-
 </body>
 
 

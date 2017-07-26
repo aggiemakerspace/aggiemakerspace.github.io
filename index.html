@@ -22,6 +22,24 @@
   }
   p {font-size: 16px;}
   .margin {margin-bottom: 45px;}
+
+  .bg-g{
+    background-color: #1bb59b; /* Dark Blue */
+    color: #ffffff;
+
+  }
+
+  .bg-b{
+    background-color: #1dbfc1; /* Dark Blue */
+    color: #ffffff;
+
+  }
+
+  .bg-dg{
+
+    background-color: #00a372;
+    color: #ffffff;
+  }
   .bg-1 {
       /*background-color: #1abc9c; /* Green */
       /*color: #ffffff;*/
@@ -133,7 +151,16 @@ div.well div {
   height: 220px;
   overflow-y: scroll;
 }
-
+.jumbotron {
+      background-size: cover;
+      background-size: 100% 100%;
+      /*background-size: auto 150;*/
+      width: 100%;
+      background: #000 url('blug.jpg') center no-repeat;
+      color: #fff;
+      padding: 100px 25px;
+      font-family: Montserrat, sans-serif;
+}
   </style>
 </head>
 <body  class="bg-1">
@@ -161,10 +188,14 @@ div.well div {
 </nav>
 <!-- HERO -->
 <div  class="container-fluid text-center bg-2 ">
-
-  <div class="col-sm-4">
+<div class="col-sm-3">
+</div>
+  <div class="col-sm-6 text-center">
      <h2 style="color:#337ab7">What is a makerspace?</h2> <h3  style="color:black">A makerspace is a collaborative environment, open to students to explore, learn, make, and share.</h3>
   </div>
+  <div class="col-sm-3">
+  </div>
+
 </div>
 
 <div class= "container-fluid text-center bg-3">
@@ -224,27 +255,27 @@ $(document).ready(function(){
 
 
 
-
+<!-- 28B5FF -->
 <!-- Tools and Equipment -->
 <div id="equipment" class="container text-center">
   <h2 style="color:#337ab7">Equipment & Software</h2><br>
   <div class="row">
     <div class="col-sm-4">
-      <div class="thumbnail">
+      <div class="thumbnail bg-g">
         <img id ="" src="img/cnc_mill.jpg" class="img-responsive hideme img-rounded" style="width:100%" alt="cncmill">
         <div class="caption"><p>CNC Mill</p></div>
       </div>
     </div>
 
     <div class="col-sm-4">
-      <div class="thumbnail">
+      <div class="thumbnail bg-b">
         <img src="img/3dprinter.jpg" class="img-responsive hideme img-rounded" style="width:100%" alt="Image">
         <div class="caption"><p>3D Printer</p></div>
       </div>
     </div>
 
     <div class="col-sm-4">
-      <div class="thumbnail">
+      <div class="thumbnail bg-dg">
         <img src="img/othermill.jpg" class="img-responsive hideme img-rounded" style="width:100%" alt="Image">
         <div class="caption"><p>Other Mill</p></div>
       </div>
@@ -260,7 +291,7 @@ $(document).ready(function(){
 
 
     <div class="col-sm-4">
-      <div class="thumbnail">
+      <div class="thumbnail bg-g">
       <img src="img/eagle_cad.jpg" class="img-responsive hideme img-rounded" style="width:100%" alt="Image">
       <div class="caption"><p>Eagle CAD</p></div>
     </div>
@@ -268,7 +299,7 @@ $(document).ready(function(){
   </div>
 
     <div class="col-sm-4">
-      <div class="thumbnail">
+      <div class="thumbnail bg-b">
       <img src="img/solidworks.jpg" class="img-responsive hideme img-rounded" style="width:100%" alt="Image">
       <div class="caption"><p>Solid Works</p></div>
     </div>
@@ -276,7 +307,7 @@ $(document).ready(function(){
   </div>
 
   <div class="col-sm-4">
-    <div class="thumbnail">
+    <div class="thumbnail bg-dg">
     <img src="img/laserengraver.jpg" class="img-responsive hideme img-rounded" style="width:100%" alt="Image">
     <div class="caption"><p>Laser Engraver</p></div>
   </div>

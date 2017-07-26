@@ -27,7 +27,9 @@
            text-decoration:none;
            color: #F0FFFF;
         }
-
+        a:hover{
+          color: #000;
+        }
 
 body,html{
   height: 100%;
@@ -84,9 +86,11 @@ body,html{
 
     <div  class="container w3-card center
     w3-round-xlarge w3-text-black">
-        <div><h2>Aggie|MAKERSPACE</h2>
+        <div><h2><a href="../index.html"> <span class=" 	fa fa-arrow-circle-left">   <i class="fa fa-home" aria-hidden="true"></i>
+ </span></a>Aggie|MAKERSPACE</h2>
           <hr>
-          <br>
+
+          <p style="margin-top: 0; padding-top: 2px;"><i style="font: 10px Arimo, sans-serif; color:white">Sign in with NCAT or Aggies Email address</i></p>
         <form>
           <div id = "getInput" class="form-group">
             <label for="txtEmail">Email address:</label>
@@ -101,7 +105,6 @@ body,html{
 
           <button id= "btnLogin" type= "button" class="btn btn-success btn-lg btn-block btn-action">Log in</button>
             <!-- <button id="btnLogout" type = "button" class="btn btn-danger btn-lg btn-block btn-action hide">Logout</button> -->
-          <button id="btnGoogleSignUp" type = "button" class ="btn btn-primary btn-lg btn-block btn-action">Google Sign In </button>
           <button id="btnRegister" type = "button" class="btn btn-danger btn-lg btn-block">Register Now</button>
 
           </form>

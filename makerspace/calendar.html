@@ -12,7 +12,7 @@
 <!--Source -->
 <script src="https://www.gstatic.com/firebasejs/4.1.2/firebase.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script src="home.js"></script>
+<script src="/js/default.js"></script>
 
 <style>
     html,body,h1,h2,h3,h4,h5 {
@@ -124,8 +124,14 @@ footer{
 
 
 <div class="w3-container"  style="" >
-<p></p>
-<p></p>
+  <!-- Page Container -->
+  <div id="data" class="w3-content"  style="" >
+
+
+<iframe src="https://calendar.google.com/calendar/embed?height=600&amp;wkst=1&amp;bgcolor=%23FFFFFF&amp;src=aggies.ncat.edu_3pnvk4skocgrke8ekb42urb9uo%40group.calendar.google.com&amp;color=%238C500B&amp;ctz=America%2FNew_York" style="border-width:0" width="800" height="450" frameborder="0" scrolling="no"></iframe>
+  </div>
+
+
 </div>
   <!-- Footer -->
   <div id="wrapper">
@@ -154,6 +160,17 @@ footer{
       };
   </script>
 
+  <script>
+  function setCalendar() {
+    $("#unList").html(" ");
+    $("#editable").html(" ");
+    $("#querytitle").html("Calendar");
+    $("#querydescp").html("POP CLASSES| EVENTS| SUPERUSERS ON DUTY")
+    var x  = "\<iframe src=\"https://calendar.google.com/calendar/embed?src=aggies.ncat.edu_3pnvk4skocgrke8ekb42urb9uo%40group.calendar.google.com&ctz=America/New_York\" style=\"border: 0\" width=\"800\" height=\"600\" frameborder=\"0\" scrolling=\"no\"\>\<\/iframe\>";
+          $("#unList").html("<div id='editable'>" + String(x) + "</div>");
+
+  }
+  </script>
 
 </body>
 </html>

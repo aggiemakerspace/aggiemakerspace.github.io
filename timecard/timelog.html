@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Theme Made By www.w3schools.com - No Copyright -->
+  <title>MakerSpace</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <!-- Font -->
+  <link href="https://fonts.googleapis.com/css?family=Khand" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Khand|Ubuntu" rel="stylesheet">
+
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/4.1.2/firebase.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <style>
+  body {
+      font: 20px Montserrat, sans-serif;
+      line-height: 1.8;
+      color: #f5f6f7;
+  }
+  p {font-size: 16px;}
+  .margin {margin-bottom: 45px;}
+  .bg-1 {
+      /*background-color: #1abc9c; /* Green */
+      /*color: #ffffff;*/
+
+      background-image: -webkit-gradient(
+        linear,
+        left top,
+        left bottom,
+        color-stop(0, #E2EFF0),
+        color-stop(1, #86A2A8),
+        color-stop(1, #87B0B0),
+        color-stop(1, #010A08)
+      );
+      background-image: -o-linear-gradient(bottom, #E2EFF0 0%, #86A2A8 100%, #87B0B0 100%, #010A08 100%);
+      background-image: -moz-linear-gradient(bottom, #E2EFF0 0%, #86A2A8 100%, #87B0B0 100%, #010A08 100%);
+      background-image: -webkit-linear-gradient(bottom, #E2EFF0 0%, #86A2A8 100%, #87B0B0 100%, #010A08 100%);
+      background-image: -ms-linear-gradient(bottom, #E2EFF0 0%, #86A2A8 100%, #87B0B0 100%, #010A08 100%);
+      background-image: linear-gradient(to bottom, #E2EFF0 0%, #86A2A8 100%, #87B0B0 100%, #010A08 100%);
+
+
+
+  }
+  .bg-2 {
+      background-color: #474e5d; /* Dark Blue */
+      color: #ffffff;
+
+  }
+  .bg-3 {
+      background-color: #ffffff; /* White */
+      color: #555555;
+  }
+  .bg-4 {
+      background-color: #2f2f2f; /* Black Gray */
+      color: #fff;
+  }
+
+  .bg-5{
+
+    background-color: #8EE5EE;
+    color: #CDC8B1
+  }
+  .container-fluid {
+      padding-top: 70px;
+      padding-bottom: 70px;
+  }
+  .navbar {
+      padding-top: 15px;
+      padding-bottom: 15px;
+      border: 0;
+      border-radius: 0;
+      margin-bottom: 0;
+      font-size: 12px;
+      letter-spacing: 5px;
+    }
+    .displaybox
+    {
+        padding-top: 50px;
+        min-height: 70%;
+        min-height: -webkit-calc(100% - 186px);
+        min-height: -moz-calc(100% - 186px);
+        min-height: calc(100% - 186px);
+    }
+    .container
+    {
+
+        min-height: 70%;
+        min-height: -webkit-calc(100% - 186px);
+        min-height: -moz-calc(100% - 186px);
+        min-height: calc(100% - 186px);
+    }
+
+  .navbar-nav  li a:hover {
+      color: #1abc9c !important;
+  }
+  address {
+    display: block;
+    font-style: italic;
+}
+
+.hideme
+{
+    opacity:0;
+}
+/*CSS*/
+div.c-wrapper{
+    width: 100%; /* for example */
+    margin: auto;
+}
+
+
+
+div.well div {
+  height: 220px;
+  overflow-y: scroll;
+}
+
+  </style>
+</head>
+<body  class="bg-1">
+
+<!-- Navbar -->
+<nav  id="hide" class="navbar navbar-default bg-5">
+  <div class="container">
+    <div class="navbar-header">
+        <span class="">timeclock</span>
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="../index.html" style="font: 20px Ubuntu, sans-serif">MakerSpace</a>
+    </div>
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav navbar-right">
+        <li><a id= "loggedIn" style="font: 15px Ubuntu, sans-serif"></a></li>
+        <li><a id = "logout" href="#info" style="color:red">LOGOUT</a></li>
+
+      </ul>
+    </div>
+  </div>
+
+</nav>
+<!-- HERO -->
+<div  class="container-fluid text-center bg-2 ">
+
+
+<div class= "container text-center">
+
+  <div class="col-sm-12">
+<h3 class="text-center">Log in using school email.</h3>
+      <!-- Login -->
+
+    <div id="loginbox" class="col-sm-12  ">
+
+      <div class="row">
+        <div id = "getInput" class="form-group">
+            <div class="col-sm-2"></div>
+            <div class="col-sm-3">
+
+             <input type="text" class="form-control text-right" id="usrEmail" style="width:300px float:left" value="@">
+           </div>
+           <div class="col-sm-3">
+              <select id="email-options" class="" value="0" style="color:black"></select>
+            </div>
+               <div class="col-sm-2">
+            <button id= "btnClockin" type= "button" class="btn btn-success btn-lg btn-block btn-action">Clock in</button>
+          </div>
+          <div class="col-sm-2">
+            <button style=''type="button"  id='btnClockout'
+            class="btn btn-danger btn-lg btn-action">Signout </button>
+
+          </div>
+        </div>
+
+
+
+    </div>
+  </div>
+
+
+      <!-- <div id="createbox" class="">
+          <div><h2>Aggie|MAKERSPACE</h2>
+            <hr>
+            <br>
+          <form>
+            <div id = "getInput" class="form-group">
+
+              <label for="txtEmail">Email address:</label>
+              <input id="txtEmail" type="email" placeholder="Email" class="form-control">
+            </div>
+
+            <div class ="form-group">
+              <label for="txtPassword">Password:</label>
+              <input id="txtPassword" type="password"
+                 placeholder="Password" class="form-control">
+            </div>
+
+            <button id= "btnLogin" type= "button" class="btn btn-success btn-lg btn-block btn-action">Create Account</button>
+
+            </form>
+
+          </div>
+        </div> -->
+
+
+</div><!--column close -->
+
+
+
+
+<!-- Display Container logged in users -->
+  <div class="col-sm-12 container displaybox">
+    <div class="well" style ="height: 480px" >
+      <!-- User and signout button -->
+      <div style ="color:black; font: 12px Ubuntu, sans-serif; float:left" class="" id="editable">
+<script>
+
+</script>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+
+  </div>
+<!-- Column close -->
+
+
+
+</div>
+
+</div>
+
+
+
+
+</div>
+
+
+</div>
+<!--Display Email Options  -->
+<script>
+window.onload = function () {
+  var JSON = {
+      "COLUMNS":["ID", "Name"],
+      "DATA": [
+          ["0", "aggies.ncat.edu"],
+          ["1","ncat.edu"]
+
+
+      ]
+  }, select = document.getElementById("email-options");
+  for (var i = 0; i < JSON.DATA.length; i++) {
+  var at = JSON.DATA[i], id = at[0], name = at[1];
+      var option = document.createElement("option");
+      option.value = id;
+      option.textContent = name;
+      select.appendChild(option);
+    };
+};
+
+</script>
+
+
+
+
+
+<!-- 28B5FF -->
+
+
+
+
+
+
+
+
+
+<!-- Footer -->
+<footer   class="container-fluid text-center bg-5">
+  <div class="row">
+
+  <p style="color:black">Aggie Makerspace | 2017<p>
+  <p style="color:black">Contact <span class="glyphicon glyphicon-phone"></span> </p>
+
+
+</div>
+<div class="row">
+
+    <div class="col-sm-4">
+    <p>  <a href="mailto:jck@ncat.edu">Adviser: Dr. John C Kelly</a></p>
+  </div>
+    <div class="col-sm-4">
+    <p><a href="mailto:pperry@aggies.ncat.edu">Technical Manager: Princeton Perry</a></p>
+  </div>
+    <div class="col-sm-4">
+    <p><a href="mailto:rgmwanik@aggies.ncat.edu">Web Designer: Robert Mwaniki</a></p>
+  </div>
+</div>
+<p id="disclaimer">1601 East Market Street, Greensboro, NC 27411 | This website is
+  unaffiliated with North Carolina Agricultural and Technical State University</p>
+<h3 style="color:black"><a href="#" onclick="adminHide(); return false;"><span id="btnHide" class="glyphicon glyphicon-eye-close"></span>Hide</a></h3>
+</footer>
+
+  <script src="timelog.js"></script>
+
+<script>
+
+  function adminHide(){
+
+      $("#hide").hide();
+      $("footer").hide();
+  };
+
+</script>
+</body>
+</html>
