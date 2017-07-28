@@ -1,271 +1,304 @@
 <!DOCTYPE html>
+
 <html>
 <head>
-<title>Profile page</title>
+<title>MakeSpace HomePage</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-<link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-blue.css">
+
+<!--Fonts-->
 <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Open+Sans'>
+<link href="https://fonts.googleapis.com/css?family=Khand" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Khand|Ubuntu" rel="stylesheet">
+
+
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <!--Source -->
 <script src="https://www.gstatic.com/firebasejs/4.1.2/firebase.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!--Bootstrap-->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
 <script src="js/profile.js"></script>
 
 <style>
-    html,body,h1,h2,h3,h4,h5 {font-family: "Open Sans", sans-serif}
-    th, td
-    {
-        border-left: 1px solid black;
-        text-align: center;
-    }
-    body,html{
-      height: 100%;
-      width: 100%;
-      margin: 0;
-      padding: 0;
+    h1,h2,h3,h4,h5 {
+      font-family: "Khand", sans-serif;
+      text-align: center;
 
     }
 
-    table
-    {
-        text-align:center;
-        align: center;
-    }
-    form
-    {
-
-        text-align:center;
+    p,i{
+      font-family: "Khand|Ubuntu", sans-serif;
+      text-align: center;
     }
 
+#admin{
+  display: none;
+}
+#username{
 
-    #tableContainer-2 {
-
-    }
-    #bgimage {
-
-
-
-
-      height: 100%;
-      background: #000 url('assets/img/notepad.jpg') center no-repeat;
-      background-size: cover;
-      margin-bottom: 0px
-      background-size: 100% 100%;
-      /*background-size: auto 150;*/
-      width: 100%;
+  position: center-fixed;
+  text-align: center;
+}
 
 
+.bg-1 {
+      background-color: #1abc9c; /* Green */
+      color: #ffffff;
+  }
 
-    }
+  .bg-2 {
+    background-color: #474e5d; /* Dark Blue */
+    color: #ffffff;
+}
 
-    select {
+.container{
+      min-height: 70%;
+      min-height: -webkit-calc(100% - 186px);
+      min-height: -moz-calc(100% - 186px);
+      min-height: calc(100% - 186px);
+  }
 
-        width: 200px;
-    }
+}
+.navbar {
+    padding-top: 15px;
+    padding-bottom: 15px;
+    border: 0;
+    border-radius: 0;
+    margin-bottom: 0;
+    font-size: 12px;
+    letter-spacing: 5px;
+  }
 
-    #navDemo{
-      top:50px;;
-      box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-      z-index: 1;
-      overflow:hidden;
-      position: fixed;
-      width: 100%;
-    }
 
-    .w3-bar{
 
-       overflow: hidden;
-       position: fixed;
-       height: 50px;
+/*.footer{
 
-    }
+  position: absolute;
+  bottom: 0px;
+  width: 100%;
+}*/
 
-    .w3-card-2 {
-      overflow:hidden;
+.userpic {
+  position: relative;
 
-      width:280px;
-      height: 900px;
-      position: absolute;
-      margin-left: 25%;
-      margin-top: 50px;
-      width: 50%;
+}
+.bg-5{
 
-    }
-    .w3-text-theme{
-      padding-top: 1px;
-    }
+  background-color: 	#f0ffff;
+  color: #CDC8B1
+}
+/*
+.userpicbtn{
+  position: relative;
+  right: 30px; top: 4px;
 
+}*/
+
+.admin{
+  display: none;
+  visibility: hidden;
+}
+.navbar-nav  li a:hover {
+    color: #1abc9c !important;
+}
+
+.glyphicon.glyphicon-plus {
+    font-size: 40px;
+}
+
+.tooltip-inner {
+    white-space:pre-wrap;
+}
+
+.form-control{
+  width: 80%;
+  margin-left: 10%;
+  position: center;
+}
 
 </style>
+
+
 </head>
 
-<body id="bgimage">
+
+<body class="">
 
 
   <!-- Navbar -->
+  <div class="container">
 
-      <div class="w3-bar w3-theme-d2 w3-left-align w3-large">
-          <a class="w3-bar-item w3-button w3-hide-medium w3-hide-large w3-right w3-padding-large
-          w3-hover-white w3-large w3-theme-d2" href="javascript:void(0);" onclick="openNav()"><i class="fa fa-bars"></i></a>
-          <a href="home.html" class="w3-bar-item w3-button w3-padding-large w3-theme-d4">
-            <i class="fa fa-home w3-margin-right"></i>MakerSpace</a>
-
-
-            <a href="#" id="" onclick="logOut();return false;" class=" w3-bar-item w3-button w3-right w3-hide-small
-            w3-padding-large w3-hover-white" title="Logout"><i class="fa fa-sign-out"></i>Sign Out</a>
-            <a href="console.html" class =" w3-animate-top w3-bar-item w3-button w3-right w3-red
-            w3-hide-small w3-padding-large w3-hover-white">ADMIN CONSOLE</a>
-            <a href="inventory.html" class="w3-animate-top w3-bar-item w3-button w3-right
-            w3-hide-small w3-padding-large w3-hover-white hide">Inventory</a>
-            <a href="classes.html" class="w3-animate-top w3-bar-item w3-button w3-right
-            w3-hide-small w3-padding-large w3-hover-white">Classes</a>
-            <a href="calendar.html" class="w3-animate-top w3-bar-item w3-button w3-right
-            w3-hide-small w3-padding-large w3-hover-white">Calendar</a>
-
+    <div class="container">
+        <nav class="navbar navbar-default bg-5">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="index.html" style="font: 20px Ubuntu, sans-serif">MakerSpace<span style="font: 10px Ubuntu, san-serif"> PORTAL</span></a>
       </div>
-
-
-  <!-- Navbar on small screens -->
-  <div id="navDemo" class="w3-bar-block w3-theme-d2 w3-hide w3-hide-large w3-hide-medium w3-large">
-  <nav>
-          <a href="calendar.html" class="w3-bar-item w3-button w3-padding-large">Calendar</a>
-          <a href="classes.html" class="w3-bar-item w3-button w3-padding-large">Classes</a>
-          <a href="inventory.html" class="w3-bar-item w3-button w3-padding-large">Inventory</a>
-          <a href="console.html"  id="admin" class="w3-bar-item  w3-button w3-padding-large">Admin Console</a>
-          <a href="profile.html" class="w3-bar-item w3-button w3-padding-large">My Profile</a>
-          <a href="#" onclick="logOut();return false;" id ="" class = "w3-bar-item w3-button w3-padding-large" >Sign out</a>
-  </nav>
-  </div>
-  
-        <!-- Profile -->
-        <div class="w3-card-2 w3-round w3-white">
-            <div class="w3-container">
-                <h4 class="w3-center">My Profile</h4>
-                <p class="w3-text-theme w3-center"><img src="assets/img/avatar3.png"
-                                          class="w3-circle" style="height:106px;width:106px" alt="Avatar"/></p>
-                <hr>
-                <!--Information-->
-                <center><form action="/action_page.php">
-                    <br><h5 class="w3-text-theme w3-center">Name</h5>
-
-                  <input id ="txtName" type="text" name="name" class="w3-text-theme w3-center" value = " ">
-
-                  <!-- Change year -->
-                    <h5 class="w3-text-theme w3-center">Classification</h5>
-                    <input id="year" type="text" name="classification" class="w3-text-theme w3-center" value = " ">
-
-                    <!-- Change Major -->
-                      <h5 class="w3-text-theme w3-center">Major</h5>
-                    <h5> <select id="major" class="w3-text-theme w3-center" value="0"></select></h5>
-                  <!-- <input type="text" name="major"  class="w3-text-theme w3-center" value="Engineering"> -->
-
-
-
-                    <!--Equipment people can use -->
-                    <h5 class="w3-text-theme w3-center">Usable Equipment</h5>
-
-                    <!--Insert table-->
-                    <div id="tableContainer-2" >
-                    <table align="center" class= "w3-table-all" >
-                        <colgroup>
-                            <col span="2" style="background-color:">
-                            <col style="background-color:">
-                        </colgroup>
-                        <tr class="w3-blue">
-                            <th style="border-left: 0px">OtherMill</th>
-                            <th>3D Printer</th>
-                            <th>CNC Milling</th>
-                            <th>Laser Engraver</th>
-
-
-                            <p></p>
-                        </tr>
-                        <tr class="w3-light-blue" >
-                            <td style="border-left: 0px" class = "w3-hover-green">true</td>
-                            <td class="w3-hover-green">true</td>
-                            <td class="w3-hover-red">false</td>
-                            <td class="w3-hover-green">true</td>
-
-
-                        </tr>
-                        <tr>
-
-                        </tr>
-                    </table>
-                    </div>
-
-
-                    <h5 class="w3-text-theme w3-center">Equipment Checkout</h5>
-
-                    <p></p>
-
-
-
-                      <button id="btnSubmit" type = "button" class="btn btn-success btn-lg btn-block">Submit Changes</button>
-                    <br>
-                </form>
-
-            </center>
-
-
-           </div>
-        </div>
-
-
+      <div class="collapse navbar-collapse" id="myNavbar">
+        <ul class="nav navbar-nav navbar-right">
+          <li><a href="calendar.html">CALENDAR</a></li>
+          <li><a href="classes.html">CLASSES</a></li>
+          <li><a href="inventory.html">INVENTORY</a></li>
+          <li><a href="console.html" style="color:red">ADMIN CONSOLE</a></li>
+          <li><a href="profile.html">MY PROFILE </a></li>
+          <li><a  href="#" onclick="logOut();return false">SIGN OUT</a></li>
+        </ul>
+      </div>
+</nav>
     </div>
 
+</div>
+<!-- Page Container -->
+<div class="container  .bg-1"  style="" >
+                    <br>
+                    <!-- user pic and name container -->
 
-    <script>
-        // Used to toggle the menu on smaller screens when clicking on the menu button
-        function openNav() {
-            var x = document.getElementById("navDemo");
-            if (x.className.indexOf("w3-show") == -1) {
-                x.className += " w3-show";
-            } else {
-                x.className = x.className.replace(" w3-show", "");
-            }
-        }
-    </script>
+                    <div class="row"><h2  class="text-center" id="txtName"> </h2></div>
 
-    <!--Logout-->
 
-    <script>
-        function  logOut(){
-        firebase.auth().signOut();
-        console.log(firebaseUser + "has logged out");
-        };
-    </script>
+                    <!--User Picture -->
 
-    <script>
-    window.onload = function () {
-    var JSON = {
-        "COLUMNS":["ID", "Name"],
-        "DATA": [
-            ["0",""],
-            ["1","Biological Engineering"],
-            ["2", "Chemical Engineering"],
-            ["3", "Bioengineering"],
-            ["4", "Biological Engineering"],
-            ["5", "Architectural Engineering"],
-            ["6", "Civil Engineering"],
-            ["7", "Computer Science"],
-            ["8", "Computer Engineering"],
-            ["9", "Electrical Engineering"],
-            ["10", "Industrial and Systems Engineering"],
-            ["11", "Mechanical Engineering"],
-            ["12",  "Other"]
-        ]
-    }, select = document.getElementById("major");
-    for (var i = 0; i < JSON.DATA.length; i++) {
-    var at = JSON.DATA[i], id = at[0], name = at[1];
-        var option = document.createElement("option");
-        option.value = id;
-        option.textContent = name;
-        select.appendChild(option);
-    };
-  };
+                    <div class="row">
+                      <div class="col-sm-4;col-md-4;col-lg-4"></div>
+
+                        <div class="col-sm-4;col-md-4;col-lg-4">
+
+                              <div id = "profileDisplay" class= "userpic ">
+                                <img id="userPic" src="assets/img/avatar3.png"
+                                class="img-circle center-block img-responsive" style="height:200px;width:200px" alt=""/>
+                              </div>
+
+                              <div class="text-center" style="padding-top: 10px;">
+                                <a href="profile.html" data-toggle="tooltip" data-placement="right"
+                                title="Change stuff! ">
+
+                                <button type="button" class="btn btn-success">Upload Picture</button></a>
+                              </div>
+
+
+
+                        </div>
+
+                        <div class="col-sm-4;col-md-4;col-lg-4">
+                              <div class="form-group">
+              <!-- Remove -->
+
+
+
+                            <!-- Change year -->
+                              <h5 class="w3-text-theme w3-center">Classification</h5>
+                              <input id="year" type="text" name="classification" class="form-control" value = " ">
+
+                              <!-- Change Major -->
+                                <h5 class="w3-text-theme w3-center">Major</h5>
+                              <h5> <select id="major" class="form-control" value="0"></select></h5>
+                            <!-- <input type="text" name="major"  class="w3-text-theme w3-center" value="Engineering"> -->
+
+                            <!-- Phone -->
+                            <h5 class="w3-text-theme w3-center">Phone Number</h5>
+                              <input id="phoneNum" class="form-control" type="tel" name="usrtel" value= " ">
+
+
+                                <button id="btnSubmit" style="margin-top: 50px;margin-bottom: 0"type = "button" class="btn btn-success btn-lg btn-block">Submit Changes</button>
+                          <br>
+
+                        </div>
+
+
+
+
+
+
+                        </div>
+
+            <hr>
+
+</div>
+
+  <!--Information Container-->
+          <div class="container">
+
+</div>
+  <!-- Footer -->
+  <div id="wrapper">
+  <footer class="w3-container w3-theme-d3 w3-padding-16">
+      <h5></h5>
+  </footer>
+  </div>
+  <script>
+      // Used to toggle the menu on smaller screens when clicking on the menu button
+      function openNav() {
+          var x = document.getElementById("navDemo");
+          if (x.className.indexOf("w3-show") == -1) {
+              x.className += " w3-show";
+          } else {
+              x.className = x.className.replace(" w3-show", "");
+          }
+      }
   </script>
+
+  <!--Logout-->
+
+  <script>
+      function logOut(){
+      firebase.auth().signOut();
+      console.log("user has logged out");
+      };
+  </script>
+
+  <script>
+    $(document).ready(function(){
+        $('[data-toggle="tooltip"]').tooltip();
+    });
+
+</script>
+
+<!--Logout-->
+
+<script>
+    function  logOut(){
+    firebase.auth().signOut();
+    console.log(firebaseUser + "has logged out");
+    };
+</script>
+
+<script>
+window.onload = function () {
+var JSON = {
+    "COLUMNS":["ID", "Name"],
+    "DATA": [
+        ["0",""],
+        ["1","Biological Engineering"],
+        ["2", "Chemical Engineering"],
+        ["3", "Bioengineering"],
+        ["4", "Biological Engineering"],
+        ["5", "Architectural Engineering"],
+        ["6", "Civil Engineering"],
+        ["7", "Computer Science"],
+        ["8", "Computer Engineering"],
+        ["9", "Electrical Engineering"],
+        ["10", "Industrial and Systems Engineering"],
+        ["11", "Mechanical Engineering"],
+        ["12",  "Other"]
+    ]
+}, select = document.getElementById("major");
+for (var i = 0; i < JSON.DATA.length; i++) {
+var at = JSON.DATA[i], id = at[0], name = at[1];
+    var option = document.createElement("option");
+    option.value = id;
+    option.textContent = name;
+    select.appendChild(option);
+};
+};
+</script>
+
 </body>
 </html>

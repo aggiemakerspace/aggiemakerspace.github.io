@@ -13,6 +13,7 @@ function writeUserData(date, email,name, imageUrl, id) {
           //year_class: year,
           maj_class: " ",
           year_class: " ",
+          phone: " ",
           uid: id,
           roles:
           {
@@ -98,7 +99,7 @@ $("#getInput").keyup(function(event){
         const fname = txtFirstName.value;
         const lname = txtLastName.value;
 
-        if(fname || lname == ""){
+        if(fname.trim() || lname.trim() == ""){
             alert(str);
             window.location= "signup.html";
         }else{

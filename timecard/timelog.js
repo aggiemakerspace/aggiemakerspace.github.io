@@ -44,14 +44,18 @@
              var tObj = snap.val();
 
              if(tObj.timeOut == " "){
-               $("#editable").append("\<ul\>"+tObj.email+" has clocked in at "+tObj.timeIn +"\</ul><hr>");
+               $("#editable").append("\<ul\>"+ "\<img id=\"mcnair\" src=\"img/cn.png\" class=\"img-circle\"  alt=\"Image\"class=\"img-circle\"
+               width=\"100\" height=\"100\"\>"
+
+
+               +tObj.name+" has clocked in at "+tObj.timeIn +"\</ul><hr>");
              }
            });
             //clock out event
           timeRef.on("child_removed", function (snap){
 
             var tObj = snap.val();
-            $("#editable").append("\<ul\>"+tObj.email+" has clocked out at "+tObj.timeOut +"\</ul><hr>");
+            $("#editable").append("\<ul\>"+tObj.nae+" has clocked out at "+tObj.timeOut +"\</ul><hr>");
           });
 
 //******GET ADMIN INFORMATION

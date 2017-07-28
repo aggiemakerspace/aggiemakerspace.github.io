@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<!-- 07/16/17 -->
+<html>
+<head>
+<title>MakeSpace HomePage</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-blue.css">
+<link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Open+Sans'>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<!--Source -->
+<script src="https://www.gstatic.com/firebasejs/4.1.2/firebase.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="js/home.js"></script>
+
+<style>
+    html,body,h1,h2,h3,h4,h5 {
+      font-family: "Open Sans", sans-serif;
+
+
+    }
+#username{
+
+  position: center-fixed;
+  text-align: center;
+}
+.w3-bar{
+
+   overflow: hidden;
+   position: fixed;
+   height: 50px;
+
+
+
+}
+
+.bg-1 {
+      background-color: #1abc9c; /* Green */
+      color: #ffffff;
+  }
+
+  .bg-2 {
+    background-color: #474e5d; /* Dark Blue */
+    color: #ffffff;
+}
+
+.w3-container{
+  padding-top: 70px;
+  padding-bottom: 70px;
+
+}
+#navDemo{
+  top:50px;;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+  overflow:hidden;
+  position: fixed;
+  width: 100%;
+}
+
+footer{
+
+  position: absolute;
+  bottom: 0px;
+  width: 100%;
+}
+
+.userpic {
+  position: relative;
+
+}
+
+.userpicbtn{
+  position: relative;
+  right: 30px; top: 4px;
+
+}
+.w3-card{
+
+ width:400px;
+ height: 400px;
+ position: absolute;
+ /*border: 3px solid green;*/
+}
+.w3-center{
+    margin: auto;
+    width: 50%;
+
+    padding-top: 70px;
+}
+</style>
+
+
+</head>
+
+
+<body class="w3-theme-l5 (w3-theme-light)">
+  <!-- Navbar -->
+
+      <div class="w3-bar w3-theme-d2 w3-left-align w3-large">
+          <a class="w3-bar-item w3-button w3-hide-medium w3-hide-large w3-right w3-padding-large
+          w3-hover-white w3-large w3-theme-d2" href="javascript:void(0);" onclick="openNav()"><i class="fa fa-bars"></i></a>
+          <a href="home.html" class="w3-bar-item w3-button w3-padding-large w3-theme-d4">
+            <i class="fa fa-home w3-margin-right"></i>MakerSpace</a>
+
+
+            <a href="#" id="" onclick="logOut();return false;" class=" w3-bar-item w3-button w3-right w3-hide-small
+            w3-padding-large w3-hover-white" title="Logout"><i class="fa fa-sign-out"></i>Sign Out</a>
+            <a href="console.html" class =" w3-animate-top w3-bar-item w3-button w3-right w3-red
+            w3-hide-small w3-padding-large w3-hover-white">ADMIN CONSOLE</a>
+            <a href="inventory.html" class="w3-animate-top w3-bar-item w3-button w3-right
+            w3-hide-small w3-padding-large w3-hover-white hide">Inventory</a>
+            <a href="classes.html" class="w3-animate-top w3-bar-item w3-button w3-right
+            w3-hide-small w3-padding-large w3-hover-white">Classes</a>
+            <a href="calendar.html" class="w3-animate-top w3-bar-item w3-button w3-right
+            w3-hide-small w3-padding-large w3-hover-white">Calendar</a>
+
+      </div>
+
+
+  <!-- Navbar on small screens -->
+  <div id="navDemo" class="w3-bar-block w3-theme-d2 w3-hide w3-hide-large w3-hide-medium w3-large">
+  <nav>
+          <a href="calendar.html" class="w3-bar-item w3-button w3-padding-large">Calendar</a>
+          <a href="classes.html" class="w3-bar-item w3-button w3-padding-large">Classes</a>
+          <a href="inventory.html" class="w3-bar-item w3-button w3-padding-large">Inventory</a>
+          <a href="console.html"  id="admin" class="w3-bar-item  w3-button w3-padding-large">Admin Console</a>
+          <a href="profile.html" class="w3-bar-item w3-button w3-padding-large">My Profile</a>
+          <a href="#" onclick="logOut();return false;" id ="" class = "w3-bar-item w3-button w3-padding-large" >Sign out</a>
+  </nav>
+  </div>
+
+
+
+<div class="w3-container w3-center"  style="" >
+<div class="w3-panel w3-card w3-center" style=""><h3 style="color:red ">Accessed Denied</h3><p><h4>This page is restricted</h4><p style="color:blue">Contact SuperUser for more information</p></div>
+<p></p>
+</div>
+  <!-- Footer -->
+  <div id="wrapper">
+  <footer class="w3-container w3-theme-d3 w3-padding-16">
+      <h5></h5>
+  </footer>
+  </div>
+  <script>
+      // Used to toggle the menu on smaller screens when clicking on the menu button
+      function openNav() {
+          var x = document.getElementById("navDemo");
+          if (x.className.indexOf("w3-show") == -1) {
+              x.className += " w3-show";
+          } else {
+              x.className = x.className.replace(" w3-show", "");
+          }
+      }
+  </script>
+
+  <!--Logout-->
+
+  <script>
+      function  logOut(){
+      firebase.auth().signOut();
+      console.log(firebaseUser + "has logged out");
+      };
+  </script>
+
+
+</body>
+</html>

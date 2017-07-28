@@ -1,274 +1,287 @@
 <!DOCTYPE html>
+
 <html>
 <head>
-<title>Console</title>
+<title>MakeSpace HomePage</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-<link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-blue.css">
-<link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Open+Sans'>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
+<!--Fonts-->
+<link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Open+Sans'>
+<link href="https://fonts.googleapis.com/css?family=Khand" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Khand|Ubuntu" rel="stylesheet">
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<!--Source -->
 <script src="https://www.gstatic.com/firebasejs/4.1.2/firebase.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<style>
-    html,body,h1,h2,h3,h4,h5, a{
-      font-family: "Open Sans", sans-serif;
-      color: #F0FFFF;
+<!--Bootstrap-->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
+<script src="js/console.js"></script>
+
+<style>
+    h1,h2,h3,h4,h5 {
+      font-family: "Khand", sans-serif;
+      text-align: center;
 
     }
+
+    p,i{
+      font-family: "Khand|Ubuntu", sans-serif;
+      text-align: center;
+    }
+
+#admin{
+  display: none;
+}
 #username{
 
   position: center-fixed;
   text-align: center;
 }
-.w3-bar{
-
-  overflow: hidden;
-   position: fixed;
-   height: 50px;
 
 
+.bg-1 {
+      background-color: #1abc9c; /* Green */
+      color: #ffffff;
+  }
 
+  .bg-2 {
+    background-color: #474e5d; /* Dark Blue */
+    color: #ffffff;
 }
 
-
-
-.w3-container{
-  padding-top: 50px;
-  padding-bottom: 70px;
-}
-
-#navDemo{
-  top:50px;;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-  z-index: 1;
-  overflow:hidden;
-  position: fixed;
-  width: 100%;
-}
-footer {
-  position: fixed;
-  bottom: 0;
-  width: 100%;
-  height: 90px;
-  margin: 0;
-}
-nav{
-
-
-  -webkit-background-size: cover; /* For WebKit*/
-   -moz-background-size: cover;    /* Mozilla*/
-   -o-background-size: cover;      /* Opera*/
-   background-size: cover;
-  color: #ffffff;
-
+.container{
+      min-height: 70%;
+      min-height: -webkit-calc(100% - 186px);
+      min-height: -moz-calc(100% - 186px);
+      min-height: calc(100% - 186px);
+  }
 
 }
-section {
-
-    margin: 0;
-
-    align-items:center;
-
-    align-content:center;
-    padding: 1em;
-    overflow: hidden;
-    max-width:1000px;
-
-
-}
-#main {
-
-    /*margin-top: 50px;
-    margin-left: 280px;*/
-
-}
+.navbar {
+    padding-top: 15px;
+    padding-bottom: 15px;
+    border: 0;
+    border-radius: 0;
+    margin-bottom: 0;
+    font-size: 12px;
+    letter-spacing: 5px;
+  }
 
 
 
-.footer{
+/*.footer{
 
   position: absolute;
   bottom: 0px;
   width: 100%;
+}*/
+
+.userpic {
+  position: relative;
+
+}
+.bg-5{
+
+  background-color: 	#f0ffff;
+  color: #CDC8B1
+}
+/*
+.userpicbtn{
+  position: relative;
+  right: 30px; top: 4px;
+
+}*/
+
+.admin{
+  display: none;
+  visibility: hidden;
+}
+.navbar-nav  li a:hover {
+    color: #1abc9c !important;
 }
 
+.glyphicon.glyphicon-plus {
+    font-size: 40px;
+}
+
+.tooltip-inner {
+    white-space:pre-wrap;
+}
+
+.form-control{
+  width: 80%;
+  margin-left: 10%;
+  position: center;
+}
+
+.well{
+  color: #00000;
+  width: 100%;
+
+  box-shadow: 5px 5px 5px #888888;
+}
+
+.btn span:hover {
+    color: #1abc9c !important;
+}
 </style>
 
 
 </head>
 
 
-<body class="w3-theme-l5 (w3-theme-light)">
+<body class="">
+
+
   <!-- Navbar -->
+  <div class="container">
 
-      <div class="w3-bar w3-theme-d2 w3-left-align w3-large">
-          <a class="w3-bar-item w3-button w3-hide-medium w3-hide-large w3-right w3-padding-large
-          w3-hover-white w3-large w3-theme-d2" href="javascript:void(0);" onclick="openNav()"><i class="fa fa-bars"></i></a>
-          <a href="home.html" class="w3-bar-item w3-button w3-padding-large w3-theme-d4">
-            <i class="fa fa-home w3-margin-right"></i>MakerSpace</a>
-
-
-            <a href="#" id="" onclick="logOut();return false;" class=" w3-bar-item w3-button w3-right w3-hide-small
-            w3-padding-large w3-hover-white" title="Logout"><i class="fa fa-sign-out"></i>Sign Out</a>
-            <a href="console.html" class =" w3-animate-top w3-bar-item w3-button w3-right w3-red
-            w3-hide-small w3-padding-large w3-hover-white">ADMIN CONSOLE</a>
-            <a href="inventory.html" class="w3-animate-top w3-bar-item w3-button w3-right
-            w3-hide-small w3-padding-large w3-hover-white hide">Inventory</a>
-            <a href="classes.html" class="w3-animate-top w3-bar-item w3-button w3-right
-            w3-hide-small w3-padding-large w3-hover-white">Classes</a>
-            <a href="calendar.html" class="w3-animate-top w3-bar-item w3-button w3-right
-            w3-hide-small w3-padding-large w3-hover-white">Calendar</a>
-
+    <div class="container">
+        <nav class="navbar navbar-default bg-5">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="index.html" style="font: 20px Ubuntu, sans-serif">MakerSpace<span style="font: 10px Ubuntu, san-serif"> PORTAL</span></a>
       </div>
+      <div class="collapse navbar-collapse" id="myNavbar">
+        <ul class="nav navbar-nav navbar-right">
+          <li><a href="calendar.html">CALENDAR</a></li>
+          <li><a href="classes.html">CLASSES</a></li>
+          <li><a href="inventory.html">INVENTORY</a></li>
+          <li><a href="console.html" style="color:red">ADMIN CONSOLE</a></li>
+          <li><a href="profile.html">MY PROFILE </a></li>
+          <li><a  href="#" onclick="logOut();return false">SIGN OUT</a></li>
+        </ul>
+      </div>
+</nav>
+    </div>
+
+</div>
+<!-- Page Container -->
+<div class="container">
+                    <br>
+
+                    <h4>Admin Console</h4>
+                    <hr>
+
+                    <div class="row">
+                              <div style="margin-left: 50px; padding-left:20px" class="col-sm-2 col-md-2 col-lg-2"></div>
+                              <div class="container col-sm-8 col-lg-8 col-md-8">
+                                <!-- Main Content -->
+                                <div id="main" class="w3-center">
 
 
-  <!-- Navbar on small screens -->
-  <div id="navDemo" class="w3-bar-block w3-theme-d2 w3-hide w3-hide-large w3-hide-medium w3-large">
-  <nav>
-          <a href="calendar.html" class="w3-bar-item w3-button w3-padding-large">Calendar</a>
-          <a href="classes.html" class="w3-bar-item w3-button w3-padding-large">Classes</a>
-          <a href="inventory.html" class="w3-bar-item w3-button w3-padding-large">Inventory</a>
-          <a href="console.html"  id="admin" class="w3-bar-item  w3-button w3-padding-large">Admin Console</a>
-          <a href="profile.html" class="w3-bar-item w3-button w3-padding-large">My Profile</a>
-          <a href="#" onclick="logOut();return false;" id ="" class = "w3-bar-item w3-button w3-padding-large" >Sign out</a>
-  </nav>
+                                  <div class="">
+
+
+                                    <div class="row">
+                                    <a id="btn1" class="btn" href="javascript:void(0)" onclick="buttonClicked(event);">
+                                      <div class="">Machines</div>
+                                    </a>
+                                    <a id="btn2" class="btn" href="javascript:void(0)" onclick="buttonClicked(event);">
+                                      <div class="">All Users</div>
+                                    </a>
+                                    <a id="btn4" class="btn" href="javascript:void(0)" onclick="buttonClicked(event);">
+                                      <div class="">SuperUsers</div>
+                                    </a>
+                                    <a id="btn5" class="btn" href="javascript:void(0)" onclick="buttonClicked(event);">
+                                      <div class="">RegularUsers</div>
+                                    </a>
+
+
+                                    <a id="btn6" class="btn" href="../timecard/timelog.html" onclick="buttonClicked(event);">
+                                      <div class="">TimeClock</div>
+                                    </a>
+                                    <a id="btn4" class="btn" href="javascript:void(0)" onclick="buttonClicked(event); setCalendar();">
+                                      <div class="">Calendar</div>
+                                    </a>
+                                    <a id="btnAdmin" class="btn btn-danger" href="config.html" onclick="buttonClicked(event); checkAdmin();">
+                                      <div class=""><span class="glyphicon glyphicon-cog"></span>CONFIG</div>
+                                    </a>
+
+
+
+                                  </div>
+
+                                  <section class="">
+                                    <div id = "container" class="">
+                                    <h2 id = "querytitle" class = "w3-text-black">Title</h2>
+                                    <p id = "querydescp">A short description:</p>
+                                    <ul id = "unList" class="w3-ul">
+                                      <!--Stuff goes here -->
+                                        <div id = "editable">
+
+
+                                        </div>
+
+
+
+                                  </section>
+
+
+
+                              </div>
+
+
+
+
+                          </div>
+                        <div class="col-sm-2 col-md-2 col-lg-2"></div>
+
+
+
+
+
+
+
+                  </div>
+
+</div>
+
+  <!-- Footer -->
+  <div id="wrapper">
+  <footer class="w3-container w3-theme-d3 w3-padding-16">
+      <h5></h5>
+  </footer>
   </div>
 
 
 
+  <!--Logout-->
 
-<!-- Sidebar/menu -->
+  <script>
+      function logOut(){
+      firebase.auth().signOut();
+      console.log("user has logged out");
+      };
+  </script>
 
-  <!--Information Container-->
-          <div class="w3-container">
+  <script>
+    $(document).ready(function(){
+        $('[data-toggle="tooltip"]').tooltip();
+    });
 
+</script>
 
-            <!-- Main Content -->
-            <div id="main" class="w3-center">
+<!--Logout-->
 
-
-              <div class="">
-
-
-                <div class="w3-row">
-                <a id="btn1" href="javascript:void(0)" onclick="buttonClicked(event);">
-                  <div class="w3-col w3-mobile m2 l2 s2 tablink w3-bottombar w3-blue w3-hover-light-blue w3-padding">Machines</div>
-                </a>
-                <a id="btn2" href="javascript:void(0)" onclick="buttonClicked(event);">
-                  <div class="w3-col w3-mobile m2 l2 s2 tablink w3-bottombar w3-blue w3-hover-light-blue w3-padding">All Users</div>
-                </a>
-                <a id="btn4" href="javascript:void(0)" onclick="buttonClicked(event);">
-                  <div class="w3-col w3-mobile m2 l2 s2 tablink w3-bottombar w3-blue w3-hover-light-blue w3-padding">SuperUsers</div>
-                </a>
-                <a id="btn5" href="javascript:void(0)" onclick="buttonClicked(event);">
-                  <div class="w3-col w3-mobile m2 l2 s2 tablink w3-bottombar w3-blue w3-hover-light-blue w3-padding">RegularUsers</div>
-                </a>
+<script>
+    function  logOut(){
+    firebase.auth().signOut();
+    console.log(firebaseUser + "has logged out");
+    };
+</script>
 
 
-                <a id="btn6" href="../timecard/timelog.html" onclick="buttonClicked(event);">
-                  <div class="w3-col w3-mobile m2 l2 s2 tablink w3-bottombar w3-blue w3-hover-light-blue w3-padding">TimeClock</div>
-                </a>
-                <a id="btn4" href="javascript:void(0)" onclick="buttonClicked(event); setCalendar();">
-                  <div class="w3-col w3-mobile m1 l1 s1 tablink w3-bottombar w3-blue w3-hover-green w3-padding">Calendar</div>
-                </a>
-                <a id="btnAdmin" href="javascript:void(0)" onclick="buttonClicked(event); checkAdmin();">
-                  <div class="w3-col w3-mobile m1 l1 s1 tablink w3-bottombar w3-blue w3-hover-red w3-padding">ADMIN</div>
-                </a>
-
-
-
-              </div>
-
-              <!-- Page Container -->
-              <div id="data" class="w3-container shit"  style="" >
-
-                  <section class="">
-                    <div id = "container" class="">
-                    <h2 id = "querytitle" class = "w3-text-black">Title</h2>
-                    <p id = "querydescp">A short description:</p>
-                    <ul id = "unList" class="w3-ul">
-                    <div id = "editable"></div>
-                    </ul>
-                    </div>
-                  </section>
-              </div>
-
-      </div>
-
-            </div>
-
-
-
-
-
-
-            <!-- Page Container -->
-            <div class="w3-container"  style="" >
-
-
-            </div>
-            <!-- Footer -->
-            <div id="wrapper">
-            <footer class="w3-container w3-theme-d3 w3-padding-16 ">
-                <h5></h5>
-            </footer>
-            </div>
-    <!-- Javascript -->
-      <script>
-          // Used to toggle the menu on smaller screens when clicking on the menu button
-          function openNav() {
-              var x = document.getElementById("navDemo");
-              if (x.className.indexOf("w3-show") == -1) {
-                  x.className += " w3-show";
-              } else {
-                  x.className = x.className.replace(" w3-show", "");
-              }
-          }
-      </script>
-      <!--Source -->
-      <script src="js/console.js"></script>
-      <!--Logout-->
-
-      <script>
-          function  logOut(){
-          firebase.auth().signOut();
-          console.log(firebaseUser + "has logged out");
-          };
-      </script>
-
-    <!-- Open Google Calendar -->
-    <script>
-    function setCalendar() {
-      $("#unList").html(" ");
-      $("#editable").html(" ");
-      $("#querytitle").html("Calendar");
-      $("#querydescp").html("POP CLASSES| EVENTS| SUPERUSERS ON DUTY")
-      var x  = "\<iframe src=\"https://calendar.google.com/calendar/embed?src=aggies.ncat.edu_3pnvk4skocgrke8ekb42urb9uo%40group.calendar.google.com&ctz=America/New_York\" style=\"border: 0\" width=\"800\" height=\"600\" frameborder=\"0\" scrolling=\"no\"\>\<\/iframe\>";
-            $("#unList").html("<div id='editable'>" + String(x) + "</div>");
-
-    }
-    </script>
-    <!-- Check if user is administrator -->
-    <script>
-
-    function checkAdmin(){
-      console.log("You an OG");
-    }
-    </script>
-
-    <!-- Inner div Menu bar effects -->
-    <script>
-    function buttonClicked(evt) {
-      var last;
-
-      document.getElementById("data").style.display = "block";
-      evt.currentTarget.firstElementChild.className += " w3-border-red";
-      last = evt.currentTarget.firstElementChild.className;
-    }
-    </script>
 
 </body>
 </html>

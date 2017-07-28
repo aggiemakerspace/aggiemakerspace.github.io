@@ -1,80 +1,49 @@
 <!DOCTYPE html>
-<!-- 07/16/17 -->
+
 <html>
 <head>
 <title>MakeSpace HomePage</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-<link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-blue.css">
+
+<!--Fonts-->
 <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Open+Sans'>
+<link href="https://fonts.googleapis.com/css?family=Khand" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Khand|Ubuntu" rel="stylesheet">
+
+
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <!--Source -->
 <script src="https://www.gstatic.com/firebasejs/4.1.2/firebase.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script src="js/classes.js"></script>
+<!--Bootstrap-->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+<script src="js/profile.js"></script>
 
 <style>
-
-
-
-@media screen and (max-width: 1280px) {
-    img {
-        position:centered-fixed;
-        width: 265px;
-    }
-}
-
-
-@media screen and (max-width: 980px){
-  img{
-        position:centered-fixed;
-        width: 200px;
-  }
-}
-@media screen and (max-width: 800px){
-  img{
-        position:centered-fixed;
-        width: 156px;
-  }
-}
-@media screen and (max-width: 768px){
-  img{
-        position:centered-fixed;
-        width: 150px;
-  }
-}
-@media screen and (max-width: 360px){
-  img{
-        position:centered-fixed;
-        width: 260px;
-  }
-}
-@media screen and (max-width: 320px) {
-    img {
-          position:centered-fixed;
-         width: 230px;
-    }
-}
-    html,body,h1,h2,h3,h4,h5 {
-      font-family: "Open Sans", sans-serif;
-
+    h1,h2,h3,h4,h5 {
+      font-family: "Khand", sans-serif;
+      text-align: center;
 
     }
+
+    p,i{
+      font-family: "Khand|Ubuntu", sans-serif;
+      text-align: center;
+    }
+
+#admin{
+  display: none;
+}
 #username{
 
   position: center-fixed;
   text-align: center;
 }
-.w3-bar{
 
-   overflow: hidden;
-   position: fixed;
-   height: 50px;
-
-
-
-}
 
 .bg-1 {
       background-color: #1abc9c; /* Green */
@@ -86,199 +55,230 @@
     color: #ffffff;
 }
 
-.w3-container{
-  padding-top: 70px;
-  padding-bottom: 70px;
+.container{
+      min-height: 70%;
+      min-height: -webkit-calc(100% - 186px);
+      min-height: -moz-calc(100% - 186px);
+      min-height: calc(100% - 186px);
+  }
 
 }
-.w3-card-2{
+.navbar {
+    padding-top: 15px;
+    padding-bottom: 15px;
+    border: 0;
+    border-radius: 0;
+    margin-bottom: 0;
+    font-size: 12px;
+    letter-spacing: 5px;
+  }
 
-  padding-top: 20px;
-  margin-top: 20px;
-  box-shadow: 5px 5px 5px #888888;
-}
-#navDemo{
-  top:50px;;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-  z-index: 1;
-  overflow:hidden;
-  position: fixed;
-  width: 100%;
-}
 
-footer{
+
+/*.footer{
 
   position: absolute;
   bottom: 0px;
   width: 100%;
-}
+}*/
 
 .userpic {
   position: relative;
 
 }
+.bg-5{
 
+  background-color: 	#f0ffff;
+  color: #CDC8B1
+}
+/*
+.userpicbtn{
+  position: relative;
+  right: 30px; top: 4px;
 
+}*/
+
+.admin{
+  display: none;
+  visibility: hidden;
+}
+.navbar-nav  li a:hover {
+    color: #1abc9c !important;
+}
+
+.glyphicon.glyphicon-plus {
+    font-size: 40px;
+}
+
+.tooltip-inner {
+    white-space:pre-wrap;
+}
+
+.form-control{
+  width: 80%;
+  margin-left: 10%;
+  position: center;
+}
+
+.well{
+  color: #00000;
+  width: 400px;
+
+  /*box-shadow: 10px 10px 5px #888888;*/
+}
 </style>
 
 
 </head>
 
 
-<body class="w3-theme-l5 (w3-theme-light)">
+<body class="">
+
+
   <!-- Navbar -->
+  <div class="container">
 
-      <div class="w3-bar w3-theme-d2 w3-left-align w3-large">
-          <a class="w3-bar-item w3-button w3-hide-medium w3-hide-large w3-right w3-padding-large
-          w3-hover-white w3-large w3-theme-d2" href="javascript:void(0);" onclick="openNav()"><i class="fa fa-bars"></i></a>
-          <a href="home.html" class="w3-bar-item w3-button w3-padding-large w3-theme-d4">
-            <i class="fa fa-home w3-margin-right"></i>MakerSpace</a>
-
-
-            <a href="#" id="" onclick="logOut();return false;" class=" w3-bar-item w3-button w3-right w3-hide-small
-            w3-padding-large w3-hover-white" title="Logout"><i class="fa fa-sign-out"></i>Sign Out</a>
-            <a href="console.html" class =" w3-animate-top w3-bar-item w3-button w3-right w3-red
-            w3-hide-small w3-padding-large w3-hover-white">ADMIN CONSOLE</a>
-            <a href="inventory.html" class="w3-animate-top w3-bar-item w3-button w3-right
-            w3-hide-small w3-padding-large w3-hover-white hide">Inventory</a>
-            <a href="classes.html" class="w3-animate-top w3-bar-item w3-button w3-right
-            w3-hide-small w3-padding-large w3-hover-white">Classes</a>
-            <a href="calendar.html" class="w3-animate-top w3-bar-item w3-button w3-right
-            w3-hide-small w3-padding-large w3-hover-white">Calendar</a>
-
+    <div class="container">
+        <nav class="navbar navbar-default bg-5">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="index.html" style="font: 20px Ubuntu, sans-serif">MakerSpace<span style="font: 10px Ubuntu, san-serif"> PORTAL</span></a>
       </div>
-
-
-  <!-- Navbar on small screens -->
-  <div id="navDemo" class="w3-bar-block w3-theme-d2 w3-hide w3-hide-large w3-hide-medium w3-large">
-  <nav>
-          <a href="calendar.html" class="w3-bar-item w3-button w3-padding-large">Calendar</a>
-          <a href="classes.html" class="w3-bar-item w3-button w3-padding-large">Classes</a>
-          <a href="inventory.html" class="w3-bar-item w3-button w3-padding-large">Inventory</a>
-          <a href="console.html"  id="admin" class="w3-bar-item  w3-button w3-padding-large">Admin Console</a>
-          <a href="profile.html" class="w3-bar-item w3-button w3-padding-large">My Profile</a>
-          <a href="#" onclick="logOut();return false;" id ="" class = "w3-bar-item w3-button w3-padding-large" >Sign out</a>
-  </nav>
-  </div>
-
-<div class="w3-container .bg-1"  style="" >
-<h1>Coming Soon</h1>
-<!-- Default Image Sizes 300x300-->
-      <!--Class 1-->
-          <div class="w3-row-padding w3-center  w3-margin-top .bg-2">
-              <!--OtherMill -->
-              <div class="w3-quarter ">
-                <div class="w3-card-2 w3-container w3-light-blue" style="min-height:460px">
-                  <h1 style="color:white">Other Mill</h1><br>
-                  <div class="w3-center" style="width:100%">
-
-
-                        <img class= "w3-round w3-border-black w3-center" src="assets/img/othermill.png" style="" alt="OtherMill" >
-                        <div class="w3-container w3-center">
-                          <p>In this fun and exciting class you will learn...</p>
-                          <hr>
-                          <p><h5>Instructor: </h5>A Name<h5>Location: </h5>...</p>
-                          <p><a href="" class="w3-btn w3-blue w3-margin-top">SIGN UP</a></p>
-                        </div>
-
-                  </div>
-            </div>
-          </div>
-
-      <!--Class 2-->
-
-                <!--3d printing -->
-                <div class="w3-quarter ">
-                  <div class="w3-card-2 w3-container w3-light-blue" style="min-height:460px">
-                    <h1 style="color:white">3D Printer</h1><br>
-                    <div class="w3-center" style="width:100%">
-
-
-                          <img class= "w3-round w3-border-black w3-center" src="assets/img/othermill.png" style="" alt="OtherMill" >
-                          <div class="w3-container w3-center">
-                            <p>In this fun and exciting class you will learn...</p>
-                            <hr>
-                            <p><h5>Instructor: </h5>A Name<h5>Location: </h5>...</p>
-                            <p><a href="" class="w3-btn w3-blue w3-margin-top">SIGN UP</a></p>
-                          </div>
-
-                    </div>
-              </div>
-              </div>
-
-
-    <!--Class 3-->
-
-              <!--CNC Milling -->
-              <div class="w3-quarter ">
-                <div class="w3-card-2 w3-container w3-light-blue" style="min-height:460px">
-                  <h1 style="color:white">CNC Milling</h1><br>
-                  <div class="w3-center" style="width:100%">
-
-
-                        <img class= "w3-round w3-border-black w3-center" src="assets/img/othermill.png" style="" alt="OtherMill" >
-                        <div class="w3-container w3-center">
-                          <p>In this fun and exciting class you will learn...</p>
-                          <hr>
-                          <p><h5>Instructor: </h5>A Name<h5>Location: </h5>...</p>
-                          <p><a href="" class="w3-btn w3-blue w3-margin-top">SIGN UP</a></p>
-                        </div>
-
-                  </div>
-            </div>
-            </div>
-
-      <!--Class 4 -->
-
-                <!--Laser Engraver -->
-                <div class="w3-quarter ">
-                  <div class="w3-card-2 w3-container w3-light-blue" style="min-height:460px">
-                    <h1 style="color:white">Laser Engraver</h1><br>
-                    <div class="w3-center" style="width:100%">
-
-
-                          <img class= "w3-round w3-border-black w3-center" src="assets/img/othermill.png" style="" alt="laserengraver" >
-                          <div class="w3-container w3-center">
-                            <p>In this fun and exciting class you will learn...</p>
-                            <hr>
-                            <p><h5>Instructor: </h5>A Name<h5>Location: </h5>...</p>
-                            <p><a href="" class="w3-btn w3-blue w3-margin-top">SIGN UP</a></p>
-                          </div>
-
-                    </div>
-              </div>
-            </div>
-
+      <div class="collapse navbar-collapse" id="myNavbar">
+        <ul class="nav navbar-nav navbar-right">
+          <li><a href="calendar.html">CALENDAR</a></li>
+          <li><a href="classes.html">CLASSES</a></li>
+          <li><a href="inventory.html">INVENTORY</a></li>
+          <li><a href="console.html" style="color:red">ADMIN CONSOLE</a></li>
+          <li><a href="profile.html">MY PROFILE </a></li>
+          <li><a  href="#" onclick="logOut();return false">SIGN OUT</a></li>
+        </ul>
       </div>
+</nav>
+    </div>
 
 </div>
+<!-- Page Container -->
+<div class=" .bg-1"  style="" >
+                    <br>
+
+                    <h4>Events for this semester</h4>
+                    <div class="container">
+                    <div class="row">
+                        <!-- Event 1 -->
+                          <div class "col-md-6 col-lg-6 col-sm-6 ">
+
+                            <div class="well text-center">
+
+                                <h2 id ="title"> Event Name </h2>
+                                <img class= "center-block img-responsive img-rounded" src="assets/img/othermill.png" style="" alt="OtherMill" >
+                                <p>In this fun and exciting class you will learn...</p>
+                                <hr>
+                                <p><h2 >Instructor: </h2><span id="instrId">A Name</span><h2>Location: </h2>...</p>
+                                <p><a href="" class="btn btn-success">SIGN UP</a></p>
+
+                            </div>
+
+                          </div>
+
+                          <!-- Event 1 -->
+                            <div class "col-md-6 col-lg-6 col-sm-6  ">
+
+                              <div class="well">
+
+                                  <h2 id ="title"> Event Name </h2>
+                                  <img class= "center-block img-responsive img-rounded" src="assets/img/othermill.png" style="" alt="OtherMill" >
+                                  <p>In this fun and exciting class you will learn...</p>
+                                  <hr>
+                                  <p><h2 >Instructor: </h2><span id="instrId">A Name</span><h2>Location: </h2>...</p>
+                                  <p><a href="" class="btn btn-success">SIGN UP</a></p>
+
+                              </div>
+
+                            </div>
+                          </div>
+                          <div class="row">
+                            <!-- Event 1 -->
+                              <div class "col-sm-4 ">
+
+                                <div class="well ">
+
+                                    <h2 id ="title"> Event Name </h2>
+                                    <img class= "center-block img-responsive img-rounded" src="assets/img/othermill.png" style="" alt="OtherMill" >
+                                    <p>In this fun and exciting class you will learn...</p>
+                                    <hr>
+                                    <p><h2 >Instructor: </h2><span id="instrId">A Name</span><h2>Location: </h2>...</p>
+                                    <p><a href="" class="btn btn-success">SIGN UP</a></p>
+
+                                </div>
+
+                              </div>
 
 
+                              <!-- Event 1 -->
+                                <div class "col-sm-4 ">
+
+                                  <div class="well">
+
+                                      <h2 id ="title"> Event Name </h2>
+                                      <img class= "center-block img-responsive img-rounded" src="assets/img/othermill.png" style="" alt="OtherMill" >
+                                      <p>In this fun and exciting class you will learn...</p>
+                                      <hr>
+                                      <p><h2 >Instructor: </h2><span id="instrId">A Name</span><h2>Location: </h2>...</p>
+                                      <p><a href="" class="btn btn-success">SIGN UP</a></p>
+
+                                  </div>
+
+                                </div>
 
 
+                            </div> <!--Row close -->
+
+                      </div>
+                    </div>
 
 
+      </div> <!--container close -->
 
-  <script>
-      // Used to toggle the menu on smaller screens when clicking on the menu button
-      function openNav() {
-          var x = document.getElementById("navDemo");
-          if (x.className.indexOf("w3-show") == -1) {
-              x.className += " w3-show";
-          } else {
-              x.className = x.className.replace(" w3-show", "");
-          }
-      }
-  </script>
+
+  <!-- Footer -->
+  <div id="wrapper">
+  <footer class="w3-container w3-theme-d3 w3-padding-16">
+      <h5></h5>
+  </footer>
+  </div>
+
+
 
   <!--Logout-->
 
   <script>
-      function  logOut(){
+      function logOut(){
       firebase.auth().signOut();
-      console.log(firebaseUser + "has logged out");
+      console.log("user has logged out");
       };
   </script>
+
+  <script>
+    $(document).ready(function(){
+        $('[data-toggle="tooltip"]').tooltip();
+    });
+
+</script>
+
+<!--Logout-->
+
+<script>
+    function  logOut(){
+    firebase.auth().signOut();
+    console.log(firebaseUser + "has logged out");
+    };
+</script>
+
 
 
 </body>

@@ -1,4 +1,4 @@
-indexfunction() {
+(function() {
 
     var provider = new firebase.auth.GoogleAuthProvider();
 
@@ -34,13 +34,16 @@ indexfunction() {
             var fullname = object.name;
             var year = object.year_class;
             var major = object.major_class;
-
+            var phoneText = object.phone;
+            console.log(phoneText)
             //DISPLAY USER INFORMATION TO DOCUMENT
-            $("#txtName").val(fullname);
+            $("#txtName").append(fullname);
             $("#year").val(year);
+            $("#phoneNum").val(phoneText);
             ///Call Get Major function
             var val = getMajor(major);
               $("#major").val( val);
+
             });
 
             //UPDATE USER INFORMATION
@@ -58,21 +61,34 @@ indexfunction() {
 
 
                     //var emailInput = object.email;
-                    var nInput =  $("#txtName").val();
+
                     //var joinDate = object.created_at;
                     //var roles = object.roles;
                     var yInput =  $("#year").val();
+                    //phone number
+                    var pInput = $("#phoneNum").val();
 
                     //UPDATE database
                     ref.orderByChild('email').equalTo(user.email).on("child_added", function (snap){
                       var userTemp = snap.val();
-                      userTemp.name = nInput;
+
                       userTemp.major_class = majorsList[majNum];
                       userTemp.year_class = yInput;
-
+                      userTemp.phone = pInput;
                      userRef.update(userTemp);
+
+
+
+                     //update auth user
+                     user.updateProfile({
+                       photoURL: userTemp.profile_picture,
+                     }).then(function() {
+                       // Update successful.
+                     }, function(error) {
+                         // An error happened.
+                     });
                      setTimeout(function(){ alert('Success your profile was updated. ');
-                     window.location= "profile.html";}, 500);
+                     window.location= "home.html";}, 500);
 
                       console.log(userTemp);
                     });
@@ -82,10 +98,6 @@ indexfunction() {
 
                   //console.log(user.displayName);
 
-                  <!-- Log out-->
-                  logout.addEventListener('click', e => {
-                      console.log(name+"is signing out.");
-                      firebase.auth().signOut();});
 
       } else
       {

@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<title>MakeSpace HomePage</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-blue.css">
+<link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Open+Sans'>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<!--Source -->
+<script src="https://www.gstatic.com/firebasejs/4.1.2/firebase.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="js/home.js"></script>
+
+<style>
+    html,body,h1,h2,h3,h4,h5 {
+      font-family: "Open Sans", sans-serif;
+
+
+    }
+
+#admin{
+  display: none;
+}
+#username{
+
+  position: center-fixed;
+  text-align: center;
+}
+.w3-bar{
+
+   overflow: hidden;
+   position: fixed;
+   height: 50px;
+   z-index:1;
+
+
+
+}
+
+.bg-1 {
+      background-color: #1abc9c; /* Green */
+      color: #ffffff;
+  }
+
+  .bg-2 {
+    background-color: #474e5d; /* Dark Blue */
+    color: #ffffff;
+}
+
+.w3-container{
+  padding-top: 70px;
+  padding-bottom: 70px;
+
+}
+#navDemo{
+  top:50px;;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+  overflow:hidden;
+  position: fixed;
+  width: 100%;
+}
+
+/*.footer{
+
+  position: absolute;
+  bottom: 0px;
+  width: 100%;
+}*/
+
+.userpic {
+  position: relative;
+
+}
+
+.userpicbtn{
+  position: relative;
+  right: 30px; top: 4px;
+
+}
+
+.admin{
+  display: none;
+  visibility: hidden;
+}
+
+.w3-card-2{
+
+  height: 880px;
+}
+</style>
+
+
+</head>
+
+
+<body class="w3-theme-l5 (w3-theme-light)">
+  <!-- Navbar -->
+
+      <div class="w3-bar w3-theme-d2 w3-left-align w3-large">
+          <a class="w3-bar-item w3-button w3-hide-medium w3-hide-large w3-right w3-padding-large
+          w3-hover-white w3-large w3-theme-d2" href="javascript:void(0);" onclick="openNav()"><i class="fa fa-bars"></i></a>
+          <a href="home.html" class="w3-bar-item w3-button w3-padding-large w3-theme-d4">
+            <i class="fa fa-home w3-margin-right"></i>MakerSpace</a>
+
+
+            <a href="#" id="" onclick="logOut();return false;" class=" w3-bar-item w3-button w3-right w3-hide-small
+            w3-padding-large w3-hover-white" title="Logout"><i class="fa fa-sign-out"></i>Sign Out</a>
+            <a href="console.html" class =" w3-animate-top w3-bar-item w3-button w3-right w3-red
+            w3-hide-small w3-padding-large w3-hover-white">ADMIN CONSOLE</a>
+            <a href="inventory.html" class="w3-animate-top w3-bar-item w3-button w3-right
+            w3-hide-small w3-padding-large w3-hover-white hide">Inventory</a>
+            <a href="classes.html" class="w3-animate-top w3-bar-item w3-button w3-right
+            w3-hide-small w3-padding-large w3-hover-white">Classes</a>
+            <a href="calendar.html" class="w3-animate-top w3-bar-item w3-button w3-right
+            w3-hide-small w3-padding-large w3-hover-white">Calendar</a>
+
+      </div>
+
+
+  <!-- Navbar on small screens -->
+  <div id="navDemo" class="w3-bar-block w3-theme-d2 w3-hide w3-hide-large w3-hide-medium w3-large">
+  <nav>
+          <a href="calendar.html" class="w3-bar-item w3-button w3-padding-large">Calendar</a>
+          <a href="classes.html" class="w3-bar-item w3-button w3-padding-large">Classes</a>
+          <a href="inventory.html" class="w3-bar-item w3-button w3-padding-large">Inventory</a>
+          <a href="console.html"  id="admin" class="w3-bar-item  w3-button w3-padding-large">Admin Console</a>
+          <a href="profile.html" class="w3-bar-item w3-button w3-padding-large">My Profile</a>
+          <a href="#" onclick="logOut();return false;" id ="" class = "w3-bar-item w3-button w3-padding-large" >Sign out</a>
+  </nav>
+  </div>
+
+<!-- Page Container -->
+<div class="w3-container .bg-1"  style="" >
+                    <br>
+                    <!-- user pic and name container -->
+
+                    <h2  class="w3-center" >Welcome</h2>
+
+                    <div id = "username">
+                    <h4 id ="userName" class= "w3-center">User Name</h4>
+                    </div>
+                    <!--User Picture -->
+                    <div id = "profileDisplay" class= "userpic w3-container">
+                      <p class="w3-center"><img id="userPic" src="assets/img/avatar3.png"
+                      class="w3-circle" style="height:120px;width:120px" alt=""/>
+                        <a href="profile.html" class="userpicbtn  w3-btn w3-circle w3-xlarge  w3-white" style="">+</a>
+                      </p>
+
+
+
+
+                    </div>
+            <hr>
+
+</div>
+
+  <!--Information Container-->
+          <div class="w3-row-padding w3-center w3-margin-top .bg-2">
+
+            <!--User Information -->
+            <div class="w3-third">
+              <div class="w3-card-2 w3-container" style="min-height:698px">
+                <h3>User Information</h3><br>
+                <i class="fa fa-desktop w3-margin-bottom w3-text-theme" style="font-size:120px"></i>
+
+                <!--Member Title (superusers, admin, or regularuser) -->
+                <div class="w3-row">
+                   <div class="w3-col s1 m4 l1">
+                     <i class="fa fa-pencil fa-fw w3-margin-right w3-text-theme"></i></div>
+                   <div class="w3-col s11 m7 l11">
+                  <h4><b class>Member Title</b></h4>
+                   </div>
+                </div>
+                <hr>
+                <div class="w3-row">
+                     <i id = "title" class="w3-center"></i>
+
+                </div>
+                <hr>
+                <!-- // -->
+
+
+                <!--Major Classification (computer engineering, animal science, etc...) -->
+                <div class="w3-row">
+                   <div class="w3-col s1 m4 l1">
+                     <i class="fa fa-institution fa-fw w3-margin-right w3-text-theme"></i></div>
+                   <div class="w3-col s11 m7 l11">
+                  <h4><b class>Major</b></h4>
+                   </div>
+                </div>
+                <hr>
+                <div class="w3-row">
+                     <i id = "major" class="w3-center"></i>
+                </div>
+                <hr>
+                <!-- // -->
+
+                <!--Join Date (computer engineering, animal science, etc...) -->
+                <div class="w3-row">
+                   <div class="w3-col s1 m4 l1">
+                     <i class="f 	fa fa-calendar fa-fw w3-margin-right w3-text-theme"></i></div>
+                   <div class="w3-col s11 m7 l11">
+                  <h4><b class>Join Date</b></h4>
+                   </div>
+                </div>
+                <hr>
+                <div class="w3-row">
+                     <i id = "joinDate" class="w3-center"></i>
+                </div>
+                <!-- // -->
+
+
+
+          </div>
+        </div>
+
+        <!--machine approval -->
+        <div class="w3-third">
+          <div class="w3-card-2 w3-container" style="min-height:698px">
+          <h3>Machine Approval</h3><br>
+          <i class="fa fa-cogs w3-margin-bottom w3-text-theme" style="font-size:120px"></i>
+          <div id="editable">
+
+        </div>
+        </div>
+      </div>
+
+        <!-- Checked Out Items -->
+        <div class="w3-third">
+          <div class="w3-card-2 w3-container" style="min-height:698px">
+          <h3>Checked Out Items</h3><br>
+          <i class="fa fa-shopping-bag w3-margin-bottom w3-text-theme" style="font-size:120px"></i>
+          <p>Paper like design</p>
+          <p>Bold colors and shadows</p>
+          <p>Equal across platforms</p>
+          <p>Equal across devices</p>
+          </div>
+        </div>
+    </div>
+
+
+
+<div class="w3-container"  style="" >
+<p></p>
+<p></p>
+</div>
+  <!-- Footer -->
+  <div id="wrapper">
+  <footer class="w3-container w3-theme-d3 w3-padding-16">
+      <h5></h5>
+  </footer>
+  </div>
+  <script>
+      // Used to toggle the menu on smaller screens when clicking on the menu button
+      function openNav() {
+          var x = document.getElementById("navDemo");
+          if (x.className.indexOf("w3-show") == -1) {
+              x.className += " w3-show";
+          } else {
+              x.className = x.className.replace(" w3-show", "");
+          }
+      }
+  </script>
+
+  <!--Logout-->
+
+  <script>
+      function logOut(){
+      firebase.auth().signOut();
+      console.log("user has logged out");
+      };
+  </script>
+
+
+</body>
+</html>

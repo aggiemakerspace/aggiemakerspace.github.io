@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<title>MakeSpace HomePage</title>
+<meta charset="UTF-8">
+<!-- <meta http-equiv="refresh" content="" > -->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!--Fonts-->
+<link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Open+Sans'>
+<link href="https://fonts.googleapis.com/css?family=Khand" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Khand|Ubuntu" rel="stylesheet">
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<!--Source -->
+<script src="https://www.gstatic.com/firebasejs/4.1.2/firebase.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!--Bootstrap-->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+<script src="js/config.js"></script>
+
+<style>
+    h1,h2,h3,h4,h5 {
+      font-family: "Khand", sans-serif;
+      text-align: center;
+
+    }
+
+    p,i{
+      font-family: "Khand|Ubuntu", sans-serif;
+      text-align: center;
+    }
+
+#admin{
+  display: none;
+}
+#username{
+
+  position: center-fixed;
+  text-align: center;
+}
+
+
+.bg-1 {
+      background-color: #1abc9c; /* Green */
+      color: #ffffff;
+  }
+
+  .bg-2 {
+    background-color: #474e5d; /* Dark Blue */
+    color: #ffffff;
+}
+
+.container{
+      min-height: 70%;
+      min-height: -webkit-calc(100% - 186px);
+      min-height: -moz-calc(100% - 186px);
+      min-height: calc(100% - 186px);
+  }
+
+}
+.navbar {
+    padding-top: 15px;
+    padding-bottom: 15px;
+    border: 0;
+    border-radius: 0;
+    margin-bottom: 0;
+    font-size: 12px;
+    letter-spacing: 5px;
+  }
+
+
+
+/*.footer{
+
+  position: absolute;
+  bottom: 0px;
+  width: 100%;
+}*/
+
+.userpic {
+  position: relative;
+
+}
+.bg-5{
+
+  background-color: 	#f0ffff;
+  color: #CDC8B1
+}
+/*
+.userpicbtn{
+  position: relative;
+  right: 30px; top: 4px;
+
+}*/
+
+.admin{
+  display: none;
+  visibility: hidden;
+}
+.navbar-nav  li a:hover {
+    color: #1abc9c !important;
+}
+
+.glyphicon.glyphicon-plus {
+    font-size: 40px;
+}
+
+.tooltip-inner {
+    white-space:pre-wrap;
+}
+
+.form-control{
+  width: 80%;
+  margin-left: 10%;
+  position: center;
+}
+
+/*.well{
+  color: #00000;
+  width: 100%;
+
+  box-shadow: 5px 5px 5px #888888;
+}*/
+
+#editable1,#editable2, #editable3 {
+  overflow-y:auto;
+}
+
+.btn span:hover {
+    color: #1abc9c !important;
+}.panel-primary{
+
+  height: 850px;
+  box-shadow: 2px 2px 5px #888888;
+}
+
+</style>
+
+
+</head>
+
+
+<body class="">
+
+
+  <!-- Navbar -->
+  <div class="container">
+
+    <div class="container">
+        <nav class="navbar navbar-default bg-5">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="index.html" style="font: 20px Ubuntu, sans-serif">MakerSpace<span style="font: 10px Ubuntu, san-serif"> PORTAL</span></a>
+      </div>
+      <div class="collapse navbar-collapse" id="myNavbar">
+        <ul class="nav navbar-nav navbar-right">
+          <li><a href="calendar.html">CALENDAR</a></li>
+          <li><a href="classes.html">CLASSES</a></li>
+          <li><a href="inventory.html">INVENTORY</a></li>
+          <li><a href="console.html" style="color:red">ADMIN CONSOLE</a></li>
+          <li><a href="profile.html">MY PROFILE </a></li>
+          <li><a  href="#" onclick="logOut();return false">SIGN OUT</a></li>
+        </ul>
+      </div>
+</nav>
+    </div>
+
+</div>
+<!-- Page Container -->
+<div class="container-fluid">
+                    <br>
+
+                    <h4>Configure MakerSpace Misc.</h4>
+                    <hr>
+
+                    <div class="row">
+                              <div style="margin-left: 50px; padding-left:20px" class="col-sm-2 col-md-2 col-lg-2"></div>
+                              <div class="col-sm-12 col-md-12 col-lg-12">
+                                <!-- Main Content -->
+                                <div id="main" class="">
+
+
+
+
+
+                                    <div id = "container" class="">
+
+                                    <!-- EDIT SUPERUSERS -->
+                                    <div class="row">
+                                      <div class="col-sm-3"></div>
+                                    <div class="col-sm-6" style="">
+                                      <div class="panel panel-primary">
+                                          <div class="panel-heading">Edit SuperUsers <span class="glyphicon glyphicon-cog"></span></div>
+                                          <div class="panel-body">
+                                            <!-- Display current superusers -->
+                                            <div class="panel panel-default">
+                                              <div class="panel-body" style="height:250px;overflow-y:scroll;">
+                                                <div id="editable1">
+
+
+
+
+
+
+
+                                                </div>
+
+
+
+
+                                              </div>
+                                            <!-- user input -->
+                                            </div>
+                                            <!-- add -->
+                                            <form><hr>
+                                                <h4>Add User</h4>
+                                            <div class="form-group">
+                                              <label for="email">Email address:</label>
+                                              <input type="email" class="form-control" id="email">
+                                            </div>
+
+                                            <div class="text-center">
+                                              <button type="button" class="btn btn-success">Submit</button>
+                                            </div>
+
+                                          </form><hr>
+
+                                          <!-- remove user from superuser role-->
+                                          <form>
+                                              <h4>Remove User</h4><hr>
+                                          <div class="form-group">
+                                            <label for="email">Email address:</label>
+                                            <input type="email" class="form-control" id="email">
+                                          </div>
+
+                                          <div class="text-center">
+                                            <button type="button" class="btn btn-danger">Submit</button>
+                                          </div>
+
+                                        </form>
+
+
+
+
+
+
+
+                                          </div>
+                                          </div>
+
+                                          <div class="col-sm-3"></div>
+                                        </div>
+                                    </div>
+
+
+                                    <!-- EDIT MACHINES -->
+                                    <div class="col-sm-12 col-md-12 col-lg-12">
+
+
+                                      <div class="row">
+                                      <div class="col-sm-3"></div>
+                                      <div class= "col-sm-6">
+                                            <div class="panel panel-primary" style="width:100%">
+                                                <div class="panel-heading">Edit Machines <span class="glyphicon glyphicon-cog"></span></div>
+                                                <div class="panel-body">
+                                                  <!-- Display current Machines -->
+                                                  <div class="panel panel-default">
+                                                    <div class="panel-body" style="height:250px">
+                                                      <div id="editable2">
+
+
+
+
+
+
+
+                                                      </div>
+
+
+
+                                                    </div>
+
+
+                                                  </div>
+                                                  <!-- add machine to machine node -->
+                                                  <hr><form>
+                                                      <h4>Add Machine</h4>
+
+                                                  <div class="row">
+                                                    <div class="col-sm-6">
+                                                    <div class="form-group">
+                                                      <label for="maname">Machine Name:</label>
+                                                      <input type="text" class="form-control" id="maText">
+                                                    </div>
+                                                  </div>
+
+                                                  <div class="col-sm-6">
+                                                    <div class="form-group">
+                                                      <label for="maId">Machine Id (M.I.D):</label>
+                                                      <input type="text" class="form-control" id="maId">
+                                                    </div>
+
+
+                                                  </div>
+                                                </div>
+
+
+
+
+                                                  <div class="form-group">
+                                                    <label for="maname">Location: ex. "McNair Hall, Rm. 121:"</label>
+                                                    <input type="text" class="form-control" id="maText">
+                                                  </div>
+                                                  <div class="form-group">
+                                                    <label for="maname">Status</label>
+                                                    <input type="text" class="form-control" id="maText">
+                                                  </div>
+
+                                                  <div class="text-center">
+                                                    <button type="button" class="btn btn-success">Submit</button><hr>
+                                                  </div>
+
+                                                </form>
+
+                                                <!-- remove machine from machine node-->
+                                                <form>
+                                                    <h4>Remove Machine</h4>
+                                                <div class="form-group">
+                                                  <label for="email">Machine Name:</label>
+                                                  <input type="email" class="form-control" id="email">
+                                                </div>
+
+                                                <div class="text-center">
+                                                  <button type="button" class="btn btn-danger">Submit</button>
+                                                </div>
+
+                                              </form>
+
+
+
+                                          </div>
+
+                                        </div>
+
+                                      </div>
+                                        <div class="col-sm-3"></div>
+                                    </div>
+
+                              </div>
+
+                              <!-- EDIT MACHINE APPROVAL//Completed classes -->
+                              <div class="col-sm-12 col-md-12 col-lg-12">
+
+
+                                <div class="row">
+                                <div class="col-sm-3"></div>
+                                <div class= "col-sm-6">
+                                      <div class="panel panel-primary" style="width:100%">
+                                          <div class="panel-heading">Machine Approval <span class="glyphicon glyphicon-cog"></span></div>
+                                          <div class="panel-body">
+                                            <!-- Display current Machines -->
+                                            <div class="panel panel-default">
+                                              <div class="panel-body" style="height:250px">
+                                                <div id="editable3">
+
+
+
+
+
+
+
+                                                </div>
+
+
+
+                                              </div>
+
+                                            </div><hr>
+                                            <!-- add machine to machine node -->
+                                            <form>
+                                                <h4>View Trainining</h4>
+                                                <div class="row">
+                                                    <a id="btn1" class="btn" href="javascript:void(0)" onclick="buttonClicked(event);">
+                                                      <div class="">OtherMill</div>
+                                                    </a>
+                                                    <a id="btn2" class="btn" href="javascript:void(0)" onclick="buttonClicked(event);">
+                                                      <div class="">Laser Engraver</div>
+                                                    </a>
+                                                    <a id="btn4" class="btn" href="javascript:void(0)" onclick="buttonClicked(event);">
+                                                      <div class="">3d Printer</div>
+                                                    </a>
+                                                    <a id="btn5" class="btn" href="javascript:void(0)" onclick="buttonClicked(event);">
+                                                      <div class="">CNC Mill</div>
+                                                    </a>
+                                                    <a id="btn5" class="btn" href="javascript:void(0)" onclick="buttonClicked(event);">
+                                                      <div class="">Safety</div>
+                                                    </a>
+                                                </div>
+
+
+                                            <div class="form-group">
+                                              <label for="email">Email</label>
+                                              <input type="email" class="form-control" id="email">
+                                            </div>
+                                            <div class="form-group">
+                                              <div class="row">
+                                                  <div class="col-sm-6">
+                                                  <label for="trainingStatus">Status</label>
+                                                  <input type="text" class="form-control" id="tStatus">
+                                                  </div>
+
+                                                  <div class="col-sm-6">
+                                                  <label for="machineId">Type Machine ID (M.I.D.):</label>
+                                                  <input type="text" class="form-control" id="maId">
+                                                </div>
+                                              </div>
+                                        </div>
+
+                                            <div class="text-center">
+                                              <button type="button" class="btn btn-success">Submit</button>
+                                            </div>
+
+                                          </form><hr>
+
+                                          <!-- remove machine from machine node-->
+                                          <form>
+                                              <h4>Remove Machine</h4><hr>
+                                          <div class="form-group">
+                                            <label for="email">Machine Name:</label>
+                                            <input type="email" class="form-control" id="email">
+                                          </div>
+
+                                          <div class="text-center">
+                                            <button type="button" class="btn btn-danger">Submit</button>
+                                          </div>
+
+                                        </form>
+
+
+
+                                    </div>
+
+                                  </div>
+
+                                </div>
+                                  <div class="col-sm-3"></div>
+                              </div>
+
+                            </div>
+
+
+
+
+
+
+
+
+
+
+                </div>
+                <!-- Container close -->
+
+
+
+
+
+                  </div>
+
+
+</div>
+
+  <!-- Footer -->
+  <div id="wrapper">
+  <footer class="w3-container w3-theme-d3 w3-padding-16">
+      <h5></h5>
+  </footer>
+  </div>
+
+
+
+  <!--Logout-->
+
+  <script>
+      function logOut(){
+      firebase.auth().signOut();
+      console.log("user has logged out");
+      };
+  </script>
+
+  <script>
+    $(document).ready(function(){
+        $('[data-toggle="tooltip"]').tooltip();
+    });
+
+</script>
+
+<!--Logout-->
+
+<script>
+    function  logOut(){
+    firebase.auth().signOut();
+    console.log(firebaseUser + "has logged out");
+    };
+</script>
+
+
+
+</body>
+</html>
