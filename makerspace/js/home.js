@@ -1,3 +1,24 @@
+
+function disclaimerCheck(){
+firebase.database().ref().child('disclaimer/'+ user.uid).on("child_added", function (snap){
+  console.log("Disclaimer Check: "+ snap.val().read);
+  if (snap.val().read == false){
+    console.log('You have not read the disclaimer');
+    window.location.href = 'disclaimer.html';
+
+  }
+  else{
+    return true;
+  }
+});
+
+}
+
+
+
+
+
+
 function firebaseInit(){
 
         var provider = new firebase.auth.GoogleAuthProvider();
@@ -69,15 +90,13 @@ function checkifAdmin (){
         if (user) {
 
 
-
-          // User is signed in.
+    // User is signed in.
 
           var user = firebase.auth().currentUser;
-
-          //profile picture
+  //profile picture
           $("#userPic").append(user.profile_picture);
           user.providerData.forEach(function (profile){
-            console.log(profile);
+            //console.log(profile);
 
             //UPDATE USER INFORMATION FOR FIRST TIME LOGINS
               if(profile.displayName == null){
@@ -122,9 +141,17 @@ function checkifAdmin (){
                   "3d_printer": false,
                   "boss_laser_engraver": false,
                   "cnc_milling_machine": false,
-                  "other_mill": false
+                  "other_mill": false,
+                  "safety": false
                 });
+                //CREATE DISCLAIMER NODE
 
+                var dRef = firebase.database().ref().child('disclaimer/'+user.uid);
+
+                dRef.set({
+                  'read': false,
+                  'date': " "
+                });
               //ONCE DONE, CLEAN UP PAYLOAD
 
               signupQueue.orderByChild('email').equalTo(profile.email).on("child_added", function (snap){
@@ -134,14 +161,15 @@ function checkifAdmin (){
 
 
             }else{
-              console.log('Display name is valid');
+              //console.log('Display name is valid');
 
-
-            console.log("Sign-in provider: "+profile.providerId);
-            console.log("  Provider-specific UID: "+profile.uid);
-            console.log("  Name: "+profile.displayName);
-            console.log("  Email: "+profile.email);
-            console.log("  Photo URL: "+profile.photoURL);
+              //do a disclaimer check
+              disclaimerCheck();
+            // console.log("Sign-in provider: "+profile.providerId);
+            // console.log("  Provider-specific UID: "+profile.uid);
+            // console.log("  Name: "+profile.displayName);
+            // console.log("  Email: "+profile.email);
+            // console.log("  Photo URL: "+profile.photoURL);
 }
             });
 
@@ -154,9 +182,8 @@ function checkifAdmin (){
           ref.orderByChild('email').equalTo(user.email).on("child_added", function (snap){
 
 
-
           var object = snap.val();
-          console.log("uid", object.uid);
+          //console.log("uid", object.uid);
           var email = object.email;
           var fullname = object.name;
           var joinDate = object.created_at;
@@ -186,12 +213,12 @@ function checkifAdmin (){
         };
 
 
-          console.log(joinDate);
+          //console.log(joinDate);
 
 
 
 
-          console.log("Email is: "+ email);
+          //console.log("Email is: "+ email);
 //DISPLAY USER INFORMATIOn
           //console.log("This is the username:" + user.displayName);
             document.getElementById("joinDate").innerHTML= joinDate;
@@ -220,7 +247,7 @@ function checkifAdmin (){
                   break;
 
                 }
-                console.log(snap.key, snap.val());
+                //console.log(snap.key, snap.val());
                $("#editable").append(
 
 
@@ -228,7 +255,7 @@ function checkifAdmin (){
                    +imageScript+"</h4>"
 
                   );
-                console.log(snap.key);
+                //console.log(snap.key);
                 });
           //
           // <!-- Log out-->
@@ -237,6 +264,7 @@ function checkifAdmin (){
           //     firebase.auth().signOut();
           //
           // });
+
 
         } else {
           // No user is signed in.

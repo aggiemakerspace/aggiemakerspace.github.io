@@ -128,18 +128,27 @@
   box-shadow: 5px 5px 5px #888888;
 }*/
 
-#editable1,#editable2, #editable3 {
+#editable1 {
   overflow-y:auto;
 }
-
+#editable2 {
+  overflow-y:auto;
+}
+#editable3 {
+ overflow-y:auto;
+}
 .btn span:hover {
     color: #1abc9c !important;
 }.panel-primary{
 
-  height: 850px;
+  height: 900px;
   box-shadow: 2px 2px 5px #888888;
 }
 
+th{
+  padding-left: 40px;
+  padding-right: 10px
+}
 </style>
 
 
@@ -160,7 +169,7 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="index.html" style="font: 20px Ubuntu, sans-serif">MakerSpace<span style="font: 10px Ubuntu, san-serif"> PORTAL</span></a>
+        <a class="navbar-brand" href="home.html" style="font: 20px Ubuntu, sans-serif">MakerSpace<span style="font: 10px Ubuntu, san-serif"> PORTAL</span></a>
       </div>
       <div class="collapse navbar-collapse" id="myNavbar">
         <ul class="nav navbar-nav navbar-right">
@@ -205,7 +214,7 @@
                                             <!-- Display current superusers -->
                                             <div class="panel panel-default">
                                               <div class="panel-body" style="height:250px;overflow-y:scroll;">
-                                                <div id="editable1">
+                                                <div id="editable1" style="height:250px;">
 
 
 
@@ -226,11 +235,11 @@
                                                 <h4>Add User</h4>
                                             <div class="form-group">
                                               <label for="email">Email address:</label>
-                                              <input type="email" class="form-control" id="email">
+                                              <input type="email" class="form-control" id="addemail_S">
                                             </div>
 
                                             <div class="text-center">
-                                              <button type="button" class="btn btn-success">Submit</button>
+                                              <button id="btnAddSubmit_S" type="button" class="btn btn-success">Submit</button>
                                             </div>
 
                                           </form><hr>
@@ -240,11 +249,11 @@
                                               <h4>Remove User</h4><hr>
                                           <div class="form-group">
                                             <label for="email">Email address:</label>
-                                            <input type="email" class="form-control" id="email">
+                                            <input type="email" class="form-control" id="rememail_S">
                                           </div>
 
                                           <div class="text-center">
-                                            <button type="button" class="btn btn-danger">Submit</button>
+                                            <button id="btnRemSubmit_S"  type="button" class="btn btn-danger">Submit</button>
                                           </div>
 
                                         </form>
@@ -270,21 +279,26 @@
                                       <div class="row">
                                       <div class="col-sm-3"></div>
                                       <div class= "col-sm-6">
-                                            <div class="panel panel-primary" style="width:100%">
+                                            <div class="panel panel-primary" style="">
                                                 <div class="panel-heading">Edit Machines <span class="glyphicon glyphicon-cog"></span></div>
                                                 <div class="panel-body">
                                                   <!-- Display current Machines -->
+                                                  <table class="table table-striped">
+                                            <thead>
+                                              <tr>
+                                                  <th>Machine ID</th>
+                                                <th>Machine Name</th>
+                                                <th style="padding-left:10px;margin-left:0;">Status</th>
+                                                <th>Location</th>
+
+                                                  </tr>
+                                                </thead>
+                                              </table>
                                                   <div class="panel panel-default">
-                                                    <div class="panel-body" style="height:250px">
-                                                      <div id="editable2">
+                                                    <div class="panel-body" style="height:260px">
 
-
-
-
-
-
-
-                                                      </div>
+                                                            <div id="editable2" style="margin-left:0;height:250px;overflow-y:scroll;">
+                                                            </div>
 
 
 
@@ -300,14 +314,14 @@
                                                     <div class="col-sm-6">
                                                     <div class="form-group">
                                                       <label for="maname">Machine Name:</label>
-                                                      <input type="text" class="form-control" id="maText">
+                                                      <input type="text" class="form-control" id="maTxtName">
                                                     </div>
                                                   </div>
 
                                                   <div class="col-sm-6">
                                                     <div class="form-group">
                                                       <label for="maId">Machine Id (M.I.D):</label>
-                                                      <input type="text" class="form-control" id="maId">
+                                                      <input type="text" class="form-control" id="maAddId">
                                                     </div>
 
 
@@ -319,15 +333,15 @@
 
                                                   <div class="form-group">
                                                     <label for="maname">Location: ex. "McNair Hall, Rm. 121:"</label>
-                                                    <input type="text" class="form-control" id="maText">
+                                                    <input type="text" class="form-control" id="maTxtLoc">
                                                   </div>
                                                   <div class="form-group">
                                                     <label for="maname">Status</label>
-                                                    <input type="text" class="form-control" id="maText">
+                                                    <input type="text" class="form-control" id="maTxtStatus">
                                                   </div>
 
                                                   <div class="text-center">
-                                                    <button type="button" class="btn btn-success">Submit</button><hr>
+                                                    <button  id="btnAddMachine" type="button" class="btn btn-success">Submit</button><hr>
                                                   </div>
 
                                                 </form>
@@ -336,12 +350,12 @@
                                                 <form>
                                                     <h4>Remove Machine</h4>
                                                 <div class="form-group">
-                                                  <label for="email">Machine Name:</label>
-                                                  <input type="email" class="form-control" id="email">
+                                                  <label for="email">Machine ID (i.e. '3dp','om'):</label>
+                                                  <input type="text" class="form-control" id="maRemId">
                                                 </div>
 
                                                 <div class="text-center">
-                                                  <button type="button" class="btn btn-danger">Submit</button>
+                                                  <button id="btnRemoveMachine" type="button" class="btn btn-danger">Submit</button>
                                                 </div>
 
                                               </form>
@@ -370,8 +384,8 @@
                                           <div class="panel-body">
                                             <!-- Display current Machines -->
                                             <div class="panel panel-default">
-                                              <div class="panel-body" style="height:250px">
-                                                <div id="editable3">
+                                              <div class="panel-body" style="height:250px;overflow-y:scroll;">
+                                                <div id="editable3" style="height:250px;overflow-y:scroll;">
 
 
 
@@ -389,62 +403,70 @@
                                             <!-- add machine to machine node -->
                                             <form>
                                                 <h4>View Trainining</h4>
+                                                <!-- Taken training class -->
                                                 <div class="row">
-                                                    <a id="btn1" class="btn" href="javascript:void(0)" onclick="buttonClicked(event);">
-                                                      <div class="">OtherMill</div>
+                                                    <a id="btn1" class="btn" href="javascript:void(0)">
+                                                      <div class="">OtherMill <span class="glyphicon glyphicon-check"></span></div>
                                                     </a>
-                                                    <a id="btn2" class="btn" href="javascript:void(0)" onclick="buttonClicked(event);">
-                                                      <div class="">Laser Engraver</div>
+                                                    <a id="btn2" class="btn" href="javascript:void(0)"  ">
+                                                      <div class="">Laser Engraver <span class="glyphicon glyphicon-check"></span></div>
                                                     </a>
-                                                    <a id="btn4" class="btn" href="javascript:void(0)" onclick="buttonClicked(event);">
-                                                      <div class="">3d Printer</div>
+                                                    <a id="btn3" class="btn" href="javascript:void(0)" ">
+                                                      <div class="">3d Printer <span class="glyphicon glyphicon-check"></span></div>
                                                     </a>
-                                                    <a id="btn5" class="btn" href="javascript:void(0)" onclick="buttonClicked(event);">
-                                                      <div class="">CNC Mill</div>
+                                                    <a id="btn4" class="btn" href="javascript:void(0)"  ">
+                                                      <div class="">CNC Mill <span class="glyphicon glyphicon-check"></span></div>
                                                     </a>
-                                                    <a id="btn5" class="btn" href="javascript:void(0)" onclick="buttonClicked(event);">
-                                                      <div class="">Safety</div>
+                                                    <a id="btn5" class="btn" href="javascript:void(0)"  ">
+                                                      <div class="">Safety <span class="glyphicon glyphicon-check"></span></div>
+                                                    </a>
+                                                </div>
+                                                <div class="row">
+                                                    <a id="btn6" class="btn" href="javascript:void(0)" onclick="">
+                                                      <div class="">OtherMill <span class="glyphicon glyphicon-unchecked"></span></div>
+                                                    </a>
+                                                    <a id="btn7" class="btn" href="javascript:void(0)"  ">
+                                                      <div class="">Laser Engraver <span class="glyphicon glyphicon-unchecked"></span></div>
+                                                    </a>
+                                                    <a id="btn8" class="btn" href="javascript:void(0)"  ">
+                                                      <div class="">3d Printer <span class="glyphicon glyphicon-unchecked"></span></div>
+                                                    </a>
+                                                    <a id="btn9" class="btn" href="javascript:void(0)"  ">
+                                                      <div class="">CNC Mill <span class="glyphicon glyphicon-unchecked"></span></div>
+                                                    </a>
+                                                    <a id="btn10" class="btn" href="javascript:void(0)"  ">
+                                                      <div class="">Safety <span class="glyphicon glyphicon-unchecked"></span></div>
                                                     </a>
                                                 </div>
 
 
                                             <div class="form-group">
-                                              <label for="email">Email</label>
-                                              <input type="email" class="form-control" id="email">
+                                              <label for="email">Enter Email: </label>
+                                              <input type="email" class="form-control" id="trEmail">
                                             </div>
                                             <div class="form-group">
-                                              <div class="row">
-                                                  <div class="col-sm-6">
-                                                  <label for="trainingStatus">Status</label>
-                                                  <input type="text" class="form-control" id="tStatus">
-                                                  </div>
 
-                                                  <div class="col-sm-6">
-                                                  <label for="machineId">Type Machine ID (M.I.D.):</label>
-                                                  <input type="text" class="form-control" id="maId">
-                                                </div>
-                                              </div>
+
+                                            <label for="trainingStatus">Status: [true/false]</label>
+                                            <input type="text" class="form-control" id="trStatus">
+                                          </div>
+
+
+                                          <div class="form-group">
+                                          <label for="machineId" >Type Machine ID/Training ID:</label>
+                                          <p style="font: 12px Ubuntu, sans-serif">[Othermill: <b>'om'</b>, Safety: <b>'saf'</b>, CNC milling machine: <b>'cmm'</b>, 3D Printer: <b>'3dp'</b>, Boss Laser Engraver: <b>'ble'</b>]<p>
+                                          <input type="text" class="form-control" id="tId">
+                                        </div>
+
                                         </div>
 
                                             <div class="text-center">
-                                              <button type="button" class="btn btn-success">Submit</button>
+                                              <button id="btnTraining" type="button" class="btn btn-success">Submit</button>
                                             </div>
 
                                           </form><hr>
 
-                                          <!-- remove machine from machine node-->
-                                          <form>
-                                              <h4>Remove Machine</h4><hr>
-                                          <div class="form-group">
-                                            <label for="email">Machine Name:</label>
-                                            <input type="email" class="form-control" id="email">
-                                          </div>
 
-                                          <div class="text-center">
-                                            <button type="button" class="btn btn-danger">Submit</button>
-                                          </div>
-
-                                        </form>
 
 
 

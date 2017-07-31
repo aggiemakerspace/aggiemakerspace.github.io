@@ -119,15 +119,47 @@
 
 
 </head>
+<script src="js/disclaimerCheck.js"></script>
 
 
-<body class="">
+<body language="javascript" class="">
+<script>
 
+
+
+function disclaimerCheck(){
+  firebase.auth().onAuthStateChanged(function(user){
+    if (user){
+
+
+
+        var user = firebase.auth().currentUser;
+        console.log("DS"+user.uid);
+          firebase.database().ref().child('disclaimer/'+ user.uid).on("child_added", function (snap){
+            console.log(snap.val());
+            console.log("Disclaimer Check: "+ snap.val().read);
+
+            if (snap.val() == false || snap.val() == null){
+              console.log('You have not read the disclaimer');
+              window.location.href = 'disclaimer.html';
+
+            }
+            else{
+              return true;
+            }
+          });
+      }
+
+
+});
+
+}
+</script>
 
   <!-- Navbar -->
   <div class="container">
 
-    <div class="container">
+    <div class="container" onload="">
         <nav class="navbar navbar-default bg-5">
       <div class="navbar-header">
         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
@@ -135,7 +167,7 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="index.html" style="font: 20px Ubuntu, sans-serif">MakerSpace<span style="font: 10px Ubuntu, san-serif"> PORTAL</span></a>
+        <a class="navbar-brand" href="home.html" style="font: 20px Ubuntu, sans-serif">MakerSpace<span style="font: 10px Ubuntu, san-serif"> PORTAL</span></a>
       </div>
       <div class="collapse navbar-collapse" id="myNavbar">
         <ul class="nav navbar-nav navbar-right">
@@ -354,6 +386,15 @@
     $(document).ready(function(){
         $('[data-toggle="tooltip"]').tooltip();
     });
+</script>
+
+<script>
+  function disclaimer(){
+    window.location.href = "disclaimer.html";
+
+
+  }
+
 </script>
 
 </body>

@@ -17,7 +17,7 @@
 
 
     //get elements
-    const logout = document.getElementById('logout');
+
     const userPic = document.getElementById('userPic');
     const userName = document.getElementById('userName');
     const joinDate = document.getElementById('joinDate');
@@ -64,36 +64,7 @@
                 }
         };
 
-
-
-          //Object.keys(roles).map((e)=>  console.log(`key=${e} value=${roles[e]}`));
-
-          //console.log(joinDate);
-
-
-
-
-          //console.log("Email is: "+ email);
-
-          //console.log("This is the username:" + user.displayName);
-            // document.getElementById("joinDate").innerHTML= joinDate;
-            // document.getElementById("userName").innerHTML=fullname;
-
-
-/*** View Machines ***/
-
-// var ref = firebase.database().ref("machines");
-//           ref.orderByKey().endAt("other_mill").on("child_added", function(snapshot) {
-//             var m = snapshot.val();
-//             console.log(snapshot.key, m.location);
-//             //console.log(snapshot.key);
-//           });
-//           var ref = firebase.database().ref("machines");
-//           ref.orderByKey().endAt("machine2").on("child_added", function(snapshot) {
-//             console.log(snapshot.key);
-//           });
-
-          });
+      });
           //console.log(user.displayName);
 
 // JQUERY
@@ -157,7 +128,7 @@ $(document).ready(function(){
       $("#editable").html(" ");
       //Title
       $("#querytitle").text("Users");
-      var queryDescrip= "Here is a list of users in operation."
+      var queryDescrip= "Here is a list of active users in the Makerspace."
       $("#querydescp").text(String(queryDescrip));
 
       var userRef = firebase.database().ref().child("users");
@@ -188,7 +159,7 @@ $(document).ready(function(){
       var queryDescrip= "Here is a list of superusers in operation."
       $("#querydescp").text(String(queryDescrip));
 
-      var rolesRef = firebase.database().ref('roles').child('admins').orderByChild('email');
+      var rolesRef = firebase.database().ref('roles').child('superusers').orderByChild('email');
       rolesRef.on("child_added", snap=> {
         var userRef = snap.val();
        $("#unList").append("<div id='editable'>"+"<li>"+"Name: "+ userRef.name + " Email: " + String(userRef.email) +
@@ -231,12 +202,7 @@ $(document).ready(function(){
 
 
 
-<!-- Log out-->
-logout.addEventListener('click', e => {
-    console.log(name+"is signing out.");
-    firebase.auth().signOut();
 
-});
 
 
         } else {

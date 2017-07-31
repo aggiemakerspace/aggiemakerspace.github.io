@@ -9,9 +9,7 @@ function writeUserData(date, email,name, imageUrl, id) {
           email: email,
           name: name,
           profile_picture : imageUrl,
-          //maj_class: major,
-          //year_class: year,
-          maj_class: " ",
+          major_class: " ",
           year_class: " ",
           phone: " ",
           uid: id,
@@ -99,7 +97,7 @@ $("#getInput").keyup(function(event){
         const fname = txtFirstName.value;
         const lname = txtLastName.value;
 
-        if(fname.trim() || lname.trim() == ""){
+        if(fname.trim() == "" || lname.trim() == "" || fname.trim()==null|| lname.trim()==null){
             alert(str);
             window.location= "signup.html";
         }else{
