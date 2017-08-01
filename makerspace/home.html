@@ -137,7 +137,7 @@ function disclaimerCheck(){
         console.log("DS"+user.uid);
           firebase.database().ref().child('disclaimer/'+ user.uid).on("child_added", function (snap){
             console.log(snap.val());
-            console.log("Disclaimer Check: "+ snap.val().read);
+            console.log("Disclaimer Check: "+ snap.val());
 
             if (snap.val() == false || snap.val() == null){
               console.log('You have not read the disclaimer');

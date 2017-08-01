@@ -96,10 +96,11 @@ function checkifAdmin (){
   //profile picture
           $("#userPic").append(user.profile_picture);
           user.providerData.forEach(function (profile){
-            //console.log(profile);
-
+            console.log(profile);
+            console.log(user.displayName+" Display Name.")
             //UPDATE USER INFORMATION FOR FIRST TIME LOGINS
-              if(profile.displayName == null){
+              if(user.displayName == null){
+
 
                 var signupQueue = firebase.database().ref().child('signupQueue');
                 var userRef = firebase.database().ref('users/'+ user.uid);
