@@ -87,6 +87,20 @@ function searchTraining(){
 
 }
 
+//container 3 display all users emails
+function showAllEmails(){
+
+    $("#editable3").text(" ");
+    firebase.database().ref().child('emails').orderByChild('email').on("child_added", function (snap){
+
+      $("#editable3").append(
+          "<h4>"+snap.val().email+
+          "</h4>"
+         );
+   });
+
+}
+
 function addTraining(){
   var statusList = [" ", true, false];
   var emailInput = $("#trEmail").val();
@@ -501,6 +515,10 @@ $("#btnqMachine").click(function(){
 
                       });
 
+                      //Show all emails
+                      $("#trSearchUsers").click(function(){
+                          showAllEmails();
+                      });
 
 
                     //CHANGE TRAINING status
