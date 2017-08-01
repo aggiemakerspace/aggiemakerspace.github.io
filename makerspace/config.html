@@ -169,15 +169,15 @@ th{
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="home.html" style="font: 20px Ubuntu, sans-serif">MakerSpace<span style="font: 10px Ubuntu, san-serif"> PORTAL</span></a>
+        <a class="navbar-brand" href="" style="font: 20px Ubuntu, sans-serif">MakerSpace<span style="font: 10px Ubuntu, san-serif"> PORTAL</span></a>
       </div>
       <div class="collapse navbar-collapse" id="myNavbar">
         <ul class="nav navbar-nav navbar-right">
+          <li><a href="home.html">MY PROFILE </a></li>
           <li><a href="calendar.html">CALENDAR</a></li>
           <li><a href="classes.html">CLASSES</a></li>
-          <li><a href="inventory.html">INVENTORY</a></li>
-          <li><a href="console.html" style="color:red">ADMIN CONSOLE</a></li>
-          <li><a href="profile.html">MY PROFILE </a></li>
+          <li><a href="inventory.html" class="hide">INVENTORY</a></li>
+          <li><a href="config.html" style="color:red">ADMIN CONSOLE</a></li>
           <li><a  href="#" onclick="logOut();return false">SIGN OUT</a></li>
         </ul>
       </div>
@@ -194,12 +194,74 @@ th{
 
                     <div class="row">
                               <div style="margin-left: 50px; padding-left:20px" class="col-sm-2 col-md-2 col-lg-2"></div>
+                              <div class="text-center">
+                                <i onclick="location.href='../timecard/timelog.html'" class="fa fa-clock-o text-center" style="font-size:48px;color:green"><h2>Start Clock In</h2></i>
+                              </div>
                               <div class="col-sm-12 col-md-12 col-lg-12">
-                                <!-- Main Content -->
+                              <!-- Main Content -->
                                 <div id="main" class="">
 
+<!-- Quick edit machine status -->
+
+<div id = "container" class="">
+
+<!-- EDIT SUPERUSERS -->
+<div class="row">
+  <div class="col-sm-3"></div>
+<div class="col-sm-6" style="">
+  <div class="panel panel-primary" style="height:650px;">
+      <div class="panel-heading">Machine Status Quick Edit <span class="glyphicon glyphicon-cog"></span></div>
+      <div class="panel-body">
+        <!-- Display current superusers -->
+        <div class="panel panel-default">
+          <div class="panel-body" style="height:250px;overflow-y:scroll;">
+            <div id="editable" style="height:250px;">
 
 
+
+
+
+
+
+            </div>
+          </div>
+        <!-- user input -->
+        </div>
+        <!-- add -->
+        <form><hr>
+            <h4>Machine ID</h4>
+        <div class="form-group">
+          <p style="font: 12px Ubuntu, sans-serif">[<a  href="#" onclick="enterOM('#qMachineId');return false">Othermill:</a> <b>'om'</b>,
+            <a  href="#" onclick="enterSAF('#qMachineId');return false">Safety:</a> <b>'saf'</b>,<a  href="#" onclick="enterCMM('#qMachineId');return false">CNC milling machine:</a> <b>'cmm'</b>, <a href="#" onclick="enter3DP('#qMachineId');return false">3D Printer:</a> <b>'3dp'</b>
+            ,<a  href="#" onclick="enterBLE('#qMachineId');return false">Boss Laser Engraver:</a><b>'ble'</b>]<p>
+
+          <input type="text" class="form-control" id="qMachineId">
+        </div>
+        <label for="mQStatus">Status: </label>
+
+              <select class ="form-control" value="2" id="mQStatus">
+        <option value="working">working</option>
+        <option value="repair">repair</option>
+        <option value="damaged">damaged</option>
+      </select>
+
+        <div class="text-center">
+          <button id="btnqMachine" type="button" style="margin-top:25px;" class="btn btn-success">Submit</button>
+        </div>
+
+      </form><hr>
+
+
+
+
+
+
+      </div>
+      </div>
+
+      <div class="col-sm-3"></div>
+    </div>
+</div>
 
 
                                     <div id = "container" class="">
@@ -232,7 +294,7 @@ th{
                                             </div>
                                             <!-- add -->
                                             <form><hr>
-                                                <h4>Add User</h4>
+                                                <h4>Add  SuperUser</h4>
                                             <div class="form-group">
                                               <label for="email">Email address:</label>
                                               <input type="email" class="form-control" id="addemail_S">
@@ -246,7 +308,7 @@ th{
 
                                           <!-- remove user from superuser role-->
                                           <form>
-                                              <h4>Remove User</h4><hr>
+                                              <h4>Remove SuperUser</h4><hr>
                                           <div class="form-group">
                                             <label for="email">Email address:</label>
                                             <input type="email" class="form-control" id="rememail_S">
@@ -295,10 +357,14 @@ th{
                                                 </thead>
                                               </table>
                                                   <div class="panel panel-default">
-                                                    <div class="panel-body" style="height:260px">
+                                                    <div class="panel-body" style="height:250px;overflow-y:scroll;">
 
-                                                            <div id="editable2" style="margin-left:0;height:250px;overflow-y:scroll;">
+                                                            <div id="editable2" style="height:250px;">
                                                             </div>
+
+                                                            <!-- <div class="panel-body" style="height:250px;overflow-y:scroll;">
+                                                              <div id="editable1" style="height:250px;"> -->
+
 
 
 
@@ -308,7 +374,7 @@ th{
                                                   </div>
                                                   <!-- add machine to machine node -->
                                                   <hr><form>
-                                                      <h4>Add Machine</h4>
+                                                      <h4>Add New Machine</h4>
 
                                                   <div class="row">
                                                     <div class="col-sm-6">
@@ -380,14 +446,14 @@ th{
                                 <div class="col-sm-3"></div>
                                 <div class= "col-sm-6">
                                       <div class="panel panel-primary" style="width:100%">
-                                          <div class="panel-heading">Machine Approval <span class="glyphicon glyphicon-cog"></span></div>
+                                          <div class="panel-heading">Machine Approval
+                                            <span class="glyphicon glyphicon-cog"></span></div>
                                           <div class="panel-body">
+
                                             <!-- Display current Machines -->
                                             <div class="panel panel-default">
                                               <div class="panel-body" style="height:250px;overflow-y:scroll;">
-                                                <div id="editable3" style="height:250px;overflow-y:scroll;">
-
-
+                                                <div id="editable3" style="height:250px;">
 
 
 
@@ -402,59 +468,36 @@ th{
                                             </div><hr>
                                             <!-- add machine to machine node -->
                                             <form>
-                                                <h4>View Trainining</h4>
-                                                <!-- Taken training class -->
-                                                <div class="row">
-                                                    <a id="btn1" class="btn" href="javascript:void(0)">
-                                                      <div class="">OtherMill <span class="glyphicon glyphicon-check"></span></div>
-                                                    </a>
-                                                    <a id="btn2" class="btn" href="javascript:void(0)"  ">
-                                                      <div class="">Laser Engraver <span class="glyphicon glyphicon-check"></span></div>
-                                                    </a>
-                                                    <a id="btn3" class="btn" href="javascript:void(0)" ">
-                                                      <div class="">3d Printer <span class="glyphicon glyphicon-check"></span></div>
-                                                    </a>
-                                                    <a id="btn4" class="btn" href="javascript:void(0)"  ">
-                                                      <div class="">CNC Mill <span class="glyphicon glyphicon-check"></span></div>
-                                                    </a>
-                                                    <a id="btn5" class="btn" href="javascript:void(0)"  ">
-                                                      <div class="">Safety <span class="glyphicon glyphicon-check"></span></div>
-                                                    </a>
-                                                </div>
-                                                <div class="row">
-                                                    <a id="btn6" class="btn" href="javascript:void(0)" onclick="">
-                                                      <div class="">OtherMill <span class="glyphicon glyphicon-unchecked"></span></div>
-                                                    </a>
-                                                    <a id="btn7" class="btn" href="javascript:void(0)"  ">
-                                                      <div class="">Laser Engraver <span class="glyphicon glyphicon-unchecked"></span></div>
-                                                    </a>
-                                                    <a id="btn8" class="btn" href="javascript:void(0)"  ">
-                                                      <div class="">3d Printer <span class="glyphicon glyphicon-unchecked"></span></div>
-                                                    </a>
-                                                    <a id="btn9" class="btn" href="javascript:void(0)"  ">
-                                                      <div class="">CNC Mill <span class="glyphicon glyphicon-unchecked"></span></div>
-                                                    </a>
-                                                    <a id="btn10" class="btn" href="javascript:void(0)"  ">
-                                                      <div class="">Safety <span class="glyphicon glyphicon-unchecked"></span></div>
-                                                    </a>
-                                                </div>
+
 
 
                                             <div class="form-group">
-                                              <label for="email">Enter Email: </label>
-                                              <input type="email" class="form-control" id="trEmail">
+
+                                                  <label for="email">Search Email: </label>
+
+                                                  <input style="" type="email" class="form-control" id="trEmail">
+                                                  <div class="text-center">  <button style="margin-top:20px;" id ="trSearch" type="button" class="btn btn-info">Search <span class="glyphicon glyphicon-search"></span></button>
+                                                  </div>
                                             </div>
+
+                                        <hr>
+
+
+
+
                                             <div class="form-group">
 
-
+                                              <h4>Approve Machine and Safety training</h4>
                                             <label for="trainingStatus">Status: [true/false]</label>
-                                            <input type="text" class="form-control" id="trStatus">
+                                            <select id="trStatus" class="form-control" value="0"></select>
                                           </div>
 
 
                                           <div class="form-group">
                                           <label for="machineId" >Type Machine ID/Training ID:</label>
-                                          <p style="font: 12px Ubuntu, sans-serif">[Othermill: <b>'om'</b>, Safety: <b>'saf'</b>, CNC milling machine: <b>'cmm'</b>, 3D Printer: <b>'3dp'</b>, Boss Laser Engraver: <b>'ble'</b>]<p>
+                                          <p style="font: 12px Ubuntu, sans-serif">[<a  href="#" onclick="enterOM('#tId');return false">Othermill:</a> <b>'om'</b>,
+                                            <a  href="#" onclick="enterSAF('#tId');return false">Safety:</a> <b>'saf'</b>,<a  href="#" onclick="enterCMM('#tId');return false">CNC milling machine:</a> <b>'cmm'</b>, <a href="#" onclick="enter3DP('#tId');return false">3D Printer:</a> <b>'3dp'</b>
+                                            ,<a  href="#" onclick="enterBLE('#tId');return false">Boss Laser Engraver:</a><b>'ble'</b>]<p>
                                           <input type="text" class="form-control" id="tId">
                                         </div>
 
@@ -535,7 +578,81 @@ th{
     };
 </script>
 
+<script>
+window.onload = function () {
+var JSON = {
+    "COLUMNS":["ID", "Name"],
+    "DATA": [
+        ["0",""],
+        ["1","true"],
+        ["2",  "false"]
+    ]
+},
+select = document.getElementById("trStatus");
+for (var i = 0; i < JSON.DATA.length; i++) {
+var at = JSON.DATA[i], id = at[0], name = at[1];
+   var option = document.createElement("option");
+   option.value = id;
+   option.textContent = name;
+   select.appendChild(option);
+};
+};
+</script>
 
+
+
+<!-- <script>
+window.onload = function () {
+  var JSON2 = {
+      "COLUMNS":["ID", "Name"],
+      "DATA": [
+          ["0",""],
+          ["1","working"],
+          ["2",  "repair"],
+          ["3", 'damaged']
+      ]
+  },
+  select2 = document.getElementById("mQStatus");
+ for (var i = 0; i < JSON2.DATA.length; i++) {
+ var at = JSON2.DATA[i], id = at[0], name = at[1];
+     var option2 = document.createElement("option2");
+     option2.value = id;
+     option2.textContent = name;
+     select.appendChild(option2);
+ };
+ };
+</script>
+ -->
+
+
+
+
+
+
+
+<script>
+
+  function enterOM(val){
+  $(val).val("om");
+
+  }
+
+  function enterSAF(val){
+  $(val).val("saf");
+
+  }
+  function enterCMM(val){
+  $(val).val("cmm");
+
+  }
+  function enterBLE(val){
+    $(val).val("ble");
+  }
+  function enter3DP(val){
+    $(val).val("3dp");
+  }
+
+</script>
 
 </body>
 </html>

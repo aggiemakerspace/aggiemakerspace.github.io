@@ -1,8 +1,98 @@
+
+function changeMachineStatus(machineId){
+var status = $("#mQStatus").val();
+console.log(status);
+var machineRef = firebase.database().ref().child("machines");
+machineRef.orderByChild('id').equalTo(machineId).on("child_added", function (snap){
+    var mObj = snap.val();
+    var machineName = snap.key;
+    mObj.status = status;
+
+    machineRef.child(machineName).update(mObj);
+displayMachineStatus();
+
+
+  });
+
+}
+
+
+
+function displayMachineStatus(){
+
+  $("#editable").text(" ");
+  var machineRef = firebase.database().ref().child("machines");
+  var imageScript = " ";
+  machineRef.on("child_added", snap=> {
+    switch(snap.val().status) {
+  case 'working':
+      imageScript = "\<img class= 'w3-round w3-border-black w3-center' height=\"42\" width=\"42\" src='assets/img/machines/working.png' style=\"\" alt='Working' \>";
+      break;
+  case 'repair':
+      imageScript = "\<img class= 'w3-round w3-border-black w3-center' height=\"42\" width=\"42\" src='assets/img/machines/repair.png' style=\"\" alt='Repair' \>";
+      break;
+  default:
+      imageScript = "\<img class= 'w3-round w3-border-black w3-center' height=\"42\" width=\"42\" src='assets/img/machines/damaged.png' style=\"\" alt='Damaged' \>";
+
+    }
+
+   $("#editable").append("<p> " +
+       snap.key.replace(/\_/g,' ').toUpperCase()+" | "+snap.val().location+
+       imageScript+
+     "</p>" );
+    console.log(snap.key);
+    });
+
+}
+function searchTraining(){
+    var emailInput = $("#trEmail").val();
+      $("#editable3").text(" ");
+    function alertEmpty(){
+      alert("Warning: some values are missing");
+    }
+
+    //get the machine name from given machine id
+    //get uid before search machine approval
+    firebase.database().ref().child('users').orderByChild('email').equalTo(emailInput).on("child_added", function (snap){
+      var userid = snap.val().uid;
+      var string = "";
+      var mApprRef  = firebase.database().ref().child('machine_approval/'+userid);
+      mApprRef.on("child_added", snap=> {
+        switch(snap.val()) {
+      case true:
+          string = "<span style='color:green'> Has completed training.</span>"
+          break;
+
+      case false:
+          string = "<span style='color:red'> Has not completed training.</span>"
+          break;
+
+      default:
+          break;
+
+        }
+
+        //console.log(snap.key, snap.val());
+       $("#editable3").append(
+
+
+           "<h4>"+snap.key.replace(/\_/g,' ').toUpperCase()
+           +string+"</h4>"
+
+          );
+        //console.log(snap.key);
+        });
+
+    });
+
+}
+
 function addTraining(){
-
+  var statusList = [" ", true, false];
   var emailInput = $("#trEmail").val();
-  var status = $("#trStatus").val();
+  var statusNum = $("#trStatus").val();
 
+  var status = statusList[statusNum];
   var machineid = $("#tId").val();
   var machineid = machineid.trim().toLowerCase();
 
@@ -71,8 +161,8 @@ checkEmpty() || alertEmpty();
                 }
 
 
-        alert('Updated ' +emailInput+machineName);
-
+        alert('Updated ' +emailInput+" "+machineName);
+        searchTraining();
 
 
 
@@ -82,181 +172,6 @@ checkEmpty() || alertEmpty();
 
 
 }
-function displayTraining(x, y){
-    console.log("Button was clicked");
-
-    //name = other_mill, safety
-    var bool = x;
-    var mName =y;
-      var mARef = firebase.database().ref().child('machine_approval');
-
-      function getUserInfo(val){
-                var givenId = val;
-                $("#editable3").text(" ");
-                //get user information and display in panel-primary
-                firebase.database().ref().child('users').orderByChild('uid').equalTo(givenId).on("child_added", snap => {
-                  var userObj = snap.val()
-                  $("#editable3").append("\<ul>"
-
-                  +userObj.name +"\</ul>"
-                  +"<ul>"+userObj.email+"\<hr\>");
-                });
-  }
-
-          switch (mName){
-            case 'other_mill':
-
-                      // other mill\\
-                      switch (bool){
-
-                        case true:
-
-                              mARef.on("child_added", snap => {
-
-                                  if(snap.val().other_mill === true){
-                                  console.log(snap.key,snap.val().other_mill);
-                                    getUserInfo(snap.key);
-                                  }
-                                });
-                                break;
-                        case false:
-                              mARef.on("child_added", snap => {
-                                  if(snap.val().other_mill === false){
-                                  console.log(snap.key,snap.val().other_mill);
-                                    getUserInfo(snap.key);
-                                  }
-                              });
-                          break;
-                      }
-              break;
-
-          case '3d_printer':
-
-                                // other mill\\
-                                switch (bool){
-
-                                  case true:
-                                  //get user uid
-                                  firebase.database().ref().child('users').on("child_added", snap => {
-                                    var uid = snap.val().uid;
-
-                                  //
-                                  //    if (snap.val() == '3d_printer'){
-                                  //    console.log(snap.key,snap.val());
-                                  //    }
-                                  //  });
-
-
-                                        mARef.child(uid).on("child_added", snap => {
-                                            if (snap.key == '3d_printer' && snap.val()===true){
-                                            console.log(snap.key,snap.val());
-                                              getUserInfo(uid);
-                                            }
-                                          });
-                                    });
-                                          break;
-                                  case false:
-                                        // mARef.on("child_added", snap => {
-                                        //     if(snap.val().3d_printer === false){
-                                        //     console.log(snap.key,snap.val().3d_printer);
-                                        //       getUserInfo(snap.key);
-                                        //     }
-                                        // });
-                                    break;
-                                }
-
-              break;
-
-          case 'boss_laser_engraver':
-
-
-                                // other mill\\
-                                switch (bool){
-
-                                  case true:
-
-                                        mARef.on("child_added", snap => {
-
-                                            if(snap.val().boss_laser_engraver === true){
-                                            console.log(snap.key,snap.val().boss_laser_engraver);
-                                              getUserInfo(snap.key);
-                                            }
-                                          });
-                                          break;
-                                  case false:
-                                        mARef.on("child_added", snap => {
-                                            if(snap.val().boss_laser_engraver === false){
-                                            console.log(snap.key,snap.val().boss_laser_engraver);
-                                              getUserInfo(snap.key);
-                                            }
-                                        });
-                                    break;
-                                }
-              break;
-
-          case 'cnc_milling_machine':
-
-
-                                // other mill\\
-                                switch (bool){
-
-                                  case true:
-
-                                        mARef.on("child_added", snap => {
-
-                                            if(snap.val().cnc_milling_machine === true){
-                                            console.log(snap.key,snap.val().cnc_milling_machine);
-                                              getUserInfo(snap.key);
-                                            }else{
-                                              console.log("No users found for cnc milling machine training");
-
-                                            }
-
-                                          });
-                                          break;
-                                  case false:
-                                        mARef.on("child_added", snap => {
-                                            if(snap.val().cnc_milling_machine === false){
-                                            console.log(snap.key,snap.val().cnc_milling_machine);
-                                              getUserInfo(snap.key);
-                                            }else{
-                                              console.log("All users in Database have done training.")
-                                            }
-                                        });
-                                    break;
-                                }
-              break;
-          case 'safety':
-
-                                // other mill\\
-                                switch (bool){
-
-                                  case true:
-
-                                        mARef.on("child_added", snap => {
-
-                                            if(snap.val().safety === true){
-                                            console.log(snap.key,snap.val().safety);
-                                              getUserInfo(snap.key);
-                                            }
-                                          });
-                                          break;
-                                  case false:
-                                        mARef.on("child_added", snap => {
-                                            if(snap.val().safety === false){
-                                            console.log(snap.key,snap.val().safety);
-                                              getUserInfo(snap.key);
-                                            }
-                                        });
-                                    break;
-                                }
-                break;
-          default:
-              break;
-    }
-
-
-};
 
 
 
@@ -504,7 +419,16 @@ function updateUserRole(action, emailInput){
         displaySuperUsers ();
         //DISPLAY ALL machines
         displayAllMachines();
-//
+        //displayMachineStatus
+        displayMachineStatus();
+//****QUICK Machine status*****
+
+$("#btnqMachine").click(function(){
+
+  var mId = $("#qMachineId").val();
+
+   changeMachineStatus(mId);
+});
 // ********CONTAINER 1******
 //           //DISPLAY ALL superusers  //clockin event
 
@@ -571,62 +495,12 @@ function updateUserRole(action, emailInput){
 
 //******CONTAINER 3********
 
+                      //search button
+                      $("#trSearch").click(function(){
+                          searchTraining();
 
+                      });
 
-
-
-
-                  //get all true values for other_mill
-                    $("#btn1").click(function(){
-                        displayTraining(true, 'other_mill');
-
-                    });
-
-                    $("#btn6").click(function(){
-                      displayTraining(false, 'other_mill');
-                    });
-
-                    //laser engraver
-                    $("#btn2").click(function(){
-                        displayTraining(true, 'boss_laser_engraver');
-
-                    });
-
-                    $("#btn7").click(function(){
-                      displayTraining(false, 'boss_laser_engraver');
-                    });
-
-
-                    //3d printer
-                    $("#btn3").click(function(){
-                        displayTraining(true, '3d_printer');
-
-                    });
-
-                    $("#btn8").click(function(){
-                      displayTraining(false, '3d_printer');
-                    });
-
-
-                    //cnc mill
-                    $("#btn4").click(function(){
-                        displayTraining(true, 'cnc_milling_machine');
-
-                    });
-
-                    $("#btn9").click(function(){
-                      displayTraining(false, 'cnc_milling_machine');
-                    });
-
-                    //safety
-                    $("#btn5").click(function(){
-                        displayTraining(true, 'safety');
-
-                    });
-
-                    $("#btn10").click(function(){
-                      displayTraining(false, 'safety');
-                    });
 
 
                     //CHANGE TRAINING status

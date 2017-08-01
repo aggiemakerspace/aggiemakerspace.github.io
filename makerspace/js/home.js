@@ -122,7 +122,7 @@ function checkifAdmin (){
 
                 });
 
-                //CREATE CHECKOUTITEMS NODE
+                //CREATE CHECKOUT ITEMS NODE
                 var checkOutRef = firebase.database().ref().child('checkOutItems/'+ user.uid);
 
                 checkOutRef.child("item2").push({
@@ -206,7 +206,7 @@ function checkifAdmin (){
                    $("#admin").show();
                  console.log(prop);
                 }
-                $("#title").append("<h5>"+prop+"</h5>");
+                $("#title").append("<h4>"+prop+"</h4>");
                 //
 
               }
@@ -234,13 +234,14 @@ function checkifAdmin (){
               var imageScript = "";
               var mApprRef  = firebase.database().ref().child('machine_approval/'+user.uid);
               mApprRef.on("child_added", snap=> {
+                console.log(snap.val());
                 switch(snap.val()) {
               case true:
                   imageScript = "<img style=\"margin-left:10px\" class= 'text-center' height=\"42\" width=\"42\" src='assets/img/machines/gold_cert.png' style=\"\" alt='Working' \>";
                   break;
 
               case false:
-                  imageScript = "<img style=\"margin-left:10px\" class= 'w3-round w3-border-black w3-center' height=\"42\" width=\"42\" src='assets/img/machines/gold_cert.png' style=\"\" alt='Working' \>";
+                  imageScript = "<img style=\"margin-left:10px\" class= 'w3-round w3-border-black w3-center' height=\"42\" width=\"42\" src='assets/img/machines/gray_cert.png' style=\"\" alt='Working' \>";
                   break;
 
               default:
@@ -264,6 +265,32 @@ function checkifAdmin (){
           //     firebase.auth().signOut();
           //
           // });
+
+//DISPLAY MACHINE STATUS
+
+
+    var machineRef = firebase.database().ref().child("machines");
+    var imageScript = " ";
+    machineRef.on("child_added", snap=> {
+      switch(snap.val().status) {
+    case 'working':
+        imageScript = "\<img class= 'w3-round w3-border-black w3-center' height=\"42\" width=\"42\" src='assets/img/machines/working.png' style=\"\" alt='Working' \>";
+        break;
+    case 'repair':
+        imageScript = "\<img class= 'w3-round w3-border-black w3-center' height=\"42\" width=\"42\" src='assets/img/machines/repair.png' style=\"\" alt='Repair' \>";
+        break;
+    default:
+        imageScript = "\<img class= 'w3-round w3-border-black w3-center' height=\"42\" width=\"42\" src='assets/img/machines/damaged.png' style=\"\" alt='Damaged' \>";
+
+      }
+
+     $("#editable2").append("<p> " +
+         snap.key.replace(/\_/g,' ').toUpperCase()+" | "+snap.val().location+
+         imageScript+
+       "</p>" );
+      console.log(snap.key);
+      });
+
 
 
         } else {

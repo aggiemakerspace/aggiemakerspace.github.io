@@ -20,8 +20,8 @@
 <!--Bootstrap-->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
-<script src="js/console.js"></script>
+<!--
+<script src="js/profile.js"></script> -->
 
 <style>
     h1,h2,h3,h4,h5 {
@@ -157,8 +157,8 @@
           <li><a href="home.html">MY PROFILE </a></li>
           <li><a href="calendar.html">CALENDAR</a></li>
           <li><a href="classes.html">CLASSES</a></li>
-          <li><a href="inventory.html" class="hide">INVENTORY</a></li>
-          <li><a href="console.html" style="color:red">ADMIN CONSOLE</a></li>
+          <li><a href="inventory.html hide">INVENTORY</a></li>
+          <li><a href="config.html" style="color:red">ADMIN CONSOLE</a></li>
           <li><a  href="#" onclick="logOut();return false">SIGN OUT</a></li>
         </ul>
       </div>
@@ -166,85 +166,11 @@
     </div>
 
 </div>
-<!-- Page Container -->
-<div class="container">
-                    <br>
+  <!-- Page Container -->
+  <div class="container">
+                      
 
-                    <h4>Admin Console</h4>
-                    <hr>
-
-                    <div class="row">
-                              <div style="margin-left: 50px; padding-left:20px" class="col-sm-2 col-md-2 col-lg-2"></div>
-                              <div class="container col-sm-8 col-lg-8 col-md-8">
-                                <!-- Main Content -->
-                                <div id="main" class="w3-center">
-
-
-                                  <div class="">
-
-
-                                    <div class="row">
-                                    <a id="btn1" class="btn" href="javascript:void(0)">
-                                      <div class="">Machines</div>
-                                    </a>
-                                    <a id="btn2" class="btn" href="javascript:void(0)">
-                                      <div class="">All Users</div>
-                                    </a>
-                                    <a id="btn4" class="btn" href="javascript:void(0)">
-                                      <div class="">SuperUsers</div>
-                                    </a>
-                                    <!-- <a id="btn5" class="btn" href="javascript:void(0)">
-                                      <div class="">RegularUsers</div>
-                                    </a> -->
-
-
-                                    <a id="btn6" class="btn btn-success" href="../timecard/timelog.html" >
-                                      <div class="">START TimeClock</div>
-                                    </a>
-
-
-                                    <a id="btnAdmin" class="btn btn-danger" href="config.html"  checkAdmin();>
-                                      <div class=""></span>CONFIG <span class="glyphicon glyphicon-cog"></div>
-                                    </a>
-
-
-
-                                  </div>
-
-                                  <section class="">
-                                    <div id = "container" class="">
-                                    <h2 id = "querytitle" class = "w3-text-black">Title</h2>
-                                    <p id = "querydescp">A short description:</p>
-                                    <ul id = "unList" class="w3-ul">
-                                      <!--Stuff goes here -->
-                                        <div id = "editable">
-
-
-                                        </div>
-
-
-
-                                  </section>
-
-
-
-                              </div>
-
-
-
-
-                          </div>
-                        <div class="col-sm-2 col-md-2 col-lg-2"></div>
-
-
-
-
-
-
-
-                  </div>
-
-</div>
+  </div>
 
   <!-- Footer -->
   <div id="wrapper">
@@ -257,7 +183,12 @@
 
   <!--Logout-->
 
-
+  <script>
+      function logOut(){
+      firebase.auth().signOut();
+      console.log("user has logged out");
+      };
+  </script>
 
   <script>
     $(document).ready(function(){
@@ -276,6 +207,7 @@
 </script>
 
 
+<script src="js/disclaimer.js"></script>
 
 </body>
 </html>

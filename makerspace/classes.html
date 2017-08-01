@@ -146,15 +146,15 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="home.html" style="font: 20px Ubuntu, sans-serif">MakerSpace<span style="font: 10px Ubuntu, san-serif"> PORTAL</span></a>
+        <a class="navbar-brand" href="" style="font: 20px Ubuntu, sans-serif">MakerSpace<span style="font: 10px Ubuntu, san-serif"> PORTAL</span></a>
       </div>
       <div class="collapse navbar-collapse" id="myNavbar">
         <ul class="nav navbar-nav navbar-right">
+          <li><a href="home.html">MY PROFILE </a></li>
           <li><a href="calendar.html">CALENDAR</a></li>
           <li><a href="classes.html">CLASSES</a></li>
-          <li><a href="inventory.html">INVENTORY</a></li>
-          <li><a href="console.html" style="color:red">ADMIN CONSOLE</a></li>
-          <li><a href="profile.html">MY PROFILE </a></li>
+          <li><a href="inventory.html" class="hide">INVENTORY</a></li>
+          <li><a href="config.html" style="color:red">ADMIN CONSOLE</a></li>
           <li><a  href="#" onclick="logOut();return false">SIGN OUT</a></li>
         </ul>
       </div>
@@ -167,79 +167,49 @@
                     <br>
 
                     <h4>Events for this semester</h4>
-                    <div class="container">
-                    <div class="row">
-                        <!-- Event 1 -->
-                          <div class " col-sm-6 ">
 
-                            <div class="well text-center">
+                      <div class="container-fluid">
+                      <div class="row">
+                      	<div class="col-sm-4">
+                          <h2 id ="title"> CNC Milling Machine WorkShop </h2>
+                          <div class="well">
+                              <img class= "center-block img-responsive img-rounded" src="../img/cnc_mill.jpg" style="" alt="OtherMill" >
+                              <p>In this fun and exciting class you will learn...</p>
+                              <hr>
+                              <p><h2 >Instructor: </h2><span id="instrId"><h4>Princeton Perry<h4></span><h2>Location: </h2>...</p>
+                              <p><button href="" class="btn btn-success"><a target="_blank" href="https://calendar.google.com/calendar/event?action=TEMPLATE&amp;tmeid=NnB2ZDRuNG9sMG9udWhuNWY4OXN0NTU0OXMgYWdnaWVzLm5jYXQuZWR1XzNwbnZrNHNrb2NncmtlOGVrYjQydXJiOXVvQGc&amp;tmsrc=aggies.ncat.edu_3pnvk4skocgrke8ekb42urb9uo%40group.calendar.google.com">SIGN UP</a></button></p>
+                          </div>
+                          </div>
 
-                                <h2 id ="title"> Event Name </h2>
-                                <img class= "center-block img-responsive img-rounded" src="assets/img/othermill.png" style="" alt="OtherMill" >
+
+                          <div class="col-sm-4">
+                            <h2 id ="title"> 3D Printer Workshop </h2>
+                            <div class="well">
+                                <img class= "center-block img-responsive img-rounded" src="../img/3dprinter.jpg" style="" alt="OtherMill" >
                                 <p>In this fun and exciting class you will learn...</p>
                                 <hr>
-                                <p><h2 >Instructor: </h2><span id="instrId">A Name</span><h2>Location: </h2>...</p>
-                                <p><a href="" class="btn btn-success">SIGN UP</a></p>
-
+                                <p><h2 >Instructor: </h2><span id="instrId"><h4>Princeton Perry<h4></span><h2>Location: </h2>...</p>
+                                <p><button href="" class="btn btn-success"><a target="_blank" href="https://calendar.google.com/calendar/event?action=TEMPLATE&amp;tmeid=NXRjNGY5NDk5NDVhdnNzdjd1cTBuOG4wamEgYWdnaWVzLm5jYXQuZWR1XzNwbnZrNHNrb2NncmtlOGVrYjQydXJiOXVvQGc&amp;tmsrc=aggies.ncat.edu_3pnvk4skocgrke8ekb42urb9uo%40group.calendar.google.com">SIGN UP</a></button></p>
+                            </div>
                             </div>
 
-                          </div>
-
-                          <!-- Event 1 -->
-                            <div class " col-sm-6  ">
-
+                            <div class="col-sm-4">
+                              <h2 id ="title"> Laser Engraver Workshop </h2>
                               <div class="well">
-
-                                  <h2 id ="title"> Event Name </h2>
-                                  <img class= "center-block img-responsive img-rounded" src="assets/img/othermill.png" style="" alt="OtherMill" >
+                                  <img class= "center-block img-responsive img-rounded" src="../img/laserengraver.jpg" style="" alt="OtherMill" >
                                   <p>In this fun and exciting class you will learn...</p>
                                   <hr>
-                                  <p><h2 >Instructor: </h2><span id="instrId">A Name</span><h2>Location: </h2>...</p>
-                                  <p><a href="" class="btn btn-success">SIGN UP</a></p>
-
+                                  <p><h2 >Instructor: </h2><span id="instrId"><h4>Princeton Perry</h4></span><h2>Location: </h2>...</p>
+                                  <p><button href="" class="btn btn-success"><a target="_blank" href="https://calendar.google.com/calendar/event?action=TEMPLATE&amp;tmeid=NXRjNGY5NDk5NDVhdnNzdjd1cTBuOG4wamEgYWdnaWVzLm5jYXQuZWR1XzNwbnZrNHNrb2NncmtlOGVrYjQydXJiOXVvQGc&amp;tmsrc=aggies.ncat.edu_3pnvk4skocgrke8ekb42urb9uo%40group.calendar.google.com">SIGN UP</a></button></p>
+                              </div>
                               </div>
 
-                            </div>
+
+
                           </div>
-                          <div class="row">
-                            <!-- Event 1 -->
-                              <div class "col-sm-4 ">
-
-                                <div class="well ">
-
-                                    <h2 id ="title"> Event Name </h2>
-                                    <img class= "center-block img-responsive img-rounded" src="assets/img/othermill.png" style="" alt="OtherMill" >
-                                    <p>In this fun and exciting class you will learn...</p>
-                                    <hr>
-                                    <p><h2 >Instructor: </h2><span id="instrId">A Name</span><h2>Location: </h2>...</p>
-                                    <p><a href="" class="btn btn-success">SIGN UP</a></p>
-
-                                </div>
-
-                              </div>
-
-
-                              <!-- Event 1 -->
-                                <div class "col-sm-4 ">
-
-                                  <div class="well">
-
-                                      <h2 id ="title"> Event Name </h2>
-                                      <img class= "center-block img-responsive img-rounded" src="assets/img/othermill.png" style="" alt="OtherMill" >
-                                      <p>In this fun and exciting class you will learn...</p>
-                                      <hr>
-                                      <p><h2 >Instructor: </h2><span id="instrId">A Name</span><h2>Location: </h2>...</p>
-                                      <p><a href="" class="btn btn-success">SIGN UP</a></p>
-
-                                  </div>
-
-                                </div>
-
-
-                            </div> <!--Row close -->
-
+                          </div>
                       </div>
-                    </div>
+
 
 
       </div> <!--container close -->
