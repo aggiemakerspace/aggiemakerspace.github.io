@@ -1,7 +1,8 @@
+
 (function() {
 
     var provider = new firebase.auth.GoogleAuthProvider();
-
+    var oldURL;
 
     const config = {
         apiKey: "AIzaSyDusG6NBnTuNA8gamGCLlF-fagPO4ozJpk",
@@ -24,19 +25,24 @@
         var ref = firebase.database().ref().child('users');
         var userRef = firebase.database().ref('users/'+ user.uid);
 
-        console.log(user.uid)
+        console.log(user)
 
       //GET USER INFORMATION
           ref.orderByChild('email').equalTo(user.email).on("child_added", function (snap){
             var object = snap.val();
             console.log(object);
             console.log("uid", object.uid);
+            var displayPicture = object.displayPicture;
             var fullname = object.name;
+            //var email = object.email;
             var year = object.year_class;
             var major = object.major_class;
             var phoneText = object.phone;
+            var currentPhotoURL = user.photoURL;
             console.log(phoneText)
             //DISPLAY USER INFORMATION TO DOCUMENT
+            var img = $("#userPic");
+            img.attr("src", img.attr("src").replace(img.attr("src"), currentPhotoURL));
             $("#txtName").append(fullname);
             $("#year").val(year);
             $("#phoneNum").val(phoneText);
@@ -45,7 +51,79 @@
               $("#major").val( val);
 
             });
+            //UPLOAD profile_picture
 
+              $(document).ready(function(){
+                $("#file-upload").on("change", function(event){
+                  file = event.target.files[0];
+                  console.log(file.name);
+
+                  uploadFile(file);
+                });
+
+                function uploadFile(){
+              //
+              //   console.log('file name is'+ file.name)
+              //   var userRef = firebase.database().ref('users/'+ user.uid);
+              //
+              //   userRef.on("value", snap => {
+              //   oldURL = snap.val().profile_picture;
+              //   console.log(oldURL);
+              //   // Delete existing Ref
+              //   var deleteRef = firebase.storage().ref().child('makerspace/user_storage/'+user.email+'/profilePicture/'+oldURL);
+              //     deleteRef.delete().then(function() {
+              //       // File deleted successfully
+              //       console.log('Success')
+              //     }).catch(function(error) {
+              //       // Uh-oh, an error occurred!
+              //     });
+              //
+              // });
+                  var storageRef = firebase.storage().ref().child('makerspace/user_storage/'+user.email+'/profilePicture/'+file.name);
+                  var uploadTask = storageRef.put(file);
+
+
+                  uploadTask.on('state_changed', function(snap){
+                  },function(error){
+
+                  },function () {
+                    var downloadURL = uploadTask.snapshot.downloadURL;
+                    console.log(downloadURL);
+                    var img = $("#userPic");
+                    img.attr("src", img.attr("src").replace(img.attr("src"), downloadURL));
+
+
+                    //update firebase user node
+
+                    userRef.update({
+                      profile_picture: file.name,
+                      photoURL: downloadURL
+                    });
+
+                      //update display picture
+                      user.updateProfile({
+                        photoURL: downloadURL,
+                      }).then(function() {
+                        // Update successful.
+                      }, function(error) {
+                          // An error happened.
+                      });
+
+
+
+
+
+
+
+
+
+
+
+                  });
+
+              }
+
+});
             //UPDATE USER INFORMATION
             $(document).ready(function(){
 
@@ -77,21 +155,15 @@
                       userTemp.phone = pInput;
                      userRef.update(userTemp);
 
-
-
-                     //update auth user
-                     user.updateProfile({
-                       photoURL: userTemp.profile_picture,
-                     }).then(function() {
-                       // Update successful.
-                     }, function(error) {
-                         // An error happened.
-                     });
                      setTimeout(function(){ alert('Success your profile was updated. ');
                      window.location= "home.html";}, 500);
-
                       console.log(userTemp);
                     });
+
+                    //delete old picture
+
+
+
 
                 });
             });

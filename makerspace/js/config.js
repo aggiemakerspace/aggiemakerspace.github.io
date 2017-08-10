@@ -260,7 +260,7 @@ function displaySuperUsers (){
                      $("#editable1").append("\<ul>"
 
                      +sUObj.name +"\</ul>"
-                     +"<ul>"+sUObj.email+"\<hr\>");
+                     +"<ul>"+sUObj.email+"<hr>");
                    });
 
                 var superUsers = firebase.database().ref().child('roles/superusers');

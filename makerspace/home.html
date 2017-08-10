@@ -36,7 +36,12 @@
     }
 
 #admin{
+
+}
+
+.hideme{
   display: none;
+  visibility: hidden;
 }
 #username{
 
@@ -86,6 +91,10 @@
   position: relative;
 
 }
+#userPic{
+    box-shadow: 5px 5px 5px #888888;
+}
+
 .bg-5{
 
   background-color: 	#f0ffff;
@@ -98,10 +107,7 @@
 
 }*/
 
-.admin{
-  display: none;
-  visibility: hidden;
-}
+
 .navbar-nav  li a:hover {
     color: #1abc9c !important;
 }
@@ -114,33 +120,28 @@
     white-space:pre-wrap;
 }
 
-
 </style>
 
 
 </head>
-<script src="js/disclaimerCheck.js"></script>
 
 
-<body language="javascript" class="">
+
+<body language="javascript" class="" onload="disclaimerCheck();">
 <script>
-
-
-
 function disclaimerCheck(){
   firebase.auth().onAuthStateChanged(function(user){
     if (user){
-
-
-
         var user = firebase.auth().currentUser;
         console.log("DS"+user.uid);
           firebase.database().ref().child('disclaimer/'+ user.uid).on("child_added", function (snap){
             console.log(snap.val());
             console.log("Disclaimer Check: "+ snap.val());
 
-            if (snap.val() == false || snap.val() == null){
+            if (snap.key == 'read' && snap.val() === false){
+              console.log(snap.key, snap.val());
               console.log('You have not read the disclaimer');
+              alert();
               window.location.href = 'disclaimer.html';
 
             }
@@ -159,7 +160,7 @@ function disclaimerCheck(){
   <!-- Navbar -->
   <div class="container">
 
-    <div class="container" onload="">
+    <div class="container" >
         <nav class="navbar navbar-default bg-5">
       <div class="navbar-header">
         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
@@ -171,11 +172,11 @@ function disclaimerCheck(){
       </div>
       <div class="collapse navbar-collapse" id="myNavbar">
         <ul class="nav navbar-nav navbar-right">
+          <li   ><a id="admin" class="hideme"  href="config.html" style="color:red">ADMIN CONSOLE</a></li>
           <li><a href="home.html">MY PROFILE </a></li>
           <li><a href="calendar.html">CALENDAR</a></li>
           <li><a href="classes.html">CLASSES</a></li>
           <li><a href="inventory.html" class="hide">INVENTORY</a></li>
-          <li><a href="config.html" style="color:red">ADMIN CONSOLE</a></li>
           <li><a  href="#" onclick="logOut();return false">SIGN OUT</a></li>
         </ul>
       </div>
@@ -301,7 +302,7 @@ function disclaimerCheck(){
 
             <!--machine approval -->
             <div class="col-md-4 col-lg-4 col-sm-4">
-              <div class="well" style="min-height:710px">
+              <div class="well" style="height:710px; overflow-y:scroll;">
 
               <h3>Machine Approval</h3><br>
               <div class="row">
@@ -312,15 +313,15 @@ function disclaimerCheck(){
                     <div class="col-sm-1 col-md-1 col-lg-1"></div>
               </div>
 
-                <div id="editable"></div>
+                <div id="editable" style="min-height:500px" ></div>
 
             </div>
         </div>
 
 
-        <!-- Checked Out Items -->
+        <!--Machine Status -->
         <div class="col-md-4 col-lg-4 col-sm-4">
-          <div class="well" style="min-height:710px">
+          <div class="well" style="height:710px;overflow-y:scroll">
           <h3>Machine Status</h3><br>
           <div class="row">
               <div class="col-sm-3 col-md-3 col-lg-3"></div>

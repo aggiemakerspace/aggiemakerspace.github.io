@@ -85,6 +85,10 @@
 .userpic {
   position: relative;
 
+
+}
+#userPic{
+    box-shadow: 5px 5px 5px #888888;
 }
 .bg-5{
 
@@ -120,13 +124,52 @@
   position: center;
 }
 
+input[type="file"] {
+    display: none;
+}
+
+.custom-file-upload {
+    border: 1px solid #ccc;
+    display: inline-block;
+    padding: 6px 12px;
+    cursor: pointer;
+}
 </style>
 
 
 </head>
 
 
-<body class="">
+<body language="javascript" class="" onload="disclaimerCheck();" class="">
+  <!-- Check if user has signed the disclaimer -->
+  <script>
+  function disclaimerCheck(){
+    firebase.auth().onAuthStateChanged(function(user){
+      if (user){
+          var user = firebase.auth().currentUser;
+          console.log("DS"+user.uid);
+            firebase.database().ref().child('disclaimer/'+ user.uid).on("child_added", function (snap){
+              console.log(snap.val());
+              console.log("Disclaimer Check: "+ snap.val());
+
+              if (snap.key == 'read' && snap.val() === false){
+                console.log(snap.key, snap.val());
+                console.log('You have not read the disclaimer');
+                alert();
+                window.location.href = 'disclaimer.html';
+
+              }
+              else{
+                return true;
+              }
+            });
+        }
+
+
+  });
+
+  }
+  </script>
 
 
   <!-- Navbar -->
@@ -171,7 +214,7 @@
 
                         <div class="col-sm-4;col-md-4;col-lg-4">
 
-                              <div id = "profileDisplay" class= "userpic ">
+                              <div id = "pic container" class= "userpic ">
                                 <img id="userPic" src="assets/img/avatar3.png"
                                 class="img-circle center-block img-responsive" style="height:200px;width:200px" alt=""/>
                               </div>
@@ -180,8 +223,12 @@
                                 <a href="profile.html" data-toggle="tooltip" data-placement="right"
                                 title="Coming Soon! ">
 
-                                <button type="button" class="btn btn-success">Upload Picture</button></a>
-                              </div>
+                                <label for="file-upload" class="custom-file-upload">
+                                    <i class="fa fa-cloud-upload"></i> Upload Picture
+                                    </label>
+                                    <input id="file-upload" type="file"/>
+
+                                </div>
 
 
 
@@ -216,7 +263,7 @@
                               <input id="phoneNum" class="form-control" type="tel" name="usrtel" value= " ">
 
 
-                                <button id="btnSubmit" style="margin-top: 50px;margin-bottom: 0"type = "button" class="btn btn-success btn-lg btn-block">Submit Changes</button>
+                                <button id="btnSubmit" style="margin-top: 50px; margin-bottom: 0;" type = "button" class="btn btn-success btn-lg btn-block">Submit Changes</button>
                           <br>
 
                         </div>

@@ -38,7 +38,7 @@
                               setTimeout(function(){ alert("You have successfully signed the disclaimer agreement.");
                               window.location= "home.html";}, 1000);
 
-          
+
                             });
 
 

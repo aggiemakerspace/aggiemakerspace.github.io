@@ -1,4 +1,17 @@
 
+function setUpNode(val){
+
+    var dRef = firebase.database().ref().child('disclaimer/'+val);
+
+    dRef.set({
+      'read': false,
+      'date': " ",
+      'setup': false
+    });
+
+
+}
+
 function writeUserData(date, email,name, imageUrl, id) {
 
   //console.log(user);
@@ -9,6 +22,7 @@ function writeUserData(date, email,name, imageUrl, id) {
           email: email,
           name: name,
           profile_picture : imageUrl,
+          photoURL: " ",
           major_class: " ",
           year_class: " ",
           phone: " ",
@@ -22,41 +36,8 @@ function writeUserData(date, email,name, imageUrl, id) {
         });
 
 
-          //
-          // firebase.user.updateProfile({
-          //   displayName: name,
-          //   photoURL: ""
-          //
-          // }).then(function(){
-          //   console.log("Success name updated");
-          // },function(error){
-          //   console.log(error);
-          // });
-
-
 
 }
-
-// function step(){
-//
-// var user = firebase.auth().currentUser;
-// console.log(user);
-// firebase.user.updateProfile({
-//   displayName: fullname,
-//   photoURL: ""
-//
-// }).then(function(){
-//   console.log("Success name updated");
-// },function(error){
-//   console.log(error);
-// });
-
-
-
-
-
-
-//writeUserData(d,email,fullname, );
 
 
 (function() {
@@ -162,6 +143,10 @@ $("#getInput").keyup(function(event){
             firebase.auth().onAuthStateChanged(function(user) {
               if (user) {
               writeUserData(date, userEmail,fullname, imageUrl, user.uid);
+
+              //CREATE A DISCLAIMER AND SETUP NODE
+
+              setUpNode(user.uid);
               //add user to email list
 
               var emailRef =firebase.database().ref('emails/'+user.uid).set({

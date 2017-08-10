@@ -1,3 +1,84 @@
+function clockOutUser(userEmail){
+  // User is signed in.
+  var user = firebase.auth().currentUser;
+
+  //Node references
+  var ref = firebase.database().ref().child('users');
+  //admin node reference
+  var userRef = firebase.database().ref('users/'+ user.uid);
+  var timeRef = firebase.database().ref().child('timesheetQueue');
+  var timeSheet = firebase.database().ref().child('timesheet');
+
+  var timeOut = new Date();
+  ref.orderByChild('email').equalTo(userEmail).once("value", function (snap){
+    var userObject = snap.val();
+//check if user exists
+            if(snap.val() == null){
+             alert(userEmail+" was not found. Try again");
+            // $("#usrEmail").val("");
+              console.log('CLOCK OUT EVENT: User not Found');
+           }else{
+
+              console.log('CLOCK OUT EVENT: User Found');
+              ref.orderByChild('email').equalTo(userEmail).on("child_added", function (snap){
+
+                var userObject = snap.val();
+              //console.log(userObject);
+                //timeSheetQueue Ref
+
+                 timeOut = timeOut.toString();
+
+  //check if user already logged in
+
+                timeRef.orderByChild('email').equalTo(userEmail).once("value", function (snap){
+                          var temp= snap.val();
+                          console.log(snap.val());
+
+                          //user is not logged in
+                          if(snap.val() !== null){
+                            console.log("logged in");
+                            timeRef.orderByChild('email').equalTo(userEmail).once("child_added", function (snap){
+                                var tempUser = snap.val();
+                                tempUser.timeOut =timeOut;
+                                tempUser.logged_in=false;
+                                //update timeout
+                                timeRef.child(tempUser.uid).update(tempUser);
+
+
+                                firebase.database().ref('timesheet/'+tempUser.uid).push(tempUser);
+                                console.log(userEmail+'was clocked out at'+ timeOut)
+
+                                  timeRef.orderByChild('email').equalTo(tempUser.email).once("child_added", function (snap){
+                                   var userRef = snap.ref;
+
+                                   console.log("User was removed");
+                                   //$("#usrEmail").val("");
+                                   return userRef.remove();
+
+                                  });
+                              });
+                          }
+                          else{
+                            alert(userEmail+ "not logged in");
+                          }
+
+                  });
+            });
+            }
+          });//end of snap
+
+
+
+
+
+
+
+
+
+
+}
+
+
 
 (function() {
 
@@ -47,10 +128,12 @@
         //     <div class=""></span>CONFIG <span class="glyphicon glyphicon-cog"></div>
         //   </a>
              var tObj = snap.val();
-
+            
              if(tObj.timeOut == " "){
                $("#editable").append(
-               tObj.name+" has clocked in at "+tObj.timeIn +"\</ul><hr>");
+               tObj.name+" has clocked in at "+tObj.timeIn +"\</ul><button onclick=\"clockOutUser('"+tObj.email+"')\"style='float:right'type='button' id="+
+               "class='btn btn-success btn-lg btn-action'>Clock out</button>"+
+               "<hr>");
              }
            });
             //clock out event
@@ -162,7 +245,7 @@
 
                     console.log("-----Button Clock out was clicked.");
                     //get inputted email
-                      var timeOut = new Date();
+
                       var msInputNum =  $("#email-options").val();
 
                       var msInput="";
@@ -188,68 +271,7 @@
 
                       //GET USER CLOCKOUT INFORMATION
 
-
-                      ref.orderByChild('email').equalTo(userEmail).once("value", function (snap){
-                        var userObject = snap.val();
-//check if user exists
-                                if(snap.val() == null){
-                                 alert(userEmail+" was not found. Try again");
-                                // $("#usrEmail").val("");
-                                  console.log('CLOCK OUT EVENT: User not Found');
-                               }else{
-
-                                  console.log('CLOCK OUT EVENT: User Found');
-                                  ref.orderByChild('email').equalTo(userEmail).on("child_added", function (snap){
-
-                                    var userObject = snap.val();
-                                  //console.log(userObject);
-                                    //timeSheetQueue Ref
-
-                                     timeOut = timeOut.toString();
-
-                      //check if user already logged in
-
-                                    timeRef.orderByChild('email').equalTo(userEmail).once("value", function (snap){
-                                              var temp= snap.val();
-                                              console.log(snap.val());
-
-                                              //user is not logged in
-                                              if(snap.val() !== null){
-                                                console.log("logged in");
-                                                timeRef.orderByChild('email').equalTo(userEmail).once("child_added", function (snap){
-                                                    var tempUser = snap.val();
-                                                    tempUser.timeOut =timeOut;
-                                                    tempUser.logged_in=false;
-                                                    //update timeout
-                                                    timeRef.child(tempUser.uid).update(tempUser);
-
-
-                                                    firebase.database().ref('timesheet/'+tempUser.uid).push(tempUser);
-                                                    console.log(userEmail+'was clocked out at'+ timeOut)
-
-                                                      timeRef.orderByChild('email').equalTo(tempUser.email).once("child_added", function (snap){
-                                                       var userRef = snap.ref;
-
-                                                       console.log("User was removed");
-                                                       //$("#usrEmail").val("");
-                                                       return userRef.remove();
-
-                                                      });
-                                                  });
-                                              }
-                                              else{
-                                                alert(userEmail+ "not logged in");
-                                              }
-
-                                      });
-
-
-
-
-                                });
-                                }
-                              });//end of snap
-
+                      clockOutUser(userEmail);
 
 
 

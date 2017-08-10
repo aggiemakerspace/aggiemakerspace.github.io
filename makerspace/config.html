@@ -83,10 +83,7 @@
   width: 100%;
 }*/
 
-.userpic {
-  position: relative;
 
-}
 .bg-5{
 
   background-color: 	#f0ffff;
@@ -127,7 +124,9 @@
 
   box-shadow: 5px 5px 5px #888888;
 }*/
-
+/*#editable{
+  overflow-y:auto;
+}
 #editable1 {
   overflow-y:auto;
 }
@@ -136,7 +135,7 @@
 }
 #editable3 {
  overflow-y:auto;
-}
+}*/
 .btn span:hover {
     color: #1abc9c !important;
 }.panel-primary{
@@ -181,17 +180,26 @@ th{
           <li><a  href="#" onclick="logOut();return false">SIGN OUT</a></li>
         </ul>
       </div>
-</nav>
+    </nav>
     </div>
 
 </div>
 <!-- Page Container -->
 <div class="container-fluid">
+      <div class="" id="quickAccess">
                     <br>
 
                     <h4>Configure MakerSpace Misc.</h4>
                     <hr>
 
+                      <h5>
+                      <a href="#machinestatus">MACHINE STATUS</a><b> | </b>
+                      <a href="#editsusers">ADD SUPERUSERS</a><b> | </b>
+                      <a href="#editmachines">MACHINE EDIT</a><b> | </b>
+                      <a href="#training">USER TRAINING CHECKOFF</a><b></b>
+
+                    </h5>
+      </div>
                     <div class="row">
                               <div style="margin-left: 50px; padding-left:20px" class="col-sm-2 col-md-2 col-lg-2"></div>
                               <div class="text-center">
@@ -202,133 +210,107 @@ th{
                               <!-- Main Content -->
                                 <div id="main" class="">
 
-<!-- Quick edit machine status -->
-
-<div id = "container" class="">
-
-<!-- EDIT SUPERUSERS -->
-<div class="row">
-  <div class="col-sm-3"></div>
-<div class="col-sm-6" style="">
-  <div class="panel panel-primary" style="height:650px;">
-      <div class="panel-heading">Machine Status Quick Edit <span class="glyphicon glyphicon-cog"></span></div>
-      <div class="panel-body">
-        <!-- Display current superusers -->
-        <div class="panel panel-default">
-          <div class="panel-body" style="height:250px;overflow-y:scroll;">
-            <div id="editable" style="height:250px;">
 
 
 
+                                <!-- CHANGE OPERATING MACHINERY STATUS -->
+                                <div class="row">
+                                  <div class="col-sm-3"></div>
+                                <div class="col-sm-6" style="">
+                                  <div id ="machinestatus" class="panel panel-primary" style="height:650px;">
+                                      <div class="panel-heading">Machine Status Quick Edit <span class="glyphicon glyphicon-cog"></span>
+                                        <a href="#quickAccess" style="color:white"> <span style="float:right" class="glyphicon glyphicon-chevron-up"></span></a>
+                                    </div>
+                                      <div class="panel-body">
 
+                                        <div class="panel panel-default">
+                                          <div class="panel-body" style="height:250px;overflow-y:scroll;">
+                                            <div id="editable" style="height:250px;">
 
+                                            </div>
+                                          </div>
 
+                                        </div>
+                                        <!-- add -->
+                                        <form><hr>
+                                            <h4>Machine ID</h4>
+                                        <div class="form-group">
+                                          <p style="font: 12px Ubuntu, sans-serif">[<a  href="#" onclick="enterOM('#qMachineId');return false">Othermill:</a> <b>'om'</b>,
+                                            <a  href="#" onclick="enterSAF('#qMachineId');return false">Safety:</a> <b>'saf'</b>,<a  href="#" onclick="enterCMM('#qMachineId');return false">CNC milling machine:</a> <b>'cmm'</b>, <a href="#" onclick="enter3DP('#qMachineId');return false">3D Printer:</a> <b>'3dp'</b>
+                                            ,<a  href="#" onclick="enterBLE('#qMachineId');return false">Boss Laser Engraver:</a><b>'ble'</b>]<p>
 
-            </div>
-          </div>
-        <!-- user input -->
-        </div>
-        <!-- add -->
-        <form><hr>
-            <h4>Machine ID</h4>
-        <div class="form-group">
-          <p style="font: 12px Ubuntu, sans-serif">[<a  href="#" onclick="enterOM('#qMachineId');return false">Othermill:</a> <b>'om'</b>,
-            <a  href="#" onclick="enterSAF('#qMachineId');return false">Safety:</a> <b>'saf'</b>,<a  href="#" onclick="enterCMM('#qMachineId');return false">CNC milling machine:</a> <b>'cmm'</b>, <a href="#" onclick="enter3DP('#qMachineId');return false">3D Printer:</a> <b>'3dp'</b>
-            ,<a  href="#" onclick="enterBLE('#qMachineId');return false">Boss Laser Engraver:</a><b>'ble'</b>]<p>
+                                          <input type="text" class="form-control" id="qMachineId">
+                                        </div>
+                                        <label for="mQStatus">Status: </label>
+                                        <select class ="form-control" value="2" id="mQStatus">
+                                          <option value="working">working</option>
+                                          <option value="repair">repair</option>
+                                          <option value="damaged">damaged</option>
+                                        </select>
 
-          <input type="text" class="form-control" id="qMachineId">
-        </div>
-        <label for="mQStatus">Status: </label>
+                                        <div class="text-center">
+                                          <button id="btnqMachine" type="button" style="margin-top:25px;" class="btn btn-success">Submit</button>
+                                        </div>
 
-              <select class ="form-control" value="2" id="mQStatus">
-        <option value="working">working</option>
-        <option value="repair">repair</option>
-        <option value="damaged">damaged</option>
-      </select>
+                                      </form>
+                                      </div>
+                                      </div>
+                                      <div class="col-sm-3"></div>
+                                    </div>
+                                </div>
 
-        <div class="text-center">
-          <button id="btnqMachine" type="button" style="margin-top:25px;" class="btn btn-success">Submit</button>
-        </div>
-
-      </form><hr>
-
-
-
-
-
-
-      </div>
-      </div>
-
-      <div class="col-sm-3"></div>
-    </div>
-</div>
-
-
+<!--                         Close                       -->
                                     <div id = "container" class="">
 
                                     <!-- EDIT SUPERUSERS -->
                                     <div class="row">
                                       <div class="col-sm-3"></div>
                                     <div class="col-sm-6" style="">
-                                      <div class="panel panel-primary">
-                                          <div class="panel-heading">Edit SuperUsers <span class="glyphicon glyphicon-cog"></span></div>
-                                          <div class="panel-body">
-                                            <!-- Display current superusers -->
-                                            <div class="panel panel-default">
-                                              <div class="panel-body" style="height:250px;overflow-y:scroll;">
-                                                <div id="editable1" style="height:250px;">
+                                      <div  id="editsusers" class="panel panel-primary">
+                                          <div class="panel-heading">Edit SuperUsers <span class="glyphicon glyphicon-cog"></span>
+                                            <a href="#quickAccess" style="color:white"> <span style="float:right" class="glyphicon glyphicon-chevron-up"></span></a>
 
-
-
-
-
-
-
+                                          </div>
+                                            <div class="panel-body">
+                                              <!-- Display current superusers -->
+                                              <div class="panel panel-default">
+                                                <div class="panel-body" style="height:250px;overflow-y:scroll;">
+                                                  <div id="editable1" style="height:250px;">
+                                                  </div>
                                                 </div>
 
-
-
-
                                               </div>
-                                            <!-- user input -->
-                                            </div>
-                                            <!-- add -->
-                                            <form><hr>
-                                                <h4>Add  SuperUser</h4>
+
+                                              <!-- add -->
+                                              <form><hr>
+                                                  <h4>Add  SuperUser</h4>
+                                                  <div class="form-group">
+                                                    <label for="email">Email address:</label>
+                                                    <input type="email" class="form-control" id="addemail_S">
+                                                  </div>
+
+                                                  <div class="text-center">
+                                                    <button id="btnAddSubmit_S" type="button" class="btn btn-success">Submit</button>
+                                                  </div>
+
+                                            </form><hr>
+
+                                            <!-- remove user from superuser role-->
+                                            <form>
+                                                <h4>Remove SuperUser</h4><hr>
                                             <div class="form-group">
-                                              <label for="email">Email address:</label>
-                                              <input type="email" class="form-control" id="addemail_S">
+                                                <label for="email">Email address:</label>
+                                                <input type="email" class="form-control" id="rememail_S">
                                             </div>
 
                                             <div class="text-center">
-                                              <button id="btnAddSubmit_S" type="button" class="btn btn-success">Submit</button>
+                                              <button id="btnRemSubmit_S"  type="button" class="btn btn-danger">Submit</button>
                                             </div>
 
-                                          </form><hr>
+                                          </form>
 
-                                          <!-- remove user from superuser role-->
-                                          <form>
-                                              <h4>Remove SuperUser</h4><hr>
-                                          <div class="form-group">
-                                            <label for="email">Email address:</label>
-                                            <input type="email" class="form-control" id="rememail_S">
-                                          </div>
-
-                                          <div class="text-center">
-                                            <button id="btnRemSubmit_S"  type="button" class="btn btn-danger">Submit</button>
-                                          </div>
-
-                                        </form>
-
-
-
-
-
-
-
-                                          </div>
-                                          </div>
+                                            </div>
+                                        </div>
 
                                           <div class="col-sm-3"></div>
                                         </div>
@@ -336,14 +318,17 @@ th{
 
 
                                     <!-- EDIT MACHINES -->
-                                    <div class="col-sm-12 col-md-12 col-lg-12">
 
 
                                       <div class="row">
                                       <div class="col-sm-3"></div>
                                       <div class= "col-sm-6">
-                                            <div class="panel panel-primary" style="">
-                                                <div class="panel-heading">Edit Machines <span class="glyphicon glyphicon-cog"></span></div>
+                                            <div  id ="editmachines" class="panel panel-primary" style="min-height:980px;">
+                                                <div class="panel-heading">Edit Machines <span class="glyphicon glyphicon-cog"></span>
+                                                  <a href="#quickAccess" style="color:white"> <span style="float:right" class="glyphicon glyphicon-chevron-up"></span></a>
+
+
+                                                </div>
                                                 <div class="panel-body">
                                                   <!-- Display current Machines -->
                                                   <table class="table table-striped">
@@ -362,21 +347,11 @@ th{
 
                                                             <div id="editable2" style="height:250px;">
                                                             </div>
-
-                                                            <!-- <div class="panel-body" style="height:250px;overflow-y:scroll;">
-                                                              <div id="editable1" style="height:250px;"> -->
-
-
-
-
                                                     </div>
-
-
                                                   </div>
                                                   <!-- add machine to machine node -->
                                                   <hr><form>
                                                       <h4>Add New Machine</h4>
-
                                                   <div class="row">
                                                     <div class="col-sm-6">
                                                     <div class="form-group">
@@ -384,46 +359,39 @@ th{
                                                       <input type="text" class="form-control" id="maTxtName">
                                                     </div>
                                                   </div>
-
                                                   <div class="col-sm-6">
                                                     <div class="form-group">
                                                       <label for="maId">Machine Id (M.I.D):</label>
                                                       <input type="text" class="form-control" id="maAddId">
                                                     </div>
-
-
                                                   </div>
                                                 </div>
-
-
-
-
                                                   <div class="form-group">
-                                                    <label for="maname">Location: ex. "McNair Hall, Rm. 121:"</label>
-                                                    <input type="text" class="form-control" id="maTxtLoc">
+                                                      <label for="maname">Location: ex. "McNair Hall, Rm. 121:"</label>
+                                                      <input type="text" class="form-control" id="maTxtLoc">
                                                   </div>
                                                   <div class="form-group">
-                                                    <label for="maname">Status</label>
-                                                    <input type="text" class="form-control" id="maTxtStatus">
+                                                      <label for="maname">Status</label>
+                                                      <input type="text" class="form-control" id="maTxtStatus">
                                                   </div>
 
                                                   <div class="text-center">
-                                                    <button  id="btnAddMachine" type="button" class="btn btn-success">Submit</button><hr>
+                                                      <button  id="btnAddMachine" type="button" class="btn btn-success">Submit</button><hr>
                                                   </div>
 
                                                 </form>
 
                                                 <!-- remove machine from machine node-->
                                                 <form>
-                                                    <h4>Remove Machine</h4>
-                                                <div class="form-group">
-                                                  <label for="email">Machine ID (i.e. '3dp','om'):</label>
-                                                  <input type="text" class="form-control" id="maRemId">
-                                                </div>
+                                                      <h4>Remove Machine</h4>
+                                                  <div class="form-group">
+                                                    <label for="email">Machine ID (i.e. '3dp','om'):</label>
+                                                    <input type="text" class="form-control" id="maRemId">
+                                                  </div>
 
-                                                <div class="text-center">
-                                                  <button id="btnRemoveMachine" type="button" class="btn btn-danger">Submit</button>
-                                                </div>
+                                                  <div class="text-center">
+                                                    <button id="btnRemoveMachine" type="button" class="btn btn-danger">Submit</button>
+                                                  </div>
 
                                               </form>
 
@@ -437,18 +405,23 @@ th{
                                         <div class="col-sm-3"></div>
                                     </div>
 
-                              </div>
+
 
                               <!-- EDIT MACHINE APPROVAL//Completed classes -->
-                              <div class="col-sm-12 col-md-12 col-lg-12">
-
 
                                 <div class="row">
                                 <div class="col-sm-3"></div>
                                 <div class= "col-sm-6">
-                                      <div class="panel panel-primary" style="width:100%">
+                                      <div id='training' class="panel panel-primary" style="width:100%">
                                           <div class="panel-heading">Machine Approval
-                                            <span class="glyphicon glyphicon-cog"></span></div>
+
+                                            <span class="glyphicon glyphicon-cog"></span>
+                                            <a href="#quickAccess" style="color:white"> <span style="float:right" class="glyphicon glyphicon-chevron-up"></span></a>
+
+
+
+                                          </div>
+
                                           <div class="panel-body">
 
                                             <!-- Display current Machines -->
@@ -456,44 +429,31 @@ th{
                                               <div class="panel-body" style="height:250px;overflow-y:scroll;">
                                                 <div id="editable3" style="height:250px;">
 
-
-
-
-
                                                 </div>
-
-
-
-                                              </div>
+</div>
 
                                             </div><hr>
                                             <!-- add machine to machine node -->
                                             <form>
-
-
-
-                                            <div class="form-group">
+                                          <div class="form-group">
 
                                                   <label for="email">Search Email: </label>
 
                                                   <input style="" type="email" class="form-control" id="trEmail">
                                                   <div class="text-center">  <button style="margin-top:20px;" id ="trSearch" type="button" class="btn btn-info">Search <span class="glyphicon glyphicon-search"></span></button>
-                                                  <div class="text-center">  <button style="margin-top:20px;" id ="trSearchUsers" type="button" class="btn btn-success">List all Emails <span class="glyphicon glyphicon-repeat"></span></button>
+                                                  <div class="text-center">   <a style= ""> <span id ="trSearchUsers" style="float:center;margin-top:10px; font: 12px Ubuntu, sans-serif">List all Emails <span class="glyphicon glyphicon-repeat"></span></span></a>
+
                                                   </div>
                                             </div>
 
                                         <hr>
 
-
-
-
                                             <div class="form-group">
 
                                               <h4>Approve Machine and Safety training</h4>
-                                            <label for="trainingStatus">Status: [true/false]</label>
-                                            <select id="trStatus" class="form-control" value="0"></select>
+                                              <label for="trainingStatus">Status: [true/false]</label>
+                                              <select id="trStatus" class="form-control" value="0"></select>
                                           </div>
-
 
                                           <div class="form-group">
                                           <label for="machineId" >Type Machine ID/Training ID:</label>
@@ -509,11 +469,7 @@ th{
                                               <button id="btnTraining" type="button" class="btn btn-success">Submit</button>
                                             </div>
 
-                                          </form><hr>
-
-
-
-
+                                          </form>
 
                                     </div>
 
@@ -523,26 +479,10 @@ th{
                                   <div class="col-sm-3"></div>
                               </div>
 
-                            </div>
-
-
-
-
-
-
-
-
-
-
                 </div>
                 <!-- Container close -->
 
-
-
-
-
                   </div>
-
 
 </div>
 
@@ -600,37 +540,6 @@ var at = JSON.DATA[i], id = at[0], name = at[1];
 };
 };
 </script>
-
-
-
-<!-- <script>
-window.onload = function () {
-  var JSON2 = {
-      "COLUMNS":["ID", "Name"],
-      "DATA": [
-          ["0",""],
-          ["1","working"],
-          ["2",  "repair"],
-          ["3", 'damaged']
-      ]
-  },
-  select2 = document.getElementById("mQStatus");
- for (var i = 0; i < JSON2.DATA.length; i++) {
- var at = JSON2.DATA[i], id = at[0], name = at[1];
-     var option2 = document.createElement("option2");
-     option2.value = id;
-     option2.textContent = name;
-     select.appendChild(option2);
- };
- };
-</script>
- -->
-
-
-
-
-
-
 
 <script>
 

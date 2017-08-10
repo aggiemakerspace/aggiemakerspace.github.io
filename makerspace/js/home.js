@@ -1,5 +1,44 @@
+/****SIGN UP PROCESS****/
 
-function disclaimerCheck(){
+function finishSignup(userInput){
+        console.log("finishSignup()");
+        var user = userInput;
+
+        var signupQueue = firebase.database().ref().child('signupQueue');
+        var userRef = firebase.database().ref('users/'+ user.uid);
+        var userTemp;
+        signupQueue.orderByChild('email').equalTo(user.email).on("child_added", function (snap){
+          userTemp = snap.val();
+          userTemp.uid = user.uid;
+          console.log(userTemp);
+          //update user node
+          userRef.update(userTemp);
+          console.log(userTemp.name);
+          //update auth user
+          user.updateProfile({
+            displayName: userTemp.name,
+            photoURL: userTemp.photoURL,
+          }).then(function() {
+            // Update successful.
+          }, function(error) {
+              // An error happened.
+          });
+
+        });
+      //SET UP EMPTY NODES FOR NEW user
+      setup(user);
+      //ONCE DONE, CLEAN UP PAYLOAD
+
+      signupQueue.orderByChild('email').equalTo(user.email).on("child_added", function (snap){
+          var userRef = snap.ref;
+          return userRef.remove();
+        });
+
+}
+
+//check disclaimer node for true key
+function disclaimerCheck(userInput){
+var user = userInput;
 firebase.database().ref().child('disclaimer/'+ user.uid).on("child_added", function (snap){
   console.log("Disclaimer Check: "+ snap.val().read);
   if (snap.val().read == false){
@@ -8,6 +47,7 @@ firebase.database().ref().child('disclaimer/'+ user.uid).on("child_added", funct
 
   }
   else{
+    console.log(user.email +" has signed the waiver.")
     return true;
   }
 });
@@ -15,10 +55,85 @@ firebase.database().ref().child('disclaimer/'+ user.uid).on("child_added", funct
 }
 
 
+//set up empty nodes
+function setup (userInput){
+  console.log("...Setting up user");
+  var user= userInput;
+  try{
+
+
+        // //CREATE CHECKOUT ITEMS NODE
+        // var checkOutRef = firebase.database().ref().child('checkOutItems/'+ user.uid);
+        //
+        // checkOutRef.child("item2").push({
+        //   dateIn: "",
+        //   dateOut: "",
+        //   item_descp: "",
+        //   item_name: ""
+        //
+        // });
+
+
+        //CREATE A MACHINE MACHINE_APPROVAL NODE
+        var mARef = firebase.database().ref().child('machine_approval/'+user.uid);
+
+        mARef.set({
+          "3d_printer": false,
+          "boss_laser_engraver": false,
+          "cnc_milling_machine": false,
+          "other_mill": false,
+          "safety": false
+        });
+        //CREATE DISCLAIMER NODE
+
+        var dRef = firebase.database().ref().child('disclaimer/'+user.uid);
+
+        dRef.set({
+          'read': false,
+          'date': " ",
+          'setup': true
+        });
+          //once completed
+          return true;
+      }
+      catch(err){
+          console.log(err);
+          alert(err);
+        }
+
+}
+
+function checkIfSetUp(val){
+  var user = val;
+
+  console.log('check has began on '+ user.uid)//if null what happens?
+
+  var dRef = firebase.database().ref().child('disclaimer/'+user.uid);
+      if (dRef == null){
+            // if(snap.key == 'setup' &&snap.val() === true){
+            console.log('Ref not found.')
+            return false;
+          }else{
+            dRef.on("child_added", snap => {
+              console.log(snap.key,snap.val())
+            if(snap.key === 'setup' && snap.val()===false){
+
+              console.log('Set up is false');
+finishSignup(user);
+
+}
+
+          });
+
+        }
+
+}
 
 
 
 
+
+//initialize firebase connection
 function firebaseInit(){
 
         var provider = new firebase.auth.GoogleAuthProvider();
@@ -37,8 +152,11 @@ function firebaseInit(){
 
 }
 
-function checkifAdmin (){
-  firebaseInit();
+//checks if admins or superuser
+//if admin or super user display admin console
+function checkifAdmin (userInput){
+  //firebaseInit();
+  var user = userInput;
   var adminAccess = false;
   var ref = firebase.database().ref().child('users');
   ref.orderByChild('email').equalTo(user.email).on("child_added", function (snap){
@@ -48,23 +166,36 @@ function checkifAdmin (){
   //console.log(roles);
   //var displayRole = roles.administrator;
   for (var prop in roles) {
-      //console.log(roles[prop]);
+      console.log(prop, roles[prop]);
 
-        if ((roles[prop]) === true)
+        if ((roles[prop]) === true )
        {
-         if(prop == "administrator"||"superuser"){
-           adminAccess = true;
-           console.log("Admin Approved");
-           //$("#admin" ).remove();
-           //$("#admin" ).remove();
-        }
-        if (adminAccess == true){
-          console.log("Admin Approved");
-          $("#admin" ).remove();
-        }
+
+         switch(prop){
+           case 'administrator':
+
+             adminAccess = true;
+             console.log("Admin Approved");
+             $("#.hideme" ).remove();
+             break;
+
+           case 'superuser':
+
+             adminAccess = true;
+             console.log("SuperUser Approved");
+             $("#admin" ).removeClass("hideme");
+             break;
+            default:
+              adminAccess=false;
+              $("#admin" ).remove();
+         }
+
+
       }
-    };
-  });
+
+      }
+    });
+
 
 
 }
@@ -72,7 +203,6 @@ function checkifAdmin (){
 (function() {
 
     firebaseInit();
-    //checkifAdmin();
 
     //get elements
 
@@ -84,104 +214,42 @@ function checkifAdmin (){
     const adminConsole = document.getElementById("admin");
     // const profileDisplay = document.getElementById("profileDisplay");
 
+
     firebase.auth().onAuthStateChanged(function(user) {
         //var userId = user.uid;
 
         if (user) {
-
-
+          user.providerData.forEach(function (profile){
+          });
+          checkifAdmin(user);
     // User is signed in.
 
           var user = firebase.auth().currentUser;
+          console.log('User data: '+user.uid);
   //profile picture
           $("#userPic").append(user.profile_picture);
-          user.providerData.forEach(function (profile){
-            console.log(profile);
-            console.log(user.displayName+" Display Name.")
-            //UPDATE USER INFORMATION FOR FIRST TIME LOGINS
-              if(user.displayName == null){
 
-
-                var signupQueue = firebase.database().ref().child('signupQueue');
-                var userRef = firebase.database().ref('users/'+ user.uid);
-                var userTemp;
-                signupQueue.orderByChild('email').equalTo(profile.email).on("child_added", function (snap){
-                  userTemp = snap.val();
-                  userTemp.uid = user.uid;
-                  //update user node
-                  userRef.update(userTemp);
-
-                  //update auth user
-                  user.updateProfile({
-                    displayName: userTemp.name,
-                    photoURL: userTemp.profile_picture,
-                  }).then(function() {
-                    // Update successful.
-                  }, function(error) {
-                      // An error happened.
-                  });
-
-                });
-
-                //CREATE CHECKOUT ITEMS NODE
-                var checkOutRef = firebase.database().ref().child('checkOutItems/'+ user.uid);
-
-                checkOutRef.child("item2").push({
-                  dateIn: "",
-                  dateOut: "",
-                  item_descp: "",
-                  item_name: ""
-
-                });
-
-
-                //CREATE A MACHINE MACHINE_APPROVAL NODE
-                var mARef = firebase.database().ref().child('machine_approval/'+user.uid);
-
-                mARef.set({
-                  "3d_printer": false,
-                  "boss_laser_engraver": false,
-                  "cnc_milling_machine": false,
-                  "other_mill": false,
-                  "safety": false
-                });
-                //CREATE DISCLAIMER NODE
-
-                var dRef = firebase.database().ref().child('disclaimer/'+user.uid);
-
-                dRef.set({
-                  'read': false,
-                  'date': " "
-                });
-              //ONCE DONE, CLEAN UP PAYLOAD
-
-              signupQueue.orderByChild('email').equalTo(profile.email).on("child_added", function (snap){
-                  var userRef = snap.ref;
-                  return userRef.remove();
-                });
-
-
-            }else{
-              //console.log('Display name is valid');
-
-              //do a disclaimer check
-              disclaimerCheck();
-            // console.log("Sign-in provider: "+profile.providerId);
-            // console.log("  Provider-specific UID: "+profile.uid);
-            // console.log("  Name: "+profile.displayName);
-            // console.log("  Email: "+profile.email);
-            // console.log("  Photo URL: "+profile.photoURL);
-}
-            });
+          var img = $("#userPic");
+          img.attr("src", img.attr("src").replace("assets/img/avatar3.png", user.photoURL));
 
 
 
+  //*************UPDATE USER INFORMATION FOR FIRST TIME LOGINS**********
+            console.log('Before check'+ user.displayName);//displaying null
+            console.log('User object: '+ user);
+            //**********************
+
+            checkIfSetUp(user);
+              // console.log(value);
+              //           if (checkIfSetup(user)== false){
+              //             console.log("FinishSignUp Call")
+              //             finishSignup(user);
+          //}
 
            var ref = firebase.database().ref().child('users');
 
 //  **Get User Info**
           ref.orderByChild('email').equalTo(user.email).on("child_added", function (snap){
-
 
           var object = snap.val();
           //console.log("uid", object.uid);
@@ -196,7 +264,7 @@ function checkifAdmin (){
           var displayRole = roles.administrator;
           var adminAccess = false;
           for (var prop in roles) {
-
+//show whether superuser, regularuser or admin
                 if ((roles[prop]) === true)
                {
                  if(prop == "administrator"||"superuser"){
@@ -204,8 +272,8 @@ function checkifAdmin (){
                    //console.log("Admin Approved");
 
                    //adminConsole.classList.add("hide");
-                   $("#admin").show();
-                 console.log(prop);
+                   //$("#admin").show();
+
                 }
                 $("#title").append("<h4>"+prop+"</h4>");
                 //
@@ -214,14 +282,11 @@ function checkifAdmin (){
         };
 
 
-          //console.log(joinDate);
 
-
-
-
-          //console.log("Email is: "+ email);
-//DISPLAY USER INFORMATIOn
+//DISPLAY USER INFORMATION
           //console.log("This is the username:" + user.displayName);
+
+
             document.getElementById("joinDate").innerHTML= joinDate;
             document.getElementById("userName").innerHTML=fullname;
 
@@ -235,14 +300,14 @@ function checkifAdmin (){
               var imageScript = "";
               var mApprRef  = firebase.database().ref().child('machine_approval/'+user.uid);
               mApprRef.on("child_added", snap=> {
-                console.log(snap.val());
+
                 switch(snap.val()) {
               case true:
-                  imageScript = "<img style=\"margin-left:10px\" class= 'text-center' height=\"42\" width=\"42\" src='assets/img/machines/gold_cert.png' style=\"\" alt='Working' \>";
+                  imageScript = "<img style=\"margin-left:10px;float:right\" class= 'text-center' height=\"42\" width=\"42\" src='assets/img/machines/gold_cert.png' style=\"\" alt='Working' \>";
                   break;
 
               case false:
-                  imageScript = "<img style=\"margin-left:10px\" class= 'w3-round w3-border-black w3-center' height=\"42\" width=\"42\" src='assets/img/machines/gray_cert.png' style=\"\" alt='Working' \>";
+                  imageScript = "<img style=\"margin-left:10px; float:right\" class= 'w3-round w3-border-black w3-center' height=\"42\" width=\"42\" src='assets/img/machines/gray_cert.png' style=\"\" alt='Working' \>";
                   break;
 
               default:
@@ -254,7 +319,7 @@ function checkifAdmin (){
 
 
                    "<h4>"+snap.key.replace(/\_/g,' ').toUpperCase()
-                   +imageScript+"</h4>"
+                   +imageScript+"</h4><hr>"
 
                   );
                 //console.log(snap.key);
@@ -275,21 +340,21 @@ function checkifAdmin (){
     machineRef.on("child_added", snap=> {
       switch(snap.val().status) {
     case 'working':
-        imageScript = "\<img class= 'w3-round w3-border-black w3-center' height=\"42\" width=\"42\" src='assets/img/machines/working.png' style=\"\" alt='Working' \>";
+        imageScript = "\<img style=\"margin-top: 0px;float:center-fixed\" class= 'w3-round w3-border-black w3-center' height=\"42\" width=\"42\" src='assets/img/machines/working.png' style=\"\" alt='Working' \>";
         break;
     case 'repair':
-        imageScript = "\<img class= 'w3-round w3-border-black w3-center' height=\"42\" width=\"42\" src='assets/img/machines/repair.png' style=\"\" alt='Repair' \>";
+        imageScript = "\<img  style=\"margin-top:0;float:center-fixed\" class= 'w3-round w3-border-black w3-center' height=\"42\" width=\"42\" src='assets/img/machines/repair.png' style=\"\" alt='Repair' \>";
         break;
     default:
-        imageScript = "\<img class= 'w3-round w3-border-black w3-center' height=\"42\" width=\"42\" src='assets/img/machines/damaged.png' style=\"\" alt='Damaged' \>";
+        imageScript = "\<img  style=\"margin-top:0;float:center-fixed\" class= 'w3-round w3-border-black w3-center' height=\"42\" width=\"42\" src='assets/img/machines/damaged.png' style=\"\" alt='Damaged' \>";
 
       }
-
-     $("#editable2").append("<p> " +
-         snap.key.replace(/\_/g,' ').toUpperCase()+" | "+snap.val().location+
+//the name of each Machine
+     $("#editable2").append("<h4> " +
+         snap.key.replace(/\_/g,' ').toUpperCase()+" | "+"<br>"+snap.val().location+"<br>"+
          imageScript+
-       "</p>" );
-      console.log(snap.key);
+       "<hr></h4>" );
+
       });
 
 
