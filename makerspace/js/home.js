@@ -219,19 +219,29 @@ function checkifAdmin (userInput){
         //var userId = user.uid;
 
         if (user) {
+
+  console.log('is user verified'+ user.emailVerified);
+  if(user.emailVerified == false){
+    window.location.href= 'verified-check.html';
+  }
+          //check if user is verified
+
           user.providerData.forEach(function (profile){
           });
           checkifAdmin(user);
     // User is signed in.
 
           var user = firebase.auth().currentUser;
-          console.log('User data: '+user.uid);
+          console.log('User data: ' + user.uid);
   //profile picture
-          $("#userPic").append(user.profile_picture);
+          if(user.photoURL !== null || user.photoURL == " "){
+            var img = $("#userPic");
+            img.attr("src", img.attr("src").replace("assets/img/avatar3.png", user.photoURL));
 
-          var img = $("#userPic");
-          img.attr("src", img.attr("src").replace("assets/img/avatar3.png", user.photoURL));
 
+        }else{
+          $("#userPic").val("assets/img/avatar3.png")
+        }
 
 
   //*************UPDATE USER INFORMATION FOR FIRST TIME LOGINS**********

@@ -58,6 +58,8 @@ function writeUserData(date, email,name, imageUrl) {
           console.log('User login error', error.message);
           alert(error.message)
         });
+
+
         //alert("Wrong Email or Password");
         //txtEmail = "ReEnter";
 
@@ -97,9 +99,32 @@ function writeUserData(date, email,name, imageUrl) {
     firebase.auth().onAuthStateChanged(firebaseUser => {
         if (firebaseUser) {
             console.log(firebaseUser+" has signed in.");
+            if(firebaseUser.emailVerified==true){
+
+
+                //remove email from unverified
+                  firebase.database().ref().child('emails/unverified').orderByChild('email').equalTo(firebaseUser.email).on("value", function (snap){
+                    var removeObject = snap.ref;
+                    return removeObject.remove();
+                    console.log('object was removed');
+
+                  });
+
+                  //add email to verified list
+                  var emailRef =firebase.database().ref('emails/verified/'+firebaseUser.uid).set({
+                    "email": firebaseUser.email
+                  });
+            // //open home screen
+            // if(firebaseUser.displayName == null){
+            //   window.location.href='profile.html';
+            // }
             window.location.href = 'home.html';
+          }
+          else{
+            window.location.href= 'verified-check.html';
+          }
             //btnLogout.classList.remove('hide');
-        } else {
+      } else {
             console.log("not logged in");
             //btnLogout.classList.add("hide");
         }

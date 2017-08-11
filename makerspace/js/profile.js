@@ -41,8 +41,14 @@
             var currentPhotoURL = user.photoURL;
             console.log(phoneText)
             //DISPLAY USER INFORMATION TO DOCUMENT
-            var img = $("#userPic");
-            img.attr("src", img.attr("src").replace(img.attr("src"), currentPhotoURL));
+            //profile picture
+                    if(user.photoURL !== null){
+                      var img = $("#userPic");
+                      img.attr("src", img.attr("src").replace("assets/img/avatar3.png", user.photoURL));
+
+
+                  }
+            //img.attr("src", img.attr("src").replace(img.attr("src"), currentPhotoURL));
             $("#txtName").append(fullname);
             $("#year").val(year);
             $("#phoneNum").val(phoneText);
@@ -92,7 +98,6 @@
                     var img = $("#userPic");
                     img.attr("src", img.attr("src").replace(img.attr("src"), downloadURL));
 
-
                     //update firebase user node
 
                     userRef.update({
@@ -108,16 +113,6 @@
                       }, function(error) {
                           // An error happened.
                       });
-
-
-
-
-
-
-
-
-
-
 
                   });
 

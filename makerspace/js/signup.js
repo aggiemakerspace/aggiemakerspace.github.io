@@ -131,6 +131,7 @@ $("#getInput").keyup(function(event){
             });
 
 
+
           //  setTimeout('', 4000);
           //  const login = auth.signInWithEmailAndPassword(txtemail, pass);
             // login.catch(function(error){
@@ -142,6 +143,14 @@ $("#getInput").keyup(function(event){
 
             firebase.auth().onAuthStateChanged(function(user) {
               if (user) {
+
+                //send verification email
+                user.sendEmailVerification().then(function() {
+                  // Email sent.
+                }).catch(function(error) {
+                  // An error happened.
+                });
+
               writeUserData(date, userEmail,fullname, imageUrl, user.uid);
 
               //CREATE A DISCLAIMER AND SETUP NODE
@@ -149,7 +158,7 @@ $("#getInput").keyup(function(event){
               setUpNode(user.uid);
               //add user to email list
 
-              var emailRef =firebase.database().ref('emails/'+user.uid).set({
+              var emailRef =firebase.database().ref('emails/unverified/'+user.uid).set({
                 "email": user.email
               });
 
