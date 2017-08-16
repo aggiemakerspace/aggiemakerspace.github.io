@@ -2,6 +2,7 @@
 (function() {
 
     var provider = new firebase.auth.GoogleAuthProvider();
+    //keep track of profile image load
     var oldURL;
 
     const config = {
@@ -27,7 +28,37 @@
 
         console.log(user)
 
+
+
+          var FunctionOne = function () {
+          // create a deferred object
+          var r = $.Deferred();
+
+          checkIfSetUp(user);
+          setTimeout(function () {
+            // and call `resolve` on the deferred object, once you're done
+            r.resolve();
+          }, 2500);
+
+          // return the deferred object
+          return r;
+        };
+
+
+
+        var FunctionTwo = function () {
+          //get user info
+          userInfo();
+          console.log('FunctionTwo');
+        };
+
+        // call FunctionOne and use the `done` method
+        // with `FunctionTwo` as it's parameter
+        FunctionOne().done(FunctionTwo);
+
       //GET USER INFORMATION
+
+      function userInfo(){
           ref.orderByChild('email').equalTo(user.email).on("child_added", function (snap){
             var object = snap.val();
             console.log(object);
@@ -45,8 +76,6 @@
                     if(user.photoURL !== null){
                       var img = $("#userPic");
                       img.attr("src", img.attr("src").replace("assets/img/avatar3.png", user.photoURL));
-
-
                   }
             //img.attr("src", img.attr("src").replace(img.attr("src"), currentPhotoURL));
             $("#txtName").append(fullname);
@@ -68,23 +97,7 @@
                 });
 
                 function uploadFile(){
-              //
-              //   console.log('file name is'+ file.name)
-              //   var userRef = firebase.database().ref('users/'+ user.uid);
-              //
-              //   userRef.on("value", snap => {
-              //   oldURL = snap.val().profile_picture;
-              //   console.log(oldURL);
-              //   // Delete existing Ref
-              //   var deleteRef = firebase.storage().ref().child('makerspace/user_storage/'+user.email+'/profilePicture/'+oldURL);
-              //     deleteRef.delete().then(function() {
-              //       // File deleted successfully
-              //       console.log('Success')
-              //     }).catch(function(error) {
-              //       // Uh-oh, an error occurred!
-              //     });
-              //
-              // });
+
                   var storageRef = firebase.storage().ref().child('makerspace/user_storage/'+user.email+'/profilePicture/'+file.name);
                   var uploadTask = storageRef.put(file);
 
@@ -118,11 +131,13 @@
 
               }
 
-});
+            });
+
             //UPDATE USER INFORMATION
             $(document).ready(function(){
 
                 $("#btnSubmit").click(function(){
+                    console.log("submit button was clicked");
                     var majNum =   $("#major").val();
                     var majorsList =
                       [
@@ -148,6 +163,7 @@
                       userTemp.major_class = majorsList[majNum];
                       userTemp.year_class = yInput;
                       userTemp.phone = pInput;
+
                      userRef.update(userTemp);
 
                      setTimeout(function(){ alert('Success your profile was updated. ');
@@ -157,33 +173,34 @@
 
                     //delete old picture
 
-
-
-
                 });
             });
 
                   //console.log(user.displayName);
 
 
-      } else
+      }
+    } else
       {
       // No user is signed in.
       console.log("No user is signed in");
       window.location.href = 'signin.html';
       }
 
+
   });
 
-}());
+}());//firebase close
 
 
 
+
+
+//***DOM****//
 function getMajor(major){
 
   switch (major) {
       case 'Biological Engineering':
-
         return 1;
         break;
       case 'Chemical Engineering':
@@ -220,3 +237,108 @@ function getMajor(major){
         return 12;
     }
   };
+
+
+//***** FINISH SIGNUP PROCESS *******
+/*============FUNCTIONS ==============*/
+
+
+//Remove user object from signinQueue, then add object to user object
+
+function finishSignup(userInput){
+        console.log("finishSignup()");
+        var user = userInput;
+
+        var signupQueue = firebase.database().ref().child('signupQueue');
+        var userRef = firebase.database().ref('users/'+ user.uid);
+        var userTemp;
+        signupQueue.orderByChild('email').equalTo(user.email).on("child_added", function (snap){
+          userTemp = snap.val();
+          userTemp.uid = user.uid;
+          console.log(userTemp);
+          //update user node
+          userRef.update(userTemp);
+          console.log(userTemp.name);
+          //update auth user
+          user.updateProfile({
+            displayName: userTemp.name,
+            photoURL: userTemp.photoURL,
+          }).then(function() {
+            // Update successful.
+          }, function(error) {
+              // An error happened.
+          });
+
+        });
+      //SET UP EMPTY NODES FOR NEW user
+      setup(user);
+      //ONCE DONE, CLEAN UP PAYLOAD
+
+      signupQueue.orderByChild('email').equalTo(user.email).on("child_added", function (snap){
+          var userRef = snap.ref;
+          return userRef.remove();
+        });
+
+}
+
+
+//set up empty nodes
+function setup (userInput){
+  console.log("...Setting up user");
+  var user= userInput;
+  try{
+
+
+
+
+        //CREATE A MACHINE MACHINE_APPROVAL NODE
+        var mARef = firebase.database().ref().child('machine_approval/'+user.uid);
+
+        mARef.set({
+          "3d_printer": false,
+          "boss_laser_engraver": false,
+          "cnc_milling_machine": false,
+          "other_mill": false,
+          "safety": false
+        });
+        //CREATE DISCLAIMER NODE
+
+        var dRef = firebase.database().ref().child('disclaimer/'+user.uid);
+
+        dRef.set({
+          'read': false,
+          'date': " ",
+          'setup': true
+        });
+          //once completed
+          return true;
+      }
+      catch(err){
+          console.log(err);
+          alert(err);
+        }
+
+}
+
+function checkIfSetUp(val){
+  var user = val;
+
+  console.log('check has began on '+ user.email)//if null what happens?
+  var dRef = firebase.database().ref().child('disclaimer/'+user.uid);
+      if (dRef == null){
+            // if(snap.key == 'setup' &&snap.val() === true){
+            console.log('Ref not found.')
+            return false;
+          }else{
+            dRef.on("child_added", snap => {
+              console.log(snap.key,snap.val())
+            if(snap.key === 'setup' && snap.val()===false){
+              console.log('Set up is false');
+              finishSignup(user);
+              }
+
+            });
+
+        }
+
+}

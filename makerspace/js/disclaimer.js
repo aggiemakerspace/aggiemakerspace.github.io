@@ -53,7 +53,7 @@
                                 // read: true});
                                 alert('You will not be able to access the User Portal unless you accept the agreement.');
                                 firebase.auth().signOut();
-                                console.log(firebaseUser + "has logged out");
+                                console.log('user has logged out');
                             });
 
 

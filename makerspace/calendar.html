@@ -131,6 +131,10 @@
 <body language="javascript" class="" onload="disclaimerCheck();">
 <script>
 function disclaimerCheck(){
+  if(sessionStorage.admin == true){
+    console.log('Sessions Storage true');
+    $("#admin" ).removeClass("hideme");
+  }
   firebase.auth().onAuthStateChanged(function(user){
     if (user){
         var user = firebase.auth().currentUser;

@@ -181,6 +181,9 @@
                                           <div class="panel-body">
                                             <p></p>
                                             <div class="well" >
+                                              <a  onclick="logOut();return false" style="; margin-bottom:10px;"> <span class=" 	fa fa-arrow-circle-left">   <i class="fa fa-edit" aria-hidden="true"></i><h4>Sign Back In!</h4>
+                                         </span></a>
+
                                               <h3>Hello future User,</h3>
                                               <br>
                                               <h4>We noticed that you need to verify your email address (<span style="color:blue" id="displayEmail"></span>). Please check your inbox for the email we sent you. Or simply, click the the button below to resend an email.
@@ -188,8 +191,7 @@
 
                                               <p></p>
                                               <button id="btnResend" type="button" class="btn btn-info btn-block">Resend <span class="glyphicon glyphicon-repeat"></span></button>
-                                            <h3><a href="../index.html"  style="float:left; margin-bottom:10px;"> <span class=" 	fa fa-arrow-circle-left">   <i class="fa fa-home" aria-hidden="true"></i>
-                                       </span></a></h3>
+
                                               <br>
                                           </div>
                                         </div>
@@ -218,12 +220,15 @@
 
   <!--Logout-->
 
-  <!-- <script>
+  <script>
       function logOut(){
+
       firebase.auth().signOut();
+
+      window.location.href= '../index.html';
       console.log("user has logged out");
       };
-  </script> -->
+  </script>
 
   <script>
     $(document).ready(function(){

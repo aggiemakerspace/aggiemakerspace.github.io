@@ -34,14 +34,8 @@ function writeUserData(date, email,name, imageUrl) {
     const txtLastName = document.getElementById('txtLname');
     const btnRegister = document.getElementById('btnRegister');
 
-    //if enter button is pressed
+    var setup;
 
-    // $("#getInput").keyup(function(event){
-    //     if(event.keyCode == 13){
-    //         $("#btnLogin").click();
-    //     }
-    // });
-    // add login event
     btnLogin.addEventListener("click", e => {
         //get email and pass
         const email = txtEmail.value;
@@ -51,28 +45,11 @@ function writeUserData(date, email,name, imageUrl) {
         //sign in
         const promise = auth.signInWithEmailAndPassword(email, pass);
         //promise.catch(console.log(e.message));
-        // promise.catch(console.log("message!!!!" + e.message));
-        // alert(e.message);
 
         promise.catch(function(error){
           console.log('User login error', error.message);
           alert(error.message)
         });
-
-
-        //alert("Wrong Email or Password");
-        //txtEmail = "ReEnter";
-
-        /*  promise.catch(console.log(message));*/
-    //AFTER SIGN IN
-        //
-        // var user = firebase.auth().currentUser;
-        // console.log("User:"+String(user.uid));
-        // var name;
-        // if (user != null) {
-        //     name = user.displayName;
-        //
-        // };
 
 
     });
@@ -88,45 +65,114 @@ function writeUserData(date, email,name, imageUrl) {
 
 
 
-    // <!-- Log out-->
-    // btnLogout.addEventListener('click', e => {
-    //     firebase.auth().signOut();
-    // });
-
-
-
 //add a realtime listener
     firebase.auth().onAuthStateChanged(firebaseUser => {
         if (firebaseUser) {
+
             console.log(firebaseUser+" has signed in.");
             if(firebaseUser.emailVerified==true){
+              console.log("User has verified email.");
 
 
-                //remove email from unverified
-                  firebase.database().ref().child('emails/unverified').orderByChild('email').equalTo(firebaseUser.email).on("value", function (snap){
-                    var removeObject = snap.ref;
-                    return removeObject.remove();
-                    console.log('object was removed');
+              var FunctionOne = function () {
+                      var
+                            a = $.Deferred(),
+                            b = $.Deferred();
 
-                  });
+                          //remove email from unverified
+                            firebase.database().ref().child('emails/unverified').orderByChild('email').equalTo(firebaseUser.email).on("value", function (snap){
+                              var removeObject = snap.ref;
+                              return removeObject.remove();
+                              console.log('object was removed');
+                            });
+                          setTimeout(function () {
+                            console.log('a done');
+                            a.resolve();
+                          },2500
+                        );
 
-                  //add email to verified list
-                  var emailRef =firebase.database().ref('emails/verified/'+firebaseUser.uid).set({
-                    "email": firebaseUser.email
-                  });
-            // //open home screen
-            // if(firebaseUser.displayName == null){
-            //   window.location.href='profile.html';
-            // }
-            window.location.href = 'home.html';
-          }
-          else{
+                          // some other fake asyc task
+                          //add email to verified list
+                          var emailRef =firebase.database().ref('emails/verified/'+firebaseUser.uid).set({
+                            "email": firebaseUser.email
+                          });
+
+                          setTimeout(function () {
+                            console.log('b done');
+                            b.resolve();
+                          },2500);
+
+                          return $.Deferred(function (def) {
+                            $.when(a, b).done(function () {
+                              def.resolve();
+                            });
+                          });
+                        };
+                        // define FunctionTwo as needed
+                        var FunctionTwo = function () {
+
+                          console.log('FunctionTwo');
+
+                          window.location.href = 'profile.html';
+                        };
+
+                        // call FunctionOne and use the `done` method
+                        // with `FunctionTwo` as it's parameter
+
+                          console.log('check has began on '+ firebaseUser.email)//if null what happens?
+                          var dRef = firebase.database().ref().child('disclaimer/'+firebaseUser.uid);
+                              // if (dRef == null){
+                              //       // if(snap.key == 'setup' &&snap.val() === true){
+                              //       console.log('Ref not found.')
+                              //       return false;
+                              //     }
+                          function checkForFirstTimeUser(){
+                              firebase.database().ref().child('disclaimer/'+ firebaseUser.uid).on("child_added", function (snap){
+                                console.log(snap.val());
+                                console.log("setup Check: "+ snap.val());
+
+                                if (snap.key == 'setup' && snap.val() === false){
+                                  setup = false;
+                                  console.log(snap.key, snap.val());
+                                  console.log('You have not setup');
+                                  return false;
+                                }
+                                else{
+                                  return true;
+                                }
+                              });
+                            }
+                              setup = checkForFirstTimeUser();
+
+                              if(setup == true){
+                                console.log('The user has already been setup, redirecting to homepage...');
+                                window.location.href='home.html';
+                              }else{
+                                //call setup functions
+                                FunctionOne().done(FunctionTwo);
+                              }
+                              console.log('Set up is done');
+                              alert();
+
+
+
+
+
+
+
+
+
+
+
+//end of verified check
+          }else{
             window.location.href= 'verified-check.html';
           }
-            //btnLogout.classList.remove('hide');
+
+
       } else {
             console.log("not logged in");
-            //btnLogout.classList.add("hide");
+
         }
     });
 

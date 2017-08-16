@@ -10,6 +10,7 @@ function clockOutUser(userEmail){
   var timeSheet = firebase.database().ref().child('timesheet');
 
   var timeOut = new Date();
+  var date =  timeOut.toLocaleDateString('en-US');
   ref.orderByChild('email').equalTo(userEmail).once("value", function (snap){
     var userObject = snap.val();
 //check if user exists
@@ -41,10 +42,78 @@ function clockOutUser(userEmail){
                                 var tempUser = snap.val();
                                 tempUser.timeOut =timeOut;
                                 tempUser.logged_in=false;
+                                tempUser.date = date;
+
+                                //***Calculation
+
+                                // var ti=  new Date(timeIn);
+                                // var to = new Date(timeOut);
+
+                                var ti = tempUser.timeIn;
+                                var to = timeOut;
+                                ti = Date.parse(ti);
+                                to = Date.parse(to);
+
+
+                                //ti =  (1502596800000);
+
+                                //duration
+                                var diff = Math.abs(ti-to)/1000;
+
+                                tempUser.duration = diff;
+
+                                console.log('timein:'+ ti+'timeout:'+to)
+                                console.log(diff);
+
+
+                                //convert to minutes
+                                var time = diff;
+                                //s = 386547057;
+                                var   s
+                                    , m
+                                    , seconds
+                                    , h
+                                    , minutes
+                                    , days
+                                    , hours;
+
+                                s= diff;
+                                  // Split s into minutes and seconds.
+                                  m       = s / 60; // 6442450 minutes.
+                                  seconds = s % 60; // 57 seconds.
+
+                                  // Split m into hours and minutes.
+                                  h       = m / 60; // 107374 hours.
+                                  minutes = m % 60; // 10 minutes.
+
+                                  // Split h into days and hours.
+                                  days    = h / 24; // 4473 days.
+                                  hours   = h % 24; // 22 hours.
+
+                                var timeArray = [days,hours, minutes, seconds];
+                                if(timeArray[0]<1){
+                                  timeArray[0]=0;
+                                }
+                                for (var prop in timeArray){
+
+                                  timeArray[prop]=Math.round(timeArray[prop]);
+                                  console.log(timeArray[prop]);
+                                }
+                                var timeStamp = timeArray[1]+" Hours, "+timeArray[2]+" Minutes, "+timeArray[3]+" Seconds";
+
+
+
+                                tempUser.duration_full = timeStamp;
+
+
                                 //update timeout
+
+                                //console.log('KEY OF TIMESHEET'+ key);
                                 timeRef.child(tempUser.uid).update(tempUser);
 
-
+                                timeSheet.child('count').transaction(function(i){
+                                  return i -1;
+                                });
                                 firebase.database().ref('timesheet/'+tempUser.uid).push(tempUser);
                                 console.log(userEmail+'was clocked out at'+ timeOut)
 
@@ -128,7 +197,7 @@ function clockOutUser(userEmail){
         //     <div class=""></span>CONFIG <span class="glyphicon glyphicon-cog"></div>
         //   </a>
              var tObj = snap.val();
-            
+
              if(tObj.timeOut == " "){
                $("#editable").append(
                tObj.name+" has clocked in at "+tObj.timeIn +"\</ul><button onclick=\"clockOutUser('"+tObj.email+"')\"style='float:right'type='button' id="+
@@ -212,8 +281,10 @@ function clockOutUser(userEmail){
                                               //console.log("USER NOT LOGGED IN.");
                                               firebase.database().ref('timesheetQueue/'+userObject.uid).update({
                                                    email: userEmail,
+                                                   date: " ",
                                                    uid: userObject.uid,
                                                    duration: " ",
+                                                   duration_full: " ",
                                                    timeOut:" ",
                                                    logged_in:"true",
                                                    timeIn:timeIn,
@@ -229,7 +300,9 @@ function clockOutUser(userEmail){
 
                                     });
 
-
+                                timeSheet.child('count').transaction(function (i){
+                                  return i+1;
+                                })
                                 //reset user email
                                 //$("#usrEmail").val("");
                               });

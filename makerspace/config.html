@@ -118,24 +118,7 @@
   position: center;
 }
 
-/*.well{
-  color: #00000;
-  width: 100%;
 
-  box-shadow: 5px 5px 5px #888888;
-}*/
-/*#editable{
-  overflow-y:auto;
-}
-#editable1 {
-  overflow-y:auto;
-}
-#editable2 {
-  overflow-y:auto;
-}
-#editable3 {
- overflow-y:auto;
-}*/
 .btn span:hover {
     color: #1abc9c !important;
 }.panel-primary{
@@ -148,6 +131,7 @@ th{
   padding-left: 40px;
   padding-right: 10px
 }
+
 </style>
 
 
@@ -172,11 +156,11 @@ th{
       </div>
       <div class="collapse navbar-collapse" id="myNavbar">
         <ul class="nav navbar-nav navbar-right">
-          <li><a href="home.html">MY PROFILE </a></li>
-          <li><a href="calendar.html">CALENDAR</a></li>
-          <li><a href="classes.html">CLASSES</a></li>
-          <li><a href="inventory.html" class="hide">INVENTORY</a></li>
-          <li><a href="config.html" style="color:red">ADMIN CONSOLE</a></li>
+          <li><a id="admin" class="hideme"  href="../makerspace/config.html" style="color:red">ADMIN CONSOLE</a></li>
+          <li><a href="../makerspace/home.html">MY PROFILE </a></li>
+          <li><a href="../makerspace/calendar.html">CALENDAR</a></li>
+          <li><a href="../makerspace/classes.html">CLASSES</a></li>
+          <li><a href="../makerspace/inventory.html" class="hide">INVENTORY</a></li>
           <li><a  href="#" onclick="logOut();return false">SIGN OUT</a></li>
         </ul>
       </div>
@@ -203,9 +187,21 @@ th{
                     <div class="row">
                               <div style="margin-left: 50px; padding-left:20px" class="col-sm-2 col-md-2 col-lg-2"></div>
                               <div class="text-center">
-                                <a href="#" data-toggle="tooltip" data-placement="top" title="Click to Open."><i onclick="location.href='../timecard/timelog.html'" class="fa fa-clock-o text-center" style="font-size:48px;color:green">
+
+                                <a href="#" data-toggle="tooltip" data-placement="top" title="Click to Open.">
+                                  <i onclick="location.href='../timelog/timelog.html'" class="fa fa-clock-o text-center" style="font-size:48px;color:green">
                                   <h2>Start Clock In</h2></i></a>
-                              </div>
+
+
+                                <a href="#" data-toggle="tooltip" data-placement="top" title="Click to Open.">
+                                  <i onclick="location.href='../timesheet/timecard.html'" class="fa fa-calendar-o text-center" style="font-size:48px;color:light-blue">
+                                  <h2>View Time Sheet</h2></i></a>
+
+                              <a href="#" data-toggle="tooltip" data-placement="top" title="Click to Open.">
+                                <i onclick="location.href='../makerspace/create_event.html'" class="fa fa-calendar-plus-o text-center" style="font-size:48px;color:light-blue">
+                                <h2>Create Event</h2></i></a>
+                                  </div>
+
                               <div class="col-sm-12 col-md-12 col-lg-12">
                               <!-- Main Content -->
                                 <div id="main" class="">

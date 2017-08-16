@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<title>MakeSpace Timesheet Display</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!--Fonts-->
+<link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Open+Sans'>
+<link href="https://fonts.googleapis.com/css?family=Khand" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Khand|Ubuntu" rel="stylesheet">
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<!--Source -->
+<script src="https://www.gstatic.com/firebasejs/4.1.2/firebase.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!--Bootstrap-->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<!-- <script src="js/default.js"></script> -->
+
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+<link rel="stylesheet" src="css/jquery-ui.css">
+ <link rel="stylesheet" src="css/style.css">
+<script src="js/timecard.js"></script>
+
+
+
+<!-- Date Time Picker -->
+
+
+<style>
+
+
+
+    h1,h2,h3,h4,h5 {
+      font-family: "Khand", sans-serif;
+      text-align: center;
+
+    }
+
+    p,i{
+      font-family: "Khand|Ubuntu", sans-serif;
+      text-align: center;
+    }
+
+#admin{
+
+}
+
+.hideme{
+  display: none;
+  visibility: hidden;
+}
+#username{
+
+  position: center-fixed;
+  text-align: center;
+}
+
+
+.bg-1 {
+      background-color: #1abc9c; /* Green */
+      color: #ffffff;
+  }
+
+  .bg-2 {
+    background-color: #474e5d; /* Dark Blue */
+    color: #ffffff;
+}
+
+.container{
+      min-height: 70%;
+      min-height: -webkit-calc(100% - 186px);
+      min-height: -moz-calc(100% - 186px);
+      min-height: calc(100% - 186px);
+
+
+  }
+
+}
+.navbar {
+    padding-top: 15px;
+    padding-bottom: 15px;
+    border: 0;
+    border-radius: 0;
+    margin-bottom: 0;
+    font-size: 12px;
+    letter-spacing: 5px;
+  }
+
+  h1 {
+    font-shadow:none;
+  }
+  h1:hover, h1:active {
+    text-shadow: 1px 1px 8px rgba(46,204,113,0.5) , -1px -1px 8px rgba(46,204,113,0.5) , 1px -1px 8px rgba(46,204,113,0.5) , -1px 1px 8px rgba(46,204,113,0.5) ;
+-webkit-transition: text-shadow 250ms cubic-bezier(0.42, 0, 0.58, 1);
+-moz-transition: text-shadow 250ms cubic-bezier(0.42, 0, 0.58, 1);
+-o-transition: text-shadow 250ms cubic-bezier(0.42, 0, 0.58, 1);
+transition: text-shadow 250ms cubic-bezier(0.42, 0, 0.58, 1);
+font-size: 39px;
+  }
+
+
+.userpic {
+  position: relative;
+
+}
+#userPic{
+    box-shadow: 5px 5px 5px #888888;
+}
+
+.bg-5{
+
+  background-color: 	#f0ffff;
+  color: #CDC8B1
+}
+
+
+.navbar-nav  li a:hover {
+    color: #1abc9c !important;
+}
+
+.glyphicon.glyphicon-plus {
+    font-size: 40px;
+}
+
+.tooltip-inner {
+    white-space:pre-wrap;
+}
+
+.well {
+  box-shadow: 5px 5px 25px #888888;
+}
+
+input:focus {
+    outline:none;
+}
+
+input {
+    float:center;
+    background-color: transparent;
+    border: 0px solid;
+    height: 40px;
+    width: 200px;
+    color: #CCC;
+    font-size: 40px;
+    font-family: "Khand", sans-serif;
+    color: black;
+}
+
+
+a, a:hover, a:active{
+
+  text-decoration:none;
+}
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+td{
+  background-color: #f0ffff;
+
+}
+th {
+    text-align: left;
+    padding: 8px;
+    background-color: #f0ffff;
+    color: white;
+    color: #888888;
+    font-family: "Khand|Ubuntu", sans-serif;
+    text-align: center;
+}
+tr{
+  background-color: #4CA230;
+}
+tr:nth-child(even){background-color: #0000}
+
+</style>
+
+
+</head>
+
+
+
+<body language="javascript" class="" onload="disclaimerCheck();">
+<script>
+function disclaimerCheck(){
+  firebase.auth().onAuthStateChanged(function(user){
+    if (user){
+        var user = firebase.auth().currentUser;
+        console.log("DS"+user.uid);
+          firebase.database().ref().child('disclaimer/'+ user.uid).on("child_added", function (snap){
+            console.log(snap.val());
+            console.log("Disclaimer Check: "+ snap.val());
+
+            if (snap.key == 'read' && snap.val() === false){
+              console.log(snap.key, snap.val());
+              console.log('You have not read the disclaimer');
+
+              window.location.href = 'disclaimer.html';
+
+            }
+            else{
+              return true;
+            }
+          });
+      }
+
+
+});
+
+}
+</script>
+
+  <!-- Navbar -->
+  <div class="container">
+
+    <div class="container" >
+        <nav class="navbar navbar-default bg-5">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="" style="font: 20px Ubuntu, sans-serif">MakerSpace<span style="font: 10px Ubuntu, san-serif"> PORTAL</span></a>
+      </div>
+      <div class="collapse navbar-collapse" id="myNavbar">
+        <ul class="nav navbar-nav navbar-right">
+          <li><a id="admin" class="hideme"  href="../makerspace/config.html" style="color:red">ADMIN CONSOLE</a></li>
+          <li><a href="../makerspace/home.html">MY PROFILE </a></li>
+          <li><a href="../makerspace/calendar.html">CALENDAR</a></li>
+          <li><a href="../makerspace/classes.html">CLASSES</a></li>
+          <li><a href="../makerspace/inventory.html" class="hide">INVENTORY</a></li>
+          <li><a  href="#" onclick="logOut();return false">SIGN OUT</a></li>
+        </ul>
+      </div>
+</nav>
+    </div>
+
+</div>
+
+
+
+<div class="container"  style="" >
+  <div class=""  style="" >
+  <a id ="displayTime"><h1>Display TimeSheet</h1></a>
+
+
+    <div class="container-fluid" style="float:center">
+
+      <div class="well" style=:"color:blue">
+        <div class="row">
+          <h2><span id="btnLeft" style="float:left;margin-left:5%;" class="glyphicon glyphicon-chevron-left"></span>
+
+              <input type="text" id ="datepicker" class="" style="" value="" </>
+          <span id="btnRight" style="float:right;margin-right:5%" class="glyphicon glyphicon-chevron-right"></span></h2>
+      </div>
+
+
+        <div class="row" style=>
+          <div class="col-sm-5"></div>
+          <div class="col-sm-2" style="">
+
+
+        </div>
+          <div class="col-sm-5"></div>
+
+        </div>
+
+
+      </div>
+
+    </div>
+    <div class="row">
+
+
+
+
+    </div></p>
+  </div>
+
+  <!-- Main Content -->
+  <div id="main" class="">
+
+
+
+        <div class="container-fluid">
+
+          <span id="content"></span>
+          <table id="user_data"  style="margin:0" class="display" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th style="margin-left:0">Email</th>
+                            <th>TimeIn</th>
+                            <th>TimeOut</th>
+                            <th>Duration</th>
+                        </tr>
+                    </thead>
+
+                    <tbody id="table-body-pengguna">
+
+                    </tbody>
+                </table>
+        </div>
+
+
+    </div>
+</div>
+
+            <!-- Page Container -->
+            <div class="push"  style="" >
+
+
+            </div>
+
+  <!-- Footer -->
+
+  <footer class="container">
+      <h5></h5>
+  </footer>
+
+  <script>
+      // Used to toggle the menu on smaller screens when clicking on the menu button
+      function openNav() {
+          var x = document.getElementById("navDemo");
+          if (x.className.indexOf("w3-show") == -1) {
+              x.className += " w3-show";
+          } else {
+              x.className = x.className.replace(" w3-show", "");
+          }
+      }
+  </script>
+
+  <!--Logout-->
+
+  <script>
+      function  logOut(){
+      firebase.auth().signOut();
+      console.log(firebaseUser + "has logged out");
+      };
+  </script>
+
+  <script>
+    $( function() {
+      $( "#datepicker" ).datepicker();
+    } );
+    </script>
+
+
+
+</body>
+</html>

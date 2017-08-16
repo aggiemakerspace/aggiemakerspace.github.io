@@ -131,6 +131,10 @@ input[type="file"] {
   <!-- Check if user has signed the disclaimer -->
   <script>
   function disclaimerCheck(){
+    if(sessionStorage.admin == true){
+      console.log('Sessions Storage true');
+      $("#admin" ).removeClass("hideme");
+    }
     firebase.auth().onAuthStateChanged(function(user){
       if (user){
           var user = firebase.auth().currentUser;
@@ -174,11 +178,11 @@ input[type="file"] {
       </div>
       <div class="collapse navbar-collapse" id="myNavbar">
         <ul class="nav navbar-nav navbar-right">
+          <li><a id="admin" class="hideme"  href="config.html" style="color:red">ADMIN CONSOLE</a></li>
           <li><a href="home.html">MY PROFILE </a></li>
           <li><a href="calendar.html">CALENDAR</a></li>
           <li><a href="classes.html">CLASSES</a></li>
           <li><a href="inventory.html" class="hide">INVENTORY</a></li>
-          <li><a href="config.html" style="color:red">ADMIN CONSOLE</a></li>
           <li><a  href="#" onclick="logOut();return false">SIGN OUT</a></li>
         </ul>
       </div>
@@ -207,7 +211,7 @@ input[type="file"] {
                               </div>
 
                               <div class="text-center" style="padding-top: 10px;">
-    
+
 
                                 <div class='container'>
                                 <label for="file-upload" class="custom-file-upload">

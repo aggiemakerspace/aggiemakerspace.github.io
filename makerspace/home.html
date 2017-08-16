@@ -65,6 +65,8 @@
       min-height: -webkit-calc(100% - 186px);
       min-height: -moz-calc(100% - 186px);
       min-height: calc(100% - 186px);
+
+
   }
 
 }
@@ -120,6 +122,9 @@
     white-space:pre-wrap;
 }
 
+.well {
+  box-shadow: 5px 5px 25px #888888;
+}
 </style>
 
 
@@ -141,7 +146,7 @@ function disclaimerCheck(){
             if (snap.key == 'read' && snap.val() === false){
               console.log(snap.key, snap.val());
               console.log('You have not read the disclaimer');
-              
+
               window.location.href = 'disclaimer.html';
 
             }
@@ -172,7 +177,7 @@ function disclaimerCheck(){
       </div>
       <div class="collapse navbar-collapse" id="myNavbar">
         <ul class="nav navbar-nav navbar-right">
-          <li   ><a id="admin" class="hideme"  href="config.html" style="color:red">ADMIN CONSOLE</a></li>
+          <li><a id="admin" class="hideme"  href="config.html" style="color:red">ADMIN CONSOLE</a></li>
           <li><a href="home.html">MY PROFILE </a></li>
           <li><a href="calendar.html">CALENDAR</a></li>
           <li><a href="classes.html">CLASSES</a></li>
@@ -221,11 +226,6 @@ function disclaimerCheck(){
 
                         <div class="col-sm-4;col-md-4;col-lg-4">
                         </div>
-
-
-
-
-
 
                         </div>
 
@@ -335,8 +335,6 @@ function disclaimerCheck(){
           <div id ="editable2" style="padding-top: 5px"class=" text-center center-block">
 
             </div>
-
-
 
           </div>
       </div>

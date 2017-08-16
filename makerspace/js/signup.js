@@ -1,7 +1,7 @@
 
-function setUpNode(val){
+function setUpNode(uid){
 
-    var dRef = firebase.database().ref().child('disclaimer/'+val);
+    var dRef = firebase.database().ref().child('disclaimer/'+uid);
 
     dRef.set({
       'read': false,
@@ -35,10 +35,7 @@ function writeUserData(date, email,name, imageUrl, id) {
           }
         });
 
-
-
 }
-
 
 (function() {
 
@@ -54,10 +51,7 @@ function writeUserData(date, email,name, imageUrl, id) {
     };
 
     firebase.initializeApp(config);
-
-
     //get elements
-
     const txtPassword = document.getElementById('txtPassword');
     const btnSignUp = document.getElementById('btnSignUp');
     //const btnLogout = document.getElementById('btnLogout');
@@ -72,9 +66,6 @@ $("#getInput").keyup(function(event){
 });
     //add sign up event
     btnSignUp.addEventListener("click", e => {
-
-
-
         const fname = txtFirstName.value;
         const lname = txtLastName.value;
 
@@ -91,13 +82,7 @@ $("#getInput").keyup(function(event){
             var n = d.toUTCString();
 
             var fullname = fname.concat(" ",lname);
-            var imageUrl = "";
-            //send to DB
-
-            //sign up
-
-
-
+            var imageUrl = "gs://aggieplayground.appspot.com/makerspace/images/avatar3.png";
 
               //get inputted email
 
@@ -130,14 +115,6 @@ $("#getInput").keyup(function(event){
               alert(error.message)
             });
 
-
-
-          //  setTimeout('', 4000);
-          //  const login = auth.signInWithEmailAndPassword(txtemail, pass);
-            // login.catch(function(error){
-            //   console.log('User login error', error.message);
-            //   alert(error.message)
-            // });
             var today = new Date();
             var date = today.toString();
 
@@ -171,14 +148,9 @@ $("#getInput").keyup(function(event){
               }
             });
 
-
-
         };//else close
 
       });
-
-
-
 
     <!-- Function to logout-->
 

@@ -1,211 +1,6 @@
-/****SIGN UP PROCESS****/
-
-function finishSignup(userInput){
-        console.log("finishSignup()");
-        var user = userInput;
-
-        var signupQueue = firebase.database().ref().child('signupQueue');
-        var userRef = firebase.database().ref('users/'+ user.uid);
-        var userTemp;
-        signupQueue.orderByChild('email').equalTo(user.email).on("child_added", function (snap){
-          userTemp = snap.val();
-          userTemp.uid = user.uid;
-          console.log(userTemp);
-          //update user node
-          userRef.update(userTemp);
-          console.log(userTemp.name);
-          //update auth user
-          user.updateProfile({
-            displayName: userTemp.name,
-            photoURL: userTemp.photoURL,
-          }).then(function() {
-            // Update successful.
-          }, function(error) {
-              // An error happened.
-          });
-
-        });
-      //SET UP EMPTY NODES FOR NEW user
-      setup(user);
-      //ONCE DONE, CLEAN UP PAYLOAD
-
-      signupQueue.orderByChild('email').equalTo(user.email).on("child_added", function (snap){
-          var userRef = snap.ref;
-          return userRef.remove();
-        });
-
-}
-
-//check disclaimer node for true key
-function disclaimerCheck(userInput){
-var user = userInput;
-firebase.database().ref().child('disclaimer/'+ user.uid).on("child_added", function (snap){
-  console.log("Disclaimer Check: "+ snap.val().read);
-  if (snap.val().read == false){
-    console.log('You have not read the disclaimer');
-    window.location.href = 'disclaimer.html';
-
-  }
-  else{
-    console.log(user.email +" has signed the waiver.")
-    return true;
-  }
-});
-
-}
-
-
-//set up empty nodes
-function setup (userInput){
-  console.log("...Setting up user");
-  var user= userInput;
-  try{
-
-
-        // //CREATE CHECKOUT ITEMS NODE
-        // var checkOutRef = firebase.database().ref().child('checkOutItems/'+ user.uid);
-        //
-        // checkOutRef.child("item2").push({
-        //   dateIn: "",
-        //   dateOut: "",
-        //   item_descp: "",
-        //   item_name: ""
-        //
-        // });
-
-
-        //CREATE A MACHINE MACHINE_APPROVAL NODE
-        var mARef = firebase.database().ref().child('machine_approval/'+user.uid);
-
-        mARef.set({
-          "3d_printer": false,
-          "boss_laser_engraver": false,
-          "cnc_milling_machine": false,
-          "other_mill": false,
-          "safety": false
-        });
-        //CREATE DISCLAIMER NODE
-
-        var dRef = firebase.database().ref().child('disclaimer/'+user.uid);
-
-        dRef.set({
-          'read': false,
-          'date': " ",
-          'setup': true
-        });
-          //once completed
-          return true;
-      }
-      catch(err){
-          console.log(err);
-          alert(err);
-        }
-
-}
-
-function checkIfSetUp(val){
-  var user = val;
-
-  console.log('check has began on '+ user.uid)//if null what happens?
-
-  var dRef = firebase.database().ref().child('disclaimer/'+user.uid);
-      if (dRef == null){
-            // if(snap.key == 'setup' &&snap.val() === true){
-            console.log('Ref not found.')
-            return false;
-          }else{
-            dRef.on("child_added", snap => {
-              console.log(snap.key,snap.val())
-            if(snap.key === 'setup' && snap.val()===false){
-
-              console.log('Set up is false');
-finishSignup(user);
-
-}
-
-          });
-
-        }
-
-}
-
-
-
-
-
-//initialize firebase connection
-function firebaseInit(){
-
-        var provider = new firebase.auth.GoogleAuthProvider();
-
-        const config = {
-            apiKey: "AIzaSyDusG6NBnTuNA8gamGCLlF-fagPO4ozJpk",
-            authDomain: "aggieplayground.firebaseapp.com",
-            databaseURL: "https://aggieplayground.firebaseio.com",
-            projectId: "aggieplayground",
-            storageBucket: "aggieplayground.appspot.com",
-            messagingSenderId: "698274958365"
-        };
-
-        firebase.initializeApp(config);
-
-
-}
-
-//checks if admins or superuser
-//if admin or super user display admin console
-function checkifAdmin (userInput){
-  //firebaseInit();
-  var user = userInput;
-  var adminAccess = false;
-  var ref = firebase.database().ref().child('users');
-  ref.orderByChild('email').equalTo(user.email).on("child_added", function (snap){
-      //console.log(snap.val());
-  var object = snap.val();
-  var roles = object.roles;
-  //console.log(roles);
-  //var displayRole = roles.administrator;
-  for (var prop in roles) {
-      console.log(prop, roles[prop]);
-
-        if ((roles[prop]) === true )
-       {
-
-         switch(prop){
-           case 'administrator':
-
-             adminAccess = true;
-             console.log("Admin Approved");
-             $("#.hideme" ).remove();
-             break;
-
-           case 'superuser':
-
-             adminAccess = true;
-             console.log("SuperUser Approved");
-             $("#admin" ).removeClass("hideme");
-             break;
-            default:
-              adminAccess=false;
-              $("#admin" ).remove();
-         }
-
-
-      }
-
-      }
-    });
-
-
-
-}
-
 (function() {
-
     firebaseInit();
-
     //get elements
-
     const userPic = document.getElementById('userPic');
     const userName = document.getElementById('userName');
     const joinDate = document.getElementById('joinDate');
@@ -214,16 +9,15 @@ function checkifAdmin (userInput){
     const adminConsole = document.getElementById("admin");
     // const profileDisplay = document.getElementById("profileDisplay");
 
-
     firebase.auth().onAuthStateChanged(function(user) {
         //var userId = user.uid;
-
         if (user) {
 
   console.log('is user verified'+ user.emailVerified);
-  if(user.emailVerified == false){
-    window.location.href= 'verified-check.html';
-  }
+
+      if(user.emailVerified == false){
+        window.location.href= 'verified-check.html';
+      }
           //check if user is verified
 
           user.providerData.forEach(function (profile){
@@ -231,34 +25,24 @@ function checkifAdmin (userInput){
           checkifAdmin(user);
     // User is signed in.
 
+    //********GET USER PICTURE***********
           var user = firebase.auth().currentUser;
-          console.log('User data: ' + user.uid);
-  //profile picture
-          if(user.photoURL !== null || user.photoURL == " "){
+
+          if(user.photoURL !== null || user.photoURL == ""){
             var img = $("#userPic");
             img.attr("src", img.attr("src").replace("assets/img/avatar3.png", user.photoURL));
-
-
         }else{
           $("#userPic").val("assets/img/avatar3.png")
         }
 
-
   //*************UPDATE USER INFORMATION FOR FIRST TIME LOGINS**********
             console.log('Before check'+ user.displayName);//displaying null
             console.log('User object: '+ user);
-            //**********************
 
-            checkIfSetUp(user);
-              // console.log(value);
-              //           if (checkIfSetup(user)== false){
-              //             console.log("FinishSignUp Call")
-              //             finishSignup(user);
-          //}
 
            var ref = firebase.database().ref().child('users');
 
-//  **Get User Info**
+//  **DISPLAY USER INFO: Get User Info**
           ref.orderByChild('email').equalTo(user.email).on("child_added", function (snap){
 
           var object = snap.val();
@@ -279,23 +63,15 @@ function checkifAdmin (userInput){
                {
                  if(prop == "administrator"||"superuser"){
                    adminAccess = true;
-                   //console.log("Admin Approved");
-
+                   //Amend Navbar, show Admin Console
+                   console.log("Admin Approved");
                    //adminConsole.classList.add("hide");
-                   //$("#admin").show();
+                   $("#admin").show();
 
                 }
                 $("#title").append("<h4>"+prop+"</h4>");
-                //
-
               }
         };
-
-
-
-//DISPLAY USER INFORMATION
-          //console.log("This is the username:" + user.displayName);
-
 
             document.getElementById("joinDate").innerHTML= joinDate;
             document.getElementById("userName").innerHTML=fullname;
@@ -377,12 +153,73 @@ function checkifAdmin (userInput){
       });
 
 
-
-
-
-
-
-
-
-
 }());
+
+
+//initialize firebase connection
+function firebaseInit(){
+
+        var provider = new firebase.auth.GoogleAuthProvider();
+
+        const config = {
+            apiKey: "AIzaSyDusG6NBnTuNA8gamGCLlF-fagPO4ozJpk",
+            authDomain: "aggieplayground.firebaseapp.com",
+            databaseURL: "https://aggieplayground.firebaseio.com",
+            projectId: "aggieplayground",
+            storageBucket: "aggieplayground.appspot.com",
+            messagingSenderId: "698274958365"
+        };
+
+        firebase.initializeApp(config);
+
+
+}
+
+//checks if admins or superuser
+//if admin or super user display admin console
+function checkifAdmin (userInput){
+  //firebaseInit();
+  var user = userInput;
+  var adminAccess = false;
+  var ref = firebase.database().ref().child('users');
+  ref.orderByChild('email').equalTo(user.email).on("child_added", function (snap){
+      //console.log(snap.val());
+  var object = snap.val();
+  var roles = object.roles;
+  //console.log(roles);
+  //var displayRole = roles.administrator;
+  for (var prop in roles) {
+      console.log(prop, roles[prop]);
+
+        if ((roles[prop]) === true )
+       {
+
+         switch(prop){
+           case 'administrator':
+             sessionStorage.admin=true;
+             adminAccess = true;
+             console.log("Admin Approved");
+             $("#.hideme" ).remove();
+             break;
+
+           case 'superuser':
+              sessionStorage.admin=true;
+
+             adminAccess = true;
+             console.log("SuperUser Approved");
+             $("#admin" ).removeClass("hideme");
+             break;
+            default:
+              adminAccess=false;
+              $("#admin" ).remove();
+         }
+
+
+      }
+
+      }
+    });
+
+
+
+}
