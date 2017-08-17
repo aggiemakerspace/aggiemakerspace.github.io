@@ -1,3 +1,29 @@
+function checkForFirstTimeUser(firebaseUser){
+    var result;
+    firebase.database().ref().child('disclaimer/'+ firebaseUser.uid).on("child_added", function (snap){
+      console.log(snap.val());
+      console.log(snap.key +" "+ snap.val());
+
+      if (snap.key === 'setup'){
+
+        switch (snap.val()){
+          //console.log(snap.key, snap.val());
+          case false:
+            console.log('setup is false');
+            result = false;
+            break;
+          case true:
+            console.log('setup is true');
+            result = true;
+            break;
+          default:
+            break;
+        }
+      }
+
+    });
+    return result;
+}
 
 function writeUserData(date, email,name, imageUrl) {
   firebase.database().ref('users/' + userId).set({
@@ -69,7 +95,7 @@ function writeUserData(date, email,name, imageUrl) {
     firebase.auth().onAuthStateChanged(firebaseUser => {
         if (firebaseUser) {
 
-            console.log(firebaseUser+" has signed in.");
+            console.log(firebaseUser.userEmail+" has signed in.");
             if(firebaseUser.emailVerified==true){
               console.log("User has verified email.");
 
@@ -121,30 +147,12 @@ function writeUserData(date, email,name, imageUrl) {
 
                           console.log('check has began on '+ firebaseUser.email)//if null what happens?
                           var dRef = firebase.database().ref().child('disclaimer/'+firebaseUser.uid);
-                              // if (dRef == null){
-                              //       // if(snap.key == 'setup' &&snap.val() === true){
-                              //       console.log('Ref not found.')
-                              //       return false;
-                              //     }
-                          function checkForFirstTimeUser(){
-                              firebase.database().ref().child('disclaimer/'+ firebaseUser.uid).on("child_added", function (snap){
-                                console.log(snap.val());
-                                console.log("setup Check: "+ snap.val());
 
-                                if (snap.key == 'setup' && snap.val() === false){
-                                  setup = false;
-                                  console.log(snap.key, snap.val());
-                                  console.log('You have not setup');
-                                  return false;
-                                }
-                                else{
-                                  return true;
-                                }
-                              });
-                            }
-                              setup = checkForFirstTimeUser();
 
-                              if(setup == true){
+                              var result = checkForFirstTimeUser(firebaseUser);
+                              console.log(result);
+
+                              if(result === true){
                                 console.log('The user has already been setup, redirecting to homepage...');
                                 window.location.href='home.html';
                               }else{
@@ -152,7 +160,7 @@ function writeUserData(date, email,name, imageUrl) {
                                 FunctionOne().done(FunctionTwo);
                               }
                               console.log('Set up is done');
-                              alert();
+
 
 
 

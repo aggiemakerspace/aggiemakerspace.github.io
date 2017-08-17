@@ -1,7 +1,26 @@
 
+function displayEvents(){
+
+  var ref = firebase.database().ref().child('events/events');
+  ref.on("child_added", function (snap){
+
+    console.log(snap.val());
+    $("#viewEvents").append("<div class=\"well\" style=\"width:90%; margin-top: 5%;margin-left:5%\"><div class='caption'>"+
+    "<h3>"+snap.val().event_name+"</h3></div>"+
+    "<h4>"+snap.val().date+"</h4><br>"
+
+    +snap.val().instructor+"<br>"
+    +snap.val().location+"<br>"
+
+    +"</div>"
+    );
+
+
+  });
+}
 function createEvent(){
 
-
+alert();
 //get element values
 
   var name,
@@ -11,13 +30,13 @@ function createEvent(){
       description;
 
     name =    $("#eventName").val();
-    location = $("#eventName").val();
-    date = $("#eventName").val();
-    instructor = $("#eventName").val();
-    description = $("#eventName").val();
+    location = $("#eventLocation").val();
+    date = $("#eventDate").val();
+    instructor = $("#eventInstructor").val();
+    description = $("#eventDescription").val();
 
     //event node
-    var ref = firebase.database().ref().child('events');
+    var ref = firebase.database().ref().child('events/events');
     ref.push({
       attendees:
       {
@@ -111,7 +130,7 @@ function checkifAdmin (userInput){
           });
           console.log(user);
             checkifAdmin(user);
-
+            displayEvents();
           // User is signed in.
 
 
