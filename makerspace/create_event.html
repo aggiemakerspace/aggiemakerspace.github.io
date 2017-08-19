@@ -131,15 +131,19 @@
 }
 .box{
   color:#FFFFFF;
-  background-color: #000000;
-  width: 230px;
-  height: 230px;
+  border-width: 20px;
+  border-color: #000000;
+
+
+
 }
 .well-cl{
   color: #00000;
   width: 100%;
   background-color: 	#f0ffff;
-  color: #CDC8B1
+  color: black;
+  border-width: 50px;
+  border-color: black;
   box-shadow: 5px 5px 5px #888888;
 }
 
@@ -150,6 +154,10 @@
 .show-events{
   width: 250px;
   height: 600px;
+}
+
+img{
+    box-shadow: 2px 2px 20px #888888;
 }
 </style>
 
@@ -191,9 +199,9 @@
 <div class="container">
                     <br>
 
-                    <h4>Events</h4>
+                    <h1>Events| UNDER CONSTRUCTION</h1>
                     <hr>
-                    <h2>Add Event</h2>
+
 
                     <div class="row">
                       <div class="col-sm-1 col-md-1 col-lg-1"></div>
@@ -205,43 +213,34 @@
 
                                   <h2><a href="#" onclick=""> CREATE EVENT</a></h2>
                                   <div class="well">
-                                    <!--Image-->
-                                    <div class="box"style="float:center">
-                                      <img src="../img/eagle_cad.jpg"  style="padding:10%" alt="Event Picture" height="200" width="200">
-                                    </div>
+
+
+
 
                                     <!-- Table -->
-                                    <table class="table table-inverse">
-                                        <thead>
-                                          <tr>
-                                            <th>#</th>
-                                            <th>First Name</th>
-                                            <th>Last Name</th>
-                                            <th>Username</th>
-                                          </tr>
-                                        </thead>
-                                        <tbody id="editable">
-                                          <tr>
-                                            <th scope="row">1</th>
-                                            <td>Mark</td>
-                                            <td>Otto</td>
-                                            <td>@mdo</td>
-                                          </tr>
-                                          <tr>
-                                            <th scope="row">2</th>
-                                            <td>Jacob</td>
-                                            <td>Thornton</td>
-                                            <td>@fat</td>
-                                          </tr>
-                                          <tr>
-                                            <th scope="row">3</th>
-                                            <td>Larry</td>
-                                            <td>the Bird</td>
-                                            <td>@twitter</td>
-                                          </tr>
-                                        </tbody>
-                                      </table>
+                                    <div class="">
+                                      <table class="table table-inverse">
+                                          <thead>
+                                            <tr>
+                                              <th>#</th>
+                                              <th>Name</th>
+                                              <th>Picture</th>
+
+                                            </tr>
+                                          </thead>
+                                          <tbody id="editable">
+
+
+                                          </tbody>
+                                        </table>
+                                    </well>
                                     <form class="form-inline">
+
+                                     <div class="form-group">
+                                       <label for="focusedInput">Image Name</label>
+                                       <input class="form-control" id="imageName" type="text">
+                                     </div><br>
+
                                      <div class="form-group">
                                        <label for="focusedInput">Event Name</label>
                                        <input class="form-control" id="eventName" type="text">
@@ -321,7 +320,7 @@
 
 
 
-
+                            </div>
 
 
 
@@ -341,7 +340,7 @@
 
 
 
-                  </div>
+
 
 </div>
 
@@ -353,15 +352,12 @@
   </div>
 
 
+<!-- select image -->
+<script>
 
-  <!--Logout-->
 
-  <script>
-      function logOut(){
-      firebase.auth().signOut();
-      console.log("user has logged out");
-      };
-  </script>
+</script>
+
 
   <script>
     $(document).ready(function(){

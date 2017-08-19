@@ -1,4 +1,57 @@
 
+//DISPLAY IMAGE NAME AND SET VARIABLE
+
+function inputImage(val){
+    var input = val;
+    console.log(input);
+
+    var ref= firebase.database().ref().child('events/images');
+    try{
+      ref.orderByChild('name').equalTo(input).on("child_added", function (snap){
+
+        console.log(snap.val());
+
+      $("#eventName").val(input)
+      imageLink = snap.val().downloadURL;
+      });
+      return imageLink;
+  }catch(err){
+  alert(err.message);
+    //setImage(input2);
+
+}
+
+}
+function displayImages(){
+
+  var ref = firebase.database().ref().child('events/images');
+  var count = 1;
+
+  ref.on("child_added", function (snap){
+    var name = snap.val().name;
+    var imageURL= snap.val().downloadURL;
+
+    $("#editable").append(
+      "<tr>"+
+        "<th scope='row'>"+count+"</th>"+
+        "<td><span>"+name+"</span></td>"+
+        "<td>"+
+        "<img src="+ imageURL + " alt='Smiley face' height='42' width='42'>"
+
+        +"</td>"+
+
+      "</tr>"
+
+
+
+
+    )
+    count++;
+  });
+
+
+
+}
 function displayEvents(){
 
   var ref = firebase.database().ref().child('events/events');
@@ -7,6 +60,7 @@ function displayEvents(){
     console.log(snap.val());
     $("#viewEvents").append("<div class=\"well\" style=\"width:90%; margin-top: 5%;margin-left:5%\"><div class='caption'>"+
     "<h3>"+snap.val().event_name+"</h3></div>"+
+    "<img  style='margin-left: 20%' src="+ snap.val().displayPicURL + " alt='Smiley face' height='100' width='100'>"+
     "<h4>"+snap.val().date+"</h4><br>"
 
     +snap.val().instructor+"<br>"
@@ -27,13 +81,17 @@ alert();
       location,
       date,
       instructor,
-      description;
+      description,
+      imageURL;
 
     name =    $("#eventName").val();
     location = $("#eventLocation").val();
     date = $("#eventDate").val();
     instructor = $("#eventInstructor").val();
     description = $("#eventDescription").val();
+    imageURL= $("#imageName").val();
+
+    inputImage(imageURL);
 
     //event node
     var ref = firebase.database().ref().child('events/events');
@@ -47,7 +105,7 @@ alert();
       event_name: name,
       date: date,
       description: description,
-      displayPicURL: " ",
+      displayPicURL: imageLink,
       instructor:instructor,
       location: location
 
@@ -121,6 +179,7 @@ function checkifAdmin (userInput){
 
     //get elements
     const logout = document.getElementById('logout');
+    var imageLink;
 
     firebase.auth().onAuthStateChanged(function(user) {
         //var userId = user.uid;
@@ -131,7 +190,9 @@ function checkifAdmin (userInput){
           console.log(user);
             checkifAdmin(user);
             displayEvents();
+            displayImages();
           // User is signed in.
+
 
 
 

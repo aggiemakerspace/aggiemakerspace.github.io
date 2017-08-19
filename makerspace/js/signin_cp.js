@@ -1,5 +1,5 @@
 function checkForFirstTimeUser(firebaseUser){
-
+    var result;
     firebase.database().ref().child('disclaimer/'+ firebaseUser.uid).on("child_added", function (snap){
       console.log(snap.val());
       console.log(snap.key +" "+ snap.val());
@@ -23,7 +23,7 @@ function checkForFirstTimeUser(firebaseUser){
       }
 
     });
-
+    return result;
 }
 
 function writeUserData(date, email,name, imageUrl) {
@@ -62,7 +62,7 @@ function writeUserData(date, email,name, imageUrl) {
     const btnRegister = document.getElementById('btnRegister');
 
     var setup;
-    var result;
+
     btnLogin.addEventListener("click", e => {
         //get email and pass
         const email = txtEmail.value;
@@ -150,9 +150,9 @@ function writeUserData(date, email,name, imageUrl) {
                           var dRef = firebase.database().ref().child('disclaimer/'+firebaseUser.uid);
 
 
-                              checkForFirstTimeUser(firebaseUser);
+                              var result = checkForFirstTimeUser(firebaseUser);
 
-                            
+                              console.log(result);
 
                               if(result === true){
                                 console.log('The user has already been setup, redirecting to homepage...');

@@ -107,7 +107,10 @@ $("#getInput").keyup(function(event){
 
                   eInput+="@";
                 }
+
+
                  userEmail = eInput+msInput;
+                 console.log(userEmail);
 
             const promise = auth.createUserWithEmailAndPassword(userEmail, pass);
             promise.catch(function(error){
