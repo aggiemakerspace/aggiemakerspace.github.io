@@ -1,3 +1,49 @@
+//check for admin
+function checkAdmin(userIn){
+  var user= userIn;
+  var state;
+  var  admins = ['rgmwanik@aggies.ncat.edu', 'alanier@aggies.ncat.edu','pperry@aggies.ncat.edu','jck@ncat.edu']
+console.log(user.email+' pre check.');
+  for( var prop in admins){
+    var emailC = admins[prop];
+    console.log(admins[prop])
+
+
+   if(emailC=== user.email){
+     //console.log('comparing: ' +emailC+ ' with: '+ user.email)
+
+     state = true;
+
+       switch(state){
+
+         case true:
+         sessionStorage.setItem("admin", true);
+         console.log("User is an admin");
+          break;
+
+         case false:
+         sessionStorage.setItem("admin", false);
+         console.log("User is not an admin");
+
+          break;
+
+
+         default:
+          break;
+       }
+   }else{
+      sessionStorage.setItem("admin", false);
+
+      console.log("User is not an admin");
+
+   }
+
+  }
+};
+
+
+
+
 function checkForFirstTimeUser(firebaseUser){
 
     firebase.database().ref().child('disclaimer/'+ firebaseUser.uid).on("child_added", function (snap){
@@ -152,7 +198,7 @@ function writeUserData(date, email,name, imageUrl) {
 
                               checkForFirstTimeUser(firebaseUser);
 
-                            
+
 
                               if(result === true){
                                 console.log('The user has already been setup, redirecting to homepage...');

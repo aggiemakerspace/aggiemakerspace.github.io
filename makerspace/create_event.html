@@ -140,6 +140,7 @@
 .well-cl{
   color: #00000;
   width: 100%;
+  height:100px;
   background-color: 	#f0ffff;
   color: black;
   border-width: 50px;
@@ -153,7 +154,7 @@
 
 .show-events{
   width: 250px;
-  height: 600px;
+  height: 875px;
 }
 
 img{
@@ -179,15 +180,15 @@ img{
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="" style="font: 20px Ubuntu, sans-serif">MakerSpace<span style="font: 10px Ubuntu, san-serif"> PORTAL</span></a>
+        <a class="navbar-brand" href="home.html" style="font: 20px Ubuntu, sans-serif">MakerSpace<span style="font: 10px Ubuntu, san-serif"> PORTAL</span></a>
       </div>
       <div class="collapse navbar-collapse" id="myNavbar">
         <ul class="nav navbar-nav navbar-right">
+          <li><a id="admin" class="hideme"  href="console.html" style="color:red">CONSOLE</a></li>
           <li><a href="home.html">MY PROFILE </a></li>
           <li><a href="calendar.html">CALENDAR</a></li>
           <li><a href="classes.html">CLASSES</a></li>
           <li><a href="inventory.html" class="hide">INVENTORY</a></li>
-          <li><a href="config.html" style="color:red">ADMIN CONSOLE</a></li>
           <li><a  href="#" onclick="logOut();return false">SIGN OUT</a></li>
         </ul>
       </div>
@@ -327,8 +328,8 @@ img{
                           <!-- SHOW EVENTS -->
                         <div class="col-sm-4 col-md-4 col-lg-4">
                           <h2>DISPLAY EVENTS</h2>
-                          <div class="well-cl show-events" style="padding: 10px;over-flow-y-scroll">
-                            <div id ="viewEvents">
+                          <div class="well-cl show-events" style="padding: 10px;overflow-y:scroll;">
+                            <div id ="viewEvents" style="overflow-y:scroll;">
 
                             </div>
 

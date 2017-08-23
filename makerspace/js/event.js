@@ -1,3 +1,14 @@
+function randomString() {
+	var chars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXTZabcdefghiklmnopqrstuvwxyz";
+	var string_length = 8;
+	var randomstring = '';
+	for (var i=0; i<string_length; i++) {
+		var rnum = Math.floor(Math.random() * chars.length);
+		randomstring += chars.substring(rnum,rnum+1);
+	}
+  return randomstring;
+}
+
 
 //DISPLAY IMAGE NAME AND SET VARIABLE
 
@@ -58,7 +69,12 @@ function displayEvents(){
   ref.on("child_added", function (snap){
 
     console.log(snap.val());
-    $("#viewEvents").append("<div class=\"well\" style=\"width:90%; margin-top: 5%;margin-left:5%\"><div class='caption'>"+
+    $("#viewEvents").append(
+
+  
+
+
+    "<div class=\"well\" style=\"width:90%; margin-top: 5%;margin-left:5%\"><div class='caption'>"+
     "<h3>"+snap.val().event_name+"</h3></div>"+
     "<img  style='margin-left: 20%' src="+ snap.val().displayPicURL + " alt='Smiley face' height='100' width='100'>"+
     "<h4>"+snap.val().date+"</h4><br>"
@@ -93,6 +109,13 @@ alert();
 
     inputImage(imageURL);
 
+    //generate event id
+    var eventID = randomString();
+
+    console.log(eventID);
+
+
+
     //event node
     var ref = firebase.database().ref().child('events/events');
     ref.push({
@@ -107,7 +130,8 @@ alert();
       description: description,
       displayPicURL: imageLink,
       instructor:instructor,
-      location: location
+      location: location,
+      eventID: eventID
 
     });
 

@@ -20,8 +20,8 @@
 <!--Bootstrap-->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
-<script src="js/default.js"></script>
+<!--
+<script src="js/profile.js"></script> -->
 
 <style>
     h1,h2,h3,h4,h5 {
@@ -35,6 +35,7 @@
       text-align: center;
     }
 
+
 #admin{
   display: none;
 }
@@ -46,7 +47,7 @@
 
 
 .bg-1 {
-      background-color: #1abc9c; /* Green */
+      background-color: #191F1C; /* Loading Gif - Dark Blue */
       color: #ffffff;
   }
 
@@ -130,13 +131,18 @@
 .btn span:hover {
     color: #1abc9c !important;
 }
+#title{
+
+  color: #ffffff;
+
+}
 </style>
 
 
 </head>
 
 
-<body class="">
+<body class="bg-1">
 
 
   <!-- Navbar -->
@@ -154,7 +160,7 @@
       </div>
       <div class="collapse navbar-collapse" id="myNavbar">
         <ul class="nav navbar-nav navbar-right">
-          <li><a href="console.html" style="color:red">CONSOLE</a></li>
+          <li><a id="admin" class="hideme"  href="console.html" style="color:red">CONSOLE</a></li>
           <li><a href="home.html">MY PROFILE </a></li>
           <li><a href="calendar.html">CALENDAR</a></li>
           <li><a href="classes.html">CLASSES</a></li>
@@ -168,21 +174,38 @@
 
 </div>
 <!-- Page Container -->
-<div class="container">
+<div class="container bg-1">
                     <br>
 
-                    <h4>Inventory</h4>
-                    <hr>
-                    <h5>As of August | 2017</h5>
+
+
+                    <h2 id="title">Loading, please wait... </h2>
                     <div class="row">
-                              <div style="margin-left: 50px; padding-left:20px" class="col-sm-2 col-md-2 col-lg-2"></div>
+                              <div style="margin-left: 0px; padding-left:20px" class="col-sm-2 col-md-2 col-lg-2"></div>
                               <div class="container col-sm-8 col-lg-8 col-md-8">
 
 
 
 
 
+
+                                    <div class="row">
+                                      <div style="margin-left:30px; padding-left:10px" class="col-sm-2 col-md-2 col-lg-2"></div>
+
+                                      <div class="col-sm-8 col-lg-8 col-md-8"><img src="../img/gif/loading2.gif" style="float:left; margin-left: 10%" alt="Loading" height="100%" width="100%">
+                                      </div>
+
+                                      <div class= "col-sm-2"></div>
+
+
                                     </div>
+                                    <p></p>
+
+
+
+                                    <p></p>
+
+
 
 
 
@@ -228,6 +251,7 @@
 </script>
 
 
+<script src="js/loading.js"></script>
 
 </body>
 </html>

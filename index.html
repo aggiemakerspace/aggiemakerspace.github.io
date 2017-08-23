@@ -9,11 +9,20 @@
   <!-- Font -->
   <link href="https://fonts.googleapis.com/css?family=Khand" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css?family=Khand|Ubuntu" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Khand|Ubuntu" rel="stylesheet">
+
+  <!-- Firebase -->
+  <script src="https://www.gstatic.com/firebasejs/4.1.2/firebase.js"></script>
+  <script src="https://apis.google.com/js/platform.js" async defer></script>
 
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+  <!-- javascript source -->
+
+<script src="./index.js"></script>
+
   <style>
   body {
       font: 20px Montserrat, sans-serif;
@@ -79,7 +88,7 @@
   .bg-5{
 
     background-color: #8EE5EE;
-    color: #CDC8B1
+    color: #CDC8B1;
   }
   .container-fluid {
       padding-top: 70px;
@@ -102,68 +111,167 @@
         min-height: -moz-calc(100% - 186px);
         min-height: calc(100% - 186px);
     }
-#disclaimer{
-  font: 15px Montserrat, sans-serif;
-  line-height: 1.8;
-  color: #000;
-  margin-bottom:0;
-  padding-bottom:0;
+    #disclaimer{
+      font: 15px Montserrat, sans-serif;
+      line-height: 1.8;
+      color: #000;
+      margin-bottom:0;
+      padding-bottom:0;
 
-}
+    }
 
-#bg_image  {
+    #bg_image  {
 
 
-    height: auto;
-    background: #000 url('makerspace/assets/img/notepad.jpg') center no-repeat;
-    background-size: contain;
-    background-size: 100% 100%;
-    /*background-size: auto 150;*/
-    width: 100%;
+        height: auto;
+        background: #000 url('makerspace/assets/img/notepad.jpg') center no-repeat;
+        background-size: contain;
+        background-size: 100% 100%;
+        /*background-size: auto 150;*/
+        width: 100%;
 
-}
+    }
 
-  .navbar-nav  li a:hover {
-      color: #1abc9c !important;
-  }
-  address {
-    display: block;
-    font-style: italic;
-}
+      .navbar-nav  li a:hover {
+          color: #1abc9c !important;
+      }
+      address {
+        display: block;
+        font-style: italic;
+    }
 
 .hideme
 {
     opacity:0;
 }
-/*CSS*/
-div.c-wrapper{
-    width: 100%; /* for example */
-    margin: auto;
+  /*CSS*/
+  div.c-wrapper{
+      width: 100%; /* for example */
+      margin: auto;
+  }
+
+  .carousel-inner > .item > img,
+  .carousel-inner > .item > a > img{
+  width: 100%; /* use this, or not */
+  margin: auto;
+  }
+
+  div.well div {
+    height: 220px;
+    overflow-y: scroll;
+  }
+  .jumbotron {
+        background-size: cover;
+        background-size: 100% 100%;
+        /*background-size: auto 150;*/
+        width: 100%;
+        background: #000 url('blug.jpg') center no-repeat;
+        color: #fff;
+        padding: 100px 25px;
+        font-family: Montserrat, sans-serif;
+  }
+  .img-shadow{
+      box-shadow: 5px 5px 20px #888888;
+  }
+
+  .img-shadow2{
+      box-shadow: 5px 5px 10px #888888;
+  }
+
+  .img-shadow3{
+    box-shadow: 5px 5px 20px #000000;
+    border-color: white;
+    border-width: 1px;
+  }
+
+
+  .machine-front{
+    margin-top: 0;
+    background-color:rgba(0, 0, 0, 0.5);
+
+    color:#443266;
+    color:#ffffff;
+    width:100%;
+    height: 100%;
+
+
+  }
+
+  .machine-back{
+    background-color: rgba(255, 255, 255, 0.5);
+    color:#443266;
+    width:100%;
+    height: 100%;
+
+  }
+
+  .text-shadow{
+    text-shadow: 1px 1px  2px #443266;
+  }
+
+  .text-shadow2{
+    text-shadow: 1px 1px  2px #ffffff;
+
+  }
+  .bg-img{
+    background-image:url(./img/gif/building.gif);
+    height: auto;
+    background-size: cover;
+
+
+  }
+/*
+  Flip image*/
+  /* entire container, keeps perspective */
+.flip-container {
+	perspective: 1000px;
+}
+	/* flip the pane when hovered */
+	.flip-container:hover .flipper, .flip-container.hover .flipper {
+		transform: rotateY(180deg);
+	}
+
+.flip-container, .front, .back {
+	min-width: 375px;
+  width: 100%;
+  border: 4px;
+  border-color: black;
+  margin: 20px;
+	height: 600px;
+  padding: 0;
+  margin: 0;
 }
 
-.carousel-inner > .item > img,
-.carousel-inner > .item > a > img{
-width: 100%; /* use this, or not */
-margin: auto;
+/* flip speed goes here */
+.flipper {
+	transition: 0.6s;
+	transform-style: preserve-3d;
+
+	position: relative;
 }
 
-div.well div {
-  height: 220px;
-  overflow-y: scroll;
+/* hide back of pane during swap */
+.front, .back {
+	backface-visibility: hidden;
+
+	position: absolute;
+	top: 0;
+	left: 0;
 }
-.jumbotron {
-      background-size: cover;
-      background-size: 100% 100%;
-      /*background-size: auto 150;*/
-      width: 100%;
-      background: #000 url('blug.jpg') center no-repeat;
-      color: #fff;
-      padding: 100px 25px;
-      font-family: Montserrat, sans-serif;
+
+/* front pane, placed above back */
+.front {
+	z-index: 2;
+	/* for firefox 31 */
+	transform: rotateY(0deg);
 }
-img{
-    box-shadow: 5px 5px 20px #888888;
+
+/* back, initially hidden pane */
+.back {
+	transform: rotateY(180deg);
 }
+
+
 
   </style>
 </head>
@@ -202,6 +310,7 @@ img{
 
 </div>
 
+<!-- MISSION STATEMENT AND LANDING PAGE IMAGES -->
 <div class= "container-fluid text-center bg-3">
   <div class="col-sm-12 col-lg-12 col-md-12">
 
@@ -221,16 +330,16 @@ img{
 
     <div class="col-sm-4 col-lg-4">
       <h2 class="text-center"> Collaboration</h2>
-      <img id ="" src="img/gif/collaborate.jpeg" class="img-responsive  img-rounded" style="" width:"200px" height: "200px" alt="collaborate">
+      <img id ="" src="img/gif/collaborate.jpeg" class="img-responsive  img-rounded img-shadow" style="" width:"200px" height: "200px" alt="collaborate">
     </div>
     <div class="col-sm-4 col-lg-4">
       <h2> Ideation</h2>
-      <img id ="" src="img/gif/ideas.jpeg" class="img-responsive  img-rounded" style="" height:"200px" width:"200px" alt="collaborate">
+      <img id ="" src="img/gif/ideas.jpeg" class="img-responsive  img-rounded img-shadow" style="" height:"200px" width:"200px" alt="collaborate">
     </div>
 
     <div class="col-sm-4 col-lg-4">
       <h2> Growth</h2>
-      <img id ="" src="img/gif/growth.jpeg" class="img-responsive  img-rounded" style="" width:"200px" height: "200px" alt="collaborate">
+      <img id ="" src="img/gif/growth.jpeg" class="img-responsive  img-rounded img-shadow" style="" width:"200px" height: "200px" alt="collaborate">
     </div>
   </div>
 
@@ -255,33 +364,103 @@ $(document).ready(function(){
 });
 </script>
 
+<!-- DISPLAY MACHINE STATUS AND TIMESHEET -->
+<div class="container-fluid bg-img" >
+    <div class="container text-center">
+      <div class="row">
+        <div class= "col-sm-6 col-md-6 col-sm-6">
+
+          <div class="flip-container " ontouchstart="this.classList.toggle('hover');">
+            <div class="flipper">
+                <div class="front">
+                  <!-- front content -->
+                  <div class="machine-front img-shadow text-shadow"  style="overflow-y:scroll" id="machine-status">
+                    <div class=""id="editable1" style=""><h1>Machines</h1></div>
 
 
 
 
+
+                  </div>
+
+
+                </div>
+                <div class="back">
+                  <!-- back content -->
+                  <div class="machine-back text-shadow2" id="machine-location" style="overflow-y:scroll">
+                    <div class=""id="editable2" ><h1>Status</h1></div></div>
+
+                </div>
+            </div>
+          </div>
+
+
+
+        </div>
+
+        <div class= "col-sm-6 col-md-6 col-sm-6">
+          <!-- Timesheet -->
+
+          <div class="flip-container " ontouchstart="this.classList.toggle('hover');">
+            <div class="flipper">
+                <div class="front">
+                  <!-- front content -->
+                  <div class="machine-front img-shadow2"  id="timesheet" style="overflow-y:scroll">
+                    <h1>Timesheet</h1><span id="userCount"></span>
+                    <div class=""id="editable3"></div>
+
+
+
+
+
+                  </div>
+
+
+                </div>
+                <div class="back">
+                  <!-- back content -->
+                  <div class="machine-back text-shadow2" id="events" style="overflow-y:scroll">
+                    <div class=""id="editable4" ><h1>Time Events</h1></div></div>
+
+                </div>
+            </div>
+          </div>
+
+
+
+
+        </div>
+
+
+      </div>
+
+
+</div>
+
+</div>
 <!-- 28B5FF -->
 <!-- Tools and Equipment -->
 <div id="equipment" class="container text-center">
   <h2 style="color:#337ab7">Equipment & Software</h2><br>
   <div class="row">
     <div class="col-sm-4">
-      <div class="thumbnail bg-g">
-        <img id ="" src="img/cnc_mill.jpg" class="img-responsive hideme img-rounded" style="width:100%" alt="cncmill">
-        <div class="caption"><p>CNC Mill</p></div>
+      <div class="thumbnail bg-g img-shadow3">
+        <img id ="" src="img/cnc_mill.jpg" class="img-responsive hideme img-rounded img-shadow2" style="width:100%" alt="cncmill">
+        <div class="caption"><h2>CNC Mill</h2></div>
       </div>
     </div>
 
     <div class="col-sm-4">
-      <div class="thumbnail bg-b">
-        <img src="img/3dprinter.jpg" class="img-responsive hideme img-rounded" style="width:100%" alt="Image">
-        <div class="caption"><p>3D Printer</p></div>
+      <div class="thumbnail bg-b img-shadow3">
+        <img src="img/3dprinter.jpg" class="img-responsive hideme img-rounded img-shadow2" style="width:100%" alt="Image">
+        <div class="caption"><h2>3D Printer</h2></div>
       </div>
     </div>
 
     <div class="col-sm-4">
-      <div class="thumbnail bg-dg">
-        <img src="img/othermill.jpg" class="img-responsive hideme img-rounded" style="width:100%" alt="Image">
-        <div class="caption"><p>Other Mill</p></div>
+      <div class="thumbnail bg-dg img-shadow3">
+        <img src="img/othermill.jpg" class="img-responsive hideme img-rounded img-shadow2" style="width:100%" alt="Image">
+        <div class="caption"><h2>Other Mill</h2></div>
       </div>
   </div>
 
@@ -295,25 +474,25 @@ $(document).ready(function(){
 
 
     <div class="col-sm-4">
-      <div class="thumbnail bg-g">
-      <img src="img/eagle_cad.jpg" class="img-responsive hideme img-rounded" style="width:100%" alt="Image">
-      <div class="caption"><p>Eagle CAD</p></div>
+      <div class="thumbnail bg-g img-shadow3">
+      <img src="img/eagle_cad.jpg" class="img-responsive hideme img-rounded img-shadow2" style="width:100%" alt="Image">
+      <div class="caption"><h2>Eagle CAD</h2></div>
     </div>
 
   </div>
 
     <div class="col-sm-4">
-      <div class="thumbnail bg-b">
-      <img src="img/solidworks.jpg" class="img-responsive hideme img-rounded" style="width:100%" alt="Image">
-      <div class="caption"><p>Solid Works</p></div>
+      <div class="thumbnail bg-b img-shadow3">
+      <img src="img/solidworks.jpg" class="img-responsive hideme img-rounded img-shadow2" style="width:100%" alt="Image">
+      <div class="caption"><h2>Solid Works</h2></div>
     </div>
 
   </div>
 
   <div class="col-sm-4">
-    <div class="thumbnail bg-dg">
-    <img src="img/laserengraver.jpg" class="img-responsive hideme img-rounded" style="width:100%" alt="Image">
-    <div class="caption"><p>Laser Engraver</p></div>
+    <div class="thumbnail bg-dg img-shadow3">
+    <img src="img/laserengraver.jpg" class="img-responsive hideme img-rounded img-shadow2" style="width:100%" alt="Image">
+    <div class="caption"><h2>Laser Engraver</h2></div>
   </div>
 
 </div>
@@ -519,6 +698,9 @@ $(document).ready(function() {
     });
 
 </script>
+
+
+
 
 </body>
 </html>

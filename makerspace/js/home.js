@@ -61,7 +61,7 @@
 //show whether superuser, regularuser or admin
                 if ((roles[prop]) === true)
                {
-                 if(prop == "administrator"||"superuser"){
+                 if(prop == "admin"||"superuser"){
                    adminAccess = true;
                    //Amend Navbar, show Admin Console
                    console.log("Admin Approved");
@@ -195,11 +195,11 @@ function checkifAdmin (userInput){
        {
 
          switch(prop){
-           case 'administrator':
+           case 'admin':
              sessionStorage.admin=true;
              adminAccess = true;
              console.log("Admin Approved");
-             $("#.hideme" ).remove();
+             $("#admin" ).removeClass("hideme");
              break;
 
            case 'superuser':

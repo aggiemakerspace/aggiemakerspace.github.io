@@ -162,6 +162,13 @@ function disclaimerCheck(){
 }
 </script>
 
+<script>
+  var state = sessionStorage.getItem("admin");
+  console.log(user.email + " admin check (t/f): "+ state);
+
+
+</script>
+
   <!-- Navbar -->
   <div class="container">
 
@@ -177,7 +184,7 @@ function disclaimerCheck(){
       </div>
       <div class="collapse navbar-collapse" id="myNavbar">
         <ul class="nav navbar-nav navbar-right">
-          <li><a id="admin" class="hideme"  href="config.html" style="color:red">ADMIN CONSOLE</a></li>
+          <li><a id="admin" class="hideme"  href="console.html" style="color:red">CONSOLE</a></li>
           <li><a href="home.html">MY PROFILE </a></li>
           <li><a href="calendar.html">CALENDAR</a></li>
           <li><a href="classes.html">CLASSES</a></li>
@@ -286,7 +293,7 @@ function disclaimerCheck(){
 
 
                       <h4><b class>Join Date<span style="padding-left: 10px" class="fa fa-calendar"></span></b></h4>
-                      
+
                     </div>
                     <hr>
                     <div class="row">

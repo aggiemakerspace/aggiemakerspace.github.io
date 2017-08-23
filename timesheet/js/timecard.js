@@ -66,7 +66,6 @@ function getDisplay(dateInput){
   var givenDate = dateInput;
 
   var time = firebase.database().ref().child("timesheet");
-  var uid = 'jxlohcP3gQXZV2MfSEC44pAOgzj2';
   var emailsIn = " ";
   var emailsRef = firebase.database().ref().child('emails/verified');
     $("#table-body-pengguna").text(" ");

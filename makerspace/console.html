@@ -130,6 +130,64 @@
 .btn span:hover {
     color: #1abc9c !important;
 }
+
+table,tr{
+  border: solid thin;
+  padding: 0.5rem 2rem;
+  margin-top: 1rem;
+  box-shadow: 2px 2px 5px #888888;
+}
+
+th{
+
+  font-weight: bold;
+}
+
+#container{
+
+}
+
+
+  .hide{
+    display: none;
+    visibility: hidden;
+  }
+
+  .hideme,.config-hideme{
+    display:none;
+    visibility: hidden;
+  }
+
+
+
+
+
+  #admin{
+
+  }
+
+
+
+  input[type=text] {
+      width: 130px;
+      box-sizing: border-box;
+      border: 2px solid #ccc;
+      border-radius: 4px;
+      font-size: 16px;
+      background-color: white;
+      background-image: url('./assets/img/searchicon.png');
+      background-size: 20px 20px;
+      background-position: 10px 10px;
+      background-repeat: no-repeat;
+      padding: 12px 20px 12px 40px;
+      -webkit-transition: width 0.4s ease-in-out;
+      transition: width 0.4s ease-in-out;
+  }
+
+  input[type=text]:focus {
+      width: 100%;
+  }
+
 </style>
 
 
@@ -150,15 +208,14 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="" style="font: 20px Ubuntu, sans-serif">MakerSpace<span style="font: 10px Ubuntu, san-serif"> PORTAL</span></a>
+        <a class="navbar-brand" href="home.html" style="font: 20px Ubuntu, sans-serif">MakerSpace<span style="font: 10px Ubuntu, san-serif"> PORTAL</span></a>
       </div>
       <div class="collapse navbar-collapse" id="myNavbar">
         <ul class="nav navbar-nav navbar-right">
+          <li><a id="admin" class="hideme"  href="console.html" style="color:red">CONSOLE</a></li>
           <li><a href="home.html">MY PROFILE </a></li>
           <li><a href="calendar.html">CALENDAR</a></li>
           <li><a href="classes.html">CLASSES</a></li>
-          <li><a href="inventory.html" class="hide">INVENTORY</a></li>
-          <li><a href="console.html" style="color:red">ADMIN CONSOLE</a></li>
           <li><a  href="#" onclick="logOut();return false">SIGN OUT</a></li>
         </ul>
       </div>
@@ -184,43 +241,82 @@
 
 
                                     <div class="row">
-                                    <a id="btn1" class="btn" href="javascript:void(0)">
-                                      <div class="">Machines</div>
-                                    </a>
-                                    <a id="btn2" class="btn" href="javascript:void(0)">
-                                      <div class="">All Users</div>
-                                    </a>
-                                    <a id="btn4" class="btn" href="javascript:void(0)">
-                                      <div class="">SuperUsers</div>
-                                    </a>
-                                    <!-- <a id="btn5" class="btn" href="javascript:void(0)">
-                                      <div class="">RegularUsers</div>
+                                    <!-- <a id="btn1" class="btn" href="javascript:void(0)">
+                                      <div class=""><h2>MACHINES</h2></div>
                                     </a> -->
-
-
-                                    <a id="btn6" class="btn btn-success" href="../timecard/timelog.html" >
-                                      <div class="">START TimeClock</div>
+                                    <a id="btn2" class="btn" href="javascript:void(0)">
+                                      <div class=""><h2>USERS</h2></div>
+                                    </a>
+                                    <a id="btn3" class="btn" href="javascript:void(0)">
+                                      <div class=""><h2>SUPERUSERS</h2></div>
                                     </a>
 
 
-                                    <a id="btnAdmin" class="btn btn-danger" href="config.html"  checkAdmin();>
-                                      <div class=""></span>CONFIG <span class="glyphicon glyphicon-cog"></div>
+                                    <a id="btn6" class="btn"  href="../timelog/timelog.html" >
+                                      <div style="color:green" class=""><h2>CLOCKIN <span class="glyphicon glyphicon-time"></h2></div>
+                                    </a>
+
+                                    <a id="btn7" class="btn"  href="../timesheet/timecard.html" >
+                                      <div style="color:green" class=""><h2>TIMESHEET <span class="glyphicon glyphicon-calendar"></h2></div>
+                                    </a>
+
+
+                                    <a id="btnAdmin" class="btn config-hideme" href="config.html"  checkAdmin();>
+                                      <div style="color:red" class=""></span><h2>CONFIG <span class="glyphicon glyphicon-cog"><h2></div>
                                     </a>
 
 
 
                                   </div>
 
+                                  <div class="row">
+
+                                      <h3> Enter Full Name, or Email: <input style="float:center" type="text" name="search" placeholder="Search.. Underconstruction">
+ </h3>
+
+                                  </div>
+
                                   <section class="">
-                                    <div id = "container" class="">
-                                    <h2 id = "querytitle" class = "w3-text-black">Title</h2>
-                                    <p id = "querydescp">A short description:</p>
-                                    <ul id = "unList" class="w3-ul">
-                                      <!--Stuff goes here -->
-                                        <div id = "editable">
+                                    <div id = "container" class="hide">
+                                      <table id="user_data"  style="margin:0" class="display" width="100%" cellspacing="0">
+                                                <thead>
+                                                    <tr>
+                                                        <th><h3 id="t1"></h3></th>
+                                                        <th><h3 id='t2' style="margin-left:0"></h3></th>
+                                                        <th><h3 id= 't3'><h3></th>
+                                                        <th><h3 id= 't4'><h3></th>
+                                                        <th><h3 id='t5'><h3></th>
+                                                    </tr>
+
+                                                </thead>
+                                                <hr>
+                                                <tbody id="editable">
+
+                                                </tbody>
+                                            </table>
 
 
-                                        </div>
+
+                                  </section>
+
+                                  <section class="">
+                                    <div id = "container2" class="hide">
+                                      <table id="user_data"  style="margin:0" class="display" width="100%" cellspacing="0">
+                                                <thead>
+                                                    <tr>
+                                                        <th><h3 id="t1"></h3></th>
+                                                        <th><h3 id='t2' style="margin-left:0"></h3></th>
+                                                        <th><h3 id= 't3'><h3></th>
+                                                        <th><h3 id= 't4'><h3></th>
+                                                        <th><h3 id='t5'><h3></th>
+                                                    </tr>
+
+                                                </thead>
+                                                <hr>
+                                                <tbody id="editable">
+
+                                                </tbody>
+                                            </table>
 
 
 

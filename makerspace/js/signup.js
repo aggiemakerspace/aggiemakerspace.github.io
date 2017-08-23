@@ -21,8 +21,8 @@ function writeUserData(date, email,name, imageUrl, id) {
           created_at: date,
           email: email,
           name: name,
-          profile_picture : imageUrl,
-          photoURL: " ",
+          profile_picture : 'avatar3.png',
+          photoURL: imageURL,
           major_class: " ",
           year_class: " ",
           phone: " ",
@@ -82,7 +82,7 @@ $("#getInput").keyup(function(event){
             var n = d.toUTCString();
 
             var fullname = fname.concat(" ",lname);
-            var imageUrl = "gs://aggieplayground.appspot.com/makerspace/images/avatar3.png";
+            var imageUrl = "https://firebasestorage.googleapis.com/v0/b/aggieplayground.appspot.com/o/makerspace%2Fimages%2Favatar3.png?alt=media&token=305d76ac-e86b-4cec-9107-1a387d01ebde";
 
               //get inputted email
 
