@@ -232,7 +232,8 @@ function clockOutUser(userEmail){
                 $("#btnClockin").click(function(){
                   console.log("------Button Clock in was clicked.")
                   //get email
-                  var eInput =  $("#usrEmail").val();
+                  var eInput =  $("#usrEmail").val().toLowerCase();
+
 
                   console.log(eInput);
                   if (eInput.includes('@')==false){
@@ -334,7 +335,7 @@ function clockOutUser(userEmail){
                           break;
                       };
 
-                      var eInput =  $("#usrEmail").val();
+                      var eInput =  $("#usrEmail").val().toLowerCase();
 
                       if (eInput.includes('@')==false){
 

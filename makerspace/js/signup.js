@@ -12,7 +12,7 @@ function setUpNode(uid){
 
 }
 
-function writeUserData(date, email,name, imageUrl, id) {
+function writeUserData(date, email,name, imageURL, id) {
 
   //console.log(user);
   //send to signup queue
@@ -82,7 +82,10 @@ $("#getInput").keyup(function(event){
             var n = d.toUTCString();
 
             var fullname = fname.concat(" ",lname);
-            var imageUrl = "https://firebasestorage.googleapis.com/v0/b/aggieplayground.appspot.com/o/makerspace%2Fimages%2Favatar3.png?alt=media&token=305d76ac-e86b-4cec-9107-1a387d01ebde";
+            var imageURL= "https\://firebasestorage.googleapis.com";
+            imageURL += "/v0/b/aggieplayground.appspot.com/";
+            imageURL += "o/makerspace%2Fimages%2Favatar3.png?alt";
+            imageURL += "media&token=305d76ac-e86b-4cec-9107-1a387d01ebde";
 
               //get inputted email
 
@@ -131,7 +134,7 @@ $("#getInput").keyup(function(event){
                   // An error happened.
                 });
 
-              writeUserData(date, userEmail,fullname, imageUrl, user.uid);
+              writeUserData(date, userEmail,fullname, imageURL, user.uid);
 
               //CREATE A DISCLAIMER AND SETUP NODE
 
