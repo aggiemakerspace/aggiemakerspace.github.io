@@ -3,7 +3,7 @@
 
     var provider = new firebase.auth.GoogleAuthProvider();
     //keep track of profile image load
-    var oldURL;
+  
 
     const config = {
         apiKey: "AIzaSyDusG6NBnTuNA8gamGCLlF-fagPO4ozJpk",
@@ -96,10 +96,39 @@
                   uploadFile(file);
                 });
 
+                function getOldFile(){
+                  var oldN;
+
+                  userRef.on('value', snap => {
+                    oldN = snap.val().profile_picture;
+                    console.log(oldN);
+
+                  });
+
+                  return oldN;
+                }
+
+                function deleteOldFile(userObject, fileName){
+                  console.log("Deleting....")
+                    let pictureRef = firebase.storage().ref().child('makerspace/user_storage/'+userObject.email+'/profilePicture/'+fileName);
+
+                    pictureRef.delete().then(function (){
+                      //file deleted successfully
+
+                    }).catch(function(error){
+                      //error
+                      console.log(error.message);
+                    });
+
+                }
+
                 function uploadFile(){
 
                   var storageRef = firebase.storage().ref().child('makerspace/user_storage/'+user.email+'/profilePicture/'+file.name);
                   var uploadTask = storageRef.put(file);
+
+                  let currentImage = getOldFile();
+                  console.log(currentImage);
 
 
                   uploadTask.on('state_changed', function(snap){
@@ -129,9 +158,11 @@
 
                   });
 
+                  deleteOldFile(user, currentImage);
+
               }
 
-            });
+            });//document ready close
 
             //UPDATE USER INFORMATION
             $(document).ready(function(){
