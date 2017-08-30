@@ -143,7 +143,7 @@
       }
 //the name of each Machine
      $("#editable2").append("<h4> " +
-         snap.key.replace(/\_/g,' ').toUpperCase()+"  "+"<br>"+snap.val().location+"<br>"+
+         snap.key.replace(/\_/g,' ').toUpperCase()+" | "+"<br>"+snap.val().location+"<br>"+
          imageScript+
        "<hr></h4>" );
 

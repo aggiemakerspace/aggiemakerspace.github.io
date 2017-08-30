@@ -9,7 +9,7 @@ machineRef.orderByChild('id').equalTo(machineId).on("child_added", function (sna
     mObj.status = status;
 
     machineRef.child(machineName).update(mObj);
-displayMachineStatus();
+    displayMachineStatus();
 
 
   });
@@ -573,7 +573,7 @@ function checkifAdmin (userInput){
 
              adminAccess = true;
              console.log("Admin Approved");
-             $("#.hideme" ).remove();
+             $("#.hideme" ).removeClass();
              break;
 
            case 'superuser':

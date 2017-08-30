@@ -195,6 +195,16 @@ th{
 
 
 <body class="">
+  <!--Check to see if you have access to the page -->
+  <script>
+
+  if(sessionStorage.getItem('superuser')!== 'true'){
+    console.log('Page Restricted');
+    window.location.href = 'home.html';
+
+  }
+
+  </script>
 
 
   <!-- Navbar -->
@@ -244,76 +254,99 @@ th{
                                     <!-- <a id="btn1" class="btn" href="javascript:void(0)">
                                       <div class=""><h2>MACHINES</h2></div>
                                     </a> -->
+                                    <ul class="nav navbar-nav"><li>
                                     <a id="btn2" class="btn" href="javascript:void(0)">
                                       <div class=""><h2>USERS</h2></div>
                                     </a>
+                                  </li>
+                                  <li>
                                     <a id="btn3" class="btn" href="javascript:void(0)">
                                       <div class=""><h2>SUPERUSERS</h2></div>
                                     </a>
+                                  </li>
 
-
+                                  <li>
                                     <a id="btn6" class="btn"  href="../timelog/timelog.html" >
                                       <div style="color:green" class=""><h2>CLOCKIN <span class="glyphicon glyphicon-time"></h2></div>
                                     </a>
-
+                                  </li>
+                                  <li>
                                     <a id="btn7" class="btn"  href="../timesheet/timecard.html" >
                                       <div style="color:green" class=""><h2>TIMESHEET <span class="glyphicon glyphicon-calendar"></h2></div>
                                     </a>
+                                  </li>
 
-
-                                    <a id="btnAdmin" class="btn config-hideme" href="config.html"  checkAdmin();>
+                                  <li>
+                                    <a id="btnAdmin" class="btn config-hideme" href="config.html">
                                       <div style="color:red" class=""></span><h2>CONFIG <span class="glyphicon glyphicon-cog"><h2></div>
                                     </a>
+                                  </li>
+                                </ul>
 
 
 
                                   </div>
 
-                                  <div class="row">
-
-                                      <h3> Enter Full Name, or Email: <input style="float:center" type="text" name="search" placeholder="Search.. Underconstruction">
- </h3>
-
-                                  </div>
 
                                   <section class="">
+
+                                    	<form role="form">
+                                            <div class="form-group">
+                                              <input type="input" class="form-control input-lg" id="txt-search" placeholder="Type your search character">
+                                            </div>
+                                    	</form>
+                                      <div class="container-fluid" style="padding: 10px 20px;float:left">
+                                    	<div id="filter-records"></div>
+                                      </div>
+                                    </section>
+
+
+                                  <!-- Container  -->
+                                  <div class="container" style="padding:25px 250px;">
+
+                                     <div id="filter-records"></div>
+                                  </div>
+
+
+                                  <!-- DISPLAY USER INFORMATION -->
+                                  <section class="">
                                     <div id = "container" class="hide">
-                                      <table id="user_data"  style="margin:0" class="display" width="100%" cellspacing="0">
-                                                <thead>
-                                                    <tr>
-                                                        <th><h3 id="t1"></h3></th>
-                                                        <th><h3 id='t2' style="margin-left:0"></h3></th>
-                                                        <th><h3 id= 't3'><h3></th>
-                                                        <th><h3 id= 't4'><h3></th>
-                                                        <th><h3 id='t5'><h3></th>
-                                                    </tr>
+                                      <table id="users_data"  style="margin:0" class="display" width="100%" cellspacing="0">
 
-                                                </thead>
                                                 <hr>
-                                                <tbody id="editable">
+                                                <div id="editable1"></div>
 
-                                                </tbody>
+
+
+
                                             </table>
-
-
-
                                   </section>
+
+                                  <!-- DISPLAY MACHINE APPROVAL -->
+                                  <script>
+                                    function displayMAppr(){
+
+                                      $('#container').addClass('hide');
+                                      alert(user.email);
+                                    }
+
+                                  </script>
 
                                   <section class="">
                                     <div id = "container2" class="hide">
                                       <table id="user_data"  style="margin:0" class="display" width="100%" cellspacing="0">
                                                 <thead>
                                                     <tr>
-                                                        <th><h3 id="t1"></h3></th>
-                                                        <th><h3 id='t2' style="margin-left:0"></h3></th>
-                                                        <th><h3 id= 't3'><h3></th>
-                                                        <th><h3 id= 't4'><h3></th>
+                                                        <th><h3 id="t1">Name</h3></th>
+                                                        <th><h3 id='t2' style="margin-left:0">Email</h3></th>
+                                                        <th><h3 id= 't3'>Machine Approval<h3></th>
+                                                        <th><h3 id= 't4'> <h3></th>
                                                         <th><h3 id='t5'><h3></th>
                                                     </tr>
 
                                                 </thead>
                                                 <hr>
-                                                <tbody id="editable">
+                                                <tbody id="editable2">
 
                                                 </tbody>
                                             </table>
@@ -366,6 +399,7 @@ th{
 
 <script>
     function  logOut(){
+    sessionStorage.clear();
     firebase.auth().signOut();
     console.log(firebaseUser + "has logged out");
     };

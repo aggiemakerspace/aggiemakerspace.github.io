@@ -23,7 +23,7 @@ function checkifAdmin (userInput){
 
              adminAccess = true;
              console.log("Admin Approved");
-             $("#.hideme" ).remove();
+            $("#admin" ).removeClass("hideme");
              break;
 
            case 'superuser':

@@ -308,6 +308,7 @@ input[type="file"] {
 
 <script>
     function  logOut(){
+    sessionStorage.clear();
     firebase.auth().signOut();
     console.log(firebaseUser + "has logged out");
     };

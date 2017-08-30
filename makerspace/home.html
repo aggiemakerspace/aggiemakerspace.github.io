@@ -163,8 +163,8 @@ function disclaimerCheck(){
 </script>
 
 <script>
-  var state = sessionStorage.getItem("admin");
-  console.log(user.email + " admin check (t/f): "+ state);
+  // var state = sessionStorage.getItem("admin");
+  // console.log(user.email + " admin check (t/f): "+ state);
 
 
 </script>
@@ -378,6 +378,7 @@ function disclaimerCheck(){
 
   <script>
       function logOut(){
+      sessionStorage.clear();
       firebase.auth().signOut();
       console.log("user has logged out");
       };

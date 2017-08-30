@@ -365,6 +365,7 @@ function clockOutUser(userEmail){
                   <!-- Log out-->
                   logout.addEventListener('click', e => {
                       console.log(name+"is signing out.");
+                      sessionStorage.clear();
                       firebase.auth().signOut();});
 
       } else

@@ -1,8 +1,22 @@
-//check for admin
+function returnAdmins(){
+  var arrayValues;
+  console.log('function')
+  var adminRef = firebase.database().ref().child('roles/admins').on("child_added", function (snap){
+      arrayValues.push(snap.val().email);
+      console.log(snap.val().email)
+  });
+  return arrayValues;
+}
+
+
 function checkAdmin(userIn){
   var user= userIn;
   var state;
+  //get admins from database
   var  admins = ['rgmwanik@aggies.ncat.edu', 'alanier@aggies.ncat.edu','pperry@aggies.ncat.edu','jck@ncat.edu']
+  //let returnType ='admins';
+  //let array = returnArray(returnType);
+  //returnAdmins();
 console.log(user.email+' pre check.');
   for( var prop in admins){
     var emailC = admins[prop];
@@ -61,6 +75,7 @@ function checkForFirstTimeUser(firebaseUser){
           case true:
             console.log('setup is true');
             result = true;
+
               window.location.href = 'home.html';
             break;
           default:
@@ -202,6 +217,8 @@ function writeUserData(date, email,name, imageUrl) {
 
                               if(result === true){
                                 console.log('The user has already been setup, redirecting to homepage...');
+
+                                //
                                 window.location.href='home.html';
                               }else{
                                 //call setup functions

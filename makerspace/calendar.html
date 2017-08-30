@@ -222,6 +222,7 @@ function disclaimerCheck(){
 
   <script>
       function logOut(){
+      sessionStorage.clear();
       firebase.auth().signOut();
       console.log("user has logged out");
       };

@@ -1,14 +1,15 @@
-//console for superusers
-
-
-function getInfo(input){
-
-        var email = input;
-         firebase.database().ref().child('users').orderByChild('email').equalTo(input).on('child_added',function (snap){
 
 
 
+//search by
 
+function displayInfo(emailInput){
+
+        var email = emailInput;
+
+         firebase.database().ref().child('users').orderByChild('email').equalTo(email).on('child_added',function (snap){
+          //data = JSON.stringify(snap.val());
+          //  console.log(snap.val().email + " " +snap.val().uid);
                  var
                   email,
                   name,
@@ -17,61 +18,86 @@ function getInfo(input){
                   year,
                   picURL;
 
-
                   email = snap.val().email;
                   name = snap.val().name;
                   major = snap.val().major_class;
                   phone = snap.val().phone;
                   year = snap.val().year_class;
                   picURL = snap.val().photoURL;
+                  uid = snap.val().uid;
 
-  // Title 1,2,3,4,5 #t1, #t2,#t3,#t4,#t5
-                  //set titles
-                  $("#t1").html('Name');
-                    $("#t2").html('Email');
-                      $("#t3").html('Major');
-                        $("#t4").html('Classification');
-                          $("#t5").html('Phone');
+                  console.log();
+                          var output = '<div class="row">';
+                          var count = 1;
 
-                  $("#editable").append(
-                  "<tr ><td><img id=\"userPic\" src='"+ picURL +"' class='img-circle center-block img-responsive'"+
-                  "style='height:100px;width:100px;margin-top: 10px;' alt='' "+
+              				  output += '<div class="col-md-6 well">';
+              				  output += '<div class="col-md-3"><img class="img-circle center-block img-responsive" src="'+picURL+'" alt="'+ name +'"style="height:100px;width:100px" /></div>';
+              				  output += '<div class="col-md-7">';
+              				  output += '<h3>' + name + '</h3>';
+              				  output += '<h4>' + email + '</h4>';
+                        output += '<h4>' + major + '</h4>';
+                        output += '<h4>' + phone +'</h4>';
 
-                  "<td style=''><h3>"+ name + "</h3></td><td style=''><h3>" +email+ "</h3></td><td style=''><h3>" + major+
-                          "</h3></td><td><h3>" + year + "</h3></td><td><h3>" + phone + "</h3></td>/tr><br><hr>"
 
-                        );
+                      //   var mApprRef  = firebase.database().ref().child('machine_approval/'+uid);
+                      //   var string = " ";
+                      //   mApprRef.on("child_added", snap=> {
+                      //     console.log(snap.key, snap.val())
+                      //
+                      //     output += "<h2>"+ snap.key+"</h2>" + "<h4>"+ snap.val()+'</h4>';
+                      //
+                      //     return string;
+                      // });
 
-                   });
+                      // console.log(string)
+                      //   output += string;
+
+                        output += '</div>';
+              				  output += '</div>';
+              				  if(count%2 == 0){
+              					output += '</div><div class="row">'
+              				  }
+              				  count++;
+
+
+              			  output += '</div>';
+              			  $('#editable1').append(output);
+                      });
+
+
+
+
 
 }
 //show all users and their information
 function displayUserInfo(){
 
-    $("#editable").text(" ");
+    $("#editable1").text(" ");
     var emailRef =  ref = firebase.database().ref().child('emails/verified');
 
      emailRef.orderByChild('email').on("child_added", function (snap){
        var userRef = snap.val();
-       console.log(userRef.email);
+
        var email = userRef.email;
-       getInfo(email);
+       displayInfo(email);
           });
 
 
 }
 
+
+
 function displaySuperUsers (){
 
   //CONTAINER 1
-    $("#editable").text(" ");
+    $("#editable1").text(" ");
 
             //DISPLAY ALL superusers  //clockin event
               var superUsers = firebase.database().ref().child('roles/superusers');
                superUsers.on("child_added", function (snap){
 
                    var email = snap.val().email;
-                   getInfo(email);
+                   displayInfo(email);
                    });
 
 
@@ -84,6 +110,8 @@ function displaySuperUsers (){
 (function() {
 
     var provider = new firebase.auth.GoogleAuthProvider();
+    var dataArray= new Array;
+    var machineObj;
 
     const config = {
         apiKey: "AIzaSyDusG6NBnTuNA8gamGCLlF-fagPO4ozJpk",
@@ -114,33 +142,117 @@ function displaySuperUsers (){
           var usrObject = snap.val();
           });
 
+          getUserObjects();
+
+
+          //data
+
+
+        function getUserObjects(){
+            let emailRef = firebase.database().ref().child('emails/verified');
+            emailRef.orderByChild('email').on('child_added', function (snap){
+              let email= snap.val().email;
+              getInfo(email)
+
+            })
+
+
+        }
+
+        function getInfo(emailInput){
+          var email = emailInput;
+          //var data = new Array();
+          firebase.database().ref().child('users').orderByChild('email').equalTo(email).on('child_added',function (snap){
+            dataArray.push(snap.val());
+            //dataArray.push(JSON.stringify(snap.val()));
+            //console.log(data)
+
+         });
+         console.log(dataArray)
+
+
+
+        }
+
           $(document).ready(function(){
-                  // //SHOW machines
-                  // $("#btn1").click(function(){
-                  //
-                  //
-                  //
-                  // });
 
 
 
+                //Dislay user information
                 $("#btn2").click(function(){
-                    //display user info
-                    console.log('btn 2 was clicked');
+
 
                    $("#container").removeClass("hide");
+                   $('#filter-records').addClass("hide");
                     displayUserInfo ();
                 });
 
                 $("#btn3").click(function(){
                   $("#container").removeClass("hide");
+                  $('#filter-records').addClass("hide");
                    displaySuperUsers();
 
                  });
 
 
+//get user input
+                 $("#userIn").each(function(){
 
+                     $(this).keyup(function(event){
+                          if(event.keyCode == 13){
+                                 let value = $("#userIn").val();
+
+
+
+                           }
+                       });
+                   });
+
+
+
+                  //Search for users
+                  $('#txt-search').keyup(function(){
+                    $('#filter-records').removeClass("hide");
+                    $("#container").addClass("hide");
+
+            var searchField = $(this).val();
+
+
+			if(searchField === '')  {
+				$('#filter-records').html('');
+				return;
+			}
+
+
+            var regex = new RegExp(searchField, "i");
+                var output = '<div class="row">';
+                var count = 1;
+    			  $.each(dataArray, function(key, val){
+    				if ((val.name.search(regex) != -1) || (val.email.search(regex) != -1)) {
+    				  output += '<div class="col-md-6 well">';
+    				  output += '<div class="col-md-3"><img class="img-circle center-block img-responsive" src="'+val.photoURL+'" alt="'+ val.name +'"style="height:100px;width:100px" /></div>';
+    				  output += '<div class="col-md-7">';
+    				  output += '<h3>' + val.name + '</h3>';
+    				  output += '<h4>' + val.email + '</h4>';
+              output += '<h4>' + val.major_class + '</h4>';
+    				  output += '</div>';
+    				  output += '</div>';
+    				  if(count%2 == 0){
+    					output += '</div><div class="row">'
+    				  }
+    				  count++;
+    				}
+    			  });
+    			  output += '</div>';
+    			  $('#filter-records').html(output);
             });
+
+
+
+
+
+
+    });//document close
 
 
 
@@ -170,7 +282,7 @@ function checkifAdmin (userInput){
   //console.log(roles);
   //var displayRole = roles.administrator;
   for (var prop in roles) {
-      console.log(prop, roles[prop]);
+
 
         if ((roles[prop]) === true )
        {
