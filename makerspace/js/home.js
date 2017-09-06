@@ -28,6 +28,7 @@
     //********GET USER PICTURE***********
           var user = firebase.auth().currentUser;
 
+            console.log('Given UID'+firebase.auth().uid);
           if(user.photoURL !== null || user.photoURL == ""){
             var img = $("#userPic");
             img.attr("src", img.attr("src").replace("assets/img/avatar3.png", user.photoURL));

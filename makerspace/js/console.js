@@ -39,19 +39,6 @@ function displayInfo(emailInput){
                         output += '<h4>' + phone +'</h4>';
 
 
-                      //   var mApprRef  = firebase.database().ref().child('machine_approval/'+uid);
-                      //   var string = " ";
-                      //   mApprRef.on("child_added", snap=> {
-                      //     console.log(snap.key, snap.val())
-                      //
-                      //     output += "<h2>"+ snap.key+"</h2>" + "<h4>"+ snap.val()+'</h4>';
-                      //
-                      //     return string;
-                      // });
-
-                      // console.log(string)
-                      //   output += string;
-
                         output += '</div>';
               				  output += '</div>';
               				  if(count%2 == 0){
@@ -168,7 +155,7 @@ function displaySuperUsers (){
             //console.log(data)
 
          });
-         console.log(dataArray)
+
 
 
 
