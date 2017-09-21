@@ -170,6 +170,33 @@
         padding: 100px 25px;
         font-family: Montserrat, sans-serif;
   }
+
+  #overlapthis{
+    background-image:url('img/gif/building.gif');
+    height:100px;
+    left:50px;
+    position: absolute;
+    top:90px;
+    width: 500px;
+  }
+
+  #thebigimage{
+    background-image: url('img/green_stripes.png');
+    height: 100%;
+    opacity:0.5;
+    /*margin-left: auto;
+    margin-right: auto;*/
+    position: relative;
+    width: 100%;
+  }
+
+
+  .green{
+
+    background-size: cover;
+    background-size: 100% 100%;
+    background: #000 url('img/green_stripes.png') center repeat-x;
+  }
   .img-shadow{
       box-shadow: 5px 5px 20px #888888;
   }
@@ -214,11 +241,23 @@
 
   }
   .bg-img{
-    background-image:url(./img/gif/building.gif);
+    background-image:url('./img/gif/building.gif') center;
     height: auto;
     background-size: cover;
 
 
+  }
+
+  .glass{
+    min-width: 375px;
+    width: 100%;
+    border: 4px;
+    border-color: black;
+    margin: 20px;
+  	height: 600px;
+    padding: 0;
+    margin-bottom: 100px;
+    backface-visibility: hidden;
   }
 /*
   Flip image*/
@@ -258,6 +297,12 @@
 	top: 0;
 	left: 0;
 }
+.clockin-box{
+  width: 60%;
+  height: 400px;
+  float:right;
+  margin-right: 0;
+}
 
 /* front pane, placed above back */
 .front {
@@ -269,6 +314,38 @@
 /* back, initially hidden pane */
 .back {
 	transform: rotateY(180deg);
+}
+
+.box-quote{
+
+  width: 600px;
+  height:600px;
+  border-width: medium;
+  border-color: white;
+}
+
+.card {
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+    background-color:rgba(0, 0, 0, 0.5);
+
+    color:#443266;
+    color:#ffffff;
+    width:100%;
+    height: 100%;
+    margin-top:20px;
+
+
+
+
+}
+
+.card:hover {
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+
+.container {
+    padding: 2px 16px;
 }
 
 
@@ -310,6 +387,124 @@
 
 </div>
 
+<div id=""class = "container-fluid text-center bg-img green img-shadow3">
+
+<div id="" class="row" style="opacity:1">
+  <div class="col-md-4">
+    <h1>Get <i>Started</i> on your</h1>
+    <h3>NEXT PROJECT</h3>
+    <h4>come visit us in McNair 121</h4>
+    <div class="caption"><h2 style="border-color: black; border-width: 2px;"><p><img id="mcnair" src="./makerspace/assets/img/avatar3.png" class="img-circle"  alt="Image"class="img-circle"
+              width="100" height="100"></p>Create your Account<br> for faster clock in
+              <button id="btnSubmit"  onclick="goto()" style="margin-top: 50px; margin-bottom: 0; height: 100px; border-color:white; border-width: 2px;" type = "button" class="btn btn-success btn-lg btn-block">Create Account</button>
+
+            </h2></div>
+
+  </div>
+
+  <script>
+
+  function goto(){
+    window.location.href="./makerspace/signup.html";
+  }
+  </script>
+
+  <div class="col-md-4"></div>
+
+  <div class="col-md-4 " id="">
+
+    <h1 style="font-size: 100px; font-color: #00a37"><a href="./timelog/timelog_p.html">OPEN <br>TIMESHEET<br><span style ="font-size:100px" class="glyphicon glyphicon-time"></a></h1>
+
+
+  <!-- <h1>Super Users on Duty</h1>
+    <div class="clockin-box" style="overflow-y:scroll">
+      <div class="editable3">
+    <ul style="float:left">  <img id="mcnair" src="img/mcnair.jpg" class="img-circle"  alt="Image"class="img-circle"
+      width="100" height="100"> Haneen Clocked in</ul>
+    <ul style="float:left">  <img id="mcnair" src="img/mcnair.jpg" class="img-circle"  alt="Image"class="img-circle"
+          width="100" height="100"> Haneen Clocked in</ul>
+    <ul style="float:left">  <img id="mcnair" src="img/mcnair.jpg" class="img-circle"  alt="Image"class="img-circle"
+              width="100" height="100"> Haneen Clocked in</ul>
+                <ul style="float:left">  <img id="mcnair" src="img/mcnair.jpg" class="img-circle"  alt="Image"class="img-circle"
+                  width="100" height="100"> Haneen Clocked in</ul>
+      </div>
+    </div> -->
+</div>
+
+</div>
+
+
+
+
+
+  </div>
+
+<div class ="container-fluid img-shadow3 " style="background-image:url('./img/gif/building.gif');
+border-color:black; border-width:3px;">
+<div class="">
+
+<!--What is a makerspace to me -->
+<!-- Attiyah -->
+
+
+
+
+
+      <div class="card">
+        <div class="row">
+        <div class="col-md-2">
+        <img id="mcnair" src="img/attiyah.jpeg" class="img-circle"  alt="Image"class="img-circle"
+         width="125" height="125">
+       </div>
+       <div class="col-md-4">
+         <div class="container" style="">
+           <h4><b style="color:white; text-shadow: 1px 1px black;" style="">Attiyah</b></h4>
+           <p style="color:white; text-shadow: 1px 1px black;" style="">
+             To me, the makerspace is a place where creativity can roam free. A place unrestricted by limitations and
+             judgement. It's where students feel not only comfortable sharing their ideas, but empowered to do so. We encourage each other and bring
+             out the creativeness that's inside of us all. The makerspace is more than just a room, it's a safe haven.
+           </p>
+         </div>
+    </div>
+  </div>
+      </div>
+
+
+
+
+
+
+      <div class="card" style="margin-right:100px">
+        <div class="row">
+        <div class="col-md-2">
+        <img id="mcnair" src="img/prince.jpg" class="img-circle"  alt="Image"class="img-circle"
+         width="125" height="125">
+       </div>
+       <div class="col-md-4">
+         <div class="container">
+           <h4><b style="color:white; text-shadow: 1px 1px black;">Princeton</b></h4>
+           <p style="color:white; text-shadow: 1px 1px black;">
+             Since we are at a place where people are not introdued to innovative thinking, we must find a way
+             display the innovative side of life. To present and build "out o the box"
+             concepts that spark the dormant creativity that paves the raod for furutirstic technology and ultimately ourselves.
+
+             The focus is building confidence in ones abilities to the point where they have the creativity, strength and
+             intellect to condidently take on the challenges of life.
+
+           </p>
+         </div>
+    </div>
+  </div>
+      </div>
+
+
+</div>
+</div>
+
+
+
+
+
 <!-- MISSION STATEMENT AND LANDING PAGE IMAGES -->
 <div class= "container-fluid text-center bg-3">
   <div class="col-sm-12 col-lg-12 col-md-12">
@@ -325,19 +520,19 @@
       </div>
     </div>
 
-<div class="container text-center bg-3">
+<div class="container-fluid text-center bg-3">
     <div class="row">
 
-    <div class="col-sm-4 col-lg-4">
+    <div class="col-sm-4 col-lg-4 col-xlg-4">
       <h2 class="text-center"> Collaboration</h2>
       <img id ="" src="img/gif/collaborate.jpeg" class="img-responsive  img-rounded img-shadow" style="" width:"200px" height: "200px" alt="collaborate">
     </div>
-    <div class="col-sm-4 col-lg-4">
+    <div class="col-sm-4 col-lg-4 col-xlg-4">
       <h2> Ideation</h2>
       <img id ="" src="img/gif/ideas.jpeg" class="img-responsive  img-rounded img-shadow" style="" height:"200px" width:"200px" alt="collaborate">
     </div>
 
-    <div class="col-sm-4 col-lg-4">
+    <div class="col-sm-4 col-lg-4 col-xlg-4">
       <h2> Growth</h2>
       <img id ="" src="img/gif/growth.jpeg" class="img-responsive  img-rounded img-shadow" style="" width:"200px" height: "200px" alt="collaborate">
     </div>
@@ -346,10 +541,6 @@
 </div>
 
 
-
-
-
-  </div>
 
 
 </div>
@@ -365,7 +556,7 @@ $(document).ready(function(){
 </script>
 
 <!-- DISPLAY MACHINE STATUS AND TIMESHEET -->
-<div class="container-fluid bg-img" >
+<div class="container-fluid" >
     <div class="container text-center">
       <div class="row">
         <div class= "col-sm-6 col-md-6 col-sm-6">
@@ -377,12 +568,7 @@ $(document).ready(function(){
                   <div class="machine-front img-shadow text-shadow"  style="overflow-y:scroll" id="machine-status">
                     <div class=""id="editable1" style=""><h1>Machines</h1></div>
 
-
-
-
-
                   </div>
-
 
                 </div>
                 <div class="back">
@@ -408,10 +594,6 @@ $(document).ready(function(){
                   <div class="machine-front img-shadow2"  id="timesheet" style="overflow-y:scroll">
                     <h1>Timesheet</h1><span id="userCount"></span>
                     <div class=""id="editable3"></div>
-
-
-
-
 
                   </div>
 
@@ -440,27 +622,98 @@ $(document).ready(function(){
 </div>
 <!-- 28B5FF -->
 <!-- Tools and Equipment -->
-<div id="equipment" class="container text-center">
+<div id="equipment" class=" container text-center">
   <h2 style="color:#337ab7">Equipment & Software</h2><br>
   <div class="row">
-    <div class="col-sm-4">
-      <div class="thumbnail bg-g img-shadow3">
-        <img id ="" src="img/cnc_mill.jpg" class="img-responsive hideme img-rounded img-shadow2" style="width:100%" alt="cncmill">
-        <div class="caption"><h2>CNC Mill</h2></div>
+    <div class="col-sm-4 col-xs-4">
+
+      <div class="flip-container img-shadow3 " ontouchstart="this.classList.toggle('hover');" style="height:350px">
+        <div class="flipper">
+            <div class="front">
+              <!-- front content -->
+              <div class="machine-front img-shadow2"  id="" style="height:350px">
+                <div class="" style="height:200px">
+                  <img id ="" src="img/cnc_mill.jpg" class="img-responsive  img-rounded " style="width:100%; height: 100%; border-color:white;border-width: 2px;" alt="cncmill">
+                  <div class="caption"><h1>CNC<br> Mill</h1></div>
+                </div>
+              </div>
+            </div>
+            <div class="back">
+              <!-- back content -->
+              <div class="machine-back text-shadow2" id="events" style="height:350px">
+                <div class=""id="editable4" ><a href="https://www.inventables.com/technologies/easel"><h1>Instructables</h1></a>
+                    <dd>The<b> <i>Computational Numerical Control</i></b> machine can be used to</dd>
+                  <dl>Carve Wood<br>Carve Plastics <br> Carve Metals</dl>
+                  <dd style=""> Paired with Easel <i>3D carving software</i> you can make cool creations</dd>
+
+                </div></div>
+            </div>
+        </div>
       </div>
+
+
+
+
+
+
+
     </div>
 
-    <div class="col-sm-4">
-      <div class="thumbnail bg-b img-shadow3">
-        <img src="img/3dprinter.jpg" class="img-responsive hideme img-rounded img-shadow2" style="width:100%" alt="Image">
-        <div class="caption"><h2>3D Printer</h2></div>
+    <div class="col-sm-4 col-xs-4">
+
+
+      <div class="flip-container img-shadow3 " ontouchstart="this.classList.toggle('hover');" style="height:350px">
+        <div class="flipper">
+            <div class="front">
+              <!-- front content -->
+              <div class="machine-front img-shadow2 "  id="" style="height:350px">
+                <div class="" style="height:200px">
+                  <img id ="" src="img/3dprinter.jpg" class="img-responsive  img-rounded " style="width:100%; height: 100%; border-color:white;border-width: 2px;" alt="3dprinter">
+                  <div class="caption"><h1>3D<br> Printer</h1></div>
+                </div>
+              </div>
+            </div>
+            <div class="back">
+              <!-- back content -->
+              <div class="machine-back text-shadow2" id="events" style="height:350px">
+                <div class=""id="editable4" ><a href="http://www.instructables.com/howto/3d+printer/"><h1>Instructables</h1></a>
+                    <dd>The<b> <i>3D Printer</i></b> is an additive manufacturing process that creates a physical object from a digital design.</dd>
+                  <dl>Design<br>Print<br>Prototype <br> </dl>
+
+                </div></div>
+            </div>
+        </div>
       </div>
+
+
+
+
+
+
     </div>
 
-    <div class="col-sm-4">
-      <div class="thumbnail bg-dg img-shadow3">
-        <img src="img/othermill.jpg" class="img-responsive hideme img-rounded img-shadow2" style="width:100%" alt="Image">
-        <div class="caption"><h2>Other Mill</h2></div>
+    <div class="col-sm-4 col-xs-4">
+      <div class="flip-container img-shadow3 " ontouchstart="this.classList.toggle('hover');" style="height:350px">
+        <div class="flipper">
+            <div class="front">
+              <!-- front content -->
+              <div class="machine-front img-shadow2"  id="" style="height:350px">
+                <div class="" style="height:200px">
+                  <img id ="" src="img/othermill.jpg" class="img-responsive  img-rounded " style="width:100%; height: 100%; border-color:white;border-width: 2px;" alt="cncmill">
+                  <div class="caption"><h1>PCB<br> Milling</h1></div>
+                </div>
+              </div>
+            </div>
+            <div class="back">
+              <!-- back content -->
+              <div class="machine-back text-shadow2" id="events" style="height:350px">
+                <div class=""id="editable4" ><a href="http://www.instructables.com/howto/othermill/"><h1>Instructables</h1></a>
+                    <dd><b> <i>Printed circuit board milling</i></b> is the process of removing areas of copper from a sheet of printed circuit board material</dd>
+                  <dl>Custom circuit boards<br>Jewelry <br> Molds</dl>
+
+                </div></div>
+            </div>
+        </div>
       </div>
   </div>
 
@@ -469,31 +722,104 @@ $(document).ready(function(){
 
 
 </div>
+
+<hr style="color:white; border-color:black; border-width:1px; width:50%" class="img-shadow3"
   <div class="row">
 
 
 
     <div class="col-sm-4">
-      <div class="thumbnail bg-g img-shadow3">
-      <img src="img/eagle_cad.jpg" class="img-responsive hideme img-rounded img-shadow2" style="width:100%" alt="Image">
-      <div class="caption"><h2>Eagle CAD</h2></div>
+      <div class="flip-container img-shadow3 " ontouchstart="this.classList.toggle('hover');" style="height:350px">
+        <div class="flipper">
+            <div class="front">
+              <!-- front content -->
+              <div class="machine-front img-shadow2"  id="" style="height:350px">
+                <div class="" style="height:200px">
+                  <img id ="" src="img/eagle_cad.jpg" class="img-responsive  img-rounded " style="width:100%; height: 100%; border-color:white;border-width: 2px;" alt="cncmill">
+                  <div class="caption"><h1>Eagle<br> CAD</h1></div>
+                </div>
+              </div>
+            </div>
+            <div class="back">
+              <!-- back content -->
+              <div class="machine-back text-shadow2" id="events" style="height:350px">
+                <div class=""id="editable4" ><a href="http://www.instructables.com/id/how-to-use-eaglecad/"><h1>Instructables</h1></a>
+                    <dd>With<b> <i>Eagle CAD</i></b> you can design your first PCB using schematic editors. <br>
+                      <br>It features schematic capture, printed circuit board layout, auto-router and computer-aided manufacturing features</dd>
+
+
+                </div></div>
+            </div>
+        </div>
+      </div>
     </div>
 
-  </div>
+
 
     <div class="col-sm-4">
-      <div class="thumbnail bg-b img-shadow3">
-      <img src="img/solidworks.jpg" class="img-responsive hideme img-rounded img-shadow2" style="width:100%" alt="Image">
-      <div class="caption"><h2>Solid Works</h2></div>
+      <div class="flip-container img-shadow3 " ontouchstart="this.classList.toggle('hover');" style="height:350px">
+        <div class="flipper">
+            <div class="front">
+              <!-- front content -->
+              <div class="machine-front img-shadow2"  id="" style="height:350px">
+                <div class="" style="height:200px">
+                  <img id ="" src="img/solidworks.jpg" class="img-responsive  img-rounded " style="width:100%; height: 100%; border-color:white;border-width: 2px;" alt="cncmill">
+                  <div class="caption"><h1>Solid<br> Works</h1></div>
+                </div>
+              </div>
+            </div>
+            <div class="back">
+              <!-- back content -->
+              <div class="machine-back text-shadow2" id="events" style="height:200px">
+                <div class=""id="editable4" ><a href="http://www.instructables.com/howto/solid+works/"><h1>Instructables</h1></a>
+                    <dd><b> <i>Solid Works</i></b> is a modeling program used to make 3D designs
+
+                    <br>
+                    <br>
+                    Create automotive components, machine components,...
+                    <br>
+                  </dd>
+                    <i>Anything and everything that you can imagine.</i>
+          </dd>
+
+                </div></div>
+            </div>
+        </div>
+      </div>
     </div>
 
-  </div>
+
 
   <div class="col-sm-4">
-    <div class="thumbnail bg-dg img-shadow3">
-    <img src="img/laserengraver.jpg" class="img-responsive hideme img-rounded img-shadow2" style="width:100%" alt="Image">
-    <div class="caption"><h2>Laser Engraver</h2></div>
+    <div class="flip-container img-shadow3 " ontouchstart="this.classList.toggle('hover');" style="height:350px">
+      <div class="flipper">
+          <div class="front">
+            <!-- front content -->
+            <div class="machine-front img-shadow2"  id="" style="height:350px">
+              <div class="" style="height:200px">
+                <img id ="" src="img/laserengraver.jpg" class="img-responsive  img-rounded " style="width:100%; height: 100%; border-color:white;border-width: 2px;" alt="cncmill">
+                <div class="caption"><h1>Laser<br> Engraver</h1></div>
+              </div>
+            </div>
+          </div>
+          <div class="back">
+            <!-- back content -->
+            <div class="machine-back text-shadow2" id="events" style="height:350px">
+              <div class=""id="editable4" ><a href="http://www.instructables.com/id/10-Tips-and-Tricks-for-Laser-Engraving-and-Cutting/"><h1>Instructables</h1></a>
+                  <dd>The<b> <i>Boss Laser Engraver</i></b> allows you to laser cut, engrave, or even transpose images onto materials such as:
+                  <br>
+                  <i>paper, cloth, stainless steel, wood, etc...</i>
+
+                  </dd>
+
+              </div></div>
+          </div>
+      </div>
+    </div>
   </div>
+
+</div>
+
 
 </div>
 

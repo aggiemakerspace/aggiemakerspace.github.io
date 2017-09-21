@@ -248,7 +248,7 @@ function writeUserData(date, email,name, imageUrl) {
 
         }
     });
-
+////////
     <!-- Function to logout-->
 
 

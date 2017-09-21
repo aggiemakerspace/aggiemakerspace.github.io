@@ -1,4 +1,5 @@
 
+//initiate disclaimer/setup node
 function setUpNode(uid){
 
     var dRef = firebase.database().ref().child('disclaimer/'+uid);
@@ -11,7 +12,7 @@ function setUpNode(uid){
 
 
 }
-
+//Initiate a temporary node to store user information
 function writeUserData(date, email,name, imageURL, id) {
 
   //console.log(user);
@@ -158,7 +159,7 @@ $("#getInput").keyup(function(event){
 
       });
 
-    <!-- Function to logout-->
+  
 
 
 

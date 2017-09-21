@@ -117,6 +117,35 @@ div.well div {
 .shadow{
   box-shadow: 5px 5px 5px #888888;
 }
+.hide{
+  display: none;
+  visibility: hidden;
+}
+
+#overlay {
+    position: fixed;
+    display: block;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0,0,0,0.5);
+    z-index: 2;
+    cursor: pointer;
+}
+
+#text{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    font-size: 50px;
+    color: white;
+    transform: translate(-50%,-50%);
+    -ms-transform: translate(-50%,-50%);
+}
+
   </style>
 </head>
 <body  class="bg-5">
@@ -135,20 +164,27 @@ div.well div {
     </div>
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav navbar-right">
-        <li><a id= "loggedIn" style="font: 15px Ubuntu, sans-serif"></a></li>
-        <li><a id = "logout" href="#info" style="color:red">LOGOUT</a></li>
+        <li><a id= "currentTime" style="font: 15px Ubuntu, sans-serif"></a></li>
+        <li><a id = "roomStatus" href="#info" style="color:red"></a></li>
 
       </ul>
     </div>
   </div>
 
 </nav>
+
+
+
+
+
 <!-- HERO -->
-<div  class="container-fluid text-center bg-2 ">
+<div  class="container-fluid text-center bg-2  ">
+
+
 
   <a id="displayText" href="javascript:toggle();"><h2 style="color:white">New User? Create Account.</h2></a>
   <div id="toggleText" style="display: none"><h1><img id='join' src='..//img/gif/join.gif'
-  class="img-circle center-block img-responsive" style="height:100px;width:100px" alt=""></h1>
+  class="img-circle center-block img-responsive" style="height:150px;width:150px" alt=""></h1>
 
   <div class="row">
     <div id = "getInput" class="form-group">
@@ -156,7 +192,7 @@ div.well div {
         <div class="col-sm-3" style="margin-bottom:5px;">
 
 
-         <input type="text" class="form-control text-center" id="usrFName" style="width:300px float:left; background:#ADD8E6" placeholder="firstname">
+         <input id="usrFName" type="text" class="form-control text-center"style="width:300px float:left; background:#ADD8E6" placeholder="firstname">
       </div>
        <div class="col-sm-3" style="margin-bottom:5px;">
           <input id="usrLName" class="form-control text-center" placeholder="lastname" style="color:black;background:#ADD8E6">
@@ -176,17 +212,17 @@ div.well div {
 
 
 
-
+<!-- Email Registration -->
   <div class="row">
     <div id = "getInput" class="form-group">
         <div class="col-sm-2"></div>
         <div class="col-sm-3" style="margin-bottom:5px;">
 
 
-         <input type="text" class="form-control text-right" id="usrEmail" style="width:300px float:left; background:#ADD8E6" value="@">
+         <input type="text" class="form-control text-right" id="usrEmailReg" style="width:300px float:left; background:#ADD8E6" value="@">
       </div>
        <div class="col-sm-3" style="margin-bottom:5px;">
-          <select id="email-options" class="form-control" value="0" style="color:black; background:#ADD8E6"></select>
+          <select id="email-options_1" class="form-control" value="0" style="color:black; background:#ADD8E6"></select>
         </div>
            <div class="col-sm-2" style="margin-bottom:5px;">
         <button style= "height:35px;padding: 5px;" id= "btnQuickRegister" type= "button" class="btn btn-success btn-lg btn-block btn-info">Submit</button>
@@ -278,9 +314,9 @@ div.well div {
 
 
 </div>
-<!--Display Email Options  -->
+<!--Display Email Options Function  -->
 <script>
-window.onload = function () {
+function displayEmailOptions (input) {
   var JSON = {
       "COLUMNS":["ID", "Name"],
       "DATA": [
@@ -289,7 +325,7 @@ window.onload = function () {
 
 
       ]
-  }, select = document.getElementById("email-options");
+  }, select = document.getElementById(input);
   for (var i = 0; i < JSON.DATA.length; i++) {
   var at = JSON.DATA[i], id = at[0], name = at[1];
       var option = document.createElement("option");
@@ -301,13 +337,34 @@ window.onload = function () {
 
 </script>
 
+<!-- Call Email Function -->
+<script>
+window .onload = displayEmailOptions("email-options")
+</script>
+
+
+
 
 
 
 
 <!-- ClockoutEvent -->
 
+<!-- TIMESHEET LOGIN -->
+<div id=""  class="container-fluid text-center bg-2 ">
 
+  <div id="overlay" onclick="">
+  <div id="text">Please enter admin password to activate timesheet.
+  <input type="password" class="form-control text-right" id="timeSheetPass" style="height: 100px; width:300px float:left; background:#ADD8E6; text-align: center; " placeholder="password">
+  </div>
+  </div>
+<!-- Turn on overlay -->
+  <div style="padding:20px">
+    <!-- <h2>Overlay with Text</h2>
+    <button onclick="on()">Turn on overlay effect</button> -->
+  </div>
+
+</div>
 
 
 
@@ -337,7 +394,7 @@ window.onload = function () {
 <h3 style="color:black"><a href="#" onclick="adminHide(); return false;"><span id="btnHide" class="glyphicon glyphicon-eye-close"></span>Hide</a></h3>
 </footer>
 
-  <script src="timelog.js"></script>
+  <script src="timelog_p.js"></script>
 
 <script>
 
@@ -356,10 +413,22 @@ function toggle() {
 	if(ele.style.display == "block") {
     		ele.style.display = "none";
 		text.innerHTML = "<h2 style='color:white'>Create Account</h2>";
+
+
+
+
   	}
 	else {
 		ele.style.display = "block";
 		text.innerHTML = "<h3 style='color:white'>Fill in the following below</h3>";
+
+
+
+    //Call email function, display on hidden div
+    displayEmailOptions("email-options_1");
+
+
+
 	}
 }
 </script>
